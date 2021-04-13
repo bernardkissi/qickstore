@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Domains\Categories\Models\Category;
+use App\Domains\Categories\Models\SubCategory;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,6 +16,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        SubCategory::factory()->count(50)->state(new Sequence(
+            ['parent_id' => '1'],
+            ['parent_id' => null ],
+        )) ->create();
     }
 }

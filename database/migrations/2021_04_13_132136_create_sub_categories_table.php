@@ -18,6 +18,7 @@ class CreateSubCategoriesTable extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->integer('order')->nullable();
+            $table->foreignId('category_id')->index()->nullable()->constrained('categories');
             $table->foreignId('parent_id')->unsigned()->index()->nullable();
             $table->timestamps();
 

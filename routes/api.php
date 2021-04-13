@@ -1,6 +1,9 @@
 <?php
 
-use Illuminate\Http\Request;
+
+use App\Domains\Categories\Models\Category;
+use App\Domains\Categories\Resources\CategoryResource;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::get('/test', function () {
+    return CategoryResource::collection(Category::with('subcategories', 'subcategories.children')
+    ->ordered()
+    ->get());
 });
