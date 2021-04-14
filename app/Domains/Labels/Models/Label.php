@@ -12,7 +12,7 @@ class Label extends Model
 
     /**
      * Fillable attributes of the model
-     * 
+     *
      * @var array
      */
     protected $fillable = [
@@ -22,4 +22,6 @@ class Label extends Model
         'visibility',
         'schedule_at',
     ];
+
+    
 }

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Domains\Categories\Models;
 
-use App\Domains\Categories\Models\SubCategory;
 use App\Domains\Categories\Scopes\Scopes;
 use Database\Factories\CategoryFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -29,7 +28,7 @@ class Category extends Model
      */
     public function subcategories()
     {
-        return $this->hasMany(SubCategory::class);
+        return $this->hasMany(Category::class, 'parent_id', 'id');
     }
 
     /**

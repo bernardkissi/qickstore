@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/test', function () {
-    return CategoryResource::collection(Category::with('subcategories', 'subcategories.children')
+    return CategoryResource::collection(Category::with('subcategories')
     ->ordered()
     ->get());
 });

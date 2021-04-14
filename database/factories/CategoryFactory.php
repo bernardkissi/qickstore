@@ -27,4 +27,14 @@ class CategoryFactory extends Factory
             'slug' => Str::slug('_'.$name)
         ];
     }
+
+
+    public function hasChildren()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'parent_id' => null,
+            ];
+        });
+    }
 }

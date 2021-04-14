@@ -16,9 +16,10 @@ trait Scopes
      */
     public function scopeCategories(Builder $builder): void
     {
-        $builder->has('subcategories');
+        $builder->whereNull('parent_id');
     }
 
+    
     /**
      * Scope to order categories in asc order
      *
