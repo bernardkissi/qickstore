@@ -41,9 +41,8 @@ class ProductActions
      * @param  App\Domains\Products\Models\Product $product
      * @return App\Domains\Products\Models\Product;;
      */
-    public function product(): Product
+    public function product(Product $product): Product
     {
-        $product = Product::find(77);
         $product->load(['sku.stockCount', 'variations.sku.StockCount', 'options.types']);
         
         return $product;
