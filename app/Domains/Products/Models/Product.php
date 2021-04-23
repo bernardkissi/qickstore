@@ -1,7 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domains\Products\Models;
 
+use App\Domains\Categories\Models\Category;
+use App\Domains\Options\Models\Option;
+use App\Domains\Products\Models\ProductVariation;
+use App\Domains\Products\Scopes\Scoper;
+use App\Domains\Skus\Model\Sku;
+use Database\Factories\ProductFactory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,8 +29,8 @@ class Product extends Model
        'name',
        'price',
        'description',
-       'slug'
-
+       'slug',
+       'status'
      ];
 
 
@@ -32,7 +41,6 @@ class Product extends Model
      */
      public function getRouteKeyName()
      {
-
           return 'slug';
      }
 
@@ -44,7 +52,74 @@ class Product extends Model
      */
      public function categories()
      {
-
          return $this->belongsToMany(Category::class);
+     }
+
+
+     /**
+     * Product has options relationship
+     *
+     * @return Illuminate\Database\Eloquent\Concerns\belongsToMany
+     */
+     public function options()
+     {
+         return $this->belongsToMany(Option::class);
+     }
+     
+
+     /**
+     *  Product has variations relationship
+     *
+     * @return Illuminate\Database\Eloquent\Concerns\hasMany
+     */
+     public function variations()
+     {
+         return $this->hasMany(ProductVariation::class)->orderBy('order', 'desc');
+     }
+
+
+     /**
+     *  Product sku relationship
+     *
+     * @return Illuminate\Database\Eloquent\Concerns\morphOne
+     */
+     public function sku()
+     {
+         return $this->morphOne(Sku::class, 'skuable');
+     }
+
+
+     /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+     protected static function newFactory()
+     {
+         return ProductFactory::new();
+     }
+
+
+     /**
+      * Scopes filter on model
+      *
+      * @param  Builder $builder [description]
+      * @param  array   $scopes
+      * @return [type]           [description]
+      */
+     public function scopeWithFilter(Builder $builder, $scopes = [])
+     {
+         return (new Scoper(request()))->apply($builder, $scopes);
+     }
+
+
+    /**
+     * Scope to check if product has variations
+     *
+     * @return bool
+     */
+     public function scopeHasVariation(): bool
+     {
+         return self::has('variations');
      }
 }

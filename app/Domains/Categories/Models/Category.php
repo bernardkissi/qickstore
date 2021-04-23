@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domains\Categories\Models;
 
 use App\Domains\Categories\Scopes\Scopes;
+use App\Domains\Products\Models\Product;
 use Database\Factories\CategoryFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -26,9 +27,20 @@ class Category extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function subcategories()
+    public function subcategories(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(Category::class, 'parent_id', 'id');
+        return $this->hasMany(__CLASS__, 'parent_id', 'id');
+    }
+
+    /**
+     *  Category products relationship
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function products(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Product::class, 'category_product', 'category_id', 'product_id')
+            ->withTimestamps();
     }
 
     /**
@@ -36,7 +48,7 @@ class Category extends Model
      *
      * @return \Illuminate\Database\Eloquent\Factories\Factory
      */
-    protected static function newFactory()
+    protected static function newFactory(): \Illuminate\Database\Eloquent\Factories\Factory
     {
         return CategoryFactory::new();
     }

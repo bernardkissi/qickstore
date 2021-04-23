@@ -2,8 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Domains\Categories\Models\Category;
-use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,12 +13,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Category::factory()->count(50)->state(new Sequence(
-            ['parent_id' => '1'],
-            ['parent_id' => '2'],
-            ['parent_id' => '3'],
-            ['parent_id' => '4'],
-            ['parent_id' => null ],
-        ))->create();
+        //$this->call(CategorySeeder::class);
+        // $this->call(OptionTypeSeeder::class);
+        $this->call(ProductSeeder::class);
     }
 }

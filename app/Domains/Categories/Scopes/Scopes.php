@@ -19,7 +19,7 @@ trait Scopes
         $builder->whereNull('parent_id');
     }
 
-    
+
     /**
      * Scope to order categories in asc order
      *
@@ -27,7 +27,7 @@ trait Scopes
      * @param  string  $direction
      * @return void
      */
-    public function scopeOrdered(Builder $builder, $direction = 'asc')
+    public function scopeOrdered(Builder $builder, $direction = 'asc'): void
     {
         $builder->orderBy('order', $direction);
     }
