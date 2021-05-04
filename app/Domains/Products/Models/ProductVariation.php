@@ -2,6 +2,7 @@
 
 namespace App\Domains\Products\Models;
 
+use App\Domains\Products\Casts\Currency;
 use App\Domains\Products\Models\Product;
 use App\Domains\Skus\Model\Sku;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -26,6 +27,17 @@ class ProductVariation extends Model
         'identifier',
         'barcode',
         'status'
+    ];
+
+
+     /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+
+        'price' => Currency::class.':GHS',
     ];
 
 

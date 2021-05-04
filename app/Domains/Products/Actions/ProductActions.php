@@ -30,7 +30,7 @@ class ProductActions
             ->withFilter($this->scopes())
             ->orderBy('created_at', 'desc')
             ->paginate(10);
-
+ 
         return $products;
     }
 
@@ -41,13 +41,20 @@ class ProductActions
      * @param  App\Domains\Products\Models\Product $product
      * @return App\Domains\Products\Models\Product;;
      */
-    public function product(Product $product): Product
+    public function product(): Product
     {
+        $product = Product::find(353);
         $product->load(['sku.stockCount', 'variations.sku.StockCount', 'options.types']);
         
         return $product;
     }
 
+
+    //todos
+    //1. create product
+    //2. add to variations
+    //3. set sku for products
+    //4. create limited or unlimited stock
 
     /**
      * Searchable scopes for products

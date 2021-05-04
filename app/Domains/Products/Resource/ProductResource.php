@@ -22,8 +22,11 @@ class ProductResource extends JsonResource
             'name' => $this->name,
             'slug' => $this->slug,
             'description'=> $this->description,
-            'price' => $this->price,
-            'sku' =>  new SkuResource($this->whenLoaded('sku'))
+    
+            // $this->mergeWhen(count($this->variations) <= 0, [
+                 'price' => $this->price,
+                'sku' =>  new SkuResource($this->whenLoaded('sku'))
+            // ])
         ];
     }
 }

@@ -43,7 +43,7 @@ Route::get('/test', function () {
            //  ->paginate(10);
 
          // return ProductResource::collection($prod);
-       // return ProductResource::collection((new ProductActions())->getProducts());
+      // return ProductResource::collection((new ProductActions())->products());
         return (new SingleProductResource((new ProductActions())->product()));
         // $product = Product::find(1);
         // $product->sku()->create(['code' => 'abc126', 'price' => 1000]);

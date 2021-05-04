@@ -27,7 +27,7 @@ class Category extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function subcategories(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function subcategories()
     {
         return $this->hasMany(__CLASS__, 'parent_id', 'id');
     }
@@ -37,18 +37,19 @@ class Category extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function products(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function products()
     {
         return $this->belongsToMany(Product::class, 'category_product', 'category_id', 'product_id')
             ->withTimestamps();
     }
 
+    
     /**
      * Create a new factory instance for the model.
      *
      * @return \Illuminate\Database\Eloquent\Factories\Factory
      */
-    protected static function newFactory(): \Illuminate\Database\Eloquent\Factories\Factory
+    protected static function newFactory()
     {
         return CategoryFactory::new();
     }

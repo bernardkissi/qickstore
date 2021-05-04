@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Domains\Products\Models;
 
 use App\Domains\Categories\Models\Category;
+use App\Domains\Collections\Models\Collection;
 use App\Domains\Options\Models\Option;
+use App\Domains\Products\Casts\Currency;
 use App\Domains\Products\Models\ProductVariation;
 use App\Domains\Products\Scopes\Scoper;
 use App\Domains\Skus\Model\Sku;
@@ -30,7 +32,19 @@ class Product extends Model
        'price',
        'description',
        'slug',
-       'status'
+       'status',
+       'featured'
+     ];
+
+
+     /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+     protected $casts = [
+
+        'price' => Currency::class.':GHS',
      ];
 
 
@@ -86,6 +100,17 @@ class Product extends Model
      public function sku()
      {
          return $this->morphOne(Sku::class, 'skuable');
+     }
+
+
+    /**
+     *  Product sku relationship
+     *
+     * @return Illuminate\Database\Eloquent\Concerns\morphOne
+     */
+     public function collections()
+     {
+         return $this->belongsToMany(Collection::class);
      }
 
 
