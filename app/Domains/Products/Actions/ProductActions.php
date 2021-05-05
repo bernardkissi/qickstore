@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domains\Products\Actions;
 
+use App\Domains\Categories\Models\Category;
 use App\Domains\Filters\Models\Filter;
 use App\Domains\Products\Models\Product;
 use App\Domains\Products\Resource\ProductResource;
@@ -68,24 +69,14 @@ class ProductActions
         });
 
         return $collection->all();
-
-
-        // // Property::distinct()->select('property_name')->groupBy('property_name')->get();
-
-        // $collect = DB::table('filters')
-        //     ->select('property_name', 'property_value')
-        //     ->distinct()
-        //     ->get();
-
-        //   $arr = collect($collect)->groupBy('property_name');
-
-        // foreach ($arr as $key => $value) {
-        //     echo $key;
-        // }
-
-        // return collect(PropertyResource::collection(Property::all())->distinct()->groupBy('property_name'));
     }
 
+
+    public function filterDemo()
+    {
+        $category = Category::find(11);
+        return $category->filters;
+    }
     //todos
     //1. create product
     //2. add to variations

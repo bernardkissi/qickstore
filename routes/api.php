@@ -44,7 +44,7 @@ Route::get('/test', function () {
 
          // return ProductResource::collection($prod);
       // return ProductResource::collection((new ProductActions())->products());
-        return (new ProductActions())->demo();
+        return (new ProductActions())->filterDemo();
         // $product = Product::find(1);
         // $product->sku()->create(['code' => 'abc126', 'price' => 1000]);
         //

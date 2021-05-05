@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domains\Categories\Models;
 
 use App\Domains\Categories\Scopes\Scopes;
+use App\Domains\Filters\Models\Filter;
 use App\Domains\Products\Models\Product;
 use Database\Factories\CategoryFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -35,15 +36,21 @@ class Category extends Model
     /**
      *  Category products relationship
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function products()
     {
-        return $this->belongsToMany(Product::class, 'category_product', 'category_id', 'product_id')
-            ->withTimestamps();
+        return $this->hasMany(Product::class);
     }
 
-    
+    /**
+     * Get all of the deployments for the project.
+     */
+    public function filters()
+    {
+        return $this->hasManyThrough(Filter::class, Product::class);
+    }
+
     /**
      * Create a new factory instance for the model.
      *
