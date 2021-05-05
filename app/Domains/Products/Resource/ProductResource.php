@@ -3,6 +3,7 @@
 namespace App\Domains\Products\Resource;
 
 use App\Domains\Products\Resource\VariationResource;
+use App\Domains\Properties\Resource\PropertyResource;
 use App\Domains\Skus\Resource\SkuResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -25,7 +26,8 @@ class ProductResource extends JsonResource
     
             // $this->mergeWhen(count($this->variations) <= 0, [
                  'price' => $this->price,
-                'sku' =>  new SkuResource($this->whenLoaded('sku'))
+                 'sku' =>  new SkuResource($this->whenLoaded('sku')),
+                 'properties' => PropertyResource::collection($this->whenLoaded('properties'))
             // ])
         ];
     }

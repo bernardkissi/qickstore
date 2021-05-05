@@ -10,6 +10,7 @@ use App\Domains\Options\Models\Option;
 use App\Domains\Products\Casts\Currency;
 use App\Domains\Products\Models\ProductVariation;
 use App\Domains\Products\Scopes\Scoper;
+use App\Domains\Properties\Models\Property;
 use App\Domains\Skus\Model\Sku;
 use Database\Factories\ProductFactory;
 use Illuminate\Database\Eloquent\Builder;
@@ -33,7 +34,8 @@ class Product extends Model
        'description',
        'slug',
        'status',
-       'featured'
+       'featured',
+       'schedule_at'
      ];
 
 
@@ -104,13 +106,24 @@ class Product extends Model
 
 
     /**
-     *  Product sku relationship
+     *  Product collections relationship
      *
      * @return Illuminate\Database\Eloquent\Concerns\morphOne
      */
      public function collections()
      {
          return $this->belongsToMany(Collection::class);
+     }
+
+
+     /**
+     *  Product properties relationship
+     *
+     * @return Illuminate\Database\Eloquent\Concerns\HasMany
+     */
+     public function properties()
+     {
+         return $this->hasMany(Property::class);
      }
 
 
