@@ -1,0 +1,6 @@
+{
+    "recommendations": [
+        "calebporzio.simple-php-cs-fixer",
+        "junstyle.php-cs-fixer"
+    ]
+}

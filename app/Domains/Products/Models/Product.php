@@ -6,11 +6,11 @@ namespace App\Domains\Products\Models;
 
 use App\Domains\Categories\Models\Category;
 use App\Domains\Collections\Models\Collection;
+use App\Domains\Filters\Models\Filter;
 use App\Domains\Options\Models\Option;
 use App\Domains\Products\Casts\Currency;
 use App\Domains\Products\Models\ProductVariation;
 use App\Domains\Products\Scopes\Scoper;
-use App\Domains\Properties\Models\Property;
 use App\Domains\Skus\Model\Sku;
 use Database\Factories\ProductFactory;
 use Illuminate\Database\Eloquent\Builder;
@@ -121,9 +121,9 @@ class Product extends Model
      *
      * @return Illuminate\Database\Eloquent\Concerns\HasMany
      */
-     public function properties()
+     public function filters()
      {
-         return $this->hasMany(Property::class);
+         return $this->hasMany(Filter::class);
      }
 
 

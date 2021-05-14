@@ -15,7 +15,7 @@ class Filter extends Model
      *
      * @var array
      */
-    protected $fillable = [ 'property_name', 'property_values' ];
+    protected $fillable = [ 'property_name', 'property_value' ];
 
 
     /**

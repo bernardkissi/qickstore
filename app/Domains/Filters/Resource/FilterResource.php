@@ -3,7 +3,6 @@
 namespace App\Domains\Filters\Resource;
 
 use App\Domains\Filters\Models\Filter;
-use App\Domains\Properties\Models\Property;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class FilterResource extends JsonResource
