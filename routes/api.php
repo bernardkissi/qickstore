@@ -4,6 +4,8 @@
 // use App\Domains\Categories\Models\Category;
 // use App\Domains\Categories\Resources\CategoryResource;
 // use App\Domains\Products\Actions\ProductActions;
+
+use App\Domains\Products\Actions\ProductActions;
 use App\Domains\Products\Actions\ProductService;
 // use App\Domains\Products\Models\Product;
 // use App\Domains\Products\Models\ProductVariation;
@@ -13,6 +15,7 @@ use App\Domains\Products\Actions\ProductService;
 // use App\Domains\Stocks\Models\StockView;
 // use Illuminate\Database\Eloquent\Builder;
 use App\Domains\Products\Resource\ProductResource;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,7 +30,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/test', function () {
+Route::post('/test', function (Request $request) {
+    (new ProductActions())->createProduct($request);
+    
+    
     // return CategoryResource::collection(Category::with('subcategories.subcategories')
     //     ->categories()
     //     ->ordered()
@@ -45,7 +51,7 @@ Route::get('/test', function () {
     //  ->paginate(10);
 
     // return ProductResource::collection($prod);
-    return ProductResource::collection((new ProductService())->getProducts());
+    // return ProductResource::collection((new ProductActions())->getProducts());
     // return (new ProductService())->getProducts();
     // $product = Product::find(1);
         // $product->sku()->create(['code' => 'abc126', 'price' => 1000]);
@@ -53,6 +59,3 @@ Route::get('/test', function () {
         //
         // return StockView::all();
 });
-
-
-// Route::get('/product/{product:slug}', [ ])

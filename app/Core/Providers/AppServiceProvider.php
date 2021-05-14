@@ -2,7 +2,7 @@
 
 namespace App\Core\Providers;
 
-use App\Domains\Filters\Resource\FilterResource;
+use App\Domains\Attributes\Resource\AttributeResource;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
 
@@ -31,6 +31,6 @@ class AppServiceProvider extends ServiceProvider
             'Variation' => 'App\Domains\Products\Models\ProductVariation',
         ]);
 
-        FilterResource::withoutWrapping();
+        AttributeResource::withoutWrapping();
     }
 }

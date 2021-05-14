@@ -10,6 +10,12 @@ class Stock extends Model
 {
     use HasFactory;
 
+    /**
+     *  Stock attributes
+     *
+     * @var array
+     */
+    protected $fillable = ['quantity'];
 
     /**
      * Product sku relationship
@@ -18,6 +24,6 @@ class Stock extends Model
      */
     public function sku()
     {
-   	 	return $this->belongsTo(Sku::class);
+        return $this->belongsTo(Sku::class);
     }
 }

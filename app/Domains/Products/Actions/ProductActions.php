@@ -6,23 +6,30 @@ namespace App\Domains\Products\Actions;
 
 use App\Domains\Products\Models\Product;
 use App\Domains\Products\Scopes\Filters\CategoryScope;
+use App\Domains\Skus\Model\Sku;
+use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-class ProductService
+class ProductActions
 {
-
-    //todos
-    //1. create product
-    //2. add to variations
-    //3. set sku for products
-    //4. create limited or unlimited stock
-    
-    public function storeProduct()
+    public function createProduct(Request $data)
     {
+        return tap(Product::create([
+
+            'name' => $data['name'],
+            'description' => $data['description'],
+            'slug' => $data['slug'],
+            'barcode' => $data['barcode'],
+            
+        ]), function (Product $product) use ($data) {
+            return tap($product->sku()->create(['code' => $data['code'], 'price' => 1000, ]), function (Sku $sku) {
+                $sku->stocks()->create(['quantity' => 20]);
+            });
+        });
     }
 
     /**
-     * Return all products loaded relationships
+     * Return all products
      *
      * @return Illuminate\Pagination\LengthAwarePaginator;
      */
@@ -50,18 +57,29 @@ class ProductService
     }
 
     /**
+     * Store product options
+     *
+     * @param Product $product
+     * @param array $options
+     * @return void
+     */
+    public function assignOptions(Product $product, array $options): void
+    {
+        $product->options()->syncWithoutDetaching($options);
+    }
+
+    /**
      * Store product variations
      *
      * @param  App\Domains\Products\Models\Product $product
-     * @param  array                               $variants
+     * @param  array $variants
      * @return void
      */
-    public function storeVariations(Product $product, array $variants): void
+    public function createVariations(Product $product, array $variants): void
     {
         $product->variations()->createMany($variants);
     }
 
-    
     /**
      * Searchable scopes for products
      *

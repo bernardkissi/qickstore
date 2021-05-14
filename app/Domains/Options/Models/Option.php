@@ -40,6 +40,4 @@ class Option extends Model
     {
         return $this->belongsToMany(Product::class);
     }
-
-    
 }

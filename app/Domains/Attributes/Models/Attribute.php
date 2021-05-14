@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Domains\Filters\Models;
+namespace App\Domains\Attributes\Models;
 
 use App\Domains\Products\Models\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Filter extends Model
+class Attribute extends Model
 {
     use HasFactory;
 

@@ -2,6 +2,7 @@
 
 namespace App\Domains\Skus\Model;
 
+use App\Domains\Stocks\Models\Stock;
 use App\Domains\Stocks\Models\StockView;
 use Database\Factories\SkuFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

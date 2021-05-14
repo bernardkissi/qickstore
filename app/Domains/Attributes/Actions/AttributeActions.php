@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\Domains\Filters\Actions;
+namespace App\Domains\Attributes\Actions;
 
+use App\Domains\Attributes\Models\Attribute;
+use App\Domains\Attributes\Resource\AttributeResource;
 use App\Domains\Categories\Models\Category;
-use App\Domains\Filters\Models\Filter;
-use App\Domains\Filters\Resource\FilterResource;
 use App\Domains\Products\Models\Product;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Str;
 
-class FilterService
+class AttributeActions
 {
 
     /**
@@ -21,10 +21,10 @@ class FilterService
      * @param  array   $arr
      * @return void
      */
-    public function storeFilters(Product $product, array $arr): void
+    public function storeFilters(Product $product, array $arrs): void
     {
-        collect(array_keys($arr))->map(function ($key) use ($arr, $product) {
-            $product->filters()->createMany($this->setFilters($arr, $key));
+        collect(array_keys($arrs))->map(function ($key) use ($arrs, $product) {
+            $product->filters()->createMany($this->setFilters($arrs, $key));
         });
     }
 
@@ -36,7 +36,7 @@ class FilterService
      */
     public function getCategoryFilters(Category $category): array
     {
-        return $this->groupFilters(FilterResource::collection($category->filters));
+        return $this->groupFilters(AttributeResource::collection($category->filters));
     }
 
 
@@ -46,7 +46,7 @@ class FilterService
      * @param  App\Domains\Filters\Models\Filter $filter
      * @return void
      */
-    public function deleteFilter(Filter $filter): void
+    public function deleteFilter(Attribute $filter): void
     {
         $filter->delete();
     }
@@ -59,7 +59,7 @@ class FilterService
      * @param  array $property
      * @return bool
      */
-    public function editFilter(Filter $filter, string $property): bool
+    public function editFilter(Attribute $filter, string $property): bool
     {
         return $filter->update(
             [
@@ -88,7 +88,7 @@ class FilterService
     }
 
     /**
-     *  Prepare filters for storing
+     *  Prepare product filters for storing
      *
      * @param array  $arr
      * @param string $key

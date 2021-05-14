@@ -27,7 +27,7 @@ class OptionType extends Model
      *
      * @return Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function attributes(): HasMany
+    public function options(): HasMany
     {
         return $this->hasMany(Option::class);
     }

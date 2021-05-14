@@ -1,20 +1,19 @@
 <?php
 
-namespace App\Domains\Filters\Resource;
+namespace App\Domains\Attributes\Resource;
 
-use App\Domains\Filters\Models\Filter;
+use App\Domains\Attribute\Models\Attribute;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class FilterResource extends JsonResource
+class AttributeResource extends JsonResource
 {
-
 
     /**
      * The resource that this resource collects.
      *
      * @var string
      */
-    public $collects = Filter::class;
+    public $collects = Attribute::class;
 
 
     /**

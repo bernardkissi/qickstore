@@ -11,15 +11,15 @@ class CategoryScope implements ScopeContract
 {
     /**
      * Filter products based on categories
-     * 
-     * @param  Illuminate\Database\Eloquent\Builder $builder 
-     * @param  string  $value   
+     *
+     * @param  Illuminate\Database\Eloquent\Builder $builder
+     * @param  string  $value
      * @return Illuminate\Database\Eloquent\Builder
      */
-    public function apply(Builder $builder, $value): Builder{
-
-		return $builder->whereHas('categories', function($builder) use ($value){
-			$builder->where('slug', $value);
-		});
-	}
+    public function apply(Builder $builder, $value): Builder
+    {
+        return $builder->whereHas('categories', function ($builder) use ($value) {
+            $builder->where('slug', $value);
+        });
+    }
 }
