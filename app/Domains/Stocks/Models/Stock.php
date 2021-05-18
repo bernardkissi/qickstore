@@ -15,7 +15,7 @@ class Stock extends Model
      *
      * @var array
      */
-    protected $fillable = ['quantity'];
+    protected $fillable = ['quantity', 'limit'];
 
     /**
      * Product sku relationship

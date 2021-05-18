@@ -50,6 +50,12 @@ return [
             'bucket' => env('AWS_BUCKET'),
             'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
+
+            'cache' => [
+                'store' => 'database',
+                'expire' => 600,
+                'prefix' => '',
+            ],
         ],
 
     ],

@@ -23,9 +23,18 @@ class ProductActions
             
         ]), function (Product $product) use ($data) {
             return tap($product->sku()->create(['code' => $data['code'], 'price' => 1000, ]), function (Sku $sku) {
-                $sku->stocks()->create(['quantity' => 20]);
+                $sku->stocks()->create(['quantity' => 20, 'limit' => 1]);
             });
         });
+    }
+
+    
+    public function uploadImage() //, Product $product
+    {
+        $product = Product::find(1);
+        $product->toS3Bucket('image');
+
+        echo $product->getMedia('products');
     }
 
     /**

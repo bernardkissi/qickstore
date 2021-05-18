@@ -31,7 +31,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::post('/test', function (Request $request) {
-    (new ProductActions())->createProduct($request);
+    (new ProductActions())->uploadImage($request);
     
     
     // return CategoryResource::collection(Category::with('subcategories.subcategories')
