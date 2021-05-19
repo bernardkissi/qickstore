@@ -13,16 +13,17 @@ class ProductVariation extends Model
     use HasFactory;
 
 
-     /**
-     * Fillable properties of the model.
-     *
-     * @var array
-     */
+    /**
+    * Fillable properties of the model.
+    *
+    * @var array
+    */
     protected $fillable = [
 
         'name',
         'price',
         'order',
+        'slug',
         'properties',
         'identifier',
         'barcode',
@@ -30,33 +31,33 @@ class ProductVariation extends Model
     ];
 
 
-     /**
-     * The attributes that should be cast.
-     *
-     * @var array
-     */
+    /**
+    * The attributes that should be cast.
+    *
+    * @var array
+    */
     protected $casts = [
 
         'price' => Currency::class.':GHS',
     ];
 
 
-     /**
-     *  Variation product relationship
-     *
-     * @return Illuminate\Database\Eloquent\Concerns\belongsTo
-     */
+    /**
+    *  Variation product relationship
+    *
+    * @return Illuminate\Database\Eloquent\Concerns\belongsTo
+    */
     public function product()
     {
         return $this->belongsTo(Product::class);
     }
 
 
-     /**
-     *  Product sku relationship
-     *
-     * @return Illuminate\Database\Eloquent\Concerns\morphOne
-     */
+    /**
+    *  Product sku relationship
+    *
+    * @return Illuminate\Database\Eloquent\Concerns\morphOne
+    */
     public function sku()
     {
         return $this->morphOne(Sku::class, 'skuable');

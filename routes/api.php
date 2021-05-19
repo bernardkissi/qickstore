@@ -31,7 +31,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::post('/test', function (Request $request) {
-    (new ProductActions())->uploadImage($request);
+    // (new ProductActions())->uploadImage($request);
     
     
     // return CategoryResource::collection(Category::with('subcategories.subcategories')
@@ -58,4 +58,8 @@ Route::post('/test', function (Request $request) {
         //
         //
         // return StockView::all();
+});
+
+Route::post('/test2', function (Request $request) {
+    (new ProductActions())->createProduct($request);
 });

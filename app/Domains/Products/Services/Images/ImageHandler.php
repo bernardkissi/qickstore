@@ -14,8 +14,7 @@ trait ImageHandler
     public function toS3Bucket(string $image)
     {
         $this->addMediaFromRequest($image)
-           ->toMediaCollection('products');
-
-        // echo $this->getFirstMediaUrl('thumb');
+            ->storingConversionsOnDisk('s3')
+            ->toMediaCollection('products');
     }
 }

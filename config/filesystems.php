@@ -54,7 +54,7 @@ return [
             'cache' => [
                 'store' => 'database',
                 'expire' => 600,
-                'prefix' => '',
+                'prefix' => 'cac-p',
             ],
         ],
 

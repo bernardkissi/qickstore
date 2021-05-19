@@ -5,40 +5,49 @@ declare(strict_types=1);
 namespace App\Domains\Products\Actions;
 
 use App\Domains\Products\Models\Product;
+use App\Domains\Products\Models\ProductVariation;
 use App\Domains\Products\Scopes\Filters\CategoryScope;
 use App\Domains\Skus\Model\Sku;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Str;
 
 class ProductActions
 {
-    public function createProduct(Request $data)
+    /**
+     * Create a product in store
+     *
+     * @param Request $data
+     * @return void
+     */
+    public function createProduct(Request $request)
     {
         return tap(Product::create([
 
-            'name' => $data['name'],
-            'description' => $data['description'],
-            'slug' => $data['slug'],
-            'barcode' => $data['barcode'],
+            'name' => $request['name'],
+            'description' => $request['description'],
+            'slug' =>  Str::slug($request['name']),
+            'barcode' => $request['barcode']
             
-        ]), function (Product $product) use ($data) {
-            return tap($product->sku()->create(['code' => $data['code'], 'price' => 1000, ]), function (Sku $sku) {
-                $sku->stocks()->create(['quantity' => 20, 'limit' => 1]);
-            });
+        ]), function (Product $product) use ($request) {
+            $this->syncProductSkuStock($product, $request['meta']);
         });
     }
 
-    
-    public function uploadImage() //, Product $product
+    /**
+     *  Attach images to products on S3 buckets
+     *
+     * @param Product $product
+     * @return void
+     */
+    public function uploadImage(Product $product): void
     {
-        $product = Product::find(1);
         $product->toS3Bucket('image');
-
-        echo $product->getMedia('products');
     }
 
     /**
-     * Return all products
+     * Return all products in store
      *
      * @return Illuminate\Pagination\LengthAwarePaginator;
      */
@@ -78,15 +87,26 @@ class ProductActions
     }
 
     /**
-     * Store product variations
+     * Creates Product variations
      *
-     * @param  App\Domains\Products\Models\Product $product
-     * @param  array $variants
+     * @param Product $product
+     * @param Request $request
      * @return void
      */
-    public function createVariations(Product $product, array $variants): void
+    public function createVariations(Request $request): void //Product $product,
     {
-        $product->variations()->createMany($variants);
+        $product = Product::find(1);
+        collect($request['variations'])->map(function ($variant) use ($product) {
+            return tap($product->variations()->create([
+
+                'name' => $variant['name'],
+                'properties' => json_encode($variant['properties']),
+                'slug' => Str::slug($variant['name'])
+
+             ]), function (ProductVariation $variation) use ($variant) {
+                 $this->syncProductSkuStock($variation, $variant['meta']);
+             });
+        });
     }
 
     /**
@@ -97,5 +117,15 @@ class ProductActions
     protected function scopes(): array
     {
         return [ 'category' => new CategoryScope() ];
+    }
+
+
+    protected function syncProductSkuStock(Model $product, array $data)
+    {
+        return tap($product->sku()->create([
+            'code' => $data['sku'], 'price' => 1000,
+        ]), function (Sku $sku) use ($data) {
+            $sku->stocks()->create(['quantity' => $data['stock'], 'limit' => 1]);
+        });
     }
 }

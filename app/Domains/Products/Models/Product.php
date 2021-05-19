@@ -171,7 +171,6 @@ class Product extends Model implements HasMedia
               ->quality(70);
     }
 
-
     /**
      * Scope to check if product has variations
      *
