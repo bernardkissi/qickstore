@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domains\Options\Actions;
 
+use App\Domains\Options\Models\Option;
 use App\Domains\Options\Models\OptionType;
 use Illuminate\Support\Collection;
 
@@ -21,21 +22,50 @@ class OptionActions
      *
      * @return Illuminate\Support\Collection
      */
-    public function storeOptions(): Collection
+    public function storeOptions() //Collection
     {
         $types = array_keys($this->options);
-
-        return collect($types)->map(function ($type) {
+       
+        $collection = collect($types)->map(function ($type) {
+            if (!is_null($this->typeExist($type))) {
+                return $this->typeExist($type);
+            }
             return OptionType::create(['name' => $type, 'input_type' => 'dropdown']);
-        })
-        ->map(function ($type) {
-            return $type->options()
-                ->createMany($this->setOptions($type->name));
-        })
-        ->collapse()
-        ->pluck('id');
+        });
+
+        return $this->createOptions($collection);
     }
     
+
+    /**
+     * Store type options
+     *
+     * @param OptionType $type
+     * @return void
+     */
+    private function createOptions(Collection $types): bool|Collection
+    {
+        return $types->map(function ($type) {
+            return collect($this->options[$type->name])->map(function ($key) use ($type) {
+                // return $type->options->contains('name', $key);
+                
+                if ($type->options->contains('name', $key)) {
+                    return $type->options->filter(fn ($option) => $option->name === $key)->pluck('id');
+                }
+                          
+                return $type->options()->createMany($this->setOptions($type->name))->pluck('id');
+                
+                // return $type->options()->createMany($this->setOptions($type->name));
+            });
+        })->flatten();
+        // ->collapse()->pluck('id');
+    }
+
+    //   // if (!collect($this->options[$type->name])->contains($option->name)) {
+    //     return collect($this->options[$type->name])->contains($option->name)? $option :
+    //     $type->options()->createMany($this->setOptions($type->name));
+
+
     /**
      * Prepare product options
      *
@@ -43,12 +73,44 @@ class OptionActions
      * @param string $key
      * @return array
      */
-    private function setOptions(string $key): array
+    private function setOptions(string $key): bool|array
     {
         $options = [];
         foreach ($this->options[$key] as $option) {
-            $options[] = ['name' => $option];
+            if (!$this->optionExist($option, $key)) {
+                $options[] = ['name' => $option];
+            }
+            continue;
         }
         return $options;
+    }
+
+
+    /**
+     *  Checks if option type exit
+     *
+     * @param string $type
+     * @return OptionType
+     */
+    private function typeExist(string $type): ?OptionType
+    {
+        return OptionType::where('name', $type)->first();
+    }
+
+    /**
+     * Check if options exist
+     *
+     * @param string $option
+     * @param string $type
+     * @return boolean|null
+     */
+    private function optionExist(string $option, string $type): null|bool
+    {
+        $types= Option::where('name', $option)
+        ->first()
+        ?->types()
+        ->pluck('name');
+
+        return $types?->contains($type);
     }
 }

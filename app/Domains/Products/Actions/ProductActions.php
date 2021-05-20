@@ -119,7 +119,13 @@ class ProductActions
         return [ 'category' => new CategoryScope() ];
     }
 
-
+    /**
+     *  Attach sku and stocks to a product or va
+     *
+     * @param Model $product
+     * @param array $data
+     * @return void
+     */
     protected function syncProductSkuStock(Model $product, array $data)
     {
         return tap($product->sku()->create([
