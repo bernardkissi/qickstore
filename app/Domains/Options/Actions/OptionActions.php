@@ -22,7 +22,7 @@ class OptionActions
      *
      * @return Illuminate\Support\Collection
      */
-    public function storeOptions() //Collection
+    public function storeOptions(): Collection
     {
         $types = array_keys($this->options);
        
@@ -38,33 +38,22 @@ class OptionActions
     
 
     /**
-     * Store type options
+     * Storing options
      *
-     * @param OptionType $type
-     * @return void
+     * @param Collection $types
+     * @return Collection
      */
-    private function createOptions(Collection $types): bool|Collection
+    private function createOptions(Collection $types): Collection
     {
         return $types->map(function ($type) {
             return collect($this->options[$type->name])->map(function ($key) use ($type) {
-                // return $type->options->contains('name', $key);
-                
                 if ($type->options->contains('name', $key)) {
                     return $type->options->filter(fn ($option) => $option->name === $key)->pluck('id');
                 }
-                          
                 return $type->options()->createMany($this->setOptions($type->name))->pluck('id');
-                
-                // return $type->options()->createMany($this->setOptions($type->name));
             });
         })->flatten();
-        // ->collapse()->pluck('id');
     }
-
-    //   // if (!collect($this->options[$type->name])->contains($option->name)) {
-    //     return collect($this->options[$type->name])->contains($option->name)? $option :
-    //     $type->options()->createMany($this->setOptions($type->name));
-
 
     /**
      * Prepare product options
