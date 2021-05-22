@@ -12,6 +12,7 @@ class CategoryResource extends JsonResource
      * Transform the resource into an array.
      *
      * @param  \Illuminate\Http\Request  $request
+     *
      * @return array
      */
     public function toArray($request): array
@@ -20,7 +21,7 @@ class CategoryResource extends JsonResource
 
             'name' => $this->name,
             'slug' => $this->slug,
-            'subcategories' => CategoryResource::collection($this->whenLoaded('subcategories'))
+            'subcategories' => CategoryResource::collection($this->whenLoaded('subcategories')),
         ];
     }
 }

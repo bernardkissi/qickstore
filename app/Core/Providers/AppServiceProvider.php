@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        
     }
 
     /**
@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Relation::morphMap([
-            
+
             'Product' => 'App\Domains\Products\Product\Models\Product',
             'Variation' => 'App\Domains\Products\Product\Models\ProductVariation',
         ]);

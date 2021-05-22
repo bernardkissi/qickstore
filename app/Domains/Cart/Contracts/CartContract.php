@@ -11,15 +11,17 @@ interface CartContract
      * Add items to cart
      *
      * @param array $products
+     *
      * @return void
      */
     public function add(array $products): void;
-    
+
     /**
      * Update in the cart
      *
-     * @param integer $skuId
-     * @param integer $quantity
+     * @param int $skuId
+     * @param int $quantity
+     *
      * @return void
      */
     public function update(int $skuId, int $quantity): void;
@@ -27,7 +29,8 @@ interface CartContract
     /**
      * Delete items in cart
      *
-     * @param integer $skuId
+     * @param int $skuId
+     *
      * @return void
      */
     public function delete(int $skuId): void;
@@ -49,7 +52,7 @@ interface CartContract
     /**
      * Checks if cart is empty
      *
-     * @return boolean
+     * @return bool
      */
     public function isEmpty(): bool;
 
@@ -63,7 +66,7 @@ interface CartContract
     /**
      * Checks if cart has changed
      *
-     * @return boolean
+     * @return bool
      */
     public function hasChanged(): bool;
 
@@ -84,16 +87,18 @@ interface CartContract
     /**
      * Undocumented function
      *
-     * @param integer $deliveryId
+     * @param int $deliveryId
+     *
      * @return Money
      */
-    public function deliveryCost(int|string $deliveryId): Money;
+    public function deliveryCost(int | string $deliveryId): Money;
 
     /**
      * Undocumented function
      *
-     * @param integer $deliveryId
+     * @param int $deliveryId
+     *
      * @return self
      */
-    public function withDelivery(int|string $deliveryId): self;
+    public function withDelivery(int | string $deliveryId): self;
 }

@@ -15,7 +15,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $property_value
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ *
  * @property-read Product $products
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Attribute newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Attribute newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Attribute query()
@@ -25,6 +27,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Attribute wherePropertyName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Attribute wherePropertyValue($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Attribute whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class Attribute extends Model
@@ -37,7 +40,6 @@ class Attribute extends Model
      * @var array
      */
     protected $fillable = [ 'property_name', 'property_value' ];
-
 
     /**
      *  Database table name

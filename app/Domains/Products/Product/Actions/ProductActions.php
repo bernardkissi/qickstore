@@ -1,5 +1,5 @@
 <?php
- 
+
 declare(strict_types=1);
 
 namespace App\Domains\Products\Product\Actions;
@@ -19,6 +19,7 @@ class ProductActions
      * Create a product in store
      *
      * @param Request $data
+     *
      * @return void
      */
     public function createProduct(Request $request)
@@ -27,7 +28,7 @@ class ProductActions
 
             'name' => $request['name'],
             'description' => $request['description'],
-            'slug' =>  Str::slug($request['name']),
+            'slug' => Str::slug($request['name']),
             'barcode' => $request['barcode'],
 
         ]), function (Product $product) use ($request) {
@@ -39,9 +40,10 @@ class ProductActions
      *  Attach images to products on S3 buckets
      *
      * @param Product $product
+     *
      * @return void
      */
-    public function uploadImage(Product|ProductVariation $product): void
+    public function uploadImage(Product | ProductVariation $product): void
     {
         $product->toS3Bucket('image');
     }
@@ -53,24 +55,23 @@ class ProductActions
      */
     public function getProducts(): LengthAwarePaginator
     {
-        $products = Product::with('sku', 'sku.stockCount', 'options', 'options.types', 'variations')
+        return Product::with('sku', 'sku.stockCount', 'options', 'options.types', 'variations')
             ->withFilter($this->scopes())
             ->orderBy('created_at', 'asc')
             ->paginate(10);
- 
-        return $products;
     }
 
     /**
      * Returns a single product
      *
      * @param  App\Domains\Products\Models\Product $product
+     *
      * @return App\Domains\Products\Models\Product;
      */
     public function getProduct(Product $product): Product
     {
         $product->load(['sku.stockCount', 'variations.sku.StockCount', 'options.types', 'properties']);
-        
+
         return $product;
     }
 
@@ -79,6 +80,7 @@ class ProductActions
      *
      * @param Product $product
      * @param array $options
+     *
      * @return void
      */
     public function assignOptions(Product $product, array $options): void
@@ -91,6 +93,7 @@ class ProductActions
      *
      * @param Product $product
      * @param Request $request
+     *
      * @return void
      */
     public function createVariations(Request $request): void //Product $product,
@@ -103,9 +106,9 @@ class ProductActions
                 'properties' => json_encode($variant['properties']),
                 'slug' => Str::slug($variant['name']),
 
-             ]), function (ProductVariation $variation) use ($variant) {
-                 $this->syncProductSkuStock($variation, $variant['meta']);
-             });
+            ]), function (ProductVariation $variation) use ($variant) {
+                $this->syncProductSkuStock($variation, $variant['meta']);
+            });
         });
     }
 
@@ -124,6 +127,7 @@ class ProductActions
      *
      * @param Model $product
      * @param array $data
+     *
      * @return void
      */
     protected function syncProductSkuStock(Model $product, array $data)
@@ -133,8 +137,8 @@ class ProductActions
             'code' => $data['sku'],
             'price' => 1000,
             'min_stock' => $data['stock'],
-            'unlimited' => $data['unlimited']
-            
+            'unlimited' => $data['unlimited'],
+
         ]), function (Sku $sku) use ($data) {
             $sku->stocks()->create(['quantity' => $data['stock'] ?? 0]);
         });

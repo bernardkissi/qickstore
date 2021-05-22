@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Domains\Products\Options\Models;
 
-use App\Domains\Products\Options\Models\Option;
 use Database\Factories\OptionTypeFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -18,8 +17,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $input_type
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|Option[] $options
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|array<Option> $options
  * @property-read int|null $options_count
+ *
  * @method static \Database\Factories\OptionTypeFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|OptionType newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|OptionType newQuery()
@@ -29,6 +30,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder|OptionType whereInputType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|OptionType whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|OptionType whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class OptionType extends Model
@@ -41,7 +43,6 @@ class OptionType extends Model
      * @var array
      */
     protected $fillable = [ 'name', 'input_type' ];
-
 
     /**
      * options to types relationship

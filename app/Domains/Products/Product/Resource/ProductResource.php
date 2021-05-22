@@ -12,6 +12,7 @@ class ProductResource extends JsonResource
      * Transform the resource into an array.
      *
      * @param  \Illuminate\Http\Request  $request
+     *
      * @return array
      */
     public function toArray($request)
@@ -21,15 +22,15 @@ class ProductResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
-            'description'=> $this->description,
+            'description' => $this->description,
             'type' => 'physical',
             'active' => true,
             'featured' => false,
             'images' => $this->getMedia('products')->map(fn ($img) => $img->getUrl('thumb')), // product/detail/thumb
             'price' => $this->price,
-            'sku' =>  new SkuResource($this->whenLoaded('sku')),
-            'properties' => AttributeResource::collection($this->whenLoaded('properties'))
-            
+            'sku' => new SkuResource($this->whenLoaded('sku')),
+            'properties' => AttributeResource::collection($this->whenLoaded('properties')),
+
         ];
     }
 }

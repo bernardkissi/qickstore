@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domains\Products\Categories\Models;
 
-use App\Domains\Products\Categories\Scopes\Scopes;
 use App\Domains\Products\Attributes\Models\Attribute;
+use App\Domains\Products\Categories\Scopes\Scopes;
 use App\Domains\Products\Product\Models\Product;
 use Database\Factories\CategoryFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,8 +21,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $order
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|Category[] $subcategories
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|array<Category> $subcategories
  * @property-read int|null $subcategories_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Category categories()
  * @method static \Database\Factories\CategoryFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Category newModelQuery()
@@ -36,10 +38,12 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Category whereParentId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Category whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Category whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
- * @property-read \Illuminate\Database\Eloquent\Collection|Attribute[] $filters
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|array<Attribute> $filters
  * @property-read int|null $filters_count
- * @property-read \Illuminate\Database\Eloquent\Collection|Product[] $products
+ * @property-read \Illuminate\Database\Eloquent\Collection|array<Product> $products
  * @property-read int|null $products_count
  */
 class Category extends Model
@@ -53,7 +57,6 @@ class Category extends Model
      */
     protected $fillable = ['name','slug', 'order'];
 
-
     /**
      * Subcategory relationship
      *
@@ -61,7 +64,7 @@ class Category extends Model
      */
     public function subcategories()
     {
-        return $this->hasMany(__CLASS__, 'parent_id', 'id');
+        return $this->hasMany(self::class, 'parent_id', 'id');
     }
 
     /**

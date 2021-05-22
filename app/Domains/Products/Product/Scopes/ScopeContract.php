@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Domains\Products\Product\Scopes;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -12,6 +11,7 @@ interface ScopeContract
      *
      * @param  Builder $builder
      * @param  [type]  $value
+     *
      * @return [type]
      */
     public function apply(Builder $builder, $value);

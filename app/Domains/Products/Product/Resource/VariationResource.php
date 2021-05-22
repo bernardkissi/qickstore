@@ -11,6 +11,7 @@ class VariationResource extends JsonResource
      * Transform the resource into an array.
      *
      * @param  \Illuminate\Http\Request  $request
+     *
      * @return array
      */
     public function toArray($request)
@@ -24,7 +25,7 @@ class VariationResource extends JsonResource
             'identifer' => $this->identifer,
             'properties' => $this->properties,
             'order' => $this->order,
-            'sku' =>  new SkuResource($this->whenLoaded('sku')),
+            'sku' => new SkuResource($this->whenLoaded('sku')),
         ];
     }
 }

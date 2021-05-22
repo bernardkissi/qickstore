@@ -1,13 +1,9 @@
 <?php
 
-
 // use App\Domains\Categories\Models\Category;
 // use App\Domains\Categories\Resources\CategoryResource;
 // use App\Domains\Products\Actions\ProductActions;
 
-use App\Domains\Attributes\Actions\AttributeActions;
-use App\Domains\Options\Actions\OptionActions;
-use App\Domains\Products\Actions\ProductService;
 // use App\Domains\Products\Models\Product;
 // use App\Domains\Products\Models\ProductVariation;
 // use App\Domains\Products\Resource\ProductResource;
@@ -15,7 +11,6 @@ use App\Domains\Products\Actions\ProductService;
 // use App\Domains\Products\Scopes\Filters\CategoryScope;
 // use App\Domains\Stocks\Models\StockView;
 // use Illuminate\Database\Eloquent\Builder;
-use App\Domains\Products\Models\Product;
 use App\Domains\Products\Product\Actions\ProductActions;
 use App\Domains\Products\Product\Resource\ProductResource;
 use Illuminate\Http\Request;
@@ -32,16 +27,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 Route::get('/test', function () {
     // (new ProductActions())->uploadImage($request);
-    
-    
+
     // return CategoryResource::collection(Category::with('subcategories.subcategories')
     //     ->categories()
     //     ->ordered()
     //     ->get());
-
 
     // return  ProductResource::collection(Product::with('options', 'options.attributes', 'variations')->get());
     // return  Product::where('id', 1)->options()->get();

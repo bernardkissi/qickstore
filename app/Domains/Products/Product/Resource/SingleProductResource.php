@@ -3,8 +3,6 @@
 namespace App\Domains\Products\Product\Resource;
 
 use App\Domains\Products\Options\Resource\OptionCollection;
-use App\Domains\Products\Product\Resource\ProductResource;
-use App\Domains\Products\Product\Resource\VariationResource;
 
 class SingleProductResource extends ProductResource
 {
@@ -12,6 +10,7 @@ class SingleProductResource extends ProductResource
      * Transform the resource into an array.
      *
      * @param  \Illuminate\Http\Request  $request
+     *
      * @return array
      */
     public function toArray($request)
@@ -19,13 +18,13 @@ class SingleProductResource extends ProductResource
         return array_merge(
             parent::toArray($request),
             [
-               $this->mergeWhen(count($this->variations) > 0, [
+                $this->mergeWhen(count($this->variations) > 0, [
 
-                 'product_options' => OptionCollection::collection($this->options->groupBy('types.name')),
-                 'product_variations' => VariationResource::collection($this->variations)
+                    'product_options' => OptionCollection::collection($this->options->groupBy('types.name')),
+                    'product_variations' => VariationResource::collection($this->variations),
 
-               ])
-               
+                ]),
+
             ]
         );
     }

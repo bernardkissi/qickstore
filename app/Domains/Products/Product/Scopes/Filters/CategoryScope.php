@@ -14,6 +14,7 @@ class CategoryScope implements ScopeContract
      *
      * @param  Illuminate\Database\Eloquent\Builder $builder
      * @param  string  $value
+     *
      * @return Illuminate\Database\Eloquent\Builder
      */
     public function apply(Builder $builder, $value): Builder

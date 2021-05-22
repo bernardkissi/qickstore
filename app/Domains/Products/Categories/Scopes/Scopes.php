@@ -12,6 +12,7 @@ trait Scopes
      * Scope to return parent categories
      *
      * @param  Builder $builder [description]
+     *
      * @return void;
      */
     public function scopeCategories(Builder $builder): void
@@ -19,12 +20,12 @@ trait Scopes
         $builder->whereNull('parent_id');
     }
 
-
     /**
      * Scope to order categories in asc order
      *
      * @param  Builder $builder   Illuminate\Database\Eloquent\Builder
      * @param  string  $direction
+     *
      * @return void
      */
     public function scopeOrdered(Builder $builder, $direction = 'asc'): void

@@ -25,9 +25,9 @@ class OptionActions
     public function storeOptions(): Collection
     {
         $types = array_keys($this->options);
-       
+
         $collection = collect($types)->map(function ($type) {
-            if (!is_null($this->typeExist($type))) {
+            if (! is_null($this->typeExist($type))) {
                 return $this->typeExist($type);
             }
             return OptionType::create(['name' => $type, 'input_type' => 'dropdown']);
@@ -35,12 +35,12 @@ class OptionActions
 
         return $this->createOptions($collection);
     }
-    
 
     /**
      * Storing options
      *
      * @param Collection $types
+     *
      * @return Collection
      */
     private function createOptions(Collection $types): Collection
@@ -60,13 +60,14 @@ class OptionActions
      *
      * @param array $arr
      * @param string $key
+     *
      * @return array
      */
-    private function setOptions(string $key): bool|array
+    private function setOptions(string $key): bool | array
     {
         $options = [];
         foreach ($this->options[$key] as $option) {
-            if (!$this->optionExist($option, $key)) {
+            if (! $this->optionExist($option, $key)) {
                 $options[] = ['name' => $option];
             }
             continue;
@@ -74,11 +75,11 @@ class OptionActions
         return $options;
     }
 
-
     /**
      *  Checks if option type exit
      *
      * @param string $type
+     *
      * @return OptionType
      */
     private function typeExist(string $type): ?OptionType
@@ -91,14 +92,15 @@ class OptionActions
      *
      * @param string $option
      * @param string $type
-     * @return boolean|null
+     *
+     * @return bool|null
      */
-    private function optionExist(string $option, string $type): null|bool
+    private function optionExist(string $option, string $type): null | bool
     {
-        $types= Option::where('name', $option)
-        ->first()
-        ?->types()
-        ->pluck('name');
+        $types = Option::where('name', $option)
+            ->first()
+            ?->types()
+            ->pluck('name');
 
         return $types?->contains($type);
     }

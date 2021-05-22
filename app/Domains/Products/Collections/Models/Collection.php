@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $image
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Collection newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Collection newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Collection query()
@@ -24,8 +25,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Collection whereImage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Collection whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Collection whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
- * @property-read \Illuminate\Database\Eloquent\Collection|Product[] $products
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|array<Product> $products
  * @property-read int|null $products_count
  */
 class Collection extends Model
@@ -38,7 +41,6 @@ class Collection extends Model
      * @var array
      */
     protected $fillable = ['name','description', 'image'];
-
 
     /**
      *  Product belongs to category relationship

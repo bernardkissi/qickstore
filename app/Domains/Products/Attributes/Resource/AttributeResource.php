@@ -7,7 +7,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class AttributeResource extends JsonResource
 {
-
     /**
      * The resource that this resource collects.
      *
@@ -15,11 +14,11 @@ class AttributeResource extends JsonResource
      */
     public $collects = Attribute::class;
 
-
     /**
      * Transform the resource into an array.
      *
      * @param  \Illuminate\Http\Request  $request
+     *
      * @return array
      */
     public function toArray($request)
@@ -28,7 +27,7 @@ class AttributeResource extends JsonResource
 
             'id' => $this->id,
             'property_name' => $this->property_name,
-            'property_value' => $this->property_value
+            'property_value' => $this->property_value,
         ];
     }
 }

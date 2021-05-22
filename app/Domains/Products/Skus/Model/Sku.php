@@ -25,10 +25,12 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int $min_stock
  * @property bool $unlimited
+ *
  * @property-read Model|\Eloquent $skuable
  * @property-read StockView|null $stockCount
- * @property-read \Illuminate\Database\Eloquent\Collection|Stock[] $stocks
+ * @property-read \Illuminate\Database\Eloquent\Collection|array<Stock> $stocks
  * @property-read int|null $stocks_count
+ *
  * @method static \Database\Factories\SkuFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Sku newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Sku newQuery()
@@ -42,7 +44,9 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @method static \Illuminate\Database\Eloquent\Builder|Sku whereSkuableType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sku whereUnlimited($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sku whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
+ *
  * @property-read Product $product
  */
 class Sku extends Model
@@ -57,22 +61,22 @@ class Sku extends Model
      * @var array
      */
     protected $fillable = [
-        
+
         'code',
         'price',
         'unlimited',
         'min_stock',
         'skuable_id',
-        'skuable_type'
+        'skuable_type',
     ];
-    
+
     /**
      * The attributes that should be cast.
      *
      * @var array
      */
     protected $casts = [
-        'unlimited' => 'boolean'
+        'unlimited' => 'boolean',
     ];
     /**
      * Skuable model relationship
@@ -83,7 +87,6 @@ class Sku extends Model
     {
         return $this->morphTo();
     }
-
 
     /**
      * Product sku relationship

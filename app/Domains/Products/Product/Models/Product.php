@@ -9,7 +9,6 @@ use App\Domains\Products\Categories\Models\Category;
 use App\Domains\Products\Collections\Models\Collection;
 use App\Domains\Products\Options\Models\Option;
 use App\Domains\Products\Product\Casts\Currency;
-use App\Domains\Products\Product\Models\ProductVariation;
 use App\Domains\Products\Product\Scopes\Scoper;
 use App\Domains\Products\Product\Services\ProductImages\ImageHandler;
 use App\Domains\Products\Skus\Model\Sku;
@@ -33,19 +32,21 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int|null $category_id
- * @property-read \Illuminate\Database\Eloquent\Collection|Category[] $categories
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|array<Category> $categories
  * @property-read int|null $categories_count
- * @property-read \Illuminate\Database\Eloquent\Collection|Collection[] $collections
+ * @property-read \Illuminate\Database\Eloquent\Collection|array<Collection> $collections
  * @property-read int|null $collections_count
- * @property-read \Illuminate\Database\Eloquent\Collection|Attribute[] $filters
+ * @property-read \Illuminate\Database\Eloquent\Collection|array<Attribute> $filters
  * @property-read int|null $filters_count
- * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection|Media[] $media
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection|array<Media> $media
  * @property-read int|null $media_count
- * @property-read \Illuminate\Database\Eloquent\Collection|Option[] $options
+ * @property-read \Illuminate\Database\Eloquent\Collection|array<Option> $options
  * @property-read int|null $options_count
  * @property-read Sku|null $sku
- * @property-read \Illuminate\Database\Eloquent\Collection|ProductVariation[] $variations
+ * @property-read \Illuminate\Database\Eloquent\Collection|array<ProductVariation> $variations
  * @property-read int|null $variations_count
+ *
  * @method static \Database\Factories\ProductFactory factory(...$parameters)
  * @method static Builder|Product hasVariation()
  * @method static Builder|Product newModelQuery()
@@ -61,6 +62,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @method static Builder|Product whereSlug($value)
  * @method static Builder|Product whereUpdatedAt($value)
  * @method static Builder|Product withFilter($scopes = [])
+ *
  * @mixin \Eloquent
  */
 class Product extends Model implements HasMedia
@@ -70,79 +72,77 @@ class Product extends Model implements HasMedia
     InteractsWithMedia,
     ImageHandler;
 
-
     /**
-    * Fillable properties of the model.
-    *
-    * @var array
-    */
+     * Fillable properties of the model.
+     *
+     * @var array
+     */
     protected $fillable = [
-        
-       'name',
-       'price',
-       'description',
-       'slug',
-       'status',
-       'featured',
-       'schedule_at'
+
+        'name',
+        'price',
+        'description',
+        'slug',
+        'status',
+        'featured',
+        'schedule_at',
     ];
 
-
     /**
-    * The attributes that should be cast.
-    *
-    * @var array
-    */
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
     protected $casts = [
 
         'price' => Currency::class.':GHS',
     ];
 
     /**
-    *  Route key returned
-    *
-    * @return string
-    */
+     *  Route key returned
+     *
+     * @return string
+     */
     public function getRouteKeyName()
     {
         return 'slug';
     }
 
     /**
-    *  Product belongs to category relationship
-    *
-    * @return Illuminate\Database\Eloquent\Concerns\belongsToMany
-    */
+     *  Product belongs to category relationship
+     *
+     * @return Illuminate\Database\Eloquent\Concerns\belongsToMany
+     */
     public function categories()
     {
         return $this->belongsToMany(Category::class);
     }
 
     /**
-    * Product has options relationship
-    *
-    * @return Illuminate\Database\Eloquent\Concerns\belongsToMany
-    */
+     * Product has options relationship
+     *
+     * @return Illuminate\Database\Eloquent\Concerns\belongsToMany
+     */
     public function options()
     {
         return $this->belongsToMany(Option::class);
     }
-     
+
     /**
-    *  Product has variations relationship
-    *
-    * @return Illuminate\Database\Eloquent\Concerns\hasMany
-    */
+     *  Product has variations relationship
+     *
+     * @return Illuminate\Database\Eloquent\Concerns\hasMany
+     */
     public function variations()
     {
         return $this->hasMany(ProductVariation::class)->orderBy('order', 'desc');
     }
 
     /**
-    *  Product sku relationship
-    *
-    * @return Illuminate\Database\Eloquent\Concerns\morphOne
-    */
+     *  Product sku relationship
+     *
+     * @return Illuminate\Database\Eloquent\Concerns\morphOne
+     */
     public function sku()
     {
         return $this->morphOne(Sku::class, 'skuable');
@@ -159,23 +159,13 @@ class Product extends Model implements HasMedia
     }
 
     /**
-    *  Product properties relationship
-    *
-    * @return Illuminate\Database\Eloquent\Concerns\HasMany
-    */
+     *  Product properties relationship
+     *
+     * @return Illuminate\Database\Eloquent\Concerns\HasMany
+     */
     public function filters()
     {
         return $this->hasMany(Attribute::class);
-    }
-
-    /**
-    * Create a new factory instance for the model.
-    *
-    * @return \Illuminate\Database\Eloquent\Factories\Factory
-    */
-    protected static function newFactory()
-    {
-        return ProductFactory::new();
     }
 
     /**
@@ -183,6 +173,7 @@ class Product extends Model implements HasMedia
      *
      * @param  Builder $builder [description]
      * @param  array   $scopes
+     *
      * @return [type]           [description]
      */
     public function scopeWithFilter(Builder $builder, $scopes = [])
@@ -191,17 +182,18 @@ class Product extends Model implements HasMedia
     }
 
     /**
-    * Defining image conversion on model
-    *
-    * @param Media $media
-    * @return void
-    */
-    public function registerMediaConversions(Media $media = null): void
+     * Defining image conversion on model
+     *
+     * @param Media $media
+     *
+     * @return void
+     */
+    public function registerMediaConversions(?Media $media = null): void
     {
         $this->addMediaConversion('thumb')
-              ->width(368)
-              ->height(232)
-              ->quality(70);
+            ->width(368)
+            ->height(232)
+            ->quality(70);
     }
 
     /**
@@ -212,5 +204,15 @@ class Product extends Model implements HasMedia
     public function scopeHasVariation(): bool
     {
         return self::has('variations');
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    protected static function newFactory()
+    {
+        return ProductFactory::new();
     }
 }

@@ -15,13 +15,16 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $sku_id
  * @property string $code
  * @property string $stock
+ *
  * @property-read Sku $sku
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|StockView newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|StockView newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|StockView query()
  * @method static \Illuminate\Database\Eloquent\Builder|StockView whereCode($value)
  * @method static \Illuminate\Database\Eloquent\Builder|StockView whereSkuId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|StockView whereStock($value)
+ *
  * @mixin \Eloquent
  */
 class StockView extends Model
@@ -29,20 +32,11 @@ class StockView extends Model
     use HasFactory;
 
     /**
-     *  Custom model table
+     * Indicates if the model should be timestamped.
      *
-     * @var string
+     * @var bool
      */
-    protected $table = 'product_stock_view';
-
-
-    /**
-    * Indicates if the model should be timestamped.
-    *
-    * @var bool
-    */
     public $timestamps = false;
-
 
     /**
      * Indicates if the model's ID is auto-incrementing.
@@ -51,6 +45,12 @@ class StockView extends Model
      */
     public $incrementing = false;
 
+    /**
+     *  Custom model table
+     *
+     * @var string
+     */
+    protected $table = 'product_stock_view';
 
     /**
      * Product stock count

@@ -13,12 +13,12 @@ use Illuminate\Support\Str;
 
 class AttributeActions
 {
-
     /**
      *  Store product filters
      *
      * @param  Product $product
      * @param  array   $arr
+     *
      * @return void
      */
     public function storeFilters(Product $product, array $arrs): void
@@ -32,6 +32,7 @@ class AttributeActions
      * Return filters under a category
      *
      * @param  App\Domains\Categories\Models\Category $category
+     *
      * @return array
      */
     public function getCategoryFilters(Category $category): array
@@ -39,11 +40,11 @@ class AttributeActions
         return $this->groupFilters(AttributeResource::collection($category->filters));
     }
 
-
     /**
      * Delete a filter
      *
      * @param  App\Domains\Filters\Models\Filter $filter
+     *
      * @return void
      */
     public function deleteFilter(Attribute $filter): void
@@ -51,12 +52,12 @@ class AttributeActions
         $filter->delete();
     }
 
-
     /**
      * Edit filter properties
      *
      * @param  App\Domains\Filters\Models\Filter $filter
      * @param  array $property
+     *
      * @return bool
      */
     public function editFilter(Attribute $filter, string $property): bool
@@ -64,7 +65,7 @@ class AttributeActions
         return $filter->update(
             [
                 'property_value' => $property->value,
-                'property_name' =>  $property->name === null ? $filter->property_name : $property->name
+                'property_name' => $property->name === null ? $filter->property_name : $property->name,
             ]
         );
     }
@@ -73,6 +74,7 @@ class AttributeActions
      * Grouping filters
      *
      * @param  Illuminate\Http\Resources\Json\AnonymousResourceCollection $filters
+     *
      * @return array
      */
     private function groupFilters(AnonymousResourceCollection $filters): array
@@ -80,9 +82,9 @@ class AttributeActions
         $collection = collect($filters)->unique(function ($item) {
             return [ $item['property_name'] => $item['property_value']];
         })
-        ->mapToGroups(function ($item) {
-            return [$item['property_name'] => $item['property_value']];
-        });
+            ->mapToGroups(function ($item) {
+                return [$item['property_name'] => $item['property_value']];
+            });
 
         return $collection->all();
     }
@@ -92,15 +94,16 @@ class AttributeActions
      *
      * @param array  $arr
      * @param string $key
+     *
      * @return array
      */
     private function setFilters(array $arr, string $key): array
     {
-        $filters= [];
+        $filters = [];
         foreach ($arr[$key] as $filter) {
             $filters[] = [
                 'property_name' => Str::of($key)->lower(),
-                'property_value' => $filter
+                'property_value' => $filter,
             ];
         }
         return $filters;
