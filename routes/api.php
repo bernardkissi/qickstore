@@ -7,7 +7,7 @@
 
 use App\Domains\Attributes\Actions\AttributeActions;
 use App\Domains\Options\Actions\OptionActions;
-use App\Domains\Products\Actions\ProductActions;
+use App\Domains\Products\Actions\ProductService;
 // use App\Domains\Products\Models\Product;
 // use App\Domains\Products\Models\ProductVariation;
 // use App\Domains\Products\Resource\ProductResource;
@@ -15,9 +15,9 @@ use App\Domains\Products\Actions\ProductActions;
 // use App\Domains\Products\Scopes\Filters\CategoryScope;
 // use App\Domains\Stocks\Models\StockView;
 // use Illuminate\Database\Eloquent\Builder;
-use App\Domains\Products\Actions\ProductService;
 use App\Domains\Products\Models\Product;
-use App\Domains\Products\Resource\ProductResource;
+use App\Domains\Products\Product\Actions\ProductActions;
+use App\Domains\Products\Product\Resource\ProductResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,7 +33,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::post('/test', function (Request $request) {
+Route::get('/test', function () {
     // (new ProductActions())->uploadImage($request);
     
     
@@ -54,8 +54,8 @@ Route::post('/test', function (Request $request) {
     //  ->paginate(10);
 
     // return ProductResource::collection($prod);
-    // return ProductResource::collection((new ProductActions())->getProducts());
-    // return (new ProductService())->getProducts();
+    return ProductResource::collection((new ProductActions())->getProducts());
+    // return (new ProductActions())->getProducts();
     // $product = Product::find(1);
         // $product->sku()->create(['code' => 'abc126', 'price' => 1000]);
         //
@@ -64,8 +64,8 @@ Route::post('/test', function (Request $request) {
 });
 
 Route::post('/test2', function (Request $request) {
-    // (new ProductActions())->createProduct($request);
+    (new ProductActions())->createProduct($request);
     // $product =  Product::find(1);
     // (new AttributeActions())->storeFilters($product, $request->arr);
-    return (new OptionActions($request->arr))->storeOptions();
+    // return (new OptionActions($request->arr))->storeOptions();
 });
