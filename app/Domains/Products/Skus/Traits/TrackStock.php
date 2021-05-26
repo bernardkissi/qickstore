@@ -50,4 +50,11 @@ trait TrackStock
         $level = 90 / 100 * $value;
         return (int) $value -= $level;
     }
+
+
+
+    public function minStock($count)
+    {
+        return min($this->stockCount(), $count);
+    }
 }

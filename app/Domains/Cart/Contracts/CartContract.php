@@ -3,7 +3,8 @@
 namespace App\Domains\Cart\Contracts;
 
 use Cknow\Money\Money;
-use Illuminate\Support\Collection;
+
+// use Illuminate\Support\Collection;
 
 interface CartContract
 {
@@ -11,17 +12,15 @@ interface CartContract
      * Add items to cart
      *
      * @param array $products
-     *
      * @return void
      */
     public function add(array $products): void;
-
+    
     /**
      * Update in the cart
      *
-     * @param int $skuId
-     * @param int $quantity
-     *
+     * @param integer $skuId
+     * @param integer $quantity
      * @return void
      */
     public function update(int $skuId, int $quantity): void;
@@ -29,18 +28,17 @@ interface CartContract
     /**
      * Delete items in cart
      *
-     * @param int $skuId
-     *
+     * @param integer $skuId
      * @return void
      */
     public function delete(int $skuId): void;
 
     /**
-     * Return cart content
+     * Return cart contents
      *
      * @return Collection
      */
-    public function cart(): Collection;
+    public function cartContents();
 
     /**
      * Empty cart
@@ -52,7 +50,7 @@ interface CartContract
     /**
      * Checks if cart is empty
      *
-     * @return bool
+     * @return boolean
      */
     public function isEmpty(): bool;
 
@@ -66,7 +64,7 @@ interface CartContract
     /**
      * Checks if cart has changed
      *
-     * @return bool
+     * @return boolean
      */
     public function hasChanged(): bool;
 
@@ -78,27 +76,25 @@ interface CartContract
     public function subTotal(): Money;
 
     /**
-     * Undocumented function
+     * Calculates the total
      *
      * @return Money
      */
     public function total(): Money;
 
     /**
-     * Undocumented function
+     * Calculates the delivery cost
      *
-     * @param int $deliveryId
-     *
+     * @param integer $deliveryId
      * @return Money
      */
-    public function deliveryCost(int | string $deliveryId): Money;
+    public function deliveryCost(int $deliveryId): Money;
 
     /**
-     * Undocumented function
+     * Check if which delivery option is to be used
      *
-     * @param int $deliveryId
-     *
+     * @param integer $deliveryId
      * @return self
      */
-    public function withDelivery(int | string $deliveryId): self;
+    public function withDelivery(int $deliveryId): int; // return a delivery model{self}
 }

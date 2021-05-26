@@ -15,7 +15,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        
     }
 
     /**
@@ -29,6 +28,8 @@ class AppServiceProvider extends ServiceProvider
 
             'Product' => 'App\Domains\Products\Product\Models\Product',
             'Variation' => 'App\Domains\Products\Product\Models\ProductVariation',
+            'User' => 'App\Domains\User\User',
+            'Guest' => 'App\Domains\User\Guest',
         ]);
 
         AttributeResource::withoutWrapping();

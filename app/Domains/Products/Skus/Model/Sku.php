@@ -6,6 +6,8 @@ use App\Domains\Products\Product\Models\Product;
 use App\Domains\Products\Skus\Traits\TrackStock;
 use App\Domains\Products\Stocks\Models\Stock;
 use App\Domains\Products\Stocks\Models\StockView;
+use App\Domains\user\Guest;
+use App\Domains\User\User;
 use Database\Factories\SkuFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -25,12 +27,10 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int $min_stock
  * @property bool $unlimited
- *
  * @property-read Model|\Eloquent $skuable
  * @property-read StockView|null $stockCount
  * @property-read \Illuminate\Database\Eloquent\Collection|array<Stock> $stocks
  * @property-read int|null $stocks_count
- *
  * @method static \Database\Factories\SkuFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Sku newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Sku newQuery()
@@ -44,10 +44,12 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @method static \Illuminate\Database\Eloquent\Builder|Sku whereSkuableType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sku whereUnlimited($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sku whereUpdatedAt($value)
- *
  * @mixin \Eloquent
- *
  * @property-read Product $product
+ * @property-read \Illuminate\Database\Eloquent\Collection|Guest[] $guests
+ * @property-read int|null $guests_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|User[] $users
+ * @property-read int|null $users_count
  */
 class Sku extends Model
 {
@@ -86,6 +88,26 @@ class Sku extends Model
     public function skuable()
     {
         return $this->morphTo();
+    }
+
+    /**
+     * Cart user relationship
+     *
+     * @return void
+     */
+    public function users()
+    {
+        return $this->morphedByMany(User::class, 'cartable');
+    }
+
+    /**
+     * Cart guest relationship
+     *
+     * @return void
+     */
+    public function guests()
+    {
+        return $this->morphedByMany(Guest::class, 'cartable');
     }
 
     /**

@@ -15,16 +15,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $sku_id
  * @property string $code
  * @property string $stock
- *
  * @property-read Sku $sku
- *
  * @method static \Illuminate\Database\Eloquent\Builder|StockView newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|StockView newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|StockView query()
  * @method static \Illuminate\Database\Eloquent\Builder|StockView whereCode($value)
  * @method static \Illuminate\Database\Eloquent\Builder|StockView whereSkuId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|StockView whereStock($value)
- *
  * @mixin \Eloquent
  */
 class StockView extends Model

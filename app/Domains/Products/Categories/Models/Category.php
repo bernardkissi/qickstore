@@ -21,10 +21,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $order
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- *
  * @property-read \Illuminate\Database\Eloquent\Collection|array<Category> $subcategories
  * @property-read int|null $subcategories_count
- *
  * @method static \Illuminate\Database\Eloquent\Builder|Category categories()
  * @method static \Database\Factories\CategoryFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Category newModelQuery()
@@ -38,9 +36,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Category whereParentId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Category whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Category whereUpdatedAt($value)
- *
  * @mixin \Eloquent
- *
  * @property-read \Illuminate\Database\Eloquent\Collection|array<Attribute> $filters
  * @property-read int|null $filters_count
  * @property-read \Illuminate\Database\Eloquent\Collection|array<Product> $products

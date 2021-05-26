@@ -32,7 +32,6 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int|null $category_id
- *
  * @property-read \Illuminate\Database\Eloquent\Collection|array<Category> $categories
  * @property-read int|null $categories_count
  * @property-read \Illuminate\Database\Eloquent\Collection|array<Collection> $collections
@@ -46,7 +45,6 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property-read Sku|null $sku
  * @property-read \Illuminate\Database\Eloquent\Collection|array<ProductVariation> $variations
  * @property-read int|null $variations_count
- *
  * @method static \Database\Factories\ProductFactory factory(...$parameters)
  * @method static Builder|Product hasVariation()
  * @method static Builder|Product newModelQuery()
@@ -62,7 +60,6 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @method static Builder|Product whereSlug($value)
  * @method static Builder|Product whereUpdatedAt($value)
  * @method static Builder|Product withFilter($scopes = [])
- *
  * @mixin \Eloquent
  */
 class Product extends Model implements HasMedia

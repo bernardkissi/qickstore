@@ -11,8 +11,10 @@
 // use App\Domains\Products\Scopes\Filters\CategoryScope;
 // use App\Domains\Stocks\Models\StockView;
 // use Illuminate\Database\Eloquent\Builder;
+use App\Domains\Cart\Services\Cart;
 use App\Domains\Products\Product\Actions\ProductActions;
 use App\Domains\Products\Product\Resource\ProductResource;
+use App\Domains\User\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -60,4 +62,17 @@ Route::post('/test2', function (Request $request) {
     // $product =  Product::find(1);
     // (new AttributeActions())->storeFilters($product, $request->arr);
     // return (new OptionActions($request->arr))->storeOptions();
+});
+
+
+Route::post('cart', function (Request $request) {
+    $class = config('modules.cart.vcart');
+    $user = User::where('id', 1)->first();
+    return (new $class(User::where('id', 1)->first()))->add($request->products);
+});
+
+
+Route::delete('cart/items', function (Request $request) {
+    $class = config('modules.cart.vcart');
+    return (new $class(User::where('id', 2)->first()))->clear();
 });

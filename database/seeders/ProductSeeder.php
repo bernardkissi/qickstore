@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Domains\Products\Models\Product;
+use App\Domains\Products\Product\Models\Product;
 use Illuminate\Database\Seeder;
 
 class ProductSeeder extends Seeder
@@ -14,9 +14,6 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        foreach(let $i=0; $i < 1000; $i++){
-        	 
-        }
         Product::factory()->hasSku()->create();
     }
 }

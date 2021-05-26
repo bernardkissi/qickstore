@@ -17,10 +17,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $input_type
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- *
  * @property-read \Illuminate\Database\Eloquent\Collection|array<Option> $options
  * @property-read int|null $options_count
- *
  * @method static \Database\Factories\OptionTypeFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|OptionType newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|OptionType newQuery()
@@ -30,7 +28,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder|OptionType whereInputType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|OptionType whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|OptionType whereUpdatedAt($value)
- *
  * @mixin \Eloquent
  */
 class OptionType extends Model

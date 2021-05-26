@@ -21,10 +21,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string $slug
- *
  * @property-read Product $product
  * @property-read Sku|null $sku
- *
  * @method static \Illuminate\Database\Eloquent\Builder|ProductVariation newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ProductVariation newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ProductVariation query()
@@ -39,7 +37,6 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|ProductVariation whereProperties($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProductVariation whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProductVariation whereUpdatedAt($value)
- *
  * @mixin \Eloquent
  */
 class ProductVariation extends Model
