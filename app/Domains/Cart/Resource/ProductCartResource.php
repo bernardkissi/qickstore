@@ -20,7 +20,7 @@ class ProductCartResource extends JsonResource
             'name' => $this->name,
             'type' => 'physical',
             'active' => true,
-            'images' => $this->getMedia('products')->map(fn ($img) => $img->getUrl('thumb')), // product/detail/thumb
+            'thumbnail' => $this->getMedia('products')->map(fn ($img) => $img->getUrl('thumb')[0]), // product/detail/thumb
         ];
     }
 }
