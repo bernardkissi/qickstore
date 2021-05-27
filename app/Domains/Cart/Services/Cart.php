@@ -3,6 +3,7 @@
 namespace App\Domains\Cart\Services;
 
 use App\Domains\Cart\Contracts\CartContract;
+use App\Domains\Cart\Resource\CartResource;
 use App\Domains\user\Guest;
 use App\Domains\User\User;
 use Cknow\Money\Money;
@@ -66,7 +67,9 @@ class Cart implements CartContract
      */
     public function cartContents()
     {
-        return $this->customer->cart;
+        $customer = $this->customer
+        ->load(['cart', 'cart.skuable','cart.stockCount']);
+        return new CartResource($customer);
     }
 
     /**

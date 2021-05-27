@@ -72,7 +72,7 @@ Route::post('cart', function (Request $request) {
 });
 
 
-Route::delete('cart/items', function (Request $request) {
+Route::get('cart/items', function (Request $request) {
     $class = config('modules.cart.vcart');
-    return (new $class(User::where('id', 2)->first()))->clear();
+    return (new $class(User::where('id', 1)->first()))->cartContents();
 });
