@@ -7,8 +7,8 @@ use App\Domains\Cart\Resource\CartResource;
 use App\Domains\user\Guest;
 use App\Domains\User\User;
 use Cknow\Money\Money;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class Cart implements CartContract
 {
@@ -63,9 +63,9 @@ class Cart implements CartContract
     /**
      * Get guest|user cart contents
      *
-     * @return void
+     * @return JsonResource
      */
-    public function cartContents()
+    public function cartContents(): JsonResource
     {
         $customer = $this->customer
         ->load(['cart', 'cart.skuable','cart.stockCount']);
