@@ -1,5 +1,5 @@
 <?php
-git 
+
 namespace App\Domains\Cart\Resource;
 
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -20,7 +20,7 @@ class ProductCartResource extends JsonResource
             'name' => $this->name,
             'type' => 'physical',
             'active' => true,
-            'thumbnail' => $this->getMedia('products')->map(fn ($img) => $img->getUrl('thumb')[0]), 
+            'thumbnail' => $this->getMedia('products')->map(fn ($img) => $img->getUrl('thumb')[0]),
         ];
     }
 }
