@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\user;
+namespace App\Domains\User;
 
 use App\Domains\Products\Skus\Model\Sku;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
