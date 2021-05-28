@@ -7,7 +7,7 @@ namespace App\Domains\Products\Skus\Traits;
 trait TrackStock
 {
     /**
-     * Checks in product is in stock
+     * Checks a product is in stock
      *
      * @return bool
      */
@@ -52,8 +52,13 @@ trait TrackStock
     }
 
 
-
-    public function minStock($count)
+    /**
+     * Returns minstock count
+     *
+     * @param int $count
+     * @return int
+     */
+    public function minStock(int $count): int
     {
         return min($this->stockCount(), $count);
     }
