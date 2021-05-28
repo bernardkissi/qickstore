@@ -31,7 +31,7 @@ class SkuCartResource extends JsonResource
             'in_stock' => $this->inStock(),
             'type' => $this->skuable_type,
             'item' =>  $resourceType::make($this->whenLoaded('skuable')) ,
-            'total_price' => Money::parse($this->price, 'GHS')->amount()->multiply($this->pivot->quantity)->amount()
+            'total_price' => Money::parse($this->price, 'GHS')->amount()->multiply($this->pivot->quantity)->format()
         ];
     }
 }
