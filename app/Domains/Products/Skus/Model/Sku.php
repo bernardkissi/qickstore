@@ -6,8 +6,8 @@ use App\Domains\Products\Product\Models\Product;
 use App\Domains\Products\Skus\Traits\TrackStock;
 use App\Domains\Products\Stocks\Models\Stock;
 use App\Domains\Products\Stocks\Models\StockView;
-use App\Domains\user\Guest;
 use App\Domains\User\User;
+use App\Domains\User\Visitor;
 use Database\Factories\SkuFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -107,7 +107,7 @@ class Sku extends Model
      */
     public function guests()
     {
-        return $this->morphedByMany(Guest::class, 'cartable');
+        return $this->morphedByMany(Visitor::class, 'cartable');
     }
 
     /**

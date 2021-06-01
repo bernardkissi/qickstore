@@ -4,8 +4,8 @@ namespace App\Domains\Cart\Services;
 
 use App\Domains\Cart\Contracts\CartContract;
 use App\Domains\Cart\Resource\CartResource;
-use App\Domains\user\Guest;
 use App\Domains\User\User;
+use App\Domains\User\Visitor;
 use Cknow\Money\Money;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -32,10 +32,9 @@ class Cart implements CartContract
      *
      * @param string $customer
      */
-    public function __construct(protected User|Guest $customer)
+    public function __construct(protected User|Visitor $customer)
     {
     }
-
 
     /**
      * Returns the delivery option
@@ -47,7 +46,6 @@ class Cart implements CartContract
     {
         return $deliveryId ? $deliveryId : 0;
     }
-
 
     /**
      * Calculates delivery cost
@@ -82,7 +80,6 @@ class Cart implements CartContract
     {
         $this->customer->cart()->syncWithoutDetaching($this->getStorepayload($products));
     }
-
 
     /**
      * Prepare cart items payload
