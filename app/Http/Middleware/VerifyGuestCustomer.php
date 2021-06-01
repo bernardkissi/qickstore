@@ -18,14 +18,15 @@ class VerifyGuestCustomer
     */
     public function handle(Request $request, Closure $next)
     {
-        //check if cookie exist
-        $cookie = $request->hasCookie('identifier') ? $request->cookie('identifier') : $this->setCookie();
+        $key = Str::uuid();
+     
+        $cookie = $request->hasCookie('identifier') ? $request->cookie('identifier') : $this->setCookie($key);
         if (is_null($cookie)) {
-            $cookie = $request->cookie('identifier');
+            $cookie = $_COOKIE["identifier"] = $key;
         }
-        //Check if a guest exist
-        $guest = $this->hasVisitor($cookie) !== false ? $this->getVisitor($cookie): $this->createVisitor($cookie);
-        // finally merge guest into request
+
+        $guest = $this->hasVisitor($cookie) ? $this->getVisitor($cookie): $this->createVisitor($cookie);
+        
         $this->setVisitor($request, $guest);
 
         return $next($request);
@@ -37,10 +38,13 @@ class VerifyGuestCustomer
     *
     * @return void
     */
-    public function setCookie(): void
+    public function setCookie(string $key): void
     {
-        $cookie = Str::uuid();
-        setcookie('name', $cookie, time()+3600);
+        setcookie('identifier', $key, [
+            'expires' => time()+3600,
+            'httponly' => true,
+            'secure' => false
+        ]);
     }
 
     /**
@@ -61,9 +65,9 @@ class VerifyGuestCustomer
     * @param string $cookie
     * @return boolean
     */
-    public function hasVisitor(string $cookie): bool
+    public function hasVisitor(?string $cookie): bool
     {
-        $guest = Visitor::where('identifier', $cookie)->first();
+        $guest = Visitor::where('identifier', $cookie)?->first();
         return $guest ? true : false;
     }
     
@@ -86,6 +90,11 @@ class VerifyGuestCustomer
     */
     public function createVisitor(string $cookie): Visitor
     {
-        return Visitor::create(['identifier' => $cookie]);
+        Visitor::create(['identifier' => $cookie]);
+        return $this->getVisitor($cookie);
+    }
+
+    public function verifyVisitor()
+    {
     }
 }
