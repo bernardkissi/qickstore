@@ -13,8 +13,11 @@ class CreateVisitorTable extends Migration
      */
     public function up()
     {
-        Schema::create('visitor', function (Blueprint $table) {
+        Schema::create('visitors', function (Blueprint $table) {
             $table->id();
+            $table->string('identifier');
+            $table->string('mobile')->nullable();
+            $table->string('email')->nullable();
             $table->timestamps();
         });
     }
