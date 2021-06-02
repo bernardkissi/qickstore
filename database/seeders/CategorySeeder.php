@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Domains\Categories\Models\Category;
+use App\Domains\Products\Categories\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 
