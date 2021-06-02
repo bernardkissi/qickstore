@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
             'Product' => 'App\Domains\Products\Product\Models\Product',
             'Variation' => 'App\Domains\Products\Product\Models\ProductVariation',
             'User' => 'App\Domains\User\User',
-            'Guest' => 'App\Domains\User\Guest',
+            'Visitor' => 'App\Domains\User\Visitor',
         ]);
 
         AttributeResource::withoutWrapping();
