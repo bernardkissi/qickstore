@@ -35,7 +35,7 @@ class Visitor extends Model
     ];
 
     /**
-    * Guest cart relationship
+    * Visitor cart relationship
     *
     * @return MorphToMany
     */
@@ -45,11 +45,11 @@ class Visitor extends Model
     }
 
     /**
-     * Get all of the guest's orders.
+     * Get all of the vistor's orders.
      *
      * @return MorphMany
      */
-    public function comments(): MorphMany
+    public function orders(): MorphMany
     {
         return $this->morphMany(Order::class, 'orderable');
     }
