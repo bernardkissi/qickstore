@@ -2,9 +2,11 @@
 
 namespace App\Domains\User;
 
+use App\Domains\Orders\Model\Order;
 use App\Domains\Products\Skus\Model\Sku;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -82,6 +84,15 @@ class User extends Authenticatable
         return $this->morphToMany(Sku::class, 'cartable', 'cart_customer')->withPivot(['quantity']);
     }
 
+    /**
+    * Get all of the user's orders.
+    *
+    * @return MorphMany
+    */
+    public function orders(): MorphMany
+    {
+        return $this->morphMany(Order::class, 'orderable');
+    }
 
     /**
     * Create a new factory instance for the model.
