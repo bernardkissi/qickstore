@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace App\Domains\Orders\States;
 
+use App\Domains\Orders\Transitions\PendingToFailed;
 use Spatie\ModelStates\Attributes\AllowTransition;
 use Spatie\ModelStates\Attributes\DefaultState;
 use Spatie\ModelStates\State;
 
 #[
     AllowTransition(Pending::class, Paid::class),
-    AllowTransition(Pending::class, Failed::class),
+    AllowTransition(Pending::class, Failed::class, PendingToFailed::class),
     AllowTransition(Paid::class, Shipped::class),
     AllowTransition(Paid::class, Delivered::class),
     AllowTransition(Shipped::class, Delivered::class),
