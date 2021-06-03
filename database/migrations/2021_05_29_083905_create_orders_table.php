@@ -17,8 +17,8 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->morphs('orderable');
             $table->string('state');
-            $table->dateTime('failed_at');
-            $table->string('error_message');
+            $table->dateTime('failed_at')->nullable();
+            $table->text('error_message')->nullable();
             $table->integer('subtotal')->unsigned();
 
             $table->timestamps();
