@@ -26,10 +26,11 @@ class ProductResource extends JsonResource
             'type' => 'physical',
             'active' => true,
             'featured' => false,
-            'images' => $this->getMedia('products')->map(fn ($img) => $img->getUrl('thumb')), // product/detail/thumb
+            'images' => $this->whenLoaded('media'),
             'price' => $this->price,
             'sku' => new SkuResource($this->whenLoaded('sku')),
             'properties' => AttributeResource::collection($this->whenLoaded('properties')),
+            //$this->getMedia('products')->map(fn ($img) => $img->getUrl('thumb')), // product/detail/thumb
 
         ];
     }
