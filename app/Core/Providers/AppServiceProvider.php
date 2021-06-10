@@ -3,6 +3,7 @@
 namespace App\Core\Providers;
 
 use App\Domains\Products\Attributes\Resource\AttributeResource;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
 
@@ -33,5 +34,6 @@ class AppServiceProvider extends ServiceProvider
         ]);
 
         AttributeResource::withoutWrapping();
+        Model::preventLazyLoading();
     }
 }
