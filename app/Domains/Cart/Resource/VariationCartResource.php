@@ -15,13 +15,12 @@ class VariationCartResource extends JsonResource
     public function toArray($request)
     {
         return [
-            
-            'id' => $this->id,
+
             'product' => $this->product->name,
             'variant' => $this->name,
             'identifer' => $this->identifer,
             'properties' => $this->properties,
-            'thumbnail' => $this->product->getMedia('products')->map(fn ($img) => $img->getUrl('thumb'))[0]
+            // 'thumbnail' => $this->product->getMedia('products')->map(fn ($img) => $img->getUrl('thumb'))[0]
         ];
     }
 }

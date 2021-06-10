@@ -16,11 +16,10 @@ class ProductCartResource extends JsonResource
     {
         return [
 
-            'id' => $this->id,
             'name' => $this->name,
             'type' => 'physical',
             'active' => true,
-            'thumbnail' => $this->getMedia('products')->map(fn ($img) => $img->getUrl('thumb')[0]),
+            // 'thumbnail' => $this->getMedia('products')->map(fn ($img) => $img->getUrl('thumb')[0]),
         ];
     }
 }
