@@ -7,7 +7,6 @@ use App\Domains\Cart\Resource\CartResource;
 use App\Domains\User\User;
 use App\Domains\User\Visitor;
 use Cknow\Money\Money;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class Cart implements CartContract
@@ -17,16 +16,16 @@ class Cart implements CartContract
      *
      * @var boolean
      */
-    protected $changed =  false;
+    protected $changed = false;
 
     /**
      * Delivery service used
      *
-     * @var Model
+     * @var string
      */
-    protected Model $delivery;
+    protected User|array|null $delivery;
 
-   
+
     /**
      * Class Constructor
      *
@@ -37,14 +36,33 @@ class Cart implements CartContract
     }
 
     /**
-     * Returns the delivery option
+     * Set Delivery on cart
      *
-     * @param integer $cost
-     * @return integer
+     * @param array|null $delivery
+     * @return self
      */
-    public function withDelivery(int $deliveryId): int
+    public function withDelivery(?array $delivery): self
     {
-        return $deliveryId ? $deliveryId : 0;
+        $type = key((array)$delivery);
+
+        $option = match ($type) {
+            'swoove' => $delivery,
+            'hosted' => User::find($delivery['hosted']),
+            null => null
+        };
+
+        $this->delivery = $option;
+        return $this;
+    }
+
+    /**
+     * Returns delivery details
+     *
+     * @return array|null
+     */
+    public function deliveryDetails(): ?array
+    {
+        return $this->delivery;
     }
 
     /**
@@ -53,9 +71,9 @@ class Cart implements CartContract
      * @param integer $deliveryId
      * @return Money
      */
-    public function deliveryCost(int $deliveryId): Money
+    public function deliveryCost(): Money
     {
-        return Money::GHS($this->withDelivery($deliveryId));
+        return Money::GHS($this->delivery['price'] ?? '0');
     }
 
     /**
@@ -188,7 +206,7 @@ class Cart implements CartContract
             return Money::parse($product->price, 'GHS')->amount()->multiply($product->pivot->quantity)->getAmount();
         });
 
-        return Money::GHS($subTotal);
+        return Money::GHS($subTotal = 600);
     }
 
     /**
@@ -198,6 +216,6 @@ class Cart implements CartContract
      */
     public function total(): Money
     {
-        return $this->subTotal()->add($this->deliveryCost(2000));
+        return $this->subTotal()->add(Money::GHS($this->delivery['price'] ?? '0'));
     }
 }

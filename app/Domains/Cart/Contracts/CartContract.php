@@ -2,6 +2,8 @@
 
 namespace App\Domains\Cart\Contracts;
 
+use App\Domains\Cart\Services\Cart;
+use App\Domains\User\User;
 use Cknow\Money\Money;
 
 // use Illuminate\Support\Collection;
@@ -15,7 +17,7 @@ interface CartContract
      * @return void
      */
     public function add(array $products): void;
-    
+
     /**
      * Update in the cart
      *
@@ -88,7 +90,7 @@ interface CartContract
      * @param integer $deliveryId
      * @return Money
      */
-    public function deliveryCost(int $deliveryId): Money;
+    public function deliveryCost(): Money;
 
     /**
      * Check if which delivery option is to be used
@@ -96,5 +98,5 @@ interface CartContract
      * @param integer $deliveryId
      * @return self
      */
-    public function withDelivery(int $deliveryId): int; // return a delivery model{self}
+    public function withDelivery(?array $delivery): self; // return a delivery model{self}
 }
