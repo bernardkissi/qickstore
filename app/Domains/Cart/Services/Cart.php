@@ -206,7 +206,7 @@ class Cart implements CartContract
             return Money::parse($product->price, 'GHS')->amount()->multiply($product->pivot->quantity)->getAmount();
         });
 
-        return Money::GHS($subTotal = 600);
+        return Money::GHS($subTotal);
     }
 
     /**
