@@ -101,11 +101,11 @@ class Sku extends Model
     }
 
     /**
-     * Cart guest relationship
+     * Cart visitors relationship
      *
      * @return void
      */
-    public function guests()
+    public function visitors()
     {
         return $this->morphedByMany(Visitor::class, 'cartable');
     }
