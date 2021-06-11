@@ -47,7 +47,7 @@ class VerifyVisitorCustomer
     }
 
     /**
-    * Undocumented function
+    * Merge the current visitor into the request
     *
     * @param Request $request
     * @param Guest $guest
@@ -58,18 +58,6 @@ class VerifyVisitorCustomer
         $request->merge(['visitor' => $guest]);
     }
 
-    /**
-    * Checks if guest already exist
-    *
-    * @param string $cookie
-    * @return boolean
-    */
-    public function hasVisitor(?string $cookie): bool
-    {
-        $guest = Visitor::where('identifier', $cookie)?->first();
-        return $guest ? true : false;
-    }
-    
     /**
     * Returns an exisiting visitor
     *
@@ -136,14 +124,14 @@ class VerifyVisitorCustomer
     public function verifyVisitor(Request $request): void
     {
         $key = Str::uuid();
-     
+
         $cookie = $request->hasCookie('identifier') ? $request->cookie('identifier') : $this->setCookie($key);
         if (is_null($cookie)) {
             $cookie = $_COOKIE["identifier"] = $key;
         }
 
-        $guest = $this->hasVisitor($cookie) ? $this->getVisitor($cookie): $this->createVisitor($cookie);
-        
+        $guest = Visitor::where('identifier', $cookie)->first() ?? $this->createVisitor($cookie);
+
         $this->setVisitor($request, $guest);
         $this->setCacheVisitor($cookie, $guest);
     }
