@@ -85,10 +85,6 @@ class Cart implements CartContract
     public function cartContents(): JsonResource
     {
         return new CartResource($this->customer);
-
-        // $customer = $this->customer
-        // ->load(['cart', 'cart.skuable','cart.stockCount']);
-        // return new CartResource($customer);
     }
 
     /**
