@@ -192,6 +192,7 @@ class Cart implements CartContract
                 $this->changed = true;
             }
             $product->pivot->update(['quantity' => $quantity]);
+            // dd($quantity);
         });
     }
 

@@ -60,6 +60,6 @@ trait TrackStock
      */
     public function minStock(int $count): int
     {
-        return min($this->stockCount(), $count);
+        return (int) min($this->stockCount->stock, $count);
     }
 }

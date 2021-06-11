@@ -22,6 +22,8 @@ class CartActions
      */
     public function getCart(Request $request): JsonResource
     {
+        $this->cart->sync();
+
         return $this->cart->cartContents()->additional(
             ['meta' => [
 
