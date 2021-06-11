@@ -24,7 +24,7 @@ class SkuCartResource extends JsonResource
 
         return [
 
-            'cartItemId' => $this->id,
+            'id' => $this->id,
             'order_quantity' => $this->pivot->quantity,
             'price' => $this->price,
             'sku_code' => $this->code,

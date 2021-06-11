@@ -19,7 +19,7 @@ class CartServiceProvider extends ServiceProvider
     {
         $this->app->singleton(Cart::class, function ($app) {
             $customer = $this->detectCustomer();
-            return new Cart($customer);
+            return new Cart($customer->load(['cart.stockCount', 'cart.skuable']));
         });
     }
 
@@ -48,7 +48,7 @@ class CartServiceProvider extends ServiceProvider
             true => $visitor,
             false => auth()->user()
         };
-        
+
         return $customer;
     }
 }

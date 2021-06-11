@@ -8,6 +8,7 @@ use App\Domains\User\User;
 use App\Domains\User\Visitor;
 use Cknow\Money\Money;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Collection;
 
 class Cart implements CartContract
 {
@@ -83,9 +84,11 @@ class Cart implements CartContract
      */
     public function cartContents(): JsonResource
     {
-        $customer = $this->customer
-        ->load(['cart', 'cart.skuable','cart.stockCount']);
-        return new CartResource($customer);
+        return new CartResource($this->customer);
+
+        // $customer = $this->customer
+        // ->load(['cart', 'cart.skuable','cart.stockCount']);
+        // return new CartResource($customer);
     }
 
     /**
@@ -192,7 +195,6 @@ class Cart implements CartContract
                 $this->changed = true;
             }
             $product->pivot->update(['quantity' => $quantity]);
-            // dd($quantity);
         });
     }
 
