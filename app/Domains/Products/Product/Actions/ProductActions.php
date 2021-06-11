@@ -43,8 +43,9 @@ class ProductActions
      *
      * @return void
      */
-    public function uploadImage(Product | ProductVariation $product): void
+    public function uploadImage(): void
     {
+        $product = Product::find(1);
         $product->toS3Bucket('image');
     }
 
@@ -55,10 +56,16 @@ class ProductActions
      */
     public function getProducts(): LengthAwarePaginator
     {
-        return Product::with('sku', 'sku.stockCount', 'options', 'options.types', 'variations')
-            ->withFilter($this->scopes())
-            ->orderBy('created_at', 'asc')
-            ->paginate(10);
+        return Product::with([
+            'sku',
+            'sku.stockCount',
+            'options',
+            'options.types',
+            'variations',
+        ])
+        ->withFilter($this->scopes())
+        ->orderBy('created_at', 'asc')
+        ->paginate(10);
     }
 
     /**
@@ -70,7 +77,12 @@ class ProductActions
      */
     public function getProduct(Product $product): Product
     {
-        $product->load(['sku.stockCount', 'variations.sku.StockCount', 'options.types', 'properties']);
+        $product->load([
+            'sku.stockCount',
+            'variations',
+            'options.types',
+            'filters'
+        ]);
 
         return $product;
     }
