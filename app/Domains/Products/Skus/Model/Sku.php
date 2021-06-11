@@ -138,9 +138,6 @@ class Sku extends Model
     public function stockCount(): HasOne
     {
         return $this->hasOne(StockView::class);
-
-        // return $this->belongsToMany(Sku::class, 'product_stock_view')
-        // ->withPivot(['stock']);
     }
 
     /**
