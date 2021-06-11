@@ -41,7 +41,7 @@ class Visitor extends Model
     */
     public function cart(): MorphToMany
     {
-        return $this->morphToMany(Sku::class, 'cartable');
+        return $this->morphToMany(Sku::class, 'cartable', 'cart_customer')->withPivot(['quantity']);
     }
 
     /**
