@@ -30,7 +30,7 @@ class Cart implements CartContract
     /**
      * Class Constructor
      *
-     * @param string $customer
+     * @param User|Visitor $customer
      */
     public function __construct(protected User|Visitor $customer)
     {
@@ -78,13 +78,23 @@ class Cart implements CartContract
     }
 
     /**
-     * Get guest|user cart contents
+     * Get customer cart contents
      *
      * @return JsonResource
      */
     public function cartContents(): JsonResource
     {
         return new CartResource($this->customer);
+    }
+
+    /**
+     * Get customer cart contents
+     *
+     * @return Collection
+     */
+    public function products(): Collection
+    {
+        return $this->customer->cart;
     }
 
     /**
