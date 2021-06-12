@@ -3,6 +3,7 @@
 namespace App\Domains\Products\Skus\Model;
 
 use App\Domains\Products\Product\Models\Product;
+use App\Domains\Products\Skus\Collection\SkuCollection;
 use App\Domains\Products\Skus\Traits\TrackStock;
 use App\Domains\Products\Stocks\Models\Stock;
 use App\Domains\Products\Stocks\Models\StockView;
@@ -148,5 +149,16 @@ class Sku extends Model
     protected static function newFactory()
     {
         return SkuFactory::new();
+    }
+
+    /**
+     * Returns a new custom sku collection
+     *
+     * @param array $models
+     * @return void
+     */
+    public function newCollection(array $models = [])
+    {
+        return new SkuCollection($models);
     }
 }
