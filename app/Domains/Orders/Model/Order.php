@@ -20,7 +20,7 @@ class Order extends Model
     * @var array
     */
     public $fillable = [
-        
+
         'status',
         'order_id',
         'subtotal'
