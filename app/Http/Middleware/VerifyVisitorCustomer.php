@@ -19,7 +19,7 @@ class VerifyVisitorCustomer
     */
     public function handle(Request $request, Closure $next)
     {
-        $cookie = $request->cookie('identifier') ?? '';
+        $cookie = $request->cookie('identifier') ?? ''; // TODO decrypt value before passing the cookie
         $cacheVisitor = $this->hasCacheVisitor($cookie) ? $this->cacheVisitor($cookie) : false;
 
         if ($cacheVisitor) {
@@ -37,10 +37,11 @@ class VerifyVisitorCustomer
     *
     * @return void
     */
-    public function setCookie(string $key): void
+    public function setCookie(string $key): void //TODO encrypt the value generated before setting cookie
     {
         setcookie('identifier', $key, [
             'expires' => time()+3600,
+            'path' => '/api',
             'httponly' => true,
             'secure' => false
         ]);
