@@ -20,7 +20,7 @@ class VerifyVisitorCustomer
     public function handle(Request $request, Closure $next)
     {
         $cookie = $request->cookie('identifier') ?? ''; // TODO decrypt value before passing the cookie
-        $cacheVisitor = $this->hasCacheVisitor($cookie) ? $this->cacheVisitor($cookie) : false;
+        $cacheVisitor = $this->hasCacheVisitor($cookie) !== '' ? $this->cacheVisitor($cookie) : false;
 
         if ($cacheVisitor) {
             $this->setVisitor($request, $cacheVisitor);
@@ -100,7 +100,7 @@ class VerifyVisitorCustomer
      * @param string $cookie
      * @return Visitor
      */
-    public function cacheVisitor(string $cookie): Visitor
+    public function cacheVisitor(string $cookie): Visitor|null
     {
         return Cache::get($cookie);
     }
