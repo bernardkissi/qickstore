@@ -3,13 +3,12 @@
 namespace App\Core\Providers;
 
 use App\Domains\Cart\Services\Cart;
-use App\Domains\User\User;
-use App\Domains\User\Visitor;
 use App\Services\DetectCustomer;
+use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
 
-class CartServiceProvider extends ServiceProvider
+class CartServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     use DetectCustomer;
     /**
@@ -33,5 +32,15 @@ class CartServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+    }
+
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return [Cart::class];
     }
 }

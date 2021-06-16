@@ -2,14 +2,14 @@
 
 namespace App\Core\Providers;
 
-use App\Domains\Orders\Checkouts\CheckOutService;
-use App\Domains\Orders\Checkouts\Downloading\DownloadService;
-use App\Domains\Orders\Checkouts\Shipping\ShippingService;
+use App\Domains\Orders\Checkouts\Contract\CheckoutableProvider;
+use App\Domains\Orders\Checkouts\Services\CheckoutService;
 use App\Services\DetectCustomer;
+use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
 
-class CheckoutServiceProvider extends ServiceProvider
+class CheckoutServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     use DetectCustomer;
 
@@ -20,11 +20,11 @@ class CheckoutServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(CheckOutService::class, function ($app) {
+        $this->app->singleton(CheckoutableProvider::class, function ($app) {
             $request  =  app(Request::class);
             $customer = $this->detect($request);
-            $service  =  $this->moduleResolver($request->service);
-            return new  $service($customer);
+
+            return new CheckoutService($customer);
         });
     }
 
@@ -35,17 +35,17 @@ class CheckoutServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // add boot services here
     }
 
+
     /**
-     * Resolve the service to be used
+     * Get the services provided by the provider.
      *
-     * @param string $serviceType
-     * @return string
+     * @return array
      */
-    public function moduleResolver(string $serviceType): string
+    public function provides()
     {
-        return config("modules.checkouts.$serviceType");
+        return [CheckoutService::class];
     }
 }
