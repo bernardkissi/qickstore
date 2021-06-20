@@ -17,6 +17,7 @@ interface DeliverableProviderContract
      * Get the delivery information of the order
      *
      * @param Order $order
+     *
      * @return array
      */
     public function deliveryInfo(Order $order): array;
