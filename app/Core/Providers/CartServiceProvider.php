@@ -3,14 +3,11 @@
 namespace App\Core\Providers;
 
 use App\Domains\Cart\Services\Cart;
-use App\Services\DetectCustomer;
 use Illuminate\Contracts\Support\DeferrableProvider;
-use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
 
 class CartServiceProvider extends ServiceProvider implements DeferrableProvider
 {
-    use DetectCustomer;
     /**
      * Register services.
      *
@@ -19,7 +16,7 @@ class CartServiceProvider extends ServiceProvider implements DeferrableProvider
     public function register()
     {
         $this->app->singleton(Cart::class, function ($app) {
-            $customer = $this->detect(app(Request::class));
+            $customer = request('visitor', auth()->user());
             return new Cart($customer->load(['cart.stockCount', 'cart.skuable']));
         });
     }
@@ -31,7 +28,6 @@ class CartServiceProvider extends ServiceProvider implements DeferrableProvider
      */
     public function boot()
     {
-        //
     }
 
     /**

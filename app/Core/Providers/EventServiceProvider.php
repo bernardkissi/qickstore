@@ -21,8 +21,8 @@ class EventServiceProvider extends ServiceProvider
         ],
 
         StateChanged::class => [
-            OrderStateChangeListener::class
-        ]
+            OrderStateChangeListener::class,
+        ],
     ];
 
     /**

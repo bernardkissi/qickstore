@@ -2,7 +2,6 @@
 
 namespace App\Core\Providers;
 
-use App\Domains\Delivery\Contract\DeliverableProvider;
 use App\Domains\Delivery\Contract\DeliveryResolvableContract;
 use App\Domains\Delivery\DeliveryResolver;
 use Illuminate\Support\ServiceProvider;
@@ -28,6 +27,5 @@ class DeliveryServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
     }
 }

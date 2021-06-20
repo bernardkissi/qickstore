@@ -2,17 +2,12 @@
 
 namespace App\Core\Providers;
 
-use App\Domains\Orders\Checkouts\Contract\CheckoutableProvider;
-use App\Domains\Orders\Checkouts\Services\CheckoutService;
-use App\Services\DetectCustomer;
+use App\Domains\Orders\Checkouts\Contract\CheckoutableContract;
 use Illuminate\Contracts\Support\DeferrableProvider;
-use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
 
 class CheckoutServiceProvider extends ServiceProvider implements DeferrableProvider
 {
-    use DetectCustomer;
-
     /**
      * Register services.
      *
@@ -20,11 +15,10 @@ class CheckoutServiceProvider extends ServiceProvider implements DeferrableProvi
      */
     public function register()
     {
-        $this->app->singleton(CheckoutableProvider::class, function ($app) {
-            $request  =  app(Request::class);
-            $customer = $this->detect($request);
-
-            return new CheckoutService($customer);
+        $this->app->singleton(CheckoutableContract::class, function ($app) {
+            $customer = request('visitor', auth()->user());
+            $service = $this->resolveService();
+            return new $service($customer);
         });
     }
 
@@ -38,6 +32,17 @@ class CheckoutServiceProvider extends ServiceProvider implements DeferrableProvi
         // add boot services here
     }
 
+    /**
+    * Resolves the tracking service to be instantiated
+    *
+    * @return void
+    */
+    protected function resolveService(): string
+    {
+        $type = request('type', 'default');
+        return config("modules.checkout.$type");
+    }
+
 
     /**
      * Get the services provided by the provider.
@@ -46,6 +51,6 @@ class CheckoutServiceProvider extends ServiceProvider implements DeferrableProvi
      */
     public function provides()
     {
-        return [CheckoutService::class];
+        return [CheckoutableContract::class];
     }
 }
