@@ -7,7 +7,7 @@ namespace App\Domains\Orders\Checkouts\Contract;
 use App\Domains\Cart\Services\Cart;
 use App\Domains\Orders\Model\Order;
 
-interface CheckoutableProvider
+interface CheckoutableContract
 {
     /**
      * Create customer order
