@@ -63,9 +63,9 @@ class ProductActions
             'options.types',
             'variations',
         ])
-        ->withFilter($this->scopes())
-        ->orderBy('created_at', 'asc')
-        ->paginate(10);
+            ->withFilter($this->scopes())
+            ->orderBy('created_at', 'asc')
+            ->paginate(10);
     }
 
     /**
@@ -81,7 +81,7 @@ class ProductActions
             'sku.stockCount',
             'variations',
             'options.types',
-            'filters'
+            'filters',
         ]);
 
         return $product;

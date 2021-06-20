@@ -28,10 +28,12 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int $min_stock
  * @property bool $unlimited
+ *
  * @property-read Model|\Eloquent $skuable
  * @property-read StockView|null $stockCount
  * @property-read \Illuminate\Database\Eloquent\Collection|array<Stock> $stocks
  * @property-read int|null $stocks_count
+ *
  * @method static \Database\Factories\SkuFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Sku newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Sku newQuery()
@@ -45,11 +47,13 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @method static \Illuminate\Database\Eloquent\Builder|Sku whereSkuableType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sku whereUnlimited($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sku whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
+ *
  * @property-read Product $product
- * @property-read \Illuminate\Database\Eloquent\Collection|Guest[] $guests
+ * @property-read \Illuminate\Database\Eloquent\Collection|array<Guest> $guests
  * @property-read int|null $guests_count
- * @property-read \Illuminate\Database\Eloquent\Collection|User[] $users
+ * @property-read \Illuminate\Database\Eloquent\Collection|array<User> $users
  * @property-read int|null $users_count
  */
 class Sku extends Model
@@ -142,6 +146,18 @@ class Sku extends Model
     }
 
     /**
+     * Returns a new custom sku collection
+     *
+     * @param array $models
+     *
+     * @return void
+     */
+    public function newCollection(array $models = [])
+    {
+        return new SkuCollection($models);
+    }
+
+    /**
      * Create a new factory instance for the model.
      *
      * @return \Illuminate\Database\Eloquent\Factories\Factory
@@ -149,16 +165,5 @@ class Sku extends Model
     protected static function newFactory()
     {
         return SkuFactory::new();
-    }
-
-    /**
-     * Returns a new custom sku collection
-     *
-     * @param array $models
-     * @return void
-     */
-    public function newCollection(array $models = [])
-    {
-        return new SkuCollection($models);
     }
 }

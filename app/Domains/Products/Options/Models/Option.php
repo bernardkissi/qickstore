@@ -14,9 +14,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $name
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ *
  * @property-read \Illuminate\Database\Eloquent\Collection|array<Product> $products
  * @property-read int|null $products_count
  * @property-read \App\Domains\Products\Options\Models\OptionType $types
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Option newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Option newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Option query()
@@ -25,6 +27,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Option whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Option whereOptionTypeId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Option whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class Option extends Model

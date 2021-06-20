@@ -39,27 +39,27 @@ trait TrackStock
     }
 
     /**
-     * Determine the minimum allowable stock
-     *
-     * @param int $value
-     *
-     * @return void
-     */
-    private function calcLowStockValue(int $value): int
-    {
-        $level = 90 / 100 * $value;
-        return (int) $value -= $level;
-    }
-
-
-    /**
      * Returns minstock count
      *
      * @param int $count
+     *
      * @return int
      */
     public function minStock(int $count): int
     {
         return (int) min($this->stockCount->stock, $count);
+    }
+
+    /**
+     * Determine the minimum allowable stock
+     *
+     * @param int $value
+     *
+     * @return int
+     */
+    private function calcLowStockValue(int $value): int
+    {
+        $level = 90 / 100 * $value;
+        return (int) $value -= $level;
     }
 }
