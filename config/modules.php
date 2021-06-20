@@ -67,6 +67,21 @@ return [
         'files' => App\Domains\Tracking\DeliveryServices\FilesTracking::class,
         'swoove' => App\Domains\Tracking\DeliveryServices\SwooveTracking::class,
         'hosted' => App\Domains\Tracking\DeliveryServices\HostedTracking::class,
+    ],
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Payment Gateways
+    |--------------------------------------------------------------------------
+    |
+    | Payment gateways currently available to the storefronts. Feel free to add
+    | additional payment providers. eg. Crypto payments...
+    */
+
+    'payments' => [
+        'flutterwave' => App\Domains\Payments\Gateways\Flutterwave::class,
+        'cash' => App\Domains\Payments\Gateways\CashOnDelivery::class,
     ]
 
 ];

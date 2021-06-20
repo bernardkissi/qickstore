@@ -176,6 +176,7 @@ return [
         App\Core\Providers\RouteServiceProvider::class,
         App\Core\Providers\CartServiceProvider::class,
         App\Core\Providers\CheckoutServiceProvider::class,
+        App\Core\Providers\PaymentServiceProvider::class,
         App\Core\Providers\DeliveryServiceProvider::class,
         App\Core\Providers\TrackingServiceProvider::class,
     ],
