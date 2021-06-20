@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Http\Middleware\VerifyVisitorCustomer;
 use Closure;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Auth\Middleware\Authenticate;
@@ -15,6 +14,7 @@ class SwitchCustomer
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
+     *
      * @return mixed
      */
     public function handle(Request $request, Closure $next)

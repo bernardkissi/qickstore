@@ -11,12 +11,13 @@ use Illuminate\Support\Str;
 class VerifyVisitorCustomer
 {
     /**
-    * Handle an incoming request.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @param  \Closure  $next
-    * @return mixed
-    */
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     *
+     * @return mixed
+     */
     public function handle(Request $request, Closure $next)
     {
         $cookie = $request->cookie('identifier') ?? ''; // TODO decrypt value before passing the cookie
@@ -31,62 +32,65 @@ class VerifyVisitorCustomer
         return $next($request);
     }
 
-
     /**
-    * Set Cookies on guest machine
-    *
-    * @return void
-    */
+     * Set Cookies on guest machine
+     *
+     * @return void
+     */
     public function setCookie(string $key): void //TODO encrypt the value generated before setting cookie
     {
         setcookie('identifier', $key, [
-            'expires' => time()+3600,
+            'expires' => time() + 3600,
             'path' => '/api',
             'httponly' => true,
-            'secure' => false
+            'secure' => false,
         ]);
     }
 
     /**
-    * Merge the current visitor into the request
-    *
-    * @param Request $request
-    * @param Guest $guest
-    * @return void
-    */
+     * Merge the current visitor into the request
+     *
+     * @param Request $request
+     * @param Guest $guest
+     *
+     * @return void
+     */
     public function setVisitor(Request $request, Visitor $guest): void
     {
         $request->merge(['visitor' => $guest]);
     }
 
     /**
-    * Returns an exisiting visitor
-    *
-    * @param string $cookie
-    * @return Visitor
-    */
-    public function getVisitor(string $cookie): Visitor
+     * Returns an exisiting visitor
+     *
+     * @param string $cookie
+     *
+     * @return Visitor
+     */
+    public function retrieveVisitor(string $cookie): Visitor
     {
         return Visitor::where('identifier', $cookie)->first();
     }
 
     /**
-    * Create a guest user
-    *
-    * @param string $cookie
-    * @return Visitor
-    */
+     * Create a guest user
+     *
+     * @param string $cookie
+     *
+     * @return Visitor
+     */
     public function createVisitor(string $cookie): Visitor
     {
         Visitor::create(['identifier' => $cookie]);
-        return $this->getVisitor($cookie);
+        return $this->retrieveVisitor($cookie);
     }
 
     /**
      * Cache the visitor
      *
      * @param string $cookie
-     * @param integer $seconds
+     * @param int $seconds
+     *
      * @return void
      */
     public function setCacheVisitor(string $cookie, Visitor $visitor, int $seconds = 3600): void
@@ -98,9 +102,10 @@ class VerifyVisitorCustomer
      * Return cache visitor
      *
      * @param string $cookie
+     *
      * @return Visitor
      */
-    public function cacheVisitor(string $cookie): Visitor|null
+    public function cacheVisitor(string $cookie): Visitor | null
     {
         return Cache::get($cookie);
     }
@@ -109,7 +114,8 @@ class VerifyVisitorCustomer
      * Checks if visitor is in cache
      *
      * @param string $cookie
-     * @return boolean
+     *
+     * @return bool
      */
     public function hasCacheVisitor(string $cookie): bool
     {
@@ -120,15 +126,16 @@ class VerifyVisitorCustomer
      * Verify current visitor
      *
      * @param Request $request
+     *
      * @return void
      */
     public function verifyVisitor(Request $request): void
     {
         $key = Str::uuid();
 
-        $cookie = $request->hasCookie('identifier') ? $request->cookie('identifier') : $this->setCookie($key);
+        $cookie = $request->cookie('identifier') ?? $this->setCookie($key);
         if (is_null($cookie)) {
-            $cookie = $_COOKIE["identifier"] = $key;
+            $cookie = $_COOKIE['identifier'] = $key;
         }
 
         $guest = Visitor::where('identifier', $cookie)->first() ?? $this->createVisitor($cookie);
