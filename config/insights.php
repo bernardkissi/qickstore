@@ -18,7 +18,6 @@ use SlevomatCodingStandard\Sniffs\TypeHints\ReturnTypeHintSniff;
 
 return [
 
-    
     /*
     |--------------------------------------------------------------------------
     | Default Preset
