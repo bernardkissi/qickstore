@@ -3,28 +3,26 @@
 namespace App\Domains\Orders\Checkouts\Services;
 
 use App\Domains\Cart\Services\Cart;
-use App\Domains\Orders\Checkouts\Contract\CheckoutableProvider;
+use App\Domains\Orders\Checkouts\Contract\CheckoutableContract;
 use App\Domains\Orders\Model\Order;
 use App\Domains\User\User;
 use App\Domains\User\Visitor;
 
-class CheckoutService implements CheckoutableProvider
+class CheckoutService implements CheckoutableContract
 {
-
     /**
      * Class constructor
      *
      * @param mixed $customer
      */
-    public function __construct(public User|Visitor $customer)
+    public function __construct(public User | Visitor $customer)
     {
     }
-
 
     public function createOrder(Cart $cart): Order
     {
         $order = $this->customer->orders()->create(['subtotal' => $cart->total()->getAmount()]);
-        $order->products()->sync($this->cart->products()->toCollect());
+        $order->products()->sync($cart->products()->toCollect());
         return $order;
     }
 

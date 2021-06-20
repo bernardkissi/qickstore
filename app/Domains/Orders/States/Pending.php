@@ -14,10 +14,10 @@ class Pending extends OrderState
     public static $name = 'pending';
 
     /**
-    * Returns the paid state of an order
-    *
-    * @return string
-    */
+     * Returns the paid state of an order
+     *
+     * @return string
+     */
     public function status(): string
     {
         return 'Pending';

@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace App\Domains\Orders\Actions;
 
 use App\Domains\Orders\States\Failed;
-use App\Domains\Orders\States\Paid;
-use App\Domains\User\User;
 use App\Domains\User\Visitor;
 
 class OrderActions
@@ -26,7 +24,7 @@ class OrderActions
             'currentState' => $order->state,
             'states' => $order->getStates(),
             'defzult' => $order->getDefaultStates(),
-            'transitions' => $order->state->transitionableStates()
+            'transitions' => $order->state->transitionableStates(),
         ];
     }
 }
@@ -37,7 +35,6 @@ class OrderActions
 // 3. get items from cart
 // 4. create the order -- set the transition state to pending
 // make payment of the order -- after the webhook response we set order to state of paid
-
 
 //jobs behind the scene
 

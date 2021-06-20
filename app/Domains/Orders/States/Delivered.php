@@ -14,10 +14,10 @@ class Delivered extends OrderState
     public static $name = 'delivered';
 
     /**
-    * Returns the paid state of an order
-    *
-    * @return string
-    */
+     * Returns the paid state of an order
+     *
+     * @return string
+     */
     public function status(): string
     {
         return 'Delivered';
