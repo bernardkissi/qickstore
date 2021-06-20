@@ -15,7 +15,7 @@ class Cart implements CartContract
     /**
      * checks is cart changes
      *
-     * @var boolean
+     * @var bool
      */
     protected $changed = false;
 
@@ -24,15 +24,14 @@ class Cart implements CartContract
      *
      * @var string
      */
-    protected User|array|null $delivery;
-
+    protected User | array | null $delivery;
 
     /**
      * Class Constructor
      *
      * @param User|Visitor $customer
      */
-    public function __construct(protected User|Visitor $customer)
+    public function __construct(protected User | Visitor $customer)
     {
     }
 
@@ -40,11 +39,12 @@ class Cart implements CartContract
      * Set Delivery on cart
      *
      * @param array|null $delivery
+     *
      * @return self
      */
     public function withDelivery(?array $delivery): self
     {
-        $type = key((array)$delivery);
+        $type = key((array) $delivery);
 
         $option = match ($type) {
             'swoove' => $delivery,
@@ -69,7 +69,8 @@ class Cart implements CartContract
     /**
      * Calculates delivery cost
      *
-     * @param integer $deliveryId
+     * @param int $deliveryId
+     *
      * @return Money
      */
     public function deliveryCost(): Money
@@ -101,6 +102,7 @@ class Cart implements CartContract
      * Add items to cart
      *
      * @param array $products
+     *
      * @return void
      */
     public function add(array $products): void
@@ -109,37 +111,11 @@ class Cart implements CartContract
     }
 
     /**
-     * Prepare cart items payload
-     *
-     * @param array $products
-     * @return array
-     */
-    private function getStorePayload(array $products): array
-    {
-        return collect($products)->keyBy('id')->map(function ($product) {
-            return [ "quantity" => $product['quantity'] + $this->getCurrentQuanity($product['id'])];
-        })->toArray();
-    }
-
-    /**
-     * Return existing cart product quantity
-     *
-     * @param integer $skuId
-     * @return integer
-     */
-    private function getCurrentQuanity(int $productId): int
-    {
-        if ($product = $this->customer->cart->where('id', $productId)->first()) {
-            return $product->pivot->quantity;
-        }
-        return 0;
-    }
-
-    /**
      * Update items in cart
      *
-     * @param integer $skuId
-     * @param integer $quantity
+     * @param int $skuId
+     * @param int $quantity
+     *
      * @return void
      */
     public function update(int $productId, int $quantity): void
@@ -150,7 +126,8 @@ class Cart implements CartContract
     /**
      * Remove items from cart
      *
-     * @param integer $productId
+     * @param int $productId
+     *
      * @return void
      */
     public function delete(int $productId): void
@@ -171,7 +148,7 @@ class Cart implements CartContract
     /**
      * Checks if cart is empty
      *
-     * @return boolean
+     * @return bool
      */
     public function isEmpty(): bool
     {
@@ -181,7 +158,7 @@ class Cart implements CartContract
     /**
      * Checks if cart has changed
      *
-     * @return boolean
+     * @return bool
      */
     public function hasChanged(): bool
     {
@@ -197,7 +174,7 @@ class Cart implements CartContract
     {
         $this->customer->cart->each(function ($product) {
             $quantity = $product->minStock($product->pivot->quantity);
-            if ($quantity != $product->pivot->quantity) {
+            if ($quantity !== $product->pivot->quantity) {
                 $this->changed = true;
             }
             $product->pivot->update(['quantity' => $quantity]);
@@ -226,5 +203,35 @@ class Cart implements CartContract
     public function total(): Money
     {
         return $this->subTotal()->add(Money::GHS($this->delivery['price'] ?? '0'));
+    }
+
+    /**
+     * Prepare cart items payload
+     *
+     * @param array $products
+     *
+     * @return array
+     */
+    private function getStorePayload(array $products): array
+    {
+        return collect($products)->keyBy('id')->map(function ($product) {
+            return [ 'quantity' => $product['quantity'] + $this->getCurrentQuanity($product['id'])];
+        })->toArray();
+    }
+
+    /**
+     * Return existing cart product quantity
+     *
+     * @param int $skuId
+     *
+     * @return int
+     */
+    private function getCurrentQuanity(int $productId): int
+    {
+        $product = $this->customer->cart->where('id', $productId)->first();
+        if ($product) {
+            return $product->pivot->quantity;
+        }
+        return 0;
     }
 }

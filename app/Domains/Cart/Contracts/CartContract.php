@@ -2,8 +2,6 @@
 
 namespace App\Domains\Cart\Contracts;
 
-use App\Domains\Cart\Services\Cart;
-use App\Domains\User\User;
 use Cknow\Money\Money;
 
 // use Illuminate\Support\Collection;
@@ -14,6 +12,7 @@ interface CartContract
      * Add items to cart
      *
      * @param array $products
+     *
      * @return void
      */
     public function add(array $products): void;
@@ -21,8 +20,9 @@ interface CartContract
     /**
      * Update in the cart
      *
-     * @param integer $skuId
-     * @param integer $quantity
+     * @param int $skuId
+     * @param int $quantity
+     *
      * @return void
      */
     public function update(int $skuId, int $quantity): void;
@@ -30,7 +30,8 @@ interface CartContract
     /**
      * Delete items in cart
      *
-     * @param integer $skuId
+     * @param int $skuId
+     *
      * @return void
      */
     public function delete(int $skuId): void;
@@ -52,7 +53,7 @@ interface CartContract
     /**
      * Checks if cart is empty
      *
-     * @return boolean
+     * @return bool
      */
     public function isEmpty(): bool;
 
@@ -66,7 +67,7 @@ interface CartContract
     /**
      * Checks if cart has changed
      *
-     * @return boolean
+     * @return bool
      */
     public function hasChanged(): bool;
 
@@ -87,7 +88,8 @@ interface CartContract
     /**
      * Calculates the delivery cost
      *
-     * @param integer $deliveryId
+     * @param int $deliveryId
+     *
      * @return Money
      */
     public function deliveryCost(): Money;
@@ -95,7 +97,8 @@ interface CartContract
     /**
      * Check if which delivery option is to be used
      *
-     * @param integer $deliveryId
+     * @param int $deliveryId
+     *
      * @return self
      */
     public function withDelivery(?array $delivery): self; // return a delivery model{self}

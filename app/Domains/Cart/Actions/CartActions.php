@@ -13,11 +13,11 @@ class CartActions
     {
     }
 
-
     /**
      * Return customer cart items
      *
      * @param Request $request
+     *
      * @return JsonResource
      */
     public function getCart(Request $request): JsonResource
@@ -32,8 +32,9 @@ class CartActions
                 'delivery_details' => $this->cart->withDelivery($request->query())->deliveryDetails(),
                 'delivery_cost' => $this->cart->deliveryCost(),
                 'total' => $this->cart->total(),
-                'changed' => $this->cart->hasChanged()
-            ]]
+                'changed' => $this->cart->hasChanged(),
+            ],
+            ]
         );
     }
 
@@ -41,6 +42,7 @@ class CartActions
      * Add products to cart
      *
      * @param array $request
+     *
      * @return void
      */
     public function addToCart(array $products)
@@ -52,7 +54,8 @@ class CartActions
      * Update items in users/visitors cart
      *
      * @param Sku $sku
-     * @param integer $quantity
+     * @param int $quantity
+     *
      * @return void
      */
     public function updateItem(Sku $sku, int $quantity): void
@@ -64,6 +67,7 @@ class CartActions
      * Remove a product from the cart
      *
      * @param Sku $sku
+     *
      * @return void
      */
     public function deleteItem(Sku $sku): void
