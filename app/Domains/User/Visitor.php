@@ -12,11 +12,13 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 /**
  * App\Domains\user\Guest
  *
- * @property-read \Illuminate\Database\Eloquent\Collection|Sku[] $carts
+ * @property-read \Illuminate\Database\Eloquent\Collection|array<Sku> $carts
  * @property-read int|null $carts_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Guest newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Guest newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Guest query()
+ *
  * @mixin \Eloquent
  */
 class Visitor extends Model
@@ -24,21 +26,21 @@ class Visitor extends Model
     use HasFactory;
 
     /**
-    * The attributes that are mass assignable.
-    *
-    * @var array
-    */
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'identifier',
         'email',
-        'mobile'
+        'mobile',
     ];
 
     /**
-    * Visitor cart relationship
-    *
-    * @return MorphToMany
-    */
+     * Visitor cart relationship
+     *
+     * @return MorphToMany
+     */
     public function cart(): MorphToMany
     {
         return $this->morphToMany(Sku::class, 'cartable', 'cart_customer')->withPivot(['quantity']);

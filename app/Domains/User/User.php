@@ -22,10 +22,12 @@ use Illuminate\Notifications\Notifiable;
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|Sku[] $carts
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|array<Sku> $carts
  * @property-read int|null $carts_count
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|array<\Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User query()
@@ -37,6 +39,7 @@ use Illuminate\Notifications\Notifiable;
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class User extends Authenticatable
@@ -73,32 +76,31 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-
     /**
-    * Undocumented function
-    *
-    * @return MorphToMany
-    */
+     * Undocumented function
+     *
+     * @return MorphToMany
+     */
     public function cart(): MorphToMany
     {
         return $this->morphToMany(Sku::class, 'cartable', 'cart_customer')->withPivot(['quantity']);
     }
 
     /**
-    * Get all of the user's orders.
-    *
-    * @return MorphMany
-    */
+     * Get all of the user's orders.
+     *
+     * @return MorphMany
+     */
     public function orders(): MorphMany
     {
         return $this->morphMany(Order::class, 'orderable');
     }
 
     /**
-    * Create a new factory instance for the model.
-    *
-    * @return \Illuminate\Database\Eloquent\Factories\Factory
-    */
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
     protected static function newFactory()
     {
         return UserFactory::new();
