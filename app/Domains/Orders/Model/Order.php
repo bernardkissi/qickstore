@@ -15,15 +15,15 @@ class Order extends Model
     use HasFactory, HasStates;
 
     /**
-    * Fillable properties of the model.
-    *
-    * @var array
-    */
+     * Fillable properties of the model.
+     *
+     * @var array
+     */
     public $fillable = [
 
         'status',
         'order_id',
-        'subtotal'
+        'subtotal',
     ];
 
     /**
