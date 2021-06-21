@@ -2,19 +2,18 @@
 
 namespace App\Domains\Payments\Contract;
 
-use App\Domains\User\User;
-use App\Domains\User\Visitor;
+use Illuminate\Http\Request;
 
 interface PaymentableContract
 {
     /**
      * Charge customers on checkout
      *
-     * @param User|Visitor $customer
+     * @param Request $request
      * @param int $amount
-     * @return string
+     * @return array
      */
-    public function charge(User|Visitor $customer, int $amount): string;
+    public function charge(Request $request): array;
 
     // TODO :Add Store, amount to requested to payout
     public function payout();

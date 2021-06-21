@@ -3,9 +3,10 @@
 namespace App\Core\Providers;
 
 use App\Domains\Payments\Contract\PaymentableContract;
+use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 
-class PaymentServiceProvider extends ServiceProvider
+class PaymentServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     /**
      * Register services.
@@ -39,5 +40,15 @@ class PaymentServiceProvider extends ServiceProvider
     {
         $gateway = request('gateway', 'flutterwave');
         return config("modules.payments.$gateway");
+    }
+
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return [PaymentableContract::class];
     }
 }

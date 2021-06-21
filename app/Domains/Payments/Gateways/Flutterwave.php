@@ -3,22 +3,33 @@
 namespace App\Domains\Payments\Gateways;
 
 use App\Domains\Payments\Contract\PaymentableContract;
-use App\Domains\User\User;
-use App\Domains\User\Visitor;
+use App\Domains\Payments\Traits\RaveApi;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class Flutterwave implements PaymentableContract
 {
+    use RaveApi;
     /**
-     * Charge customers on checkout
+     * Charge the user through flutterwave gateway
      *
-     * @param User|Visitor $customer
-     * @param int $amount
-     * @return string
+     * @param Request $request
+     * @return array
      */
-    public function charge(User|Visitor $customer, int $amount): string
+    public function charge(Request $request): array
     {
-        return "you are being charged. $amount";
+        $data = static::apiData($request)->toArray();
+
+        $response = Http::withToken(env('FLUTTERWAVE_SEC_KEY'))
+            ->post(config('payments.flutterwave'), $data);
+
+        if ($response->failed()) {
+            throw new \Exception('we couldnt complete your payment. try again later');
+        }
+
+        return $response->json();
     }
+
 
     public function payout()
     {

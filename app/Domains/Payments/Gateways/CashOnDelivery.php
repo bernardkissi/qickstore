@@ -5,19 +5,20 @@ namespace App\Domains\Payments\Gateways;
 use App\Domains\Payments\Contract\PaymentableContract;
 use App\Domains\User\User;
 use App\Domains\User\Visitor;
+use Illuminate\Http\Request;
 
 class CashOnDelivery implements PaymentableContract
 {
     /**
      * Charge customers on checkout
      *
-     * @param User|Visitor $customer
+     * @param Request $request
      * @param int $amount
      * @return string
      */
-    public function charge(User|Visitor $customer, int $amount): string
+    public function charge(Request $request): array
     {
-        return "You will pay $amount on delivery. ";
+        return['hello'];
     }
 
     public function payout()
