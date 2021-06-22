@@ -3,18 +3,20 @@
 namespace App\Domains\Payments\Traits;
 
 use App\Domains\Payments\Dtos\PaymentDto;
+use App\Domains\Payments\Dtos\PayoutDto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-trait RaveApi
+trait RavePaymentApi
 {
     /**
-    * Prepare user payment information
-    *
-    * @param Request $request
-    * @return PaymentDto
-    */
-    public static function apiData(Request $request): PaymentDto
+     * Prepare user payment information
+     *
+     * @param Request $request
+     *
+     * @return PaymentDto
+     */
+    public static function paymentApiData(Request $request): PaymentDto
     {
         $data = [
             'redirect_url' => route('home'),
@@ -27,13 +29,13 @@ trait RaveApi
             'customer' => [
                 'email' => 'bernardkissi18@gmail.com',
                 'phonenumber' => '0543063709',
-                'name' => 'Bernard Kissi'
+                'name' => 'Bernard Kissi',
             ],
             'customization' => [
                 'title' => 'MyShop',
                 'description' => 'Hair loss solution for people in the bank',
-                'logo' => 'company logo'
-            ]
+                'logo' => 'company logo',
+            ],
         ];
 
         return PaymentDto::make($data);

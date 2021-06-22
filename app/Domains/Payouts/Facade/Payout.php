@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Domains\Payments\Facades;
+namespace App\Domains\Payouts\Facade;
 
-use App\Domains\Payments\Contract\PaymentableContract;
+use App\Domains\Payouts\Contract\PayableContract;
 use Illuminate\Support\Facades\Facade;
 
-class PaymentGateway extends Facade
+class Payout extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -14,6 +14,6 @@ class PaymentGateway extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return PaymentableContract::class;
+        return PayableContract::class;
     }
 }

@@ -22,9 +22,8 @@ class Payment extends Model
         'status',
         'amount',
         'provider',
-        'channel'
+        'channel',
     ];
-
 
     /**
      * Register payments for order

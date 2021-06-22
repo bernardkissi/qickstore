@@ -3,13 +3,13 @@
 namespace App\Domains\Payments\Dtos;
 
 use App\Domains\Orders\Model\Dtos\OrderData;
-use Cerbero\LaravelDto\Dto;
-
 use const Cerbero\Dto\IGNORE_UNKNOWN_PROPERTIES;
 use const Cerbero\Dto\PARTIAL;
+use Cerbero\LaravelDto\Dto;
 
 /**
  * The data transfer object for the Payment model.
+ *
  * @property string $currency
  * @property int $id
  * @property int $orderId
@@ -50,9 +50,9 @@ class PaymentDto extends Dto
         'subaccounts' => [
             [
                 'id' => 'RS_2F2994AA79A4EA872478C535F268A884',
-                'transaction_charge_type' => "percentage",
-                'transaction_charge' =>  0.09
-            ]
+                'transaction_charge_type' => 'percentage',
+                'transaction_charge' => 0.09,
+            ],
         ],
     ];
 }
