@@ -15,7 +15,10 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('order_id')->unsigned()->index()->constrained('orders');
             $table->string('tx_ref');
+            $table->string('card_type')->nullable();
+            $table->string('subaccount')->nullable();
             $table->string('provider_reference')->nullable();
             $table->string('status');
             $table->string('amount');
