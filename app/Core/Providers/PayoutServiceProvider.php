@@ -2,11 +2,11 @@
 
 namespace App\Core\Providers;
 
-use App\Domains\Tracking\Contract\TrackableContract;
+use App\Domains\Payouts\Contract\PayableContract;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 
-class TrackingServiceProvider extends ServiceProvider implements DeferrableProvider
+class PayoutServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     /**
      * Register services.
@@ -15,9 +15,9 @@ class TrackingServiceProvider extends ServiceProvider implements DeferrableProvi
      */
     public function register()
     {
-        $this->app->singleton(TrackableContract::class, function ($app) {
-            $provider = $this->resolveService();
-            return new $provider();
+        $this->app->singleton(PayableContract::class, function ($app) {
+            $gateway = $this->resolveService();
+            return new $gateway();
         });
     }
 
@@ -28,6 +28,7 @@ class TrackingServiceProvider extends ServiceProvider implements DeferrableProvi
      */
     public function boot()
     {
+        //
     }
 
     /**
@@ -37,17 +38,17 @@ class TrackingServiceProvider extends ServiceProvider implements DeferrableProvi
      */
     public function provides()
     {
-        return [TrackableContract::class];
+        return [PayableContract::class];
     }
 
     /**
-     * Resolves the tracking service to be instantiated
+     * Resolves the payment gateway to be instantiated
      *
      * @return void
      */
     protected function resolveService(): string
     {
-        $type = request('service', 'swoove');
-        return config("modules.tracking.${type}");
+        $gateway = request('service', 'flutterwave');
+        return config("modules.payouts.${gateway}");
     }
 }

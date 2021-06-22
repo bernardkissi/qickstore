@@ -33,18 +33,6 @@ class CheckoutServiceProvider extends ServiceProvider implements DeferrableProvi
     }
 
     /**
-    * Resolves the tracking service to be instantiated
-    *
-    * @return void
-    */
-    protected function resolveService(): string
-    {
-        $type = request('type', 'default');
-        return config("modules.checkout.$type");
-    }
-
-
-    /**
      * Get the services provided by the provider.
      *
      * @return array
@@ -52,5 +40,16 @@ class CheckoutServiceProvider extends ServiceProvider implements DeferrableProvi
     public function provides()
     {
         return [CheckoutableContract::class];
+    }
+
+    /**
+     * Resolves the tracking service to be instantiated
+     *
+     * @return void
+     */
+    protected function resolveService(): string
+    {
+        $type = request('type', 'default');
+        return config("modules.checkout.${type}");
     }
 }

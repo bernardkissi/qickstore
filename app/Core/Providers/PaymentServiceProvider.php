@@ -28,18 +28,6 @@ class PaymentServiceProvider extends ServiceProvider implements DeferrableProvid
      */
     public function boot()
     {
-        //
-    }
-
-    /**
-    * Resolves the payment gateway to be instantiated
-    *
-    * @return void
-    */
-    protected function resolveService(): string
-    {
-        $gateway = request('gateway', 'flutterwave');
-        return config("modules.payments.$gateway");
     }
 
     /**
@@ -50,5 +38,16 @@ class PaymentServiceProvider extends ServiceProvider implements DeferrableProvid
     public function provides()
     {
         return [PaymentableContract::class];
+    }
+
+    /**
+     * Resolves the payment gateway to be instantiated
+     *
+     * @return void
+     */
+    protected function resolveService(): string
+    {
+        $gateway = request('gateway', 'flutterwave');
+        return config("modules.payments.${gateway}");
     }
 }
