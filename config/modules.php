@@ -82,6 +82,22 @@ return [
     'payments' => [
         'flutterwave' => App\Domains\Payments\Gateways\Flutterwave::class,
         'cash' => App\Domains\Payments\Gateways\CashOnDelivery::class,
+    ],
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Payout Services
+    |--------------------------------------------------------------------------
+    |
+    | This services will handle payout to merchants manually or automatically
+    | if configured through store settings. Additional payout services can be
+    | added to be used by stores;
+    */
+
+    'payouts' => [
+        'flutterwave' => App\Domains\Payouts\Services\FlutterwavePayoutService::class,
+        //'paystack' => '',
     ]
 
 ];

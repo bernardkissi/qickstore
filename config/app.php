@@ -179,6 +179,7 @@ return [
         App\Core\Providers\PaymentServiceProvider::class,
         App\Core\Providers\DeliveryServiceProvider::class,
         App\Core\Providers\TrackingServiceProvider::class,
+        App\Core\Providers\PayoutServiceProvider::class,
     ],
 
     /*
@@ -231,7 +232,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'PaymentGateway' => App\Domains\Payments\Facades\PaymentGateway::class
+        'Payment' => App\Domains\Payments\Facade\Payment::class,
+        'Payout' => App\Domains\Payouts\Facade\Payout::class
 
     ],
 

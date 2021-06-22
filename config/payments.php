@@ -11,6 +11,9 @@
 
 return [
 
-    'flutterwave' => 'https://api.flutterwave.com/v3/payments',
-    'paystack' => ''
+    'flutterwave' =>[
+        'charge' => 'https://api.flutterwave.com/v3/payments',
+        'payout' => 'https://api.flutterwave.com/v3/transfers'
+    ]
+
 ];
