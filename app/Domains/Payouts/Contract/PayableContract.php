@@ -11,5 +11,5 @@ interface PayableContract
      *
      * @return array
      */
-    public function pay(array $data): array;
+    public function pay(array $data): object;
 }

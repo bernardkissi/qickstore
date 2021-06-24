@@ -5,46 +5,46 @@ declare(strict_types=1);
 namespace App\Domains\Payouts\Services;
 
 use App\Domains\Payouts\Contract\PayableContract;
+use App\Domains\Payouts\Events\PayoutCompleted;
 use App\Domains\Payouts\Model\Payout;
 use App\Domains\Payouts\Traits\PayoutApiData;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Spatie\QueueableAction\QueueableAction;
 
 class FlutterwavePayoutService implements PayableContract
 {
     use PayoutApiData, QueueableAction;
+
     /**
      * Send payout request to our payment gateway
      *
      * @return array
      */
-    public function pay(array $data = []): array
+    public function pay(array $data): object
     {
-        $data = static::payoutsApiData($data)->toArray();
+        $api = static::payoutsApiData($data)->toArray();
 
         $response = Http::withToken(env('FLUTTERWAVE_SEC_KEY'))
-            ->post(config('payments.flutterwave.payout'), $data);
+            ->post(config('payments.flutterwave.payout'), $api);
 
         if ($response->failed()) {
             throw new \Exception('Oops! something went wrong with payout');
         }
 
-        return $response->json();
+        return $response;
     }
 
-
-    public function execute(array $req): void
+    /**
+     * Makes payout on behalf of the merchant
+     *
+     * @param array $data
+     * @return void
+     */
+    public function execute(array $data): void
     {
-        $data = static::payoutsApiData($req)->toArray();
+        $response = $this->pay($data);
 
-        $response = Http::withToken(env('FLUTTERWAVE_SEC_KEY'))
-            ->post(config('payments.flutterwave.payout'), $data);
-
-        if ($response->failed()) {
-            throw new \Exception('Oops! something went wrong with payout');
-        }
-
+        // TODO: dispatch an event will handle creating payout and send payout notification to the merchant
         if ($response->successful()) {
             Payout::create(
                 [
@@ -58,21 +58,8 @@ class FlutterwavePayoutService implements PayableContract
                     'reference' => $response['data']['reference']
                 ]
             );
+
+            event(new PayoutCompleted($data['shop']));
         }
     }
 }
-
-
-//  $table->integer('payout_id');
-//             $table->string('account_number');
-//             $table->string('bank_name');
-//             $table->string('fullname');
-//             $table->string('currency')->default('GHS');
-//             $table->integer('amount_requested');
-//             $table->integer('transaction_fee');
-//             $table->string('status');
-//             $table->string('reference');
-//             $table->string('narration')->nullable();
-//             $table->boolean('requires_approval')->default(0);
-//             $table->boolean('is_approved')->default(0);
-//             $table->string('error')->nullable();

@@ -3,6 +3,8 @@
 namespace App\Core\Providers;
 
 use App\Domains\Orders\Listeners\OrderStateChangeListener;
+use App\Domains\Payouts\Events\PayoutCompleted;
+use App\Domains\Payouts\Listeners\PayoutNotification;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -22,6 +24,10 @@ class EventServiceProvider extends ServiceProvider
 
         StateChanged::class => [
             OrderStateChangeListener::class,
+        ],
+
+        PayoutCompleted::class => [
+            PayoutNotification::class,
         ],
     ];
 
