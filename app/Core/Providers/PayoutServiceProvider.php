@@ -28,7 +28,6 @@ class PayoutServiceProvider extends ServiceProvider implements DeferrableProvide
      */
     public function boot()
     {
-        //
     }
 
     /**
