@@ -7,14 +7,19 @@ use App\Domains\Orders\Model\Order;
 
 class HostedDelivery implements DeliverableProviderContract
 {
+    public static function init(): static
+    {
+        return new static();
+    }
+
     /**
-     * di9spatch the delivery to the agent
+     * dispatch the delivery to the agent
      *
      * @return void
      */
-    public function dispatch(): string
+    public static function dispatch(): array
     {
-        return 'We are hosted delivery and you welcome';
+        return ['your hosted order is ready for download'];
     }
 
     /**

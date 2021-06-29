@@ -3,10 +3,15 @@
 namespace App\Domains\Delivery\Services;
 
 use App\Domains\Delivery\Contract\DeliverableProviderContract;
+use App\Domains\Delivery\Traits\SwooveTransfer;
+use App\Domains\Delivery\Transporters\Swoove\CreateDelivery;
 use App\Domains\Orders\Model\Order;
+use Illuminate\Http\Request;
 
 class SwooveDelivery implements DeliverableProviderContract
 {
+    use SwooveTransfer;
+
     public static function init(): static
     {
         return new static();
@@ -16,9 +21,13 @@ class SwooveDelivery implements DeliverableProviderContract
      *
      * @return void
      */
-    public function dispatch(): string
+    public static function dispatch(Request $request): array
     {
-        return 'swoove';
+        $response  = CreateDelivery::build()
+                        ->withData(static::data($request))
+                        ->send()
+                        ->json();
+        return $response;
     }
 
     /**

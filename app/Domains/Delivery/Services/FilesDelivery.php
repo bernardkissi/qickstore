@@ -7,14 +7,19 @@ use App\Domains\Orders\Model\Order;
 
 class FilesDelivery implements DeliverableProviderContract
 {
+    public static function init(): static
+    {
+        return new static();
+    }
+
     /**
      * di9spatch the delivery to the agent
      *
      * @return void
      */
-    public function dispatch(): string
+    public static function dispatch(): array
     {
-        return 'your order is ready for download';
+        return ['your file order is ready for download'];
     }
 
     /**
