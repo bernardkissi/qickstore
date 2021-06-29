@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 namespace App\Domains\Payouts\Traits;
 
 use App\Domains\Payouts\Dtos\PayoutDto;

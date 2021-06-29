@@ -2,8 +2,6 @@
 
 namespace App\Domains\Payouts\Contract;
 
-use Illuminate\Http\Request;
-
 interface PayableContract
 {
     /**

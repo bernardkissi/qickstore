@@ -27,6 +27,6 @@ class Payout extends Model
         'narration',
         'requires_approval',
         'is_approved',
-        'error'
+        'error',
     ];
 }

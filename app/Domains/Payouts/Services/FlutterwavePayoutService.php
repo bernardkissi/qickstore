@@ -38,6 +38,7 @@ class FlutterwavePayoutService implements PayableContract
      * Makes payout on behalf of the merchant
      *
      * @param array $data
+     *
      * @return void
      */
     public function execute(array $data): void
@@ -55,7 +56,7 @@ class FlutterwavePayoutService implements PayableContract
                     'amount_requested' => $response['data']['amount'],
                     'transaction_fee' => $response['data']['fee'],
                     'status' => $response['data']['status'],
-                    'reference' => $response['data']['reference']
+                    'reference' => $response['data']['reference'],
                 ]
             );
 
