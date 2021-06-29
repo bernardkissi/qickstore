@@ -15,6 +15,7 @@
         "fruitcake/laravel-cors": "^2.0",
         "glorand/laravel-model-settings": "^4.2",
         "guzzlehttp/guzzle": "^7.0.1",
+        "juststeveking/laravel-transporter": "^0.6.0",
         "laravel/framework": "^8.12",
         "laravel/horizon": "^5.7",
         "laravel/tinker": "^2.5",
