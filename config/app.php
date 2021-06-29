@@ -233,7 +233,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Payment' => App\Domains\Payments\Facade\Payment::class,
-        'Payout' => App\Domains\Payouts\Facade\Payout::class
+        'Payout' => App\Domains\Payouts\Facade\Payout::class,
+        'Delivery' => App\Domains\Delivery\Facade\Delivery::class
 
     ],
 
