@@ -3,10 +3,12 @@
 namespace App\Domains\Orders\Model;
 
 use App\Domains\Orders\States\OrderState;
+use App\Domains\Payments\Model\Payment;
 use App\Domains\Products\Skus\Model\Sku;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Spatie\ModelStates\HasStates;
 
@@ -55,5 +57,15 @@ class Order extends Model
         return $this->belongsToMany(Sku::class, 'products_order')
             ->withPivot(['quantity'])
             ->withTimestamps();
+    }
+
+    /**
+     * Returns the payment for an order
+     *
+     * @return HasOne
+     */
+    public function payment(): HasOne
+    {
+        return $this->hasOne(Payment::class);
     }
 }
