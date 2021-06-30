@@ -22,10 +22,9 @@ class FlutterwavePayoutService implements PayableContract
      */
     public function pay(array $data): object
     {
-        SendPayout::build()
+        return SendPayout::build()
         ->withData(static::data($data))
-        ->send()
-        ->json();
+        ->send();
     }
 
     /**
