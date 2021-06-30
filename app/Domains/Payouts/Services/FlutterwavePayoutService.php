@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace App\Domains\Payouts\Services;
 
+use App\Domains\APIs\Flutterwave\Payouts\PayoutRequest;
+use App\Domains\APIs\Flutterwave\Payouts\SendPayout;
 use App\Domains\Payouts\Contract\PayableContract;
 use App\Domains\Payouts\Events\PayoutCompleted;
 use App\Domains\Payouts\Model\Payout;
-use App\Domains\Payouts\Traits\PayoutApiData;
-use Illuminate\Support\Facades\Http;
 use Spatie\QueueableAction\QueueableAction;
 
 class FlutterwavePayoutService implements PayableContract
 {
-    use PayoutApiData, QueueableAction;
+    use PayoutRequest, QueueableAction;
 
     /**
      * Send payout request to our payment gateway
@@ -22,16 +22,10 @@ class FlutterwavePayoutService implements PayableContract
      */
     public function pay(array $data): object
     {
-        $api = static::payoutsApiData($data)->toArray();
-
-        $response = Http::withToken(env('FLUTTERWAVE_SEC_KEY'))
-            ->post(config('payments.flutterwave.payout'), $api);
-
-        if ($response->failed()) {
-            throw new \Exception('Oops! something went wrong with payout');
-        }
-
-        return $response;
+        SendPayout::build()
+        ->withData(static::data($data))
+        ->send()
+        ->json();
     }
 
     /**

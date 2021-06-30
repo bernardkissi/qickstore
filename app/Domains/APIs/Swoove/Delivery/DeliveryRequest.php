@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Domains\Delivery\Traits;
+namespace App\Domains\APIs\Swoove\Delivery;
 
 use App\Domains\Delivery\Dtos\DeliveryDto;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use const Cerbero\Dto\CAMEL_CASE_ARRAY;
 
-trait SwooveTransfer
+trait DeliveryRequest
 {
     /**
      * Prepare user payment information

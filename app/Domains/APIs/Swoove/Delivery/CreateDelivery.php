@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Domains\Delivery\Transporters\Swoove;
+namespace App\Domains\APIs\Swoove\Delivery;
 
-use App\Domains\Delivery\Transporters\Swoove\SwooveRequest;
+use App\Domains\APIs\Swoove\SwooveRequest;
 
 class CreateDelivery extends SwooveRequest
 {

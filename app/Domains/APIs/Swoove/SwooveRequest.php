@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Domains\Delivery\Transporters\Swoove;
+namespace App\Domains\APIs\Swoove;
 
 use JustSteveKing\Transporter\Request;
 
