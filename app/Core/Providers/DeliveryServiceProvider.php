@@ -2,8 +2,7 @@
 
 namespace App\Core\Providers;
 
-use App\Domains\Delivery\Contract\DeliveryResolvableContract;
-use App\Domains\Delivery\Services\DeliveryResolver;
+use App\Domains\Delivery\Contract\DeliverableContract;
 use Illuminate\Support\ServiceProvider;
 
 class DeliveryServiceProvider extends ServiceProvider
@@ -15,7 +14,7 @@ class DeliveryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(DeliveryResolvableContract::class, function ($app) {
+        $this->app->singleton(DeliverableContract::class, function ($app) {
             $gateway = $this->resolveService();
             return new $gateway();
         });
@@ -34,7 +33,7 @@ class DeliveryServiceProvider extends ServiceProvider
     /**
      * Resolves the payment gateway to be instantiated
      *
-     * @return void
+     * @return string
      */
     protected function resolveService(): string
     {

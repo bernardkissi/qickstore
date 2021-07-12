@@ -45,7 +45,7 @@ class CheckoutServiceProvider extends ServiceProvider implements DeferrableProvi
     /**
      * Resolves the tracking service to be instantiated
      *
-     * @return void
+     * @return string
      */
     protected function resolveService(): string
     {
