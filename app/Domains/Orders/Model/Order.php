@@ -26,7 +26,9 @@ class Order extends Model
         'status',
         'order_id',
         'subtotal',
+        'service'
     ];
+
 
     /**
      * Cast properties of the model
@@ -54,7 +56,7 @@ class Order extends Model
      */
     public function products(): BelongsToMany
     {
-        return $this->belongsToMany(Sku::class, 'products_order')
+        return $this->belongsToMany(Sku::class, 'product_order')
             ->withPivot(['quantity'])
             ->withTimestamps();
     }

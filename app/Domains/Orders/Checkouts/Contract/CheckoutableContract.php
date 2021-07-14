@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Domains\Orders\Checkouts\Contract;
 
-use App\Domains\Cart\Services\Cart;
 use App\Domains\Orders\Model\Order;
 
 interface CheckoutableContract
@@ -14,7 +13,7 @@ interface CheckoutableContract
      *
      * @return Order
      */
-    public function createOrder(Cart $cart): Order;
+    public function createOrder(array $data): Order;
 
     /**
      * Pay for the order

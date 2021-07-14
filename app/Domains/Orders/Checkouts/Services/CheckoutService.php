@@ -2,7 +2,7 @@
 
 namespace App\Domains\Orders\Checkouts\Services;
 
-use App\Domains\Cart\Services\Cart;
+use App\Domains\Cart\Facade\Cart;
 use App\Domains\Orders\Checkouts\Contract\CheckoutableContract;
 use App\Domains\Orders\Model\Order;
 use App\Domains\User\User;
@@ -19,10 +19,16 @@ class CheckoutService implements CheckoutableContract
     {
     }
 
-    public function createOrder(Cart $cart): Order
+    public function createOrder(array $data): Order
     {
-        $order = $this->customer->orders()->create(['subtotal' => $cart->total()->getAmount()]);
-        $order->products()->sync($cart->products()->toCollect());
+        $order = $this->customer->orders()->create(
+            [
+                'subtotal' => Cart::user()->total()->getAmount(),
+                'service' => 'gateway',
+                'something' => 'something'
+            ]
+        );
+        $order->products()->sync(Cart::user()->products()->toCollect());
         return $order;
     }
 
