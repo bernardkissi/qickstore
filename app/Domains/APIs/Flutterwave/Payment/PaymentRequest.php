@@ -3,7 +3,6 @@
 namespace App\Domains\APIs\Flutterwave\Payment;
 
 use App\Domains\Payments\Dtos\PaymentDto;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 trait PaymentRequest
@@ -11,11 +10,11 @@ trait PaymentRequest
     /**
      * Prepare user payment information
      *
-     * @param Request $request
+     * @param array $data
      *
      * @return PaymentDto
      */
-    public static function data(Request $request): array
+    public function data(array $data): array
     {
         $data = [
                     'redirect_url' => route('home'),
