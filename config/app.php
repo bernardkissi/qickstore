@@ -234,7 +234,9 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Payment' => App\Domains\Payments\Facade\Payment::class,
         'Payout' => App\Domains\Payouts\Facade\Payout::class,
-        'Delivery' => App\Domains\Delivery\Facade\Delivery::class
+        'Delivery' => App\Domains\Delivery\Facade\Delivery::class,
+        'Cart' => App\Domains\Cart\Facade\Cart::class,
+        'Checkout' => App\Domains\Orders\Checkouts\Facade\Checkout::class,
 
     ],
 
