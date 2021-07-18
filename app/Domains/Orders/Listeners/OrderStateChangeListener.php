@@ -7,6 +7,7 @@ use App\Domains\Orders\Handlers\Processors\DeliveryProcessor;
 use App\Domains\Orders\Handlers\Processors\FailedProcessor;
 use App\Domains\Orders\Handlers\Processors\PaidProcessor;
 use App\Domains\Orders\Handlers\Processors\RunProcess;
+use App\Domains\Orders\Handlers\Processors\ShippedProcessor;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Spatie\ModelStates\Events\StateChanged;
 
@@ -37,6 +38,7 @@ class OrderStateChangeListener implements ShouldQueue
         $processor = match ($state) {
             'paid' => new PaidProcessor(),
             'failed' => new FailedProcessor(),
+            'shipped' => new ShippedProcessor(),
             'delivered' => new DeliveryProcessor(),
             'completed' => new CompletedProcessor(),
         };
