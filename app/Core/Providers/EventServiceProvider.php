@@ -2,6 +2,7 @@
 
 namespace App\Core\Providers;
 
+use App\Domains\Orders\Events\OrderCreatedEvent;
 use App\Domains\Orders\Listeners\OrderStateChangeListener;
 use App\Domains\Payouts\Events\PayoutCompleted;
 use App\Domains\Payouts\Listeners\PayoutNotification;
@@ -28,6 +29,10 @@ class EventServiceProvider extends ServiceProvider
 
         PayoutCompleted::class => [
             PayoutNotification::class,
+        ],
+
+        OrderCreatedEvent::class => [
+            //
         ],
     ];
 
