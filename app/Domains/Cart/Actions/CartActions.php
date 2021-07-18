@@ -2,17 +2,13 @@
 
 namespace App\Domains\Cart\Actions;
 
-use App\Domains\Cart\Services\Cart;
+use App\Domains\Cart\Facade\Cart;
 use App\Domains\Products\Skus\Model\Sku;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CartActions
 {
-    public function __construct(public Cart $cart)
-    {
-    }
-
     /**
      * Return customer cart items
      *
@@ -20,20 +16,20 @@ class CartActions
      *
      * @return JsonResource
      */
-    public function getCart(Request $request): JsonResource
+    public function getCart(array $query): JsonResource
     {
-        $this->cart->sync();
+        Cart::user()->sync();
 
-        return $this->cart->cartContents()->additional(
+        return Cart::user()->cartContents()->additional(
             ['meta' => [
 
-                'isEmpty' => $this->cart->isEmpty(),
-                'subtotal' => $this->cart->subTotal(),
-                'delivery_details' => $this->cart->withDelivery($request->query())->deliveryDetails(),
-                'delivery_cost' => $this->cart->deliveryCost(),
-                'total' => $this->cart->total(),
-                'changed' => $this->cart->hasChanged(),
-            ],
+                    'isEmpty' => Cart::isEmpty(),
+                    'subtotal' => Cart::subTotal(),
+                    'delivery_details' => Cart::withDelivery($query)->deliveryDetails(),
+                    'delivery_cost' =>Cart::deliveryCost(),
+                    'total' =>Cart::total(),
+                    'changed' => Cart::hasChanged(),
+                ],
             ]
         );
     }
@@ -47,7 +43,7 @@ class CartActions
      */
     public function addToCart(array $products)
     {
-        return $this->cart->add($products);
+        return Cart::user()->add($products);
     }
 
     /**
@@ -60,7 +56,7 @@ class CartActions
      */
     public function updateItem(Sku $sku, int $quantity): void
     {
-        $this->cart->update($sku->id, $quantity);
+        Cart::user()->update($sku->id, $quantity);
     }
 
     /**
@@ -72,7 +68,7 @@ class CartActions
      */
     public function deleteItem(Sku $sku): void
     {
-        $this->cart->delete($sku->id);
+        Cart::user()->delete($sku->id);
     }
 
     /**
@@ -82,6 +78,6 @@ class CartActions
      */
     public function clearCart()
     {
-        $this->cart->clear();
+        Cart::user()->clear();
     }
 }

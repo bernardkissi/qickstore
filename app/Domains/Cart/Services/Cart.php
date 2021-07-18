@@ -24,15 +24,30 @@ class Cart implements CartContract
      *
      * @var string
      */
-    protected User | array | null $delivery;
+    protected array | null $delivery;
+
+
+    protected User | Visitor $customer;
 
     /**
      * Class Constructor
      *
      * @param User|Visitor $customer
      */
-    public function __construct(protected User | Visitor $customer)
+    public function __construct()
     {
+        //$customer = request('visitor', auth()->user());
+
+        //dd(request('visitor', auth()->user()));
+
+        //$this->customer = $customer->load(['cart.stockCount', 'cart.skuable']);
+    }
+
+    public function user(): self
+    {
+        $customer = request('visitor', auth()->user());
+        $this->customer = $customer->load(['cart.stockCount', 'cart.skuable']);
+        return $this;
     }
 
     /**
@@ -69,7 +84,6 @@ class Cart implements CartContract
     /**
      * Calculates delivery cost
      *
-     * @param int $deliveryId
      *
      * @return Money
      */

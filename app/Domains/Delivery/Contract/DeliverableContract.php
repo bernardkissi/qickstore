@@ -5,7 +5,7 @@ namespace App\Domains\Delivery\Contract;
 use App\Domains\Orders\Model\Order;
 use Illuminate\Http\Request;
 
-interface DeliverableProviderContract
+interface DeliverableContract
 {
     /**
      * Process delivery of the order

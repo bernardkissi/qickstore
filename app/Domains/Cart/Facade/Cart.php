@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Domains\Delivery\Facade;
+namespace App\Domains\Cart\Facade;
 
-use App\Domains\Delivery\Contract\DeliverableContract;
+use App\Domains\Cart\Contracts\CartContract;
 use Illuminate\Support\Facades\Facade;
 
-class Delivery extends Facade
+class Cart extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -14,6 +14,6 @@ class Delivery extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return DeliverableContract::class;
+        return CartContract::class;
     }
 }

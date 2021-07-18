@@ -2,10 +2,11 @@
 
 namespace App\Domains\Delivery\Services;
 
-use App\Domains\Delivery\Contract\DeliverableProviderContract;
+use App\Domains\Delivery\Contract\DeliverableContract;
 use App\Domains\Orders\Model\Order;
+use Illuminate\Http\Request;
 
-class FilesDelivery implements DeliverableProviderContract
+class FilesDelivery implements DeliverableContract
 {
     public static function init(): static
     {
@@ -17,7 +18,7 @@ class FilesDelivery implements DeliverableProviderContract
      *
      * @return void
      */
-    public static function dispatch(): array
+    public static function dispatch(Request $request): array
     {
         return ['your file order is ready for download'];
     }

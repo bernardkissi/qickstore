@@ -4,11 +4,11 @@ namespace App\Domains\Delivery\Services;
 
 use App\Domains\APIs\Swoove\Delivery\CreateDelivery;
 use App\Domains\APIs\Swoove\Delivery\DeliveryRequest;
-use App\Domains\Delivery\Contract\DeliverableProviderContract;
+use App\Domains\Delivery\Contract\DeliverableContract;
 use App\Domains\Orders\Model\Order;
 use Illuminate\Http\Request;
 
-class SwooveDelivery implements DeliverableProviderContract
+class SwooveDelivery implements DeliverableContract
 {
     use DeliveryRequest;
 
