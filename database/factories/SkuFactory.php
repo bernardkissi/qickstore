@@ -2,8 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Domains\Skus\Models\Sku;
+use App\Domains\Products\Skus\Model\Sku;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class SkuFactory extends Factory
 {
@@ -23,9 +24,9 @@ class SkuFactory extends Factory
     {
         return [
 
-            'code' => mt_rand(100, 999),
+            'code' => Str::uuid(),
             'price' => 1000
-           
+
         ];
     }
 }

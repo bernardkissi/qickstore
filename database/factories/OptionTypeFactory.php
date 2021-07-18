@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Domains\Options\Models\OptionType;
+use App\Domains\Products\Options\Models\OptionType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class OptionTypeFactory extends Factory
