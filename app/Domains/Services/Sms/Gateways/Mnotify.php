@@ -4,9 +4,9 @@ namespace App\Domains\Services\Sms\Gateways;
 
 use App\Domains\APIs\Mnotify\Sms\SendMnotifySms;
 use App\Domains\Messages\Dtos\MessageDto;
-use App\Domains\Services\Sms\SMSContract;
+use App\Domains\Services\Sms\SmsContract;
 
-class Mnotify implements SMSContract
+class Mnotify implements SmsContract
 {
     /**
      * Send text message

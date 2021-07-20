@@ -14,7 +14,7 @@ define('GSM_7BIT_ESC', "\x1b");
  * @author Jaanus Rõõmus <jaanus@roomus.ee>
  * @link http://messente.com/documentation/sms-length-calculator
  */
-class SmsCostCalculator
+class MessageCalculator
 {
 
     /**

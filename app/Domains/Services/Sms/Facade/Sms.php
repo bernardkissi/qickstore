@@ -2,7 +2,7 @@
 
 namespace App\Domains\Services\Sms\Facade;
 
-use App\Domains\Services\Sms\SMSContract;
+use App\Domains\Services\Sms\SmsContract;
 use Illuminate\Support\Facades\Facade;
 
 class Sms extends Facade
@@ -14,6 +14,6 @@ class Sms extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return SMSContract::class;
+        return SmsContract::class;
     }
 }

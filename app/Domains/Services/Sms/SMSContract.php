@@ -2,7 +2,7 @@
 
 namespace App\Domains\Services\Sms;
 
-interface SMSContract
+interface SmsContract
 {
     /**
      * Send Text Message

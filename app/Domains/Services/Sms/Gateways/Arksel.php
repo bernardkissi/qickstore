@@ -4,9 +4,9 @@ namespace App\Domains\Services\Sms\Gateways;
 
 use App\Domains\APIs\Arksel\Sms\SendArkselSms;
 use App\Domains\Messages\Dtos\MessageDto;
-use App\Domains\Services\Sms\SMSContract;
+use App\Domains\Services\Sms\SmsContract;
 
-class Arksel implements SMSContract
+class Arksel implements SmsContract
 {
     /**
      * Send text message
