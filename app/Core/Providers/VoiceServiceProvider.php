@@ -3,11 +3,11 @@
 namespace App\Core\Providers;
 
 use App\Core\Resolver\ResolveTrait;
-use App\Domains\Services\Sms\SmsContract;
+use App\Domains\Services\Voice\VoiceContract;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 
-class MessageServiceProvider extends ServiceProvider implements DeferrableProvider
+class VoiceServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     use ResolveTrait;
     /**
@@ -17,8 +17,8 @@ class MessageServiceProvider extends ServiceProvider implements DeferrableProvid
      */
     public function register()
     {
-        $this->app->singleton(SmsContract::class, function ($app) {
-            $gateway = $this->resolveService('gateway', 'mnotify', 'modules.sms');
+        $this->app->singleton(VoiceContract::class, function ($app) {
+            $gateway = $this->resolveService('gateway', 'arksel', 'modules.voice');
             return new $gateway();
         });
     }
@@ -40,6 +40,6 @@ class MessageServiceProvider extends ServiceProvider implements DeferrableProvid
     */
     public function provides()
     {
-        return [SmsContract::class];
+        return [VoiceContract::class];
     }
 }

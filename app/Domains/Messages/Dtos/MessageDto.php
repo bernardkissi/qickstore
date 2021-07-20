@@ -22,6 +22,7 @@ use const Cerbero\Dto\CAST_PRIMITIVES;
  * @property bool $sandbox
  * @property bool $is_schedule
  * @property datetime|null schedule_date
+ * @property string $voice_file
  */
 class MessageDto extends Dto
 {
