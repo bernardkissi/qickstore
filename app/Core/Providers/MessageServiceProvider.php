@@ -3,11 +3,11 @@
 namespace App\Core\Providers;
 
 use App\Core\Resolver\ResolveTrait;
-use App\Domains\Payments\Contract\PaymentableContract;
+use App\Domains\Services\Sms\SMSContract;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 
-class PaymentServiceProvider extends ServiceProvider implements DeferrableProvider
+class MessageServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     use ResolveTrait;
     /**
@@ -17,8 +17,8 @@ class PaymentServiceProvider extends ServiceProvider implements DeferrableProvid
      */
     public function register()
     {
-        $this->app->singleton(PaymentableContract::class, function ($app) {
-            $gateway = $this->resolveService('gateway', 'flutterwave', 'modules.payments');
+        $this->app->singleton(SMSContract::class, function ($app) {
+            $gateway = $this->resolveService('gateway', 'mnotify', 'modules.sms');
             return new $gateway();
         });
     }
@@ -30,15 +30,16 @@ class PaymentServiceProvider extends ServiceProvider implements DeferrableProvid
      */
     public function boot()
     {
+        //
     }
 
     /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
+    * Get the services provided by the provider.
+    *
+    * @return array
+    */
     public function provides()
     {
-        return [PaymentableContract::class];
+        return [SMSContract::class];
     }
 }
