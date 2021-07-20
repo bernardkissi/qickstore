@@ -21,11 +21,4 @@ class SendPayout extends FlutterwaveRequest
      * @var string $query
      */
     protected string $path = '/transfers';
-
-    /**
-     * Data attached to the request
-     *
-     * @var array $data
-     */
-    protected array $data = [];
 }
