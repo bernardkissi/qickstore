@@ -181,6 +181,7 @@ return [
         App\Core\Providers\TrackingServiceProvider::class,
         App\Core\Providers\PayoutServiceProvider::class,
         App\Core\Providers\MessageServiceProvider::class,
+        App\Core\Providers\VoiceServiceProvider::class,
     ],
 
     /*
@@ -238,7 +239,8 @@ return [
         'Delivery' => App\Domains\Delivery\Facade\Delivery::class,
         'Cart' => App\Domains\Cart\Facade\Cart::class,
         'Checkout' => App\Domains\Orders\Checkouts\Facade\Checkout::class,
-        'Sms' => App\Domains\Services\Sms\Facade\Sms::class
+        'Sms' => App\Domains\Services\Sms\Facade\Sms::class,
+        'Voice' => App\Domains\Services\Voice\Facade\Voice::class,
 
     ],
 
