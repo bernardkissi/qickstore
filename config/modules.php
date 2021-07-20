@@ -98,6 +98,21 @@ return [
     'payouts' => [
         'flutterwave' => App\Domains\Payouts\Services\FlutterwavePayoutService::class,
         //'paystack' => '',
-    ]
+    ],
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | SMS Gateways
+    |--------------------------------------------------------------------------
+    |
+    | This services will handle payout to merchants manually or automatically
+    | if configured through store settings. Additional payout services can be
+    | added to be used by stores;
+    */
+
+    'sms' => [
+        'arksel' => App\Domains\Services\Sms\Gateways\Arksel::class,
+        'mnotify' => App\Domains\Services\Sms\Gateways\Mnotify::class,
+    ]
 ];
