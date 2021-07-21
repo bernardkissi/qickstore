@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domains\APIs\Arksel\Voice;
 
 use App\Domains\APIs\Arksel\ArkselRequest;
+use Illuminate\Http\Client\PendingRequest;
 
 class MakeArkselCall extends ArkselRequest
 {
@@ -29,4 +30,15 @@ class MakeArkselCall extends ArkselRequest
      * @var array $data
      */
     protected array $data = [];
+
+
+    public function attachMedia()
+    {
+        $audio  = fopen((public_path('storage/demo.wav')), 'r');
+
+        $request = $this->getRequest();
+        $request->attach('voice_file', $audio, 'demo.wav');
+
+        return $this;
+    }
 }
