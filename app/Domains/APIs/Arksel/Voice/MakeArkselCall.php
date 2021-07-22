@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Domains\APIs\Arksel\Voice;
 
 use App\Domains\APIs\Arksel\ArkselRequest;
-use Illuminate\Http\Client\PendingRequest;
 
 class MakeArkselCall extends ArkselRequest
 {
