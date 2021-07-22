@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Domains\Services\Sms\Gateways;
+namespace App\Domains\Services\Notifications\Types\Sms\Providers;
 
-use App\Domains\APIs\Arksel\Sms\SendArkselSms;
+use App\Domains\APIs\Mnotify\Sms\SendMnotifySms;
 use App\Domains\Messages\Dtos\MessageDto;
-use App\Domains\Services\Sms\SmsContract;
+use App\Domains\Services\Notifications\Types\Sms\SmsContract;
 
-class Arksel implements SmsContract
+class Mnotify implements SmsContract
 {
     /**
      * Send text message
@@ -17,14 +17,14 @@ class Arksel implements SmsContract
      */
     public function send(array $data): array
     {
-        return SendArkselSms::build()
+        return SendMnotifySms::build()
         ->withData(MessageDto::make(
             [
-                'sender' => 'Techshops',
-                'recipients' => $data['recipients'],
-                'message' => 'it came from my side east side',
-                'schedule_at' => '',
-                'sandbox' => false
+                'sender' => 'bernard',
+                'recipient' => $data['recipients'],
+                'message' => 'A buyer just bought a t-shirt from your shop',
+                'schedule_date' => null,
+                'is_schedule' => false
             ]
         )->toArray())
         ->send()->json();

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\Services\Sms;
+namespace  App\Domains\Services\Notifications\Types\Sms;
 
 interface SmsContract
 {

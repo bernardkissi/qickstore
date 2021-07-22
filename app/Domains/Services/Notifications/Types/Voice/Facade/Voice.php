@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domains\Services\Voice\Facade;
+namespace App\Domains\Services\Notifications\Types\Voice\Facade;
 
-use App\Domains\Services\Voice\VoiceContract;
+use App\Domains\Services\Notifications\Types\Voice\VoiceContract;
 use Illuminate\Support\Facades\Facade;
 
 class Voice extends Facade

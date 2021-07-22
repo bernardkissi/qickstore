@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Domains\Services\Voice\Gateways;
+namespace App\Domains\Services\Notifications\Types\Voice\Providers;
 
 use App\Domains\APIs\Arksel\Voice\MakeArkselCall;
-use App\Domains\Services\Voice\VoiceContract;
+use App\Domains\Services\Notifications\Types\Voice\VoiceContract;
 
 class Arksel implements VoiceContract
 {

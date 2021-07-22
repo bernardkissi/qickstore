@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Domains\Services\Voice;
+namespace App\Domains\Services\Notifications\Types\Voice;
 
 interface VoiceContract
 {

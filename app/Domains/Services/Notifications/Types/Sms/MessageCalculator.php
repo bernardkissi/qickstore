@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\Services\Sms;
+namespace App\Domains\Services\Notifications\Types\Sms;
 
 define('GSM_CHARSET_GSM7', 0);
 define('GSM_CHARSET_UNICODE', 2);
