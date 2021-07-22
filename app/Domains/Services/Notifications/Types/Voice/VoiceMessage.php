@@ -9,7 +9,7 @@ class VoiceMessage
     /**
      * @var string
      */
-    protected string $to;
+    protected $to;
 
     /**
      * @var string
@@ -37,7 +37,7 @@ class VoiceMessage
      * @param string $line
      * @return self
      */
-    public function audio(string $audio = ''): self
+    public function audio($audio = ''): self
     {
         $this->audio = $audio;
 
@@ -50,7 +50,7 @@ class VoiceMessage
      * @param [type] $to
      * @return self
      */
-    public function to(string $to): self
+    public function to($to): self
     {
         $this->to[] = $to;
 
@@ -74,6 +74,6 @@ class VoiceMessage
             'recipients' => $this->to,
         ];
 
-        return Voice::send($data);
+        return Voice::call($data);
     }
 }
