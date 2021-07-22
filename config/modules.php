@@ -112,8 +112,8 @@ return [
     */
 
     'sms' => [
-        'arksel' => App\Domains\Services\Sms\Gateways\Arksel::class,
-        'mnotify' => App\Domains\Services\Sms\Gateways\Mnotify::class,
+        'arksel' => App\Domains\Services\Notifications\Types\Sms\Providers\Arksel::class,
+        'mnotify' => App\Domains\Services\Notifications\Types\Sms\Providers\Mnotify::class,
     ],
 
     /*
@@ -127,6 +127,6 @@ return [
     */
 
     'voice' => [
-        'arksel' => App\Domains\Services\Voice\Gateways\Arksel::class,
+        'arksel' => App\Domains\Services\Notifications\Types\Voice\Providers\Arksel::class,
     ]
 ];
