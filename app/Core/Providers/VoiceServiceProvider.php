@@ -3,7 +3,7 @@
 namespace App\Core\Providers;
 
 use App\Core\Resolver\ResolveTrait;
-use App\Domains\Services\Voice\VoiceContract;
+use App\Domains\Services\Notifications\Types\Voice\VoiceContract;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 

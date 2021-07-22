@@ -3,7 +3,7 @@
 namespace App\Core\Providers;
 
 use App\Core\Resolver\ResolveTrait;
-use App\Domains\Services\Sms\SmsContract;
+use App\Domains\Services\Notifications\Types\Sms\SmsContract;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 
@@ -18,7 +18,7 @@ class MessageServiceProvider extends ServiceProvider implements DeferrableProvid
     public function register()
     {
         $this->app->singleton(SmsContract::class, function ($app) {
-            $gateway = $this->resolveService('gateway', 'mnotify', 'modules.sms');
+            $gateway = $this->resolveService('gateway', 'arksel', 'modules.sms');
             return new $gateway();
         });
     }
