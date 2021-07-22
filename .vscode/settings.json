@@ -1,0 +1,20 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "askForPassword": false,
+            "driver": "MySQL",
+            "database": "stores",
+            "username": "root",
+            "name": "Myconnection"
+        }
+    ],
+    "terminal.integrated.enableBell": true,
+    "terminal.integrated.tabs.location": "left",
+    "todo-tree.tree.showBadges": false
+}
