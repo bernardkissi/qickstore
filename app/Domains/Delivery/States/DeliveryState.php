@@ -10,11 +10,11 @@ use Spatie\ModelStates\Attributes\DefaultState;
 use Spatie\ModelStates\State;
 
 #[
-    AllowTransition(Pending::class, Failed::class),
+    AllowTransition(Pending::class, Failed::class, WaitingToBeShippedToFailed::class),
     AllowTransition(Pending::class, Delivered::class),
     AllowTransition([Assigned::class, PickingUp::class], PickedUp::class),
     AllowTransition([PickedUp::class, Delivering::class], Delivered::class),
-    AllowTransition([PickingUp::class, Delivering::class], Failed::class),
+    AllowTransition([PickingUp::class, Delivering::class], Failed::class, WaitingToBeShippedToFailed::class),
     DefaultState(Pending::class),
 ]
 

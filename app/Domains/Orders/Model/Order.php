@@ -10,11 +10,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Notifications\Notifiable;
 use Spatie\ModelStates\HasStates;
 
 class Order extends Model
 {
-    use HasFactory, HasStates;
+    use
+    HasFactory,
+    HasStates,
+    Notifiable;
 
     /**
      * Fillable properties of the model.

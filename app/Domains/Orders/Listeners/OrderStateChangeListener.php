@@ -2,12 +2,12 @@
 
 namespace App\Domains\Orders\Listeners;
 
-use App\Domains\Orders\Handlers\Processors\CompletedProcessor;
-use App\Domains\Orders\Handlers\Processors\DeliveryProcessor;
-use App\Domains\Orders\Handlers\Processors\FailedProcessor;
-use App\Domains\Orders\Handlers\Processors\PaidProcessor;
-use App\Domains\Orders\Handlers\Processors\RunProcess;
-use App\Domains\Orders\Handlers\Processors\ShippedProcessor;
+use App\Core\Helpers\Processor\RunProcessor;
+use App\Domains\Orders\Processors\CompletedProcessor;
+use App\Domains\Orders\Processors\DeliveryProcessor;
+use App\Domains\Orders\Processors\FailedProcessor;
+use App\Domains\Orders\Processors\PaidProcessor;
+use App\Domains\Orders\Processors\ShippedProcessor;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Spatie\ModelStates\Events\StateChanged;
 
@@ -36,13 +36,13 @@ class OrderStateChangeListener implements ShouldQueue
         $state = strval($event->finalState);
 
         $processor = match ($state) {
-            'paid' => new PaidProcessor(),
-            'failed' => new FailedProcessor(),
-            'shipped' => new ShippedProcessor(),
-            'delivered' => new DeliveryProcessor(),
-            'completed' => new CompletedProcessor(),
+            'paid' => new PaidProcessor($event->model),
+            'failed' => new FailedProcessor($event->model),
+            'shipped' => new ShippedProcessor($event->model),
+            'delivered' => new DeliveryProcessor($event->model),
+            'completed' => new CompletedProcessor($event->model),
         };
 
-        echo(RunProcess::run($processor));
+        RunProcessor::run($processor);
     }
 }
