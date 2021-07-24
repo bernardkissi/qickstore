@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Domains\Delivery\States;
 
-class WaitingToBeShipped extends DeliveryState
+class Delivered extends DeliveryState
 {
     /**
      * Property name of this state in DB
      *
      * @var string
      */
-    public static $name = 'Pending';
+    public static $name = 'Delivered';
 
     /**
      * Returns the paid state of an order
@@ -20,6 +20,6 @@ class WaitingToBeShipped extends DeliveryState
      */
     public function status(): string
     {
-        return 'Pending';
+        return 'Delivered';
     }
 }

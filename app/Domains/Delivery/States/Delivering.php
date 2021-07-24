@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Domains\Delivery\States;
 
-class Completed extends DeliveryState
+class Delivering extends DeliveryState
 {
     /**
      * Property name of this state in DB
      *
      * @var string
      */
-    public static $name = 'Completed';
+    public static $name = 'Delivering';
 
     /**
      * Returns the paid state of an order
@@ -20,6 +20,6 @@ class Completed extends DeliveryState
      */
     public function status(): string
     {
-        return 'Completed';
+        return 'Delivering';
     }
 }
