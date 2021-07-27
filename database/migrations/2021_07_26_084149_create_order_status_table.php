@@ -19,8 +19,11 @@ class CreateOrderStatusTable extends Migration
             $table->string('state');
             $table->dateTime('failed_at')->nullable();
             $table->dateTime('cancelled_at')->nullable();
+            $table->dateTime('refunded_at')->nullable();
             $table->text('error_message')->nullable();
             $table->text('cancelled_reason')->nullable();
+            $table->text('refunded_reason')->nullable();
+
             $table->timestamps();
         });
     }

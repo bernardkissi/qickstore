@@ -87,3 +87,31 @@ trait HasStateTransistions
         return $collection;
     }
 }
+
+    // const PENDING = 1;
+    // const CANCELLED = 2;
+    // const FAILED = 3;
+    // const PAID = 4;
+    // const SHIPPED = 5;
+    // const DELIVERED = 6;
+    // const REFUNDED = 7;
+
+
+// /**
+//      * Returns state arrangement order number
+//      *
+//      * @param string $state
+//      * @return void
+//      */
+//     public function generateOrder(string $state): int
+//     {
+//         return match ($state) {
+//             'pending' => self::PENDING,
+//             'cancelled' => self::CANCELLED,
+//             'failed' => self::FAILED,
+//             'paid' => self::PAID,
+//             'shipped' => self::SHIPPED,
+//             'delivered' => self::DELIVERED,
+//             'refunded' => self::REFUNDED,
+//         };
+//     }

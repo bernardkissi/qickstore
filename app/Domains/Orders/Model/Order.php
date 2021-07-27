@@ -8,6 +8,7 @@ use App\Domains\Products\Skus\Model\Sku;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Notifications\Notifiable;
@@ -66,10 +67,10 @@ class Order extends Model
     /**
      * Returns the status for an order
      *
-     * @return HasOne
+     * @return HasMany
      */
-    public function status(): HasOne
+    public function status(): HasMany
     {
-        return $this->hasOne(OrderStatus::class);
+        return $this->hasMany(OrderStatus::class);
     }
 }
