@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Domains\Orders\States;
 
-class Refunded extends OrderState
+class Cancelled extends OrderState
 {
     /**
      * Property name of this state in DB
      *
      * @var string
      */
-    public static $name = 'refunded';
+    public static $name = 'cancelled';
 
     /**
      * Returns the paid state of an order
@@ -20,6 +20,6 @@ class Refunded extends OrderState
      */
     public function status(): string
     {
-        return 'Refunded';
+        return 'Cancelled';
     }
 }

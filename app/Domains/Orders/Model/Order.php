@@ -2,7 +2,7 @@
 
 namespace App\Domains\Orders\Model;
 
-use App\Domains\Orders\States\OrderState;
+use App\Domains\Orders\Model\OrderStatus;
 use App\Domains\Payments\Model\Payment;
 use App\Domains\Products\Skus\Model\Sku;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,13 +11,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Notifications\Notifiable;
-use Spatie\ModelStates\HasStates;
 
 class Order extends Model
 {
     use
     HasFactory,
-    HasStates,
     Notifiable;
 
     /**
@@ -31,16 +29,6 @@ class Order extends Model
         'order_id',
         'subtotal',
         'service'
-    ];
-
-
-    /**
-     * Cast properties of the model
-     *
-     * @var array
-     */
-    protected $casts = [
-        'state' => OrderState::class,
     ];
 
     /**
@@ -73,5 +61,15 @@ class Order extends Model
     public function payment(): HasOne
     {
         return $this->hasOne(Payment::class);
+    }
+
+    /**
+     * Returns the status for an order
+     *
+     * @return HasOne
+     */
+    public function status(): HasOne
+    {
+        return $this->hasOne(OrderStatus::class);
     }
 }

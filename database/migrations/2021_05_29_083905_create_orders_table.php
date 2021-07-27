@@ -16,15 +16,11 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->morphs('orderable');
-            $table->string('state');
             $table->string('service');
-            $table->dateTime('failed_at')->nullable();
-            $table->text('error_message')->nullable();
             $table->integer('subtotal')->unsigned();
             $table->string('estimate_id')->nullable();
             $table->json('delivery_details')->nullable();
             $table->text('instructions')->nullable();
-
             $table->timestamps();
         });
     }
