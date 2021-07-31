@@ -1,22 +1,34 @@
 <?php
 
-// use App\Domains\Categories\Models\Category;
-// use App\Domains\Categories\Resources\CategoryResource;
-// use App\Domains\Products\Actions\ProductActions;
+namespace App;
 
-// use App\Domains\Products\Models\Product;
-// use App\Domains\Products\Models\ProductVariation;
-// use App\Domains\Products\Resource\ProductResource;
-// use App\Domains\Products\Resource\SingleProductResource;
-// use App\Domains\Products\Scopes\Filters\CategoryScope;
-// use App\Domains\Stocks\Models\StockView;
-// use Illuminate\Database\Eloquent\Builder;
+use App\Domains\Cart\Actions\CartActions;
 use App\Domains\Cart\Services\Cart;
+
+use App\Domains\Delivery\Facade\Delivery;
+
+use App\Domains\Orders\Actions\OrderActions;
+use App\Domains\Orders\Checkouts\Contract\CheckoutableContract;
+use App\Domains\Orders\Checkouts\Facade\Checkout;
+
+use App\Domains\Orders\Model\Order;
+
+use App\Domains\Orders\Model\OrderStatus;
+use App\Domains\Orders\Resource\OrderStatusResource;
+use App\Domains\Payments\Facade\Payment;
+use App\Domains\Payouts\Facade\Payout;
 use App\Domains\Products\Product\Actions\ProductActions;
+use App\Domains\Products\Product\Models\Product;
 use App\Domains\Products\Product\Resource\ProductResource;
+use App\Domains\Services\Notifications\Types\Sms\Facade\Sms;
+use App\Domains\Services\Notifications\Types\Voice\Facade\Voice;
+use App\Domains\Tracking\Contract\TrackableContract;
 use App\Domains\User\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,8 +40,10 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::get('/test', function () {
+Route::get('/test/products', function (Request $request, Product $product) {
+    return ProductResource::collection((new ProductActions())->getProducts());
+});
+Route::get('/test/{product}', function (Request $request, Product $product) {
     // (new ProductActions())->uploadImage($request);
 
     // return CategoryResource::collection(Category::with('subcategories.subcategories')
@@ -48,8 +62,7 @@ Route::get('/test', function () {
     //  ->paginate(10);
 
     // return ProductResource::collection($prod);
-    return ProductResource::collection((new ProductActions())->getProducts());
-    // return (new ProductActions())->getProducts();
+    return new ProductResource((new ProductActions())->getProduct($product));
     // $product = Product::find(1);
         // $product->sku()->create(['code' => 'abc126', 'price' => 1000]);
         //
@@ -64,15 +77,113 @@ Route::post('/test2', function (Request $request) {
     // return (new OptionActions($request->arr))->storeOptions();
 });
 
+Route::post('cart', function (Request $request, Cart $cart) {
+    return (new CartActions($cart))->addToCart($request->products);
+})->middleware('customer');
 
-Route::post('cart', function (Request $request) {
-    $class = config('modules.cart.vcart');
-    $user = User::where('id', 1)->first();
-    return (new $class(User::where('id', 1)->first()))->add($request->products);
+Route::get('cart/items', function (Request $request, Cart $cart) {
+    return (new CartActions($cart))->getCart($request->query());
+})->middleware('customer');
+
+Route::get('/cookie', function (Request $request) {
+    $minutes = 10;
+    setcookie('identifier', (string) Str::uuid(), time() + 3600);
+    // print_r($_COOKIE["name"]);
+    // $cookie = cookie('name', (string) Str::uuid(), $minutes);
+    // return response('')->cookie($cookie);
+});
+
+Route::get('/cookie-set', function (Request $request) {
+    return $request->cookie('identifier');
+});
+
+Route::get('/middleware', function (Request $request) {
+    return $request->visitor;
+})->middleware('customer');
+
+// Route::post('/orders', function (Request $request) {
+//     return (new OrderActions())->createOrder();
+// });
+
+// Route::post('/paid', function (Request $request) {
+//     return (new OrderActions())->createOrder();
+// });
+
+Route::get('dtos', function (Request $request) {
+    // return VisitorData::fromRequest($request);
+    $user = User::find(1);
+    return (new Cart($user))->withDelivery($request->query())->deliveryDetails();
+});
+
+Route::get('encryption', function (Request $request) {
+    // return Crypt::encryptString($request->value);
+    return [
+        get_class(request('visitor', auth()->user())),
+        $request->visitor,
+    ];
+})->middleware('customer');
+
+Route::get('decrypt', function (Request $request) {
+    return Crypt::decryptString('eyJpdiI6InVRcHVKSmcvdysvRndNZWRLSFZyelE9PSIsInZhbHVlIjoiK1Q1M2RwYnp6eUpUcnFHWWhpSzV1QT09IiwibWFjIjoiNDU1YTQ5NWRjMGVlODZiODg3N2UxNjVhODU3MjYxNDJmMDk2Y2VmN2YzNWQxMmEwZTE2YjZiOTBiMzk4NzM4YyJ9');
+});
+
+Route::post('checkout', function (CheckoutableContract $checkout, Cart $cart, Request $request) {
+    //return $checkout->createOrder($cart);
+    return Checkout::createOrder();
+})->middleware('customer');
+
+Route::post('delivery', function (Request $request) {
+    // $service = $provider->provide('hosted');
+    config(['delivery-services.active' => 'swoove']);
+    return Delivery::dispatch($request);
+    // return $provide::dispatch();
+    // return app($provider->provide($request->service))->dispatch();
+})->middleware('customer');
+
+Route::get('tracking', function (Request $request, TrackableContract $provider) {
+    return [ $provider->track(), $request->service ];
+})->middleware('customer');
+
+Route::get('payments', function (Request $request) {
+    return Payment::charge($request->all());
+    // return $payment->pay($request);
+    // return [ $gateway->charge($request->visitor, 2000/10), $request->gateway ];
+    // dd(PaymentData::fromRequest($request)->toArray());
+})->middleware('customer');
+
+Route::post('payouts', function (Request $request) {
+    Payout::onQueue()->execute($request->all());
+})->middleware('customer');
+
+
+Route::post('tests', function () {
+    // return SwooveRequest::build()->withData([])->send()->json();
 });
 
 
-Route::get('cart/items', function (Request $request) {
-    $class = config('modules.cart.vcart');
-    return (new $class(User::where('id', 1)->first()))->cartContents();
+Route::post('/order-actions', function (Request $request) {
+    return (new OrderActions())->checkout($request->all());
+})->middleware('customer');
+
+Route::post('sms', function (Request $request) {
+    return Sms::send($request->all());
+});
+
+Route::post('voice', function (Request $request) {
+    return Voice::call($request->all());
+});
+
+
+Route::get('ordertry', function () {
+    $order = Order::where('id', 3)->select('id')->first();
+    return OrderStatusResource::collection($order->statuses);
+});
+
+
+Route::patch('order_history', function () {
+    $order = OrderStatus::where('id', 3)->select('id', 'state', 'updated_from', 'updated_at')->first();
+
+    $order->updateHistory('delivered');
+
+    return $order->updated_from;
 });

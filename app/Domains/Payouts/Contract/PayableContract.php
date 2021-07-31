@@ -9,5 +9,5 @@ interface PayableContract
      *
      * @return array
      */
-    public function pay(array $data): object;
+    public function pay(array $data): void;
 }

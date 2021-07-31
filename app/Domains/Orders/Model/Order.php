@@ -8,7 +8,6 @@ use App\Domains\Products\Skus\Model\Sku;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Notifications\Notifiable;
@@ -29,7 +28,8 @@ class Order extends Model
         'status',
         'order_id',
         'subtotal',
-        'service'
+        'service',
+        'error_message'
     ];
 
     /**
@@ -67,10 +67,10 @@ class Order extends Model
     /**
      * Returns the status for an order
      *
-     * @return HasMany
+     * @return HasOne
      */
-    public function status(): HasMany
+    public function status(): HasOne
     {
-        return $this->hasMany(OrderStatus::class);
+        return $this->hasOne(OrderStatus::class);
     }
 }

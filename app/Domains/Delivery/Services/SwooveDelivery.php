@@ -16,8 +16,9 @@ class SwooveDelivery implements DeliverableContract
     {
         return new static();
     }
+
     /**
-     * di9spatch the delivery to the agent
+     * dispatch the delivery to the agent
      *
      * @return void
      */

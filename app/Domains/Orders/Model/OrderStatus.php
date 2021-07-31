@@ -3,7 +3,7 @@
 namespace App\Domains\Orders\Model;
 
 use App\Domains\Orders\States\OrderState;
-use App\Domains\Orders\Traits\HasStateTransistions;
+use App\Domains\Orders\Traits\HasTransitionTimeline;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,7 +13,8 @@ class OrderStatus extends Model
 {
     use
     HasFactory,
-    HasStates;
+    HasStates,
+    HasTransitionTimeline;
 
     /**
      * Fillable properties of the model
@@ -25,8 +26,10 @@ class OrderStatus extends Model
         'failed_at',
         'cancelled_at',
         'failed_message',
-        'cancelled_reason'
+        'cancelled_reason',
+        'updated_from'
     ];
+
 
     /**
      * Database table for this model
@@ -42,6 +45,7 @@ class OrderStatus extends Model
      */
     protected $casts = [
         'state' => OrderState::class,
+        'updated_from' => 'array'
     ];
 
     /**
