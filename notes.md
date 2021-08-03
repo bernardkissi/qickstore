@@ -163,3 +163,131 @@
     "event.type":"MOBILEMONEYGH_TRANSACTION"
 }
 ```
+
+
+ordering system pipeline
+
+# order processing pipeline
+
+# order processor
+
+# delivery processor
+
+
+processor will be an inheritable interface
+
+```
+	class {state}Processor implements Processor
+	{
+  	   public function execute(): void;
+	}
+
+```
+
+# inhertiable interface
+
+```
+  interface Processor {
+
+  	   public function run(): void
+  }
+
+```
+
+## All processor will be run in the OrderStateListener::class
+
+```
+	public function handle(Event $event)
+	{
+		RunProcessor::run($process);
+	}
+```
+
+
+Transition state can be invoked in any of the three ways to run a processor
+
+	Develop a transition mapper
+	1. interface class
+	```
+		public function transitionMapper(): string
+	```
+	2. implementation class
+	```
+		SwooveTransition implements transitionMapper(): string
+		{
+			$state = match($string){
+				// transition mapping to our defined states
+			}
+		}
+	
+	```
+	```
+		AnotherTransition implements transitionMapper(): string
+		{
+			$state = match($string){
+				// transition mapping to our defined states
+			}
+		}
+	
+	```
+	3. 
+
+1. ## Through a webhook
+   ```
+  
+     public function __invoke(string $orderId): void
+     {
+     	//retrieve the delivery
+     	$delivery = Delivery::where('delivery_id', $deliveryId)->first();
+
+       //Run the transition mapper and return the result
+       $state = TransitionMapper::map($state): string
+
+       //check if the delivery retrieved can transition to thr returned state
+       if(!$delivery->state->canTransitionTo($state)) {
+
+       	    throws NotTransitionableException();
+       }
+
+       $delivery->state->transitionTo($state);
+
+     }
+
+   ```
+   ## if we manually check for the state of the delivery through scheduler
+   	``` 
+   	The time difference between now and ( created_at ) is > 4 hours
+   	and is in all state except ['delivered'] to get the collection
+	of delivery or deliveries to be checked
+
+   	```
+    Delivery::query()->where('') ... // build query chain
+
+    After state has been retrieved from provider (sleep 3)
+
+    // if returned state for the delivery equals the current state
+    // contiune with the rest 
+    // Transition to the state returned
+
+
+2. Through a action
+	```
+		1. Get the model intended for transition update 
+		2. check if the transition to be applied is applicable
+		3. throw an exception or error status that model can be transition to the that
+		4. Else transistion to state
+	```
+
+3. Through a state processor
+
+	```
+		check if transition is applicable to model
+        if not skip and contiune.
+	```
+   
+sales ser
+   
+
+
+
+
