@@ -183,7 +183,7 @@ Route::get('ordertry', function () {
 Route::patch('order_history', function () {
     $order = OrderStatus::where('id', 3)->select('id', 'state', 'updated_from', 'updated_at')->first();
 
-    $order->updateHistory('delivered');
+    // $order->updateHistory('delivered');
 
     return $order->updated_from;
 });
