@@ -6,7 +6,7 @@ use App\Domains\Cart\Actions\CartActions;
 use App\Domains\Cart\Services\Cart;
 
 use App\Domains\Delivery\Facade\Delivery;
-
+use App\Domains\Delivery\Mappers\SwooveMapper;
 use App\Domains\Orders\Actions\OrderActions;
 use App\Domains\Orders\Checkouts\Contract\CheckoutableContract;
 use App\Domains\Orders\Checkouts\Facade\Checkout;
@@ -186,4 +186,12 @@ Route::patch('order_history', function () {
     $order->updateHistory('delivered');
 
     return $order->updated_from;
+});
+
+
+Route::get('maps', function () {
+
+    $results = (new SwooveMapper())->map('Ended');
+    return $results;
+
 });
