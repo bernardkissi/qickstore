@@ -1,5 +1,21 @@
 <?php
 
+use App\Domains\Cart\Services\Cart;
+use App\Domains\Delivery\Mappers\SwooveMapper;
+use App\Domains\Delivery\Services\FilesDelivery;
+use App\Domains\Delivery\Services\HostedDelivery;
+use App\Domains\Delivery\Services\SwooveDelivery;
+use App\Domains\Orders\Checkouts\Services\CheckoutService;
+use App\Domains\Payments\Gateways\CashOnDelivery;
+use App\Domains\Payments\Gateways\Flutterwave;
+use App\Domains\Payouts\Services\FlutterwavePayoutService;
+use App\Domains\Services\Notifications\Types\Sms\Providers\Arksel as ArkselSms;
+use App\Domains\Services\Notifications\Types\Sms\Providers\Mnotify as MnotifySms;
+use App\Domains\Services\Notifications\Types\Voice\Providers\Arksel as ArkselVoice;
+use App\Domains\Tracking\DeliveryServices\FilesTracking;
+use App\Domains\Tracking\DeliveryServices\HostedTracking;
+use App\Domains\Tracking\DeliveryServices\SwooveTracking;
+
 /*
 |--------------------------------------------------------------------------
 | APP Modules
@@ -22,7 +38,7 @@ return [
     */
 
     'cart'=> [
-        'vcart' => App\Domains\Cart\Services\Cart::class
+        'vcart' => Cart::class
     ],
 
     /*
@@ -36,7 +52,7 @@ return [
     */
 
     'checkout' => [
-        'default' => App\Domains\Orders\Checkouts\Services\CheckoutService::class
+        'default' => CheckoutService::class
     ],
 
     /*
@@ -49,9 +65,9 @@ return [
     */
 
     'deliveries' => [
-        'swoove' => App\Domains\Delivery\Services\SwooveDelivery::class,
-        'hosted' => App\Domains\Delivery\Services\HostedDelivery::class,
-        'files'  => App\Domains\Delivery\Services\FilesDelivery::class
+        'swoove' => SwooveDelivery::class,
+        'hosted' => HostedDelivery::class,
+        'files'  => FilesDelivery::class
     ],
 
     /*
@@ -64,9 +80,9 @@ return [
     */
 
     'tracking' => [
-        'files' => App\Domains\Tracking\DeliveryServices\FilesTracking::class,
-        'swoove' => App\Domains\Tracking\DeliveryServices\SwooveTracking::class,
-        'hosted' => App\Domains\Tracking\DeliveryServices\HostedTracking::class,
+        'files' => FilesTracking::class,
+        'swoove' => SwooveTracking::class,
+        'hosted' => HostedTracking::class,
     ],
 
 
@@ -80,8 +96,8 @@ return [
     */
 
     'payments' => [
-        'flutterwave' => App\Domains\Payments\Gateways\Flutterwave::class,
-        'cash' => App\Domains\Payments\Gateways\CashOnDelivery::class,
+        'flutterwave' => Flutterwave::class,
+        'cash' => CashOnDelivery::class,
     ],
 
 
@@ -96,7 +112,7 @@ return [
     */
 
     'payouts' => [
-        'flutterwave' => App\Domains\Payouts\Services\FlutterwavePayoutService::class,
+        'flutterwave' => FlutterwavePayoutService::class,
         //'paystack' => '',
     ],
 
@@ -112,8 +128,8 @@ return [
     */
 
     'sms' => [
-        'arksel' => App\Domains\Services\Notifications\Types\Sms\Providers\Arksel::class,
-        'mnotify' => App\Domains\Services\Notifications\Types\Sms\Providers\Mnotify::class,
+        'arksel' => ArkselSms::class,
+        'mnotify' => MnotifySms::class,
     ],
 
     /*
@@ -127,6 +143,21 @@ return [
     */
 
     'voice' => [
-        'arksel' => App\Domains\Services\Notifications\Types\Voice\Providers\Arksel::class,
+        'arksel' => ArkselVoice::class,
+    ],
+
+
+     /*
+    |--------------------------------------------------------------------------
+    | Voice Gateways
+    |--------------------------------------------------------------------------
+    |
+    | This services will handle payout to merchants manually or automatically
+    | if configured through store settings. Additional payout services can be
+    | added to be used by stores;
+    */
+
+    'mappers' => [
+        'swoove' => SwooveMapper::class,
     ]
 ];
