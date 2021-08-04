@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Core\Helpers\Transitions;
 
-interface TransitionableMapper
+interface TransitionMapper
 {
     /**
      * Map external states to internal state
@@ -12,5 +12,5 @@ interface TransitionableMapper
      * @param string $state
      * @return string
      */
-	public function map(string $state): string;
+    public function map(string $state): string;
 }

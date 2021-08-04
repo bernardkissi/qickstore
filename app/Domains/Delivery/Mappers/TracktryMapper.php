@@ -11,7 +11,7 @@ use App\Domains\Delivery\States\Delivering;
 use App\Domains\Delivery\States\PickedUp;
 use App\Domains\Delivery\States\PickingUp;
 
-class SwooveMapper implements TransitionMapper
+class TracktryMapper implements TransitionMapper
 {
     /**
      * Map swoove states to internal delivery states.
@@ -22,11 +22,11 @@ class SwooveMapper implements TransitionMapper
     public function map(string $state): string
     {
         $result = match ($state) {
-            'Assigned' => Assigned::$name,
+            'Shipped' => Assigned::$name,
             'PickingUp' => PickingUp::$name,
             'PickedUp' => PickedUp::$name,
-            'Delivering' => Delivering::$name,
-            'Delivered' => Delivered::$name,
+            'drop off' => Delivering::$name,
+            'dropped off' => Delivered::$name,
             'Ended' => 'oh wow'
         };
 
