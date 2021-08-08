@@ -11,7 +11,7 @@ class Assigned extends DeliveryState
      *
      * @var string
      */
-    public static $name = 'Assigned';
+    public static $name = 'assigned';
 
     /**
      * Returns the paid state of an order

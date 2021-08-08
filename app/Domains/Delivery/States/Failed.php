@@ -11,7 +11,7 @@ class Failed extends DeliveryState
      *
      * @var string
      */
-    public static $name = 'Failed';
+    public static $name = 'failed';
 
     /**
      * Returns the paid state of an order

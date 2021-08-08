@@ -11,7 +11,7 @@ class PickedUp extends DeliveryState
      *
      * @var string
      */
-    public static $name = 'Pickedup';
+    public static $name = 'pickedup';
 
     /**
      * Returns the paid state of an order

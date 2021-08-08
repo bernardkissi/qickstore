@@ -12,4 +12,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::webhooks('flutterwave-webhook');
+Route::webhooks('payment-webhook', 'payments');
+Route::webhooks('delivery-webhook', 'deliveries');

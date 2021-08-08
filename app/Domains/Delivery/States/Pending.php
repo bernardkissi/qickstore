@@ -11,7 +11,7 @@ class Pending extends DeliveryState
      *
      * @var string
      */
-    public static $name = 'Pending';
+    public static $name = 'pending';
 
     /**
      * Returns the paid state of an order
