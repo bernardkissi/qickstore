@@ -2,6 +2,7 @@
 
 namespace App\Domains\Orders\Model;
 
+use App\Domains\Delivery\Model\Delivery;
 use App\Domains\Orders\Model\OrderStatus;
 use App\Domains\Payments\Model\Payment;
 use App\Domains\Products\Skus\Model\Sku;
@@ -72,5 +73,15 @@ class Order extends Model
     public function status(): HasOne
     {
         return $this->hasOne(OrderStatus::class);
+    }
+
+    /**
+     * Returns the delivery state of an order
+     *
+     * @return HasOne
+     */
+    public function delivery(): HasOne
+    {
+        return $this->hasOne(Delivery::class);
     }
 }

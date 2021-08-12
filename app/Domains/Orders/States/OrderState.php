@@ -14,6 +14,7 @@ use Spatie\ModelStates\State;
     AllowTransition(Pending::class, Cancelled::class),
     AllowTransition(Pending::class, Failed::class, PendingToFailed::class),
     AllowTransition(Failed::class, Paid::class),
+    AllowTransition(Processing::class, Shipped::class),
     AllowTransition(Paid::class, Shipped::class),
     AllowTransition(Paid::class, Delivered::class),
     AllowTransition(Shipped::class, Delivered::class),

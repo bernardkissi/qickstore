@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\Orders\Model\Dtos;
+namespace App\Domains\Orders\Dtos;
 
 use App\Domains\Products\Skus\Model\Dtos\SkuData;
 use Carbon\Carbon;
