@@ -1,10 +1,11 @@
 <?php
 
 use App\Domains\Cart\Services\Cart;
+use App\Domains\Delivery\Dispatchers\HostedDelivery;
+use App\Domains\Delivery\Dispatchers\SwooveDelivery;
 use App\Domains\Delivery\Mappers\SwooveMapper;
-use App\Domains\Delivery\Services\FilesDelivery;
-use App\Domains\Delivery\Services\HostedDelivery;
-use App\Domains\Delivery\Services\SwooveDelivery;
+use App\Domains\Delivery\Mappers\TracktryMapper;
+use App\Domains\Delivery\Services\Dispatchers\FilesDelivery;
 use App\Domains\Orders\Checkouts\Services\CheckoutService;
 use App\Domains\Payments\Gateways\CashOnDelivery;
 use App\Domains\Payments\Gateways\Flutterwave;
@@ -36,7 +37,6 @@ return [
     | This service acts as the cart system for stores. feel free to swap with
     | different cart service.
     */
-
     'cart'=> [
         'vcart' => Cart::class
     ],
@@ -50,7 +50,6 @@ return [
     | Feel free to add checkout services to this service to handle different
     | orders or swap default.
     */
-
     'checkout' => [
         'default' => CheckoutService::class
     ],
@@ -78,7 +77,6 @@ return [
     | Tracking services for the delivery channels defined above. Add a tracking
     | service when you add a new delivery channel.
     */
-
     'tracking' => [
         'files' => FilesTracking::class,
         'swoove' => SwooveTracking::class,
@@ -126,7 +124,6 @@ return [
     | if configured through store settings. Additional payout services can be
     | added to be used by stores;
     */
-
     'sms' => [
         'arksel' => ArkselSms::class,
         'mnotify' => MnotifySms::class,
@@ -141,7 +138,6 @@ return [
     | if configured through store settings. Additional payout services can be
     | added to be used by stores;
     */
-
     'voice' => [
         'arksel' => ArkselVoice::class,
     ],
@@ -156,8 +152,8 @@ return [
     | if configured through store settings. Additional payout services can be
     | added to be used by stores;
     */
-
     'mappers' => [
         'swoove' => SwooveMapper::class,
+        'tracktry' => TracktryMapper::class
     ]
 ];
