@@ -22,7 +22,7 @@ class Arksel implements SmsContract
             [
                 'sender' => 'Techshops',
                 'recipients' => $data['recipients'],
-                'message' => 'Your payment was successfully, tracking id 12345',
+                'message' => $data['message'],
                 'schedule_at' => '',
                 'sandbox' => false
             ]

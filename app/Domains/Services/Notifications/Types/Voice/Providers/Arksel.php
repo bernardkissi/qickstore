@@ -17,11 +17,11 @@ class Arksel implements VoiceContract
      */
     public function call(array $data): array
     {
-        $recipients = $this->formData($data);
+        $payload = $this->formData($data);
 
         $res = MakeArkselCall::build()
         ->attachMedia()
-        ->withData($recipients)
+        ->withData($payload)
         ->send();
 
         return $res->json();

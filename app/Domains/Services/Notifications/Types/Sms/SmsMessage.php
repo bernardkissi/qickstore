@@ -100,8 +100,8 @@ class SmsMessage
         $data = [
 
             'sender' => $this->from,
-            'recipients' => $this->to,
-            'message' => '$this->message',
+            'recipients' => explode(',', $this->to),
+            'message' =>  implode('', $this->lines),
             'schedule_at' => '',
             'sandbox' => false
         ];
