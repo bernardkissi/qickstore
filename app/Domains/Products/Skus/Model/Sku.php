@@ -4,6 +4,7 @@ namespace App\Domains\Products\Skus\Model;
 
 use App\Domains\Products\Product\Models\Product;
 use App\Domains\Products\Skus\Collection\SkuCollection;
+use App\Domains\Products\Skus\Traits\ImageHandler;
 use App\Domains\Products\Skus\Traits\TrackStock;
 use App\Domains\Products\Stocks\Models\Stock;
 use App\Domains\Products\Stocks\Models\StockView;
@@ -15,51 +16,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-/**
- * App\Domains\Products\Skus\Model\Sku
- *
- * @property int $id
- * @property string $skuable_type
- * @property int $skuable_id
- * @property string $code
- * @property int $price
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property int $min_stock
- * @property bool $unlimited
- *
- * @property-read Model|\Eloquent $skuable
- * @property-read StockView|null $stockCount
- * @property-read \Illuminate\Database\Eloquent\Collection|array<Stock> $stocks
- * @property-read int|null $stocks_count
- *
- * @method static \Database\Factories\SkuFactory factory(...$parameters)
- * @method static \Illuminate\Database\Eloquent\Builder|Sku newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Sku newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Sku query()
- * @method static \Illuminate\Database\Eloquent\Builder|Sku whereCode($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Sku whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Sku whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Sku whereMinStock($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Sku wherePrice($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Sku whereSkuableId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Sku whereSkuableType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Sku whereUnlimited($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Sku whereUpdatedAt($value)
- *
- * @mixin \Eloquent
- *
- * @property-read Product $product
- * @property-read \Illuminate\Database\Eloquent\Collection|array<Guest> $guests
- * @property-read int|null $guests_count
- * @property-read \Illuminate\Database\Eloquent\Collection|array<User> $users
- * @property-read int|null $users_count
- */
-class Sku extends Model
+class Sku extends Model implements HasMedia
 {
     use
     HasFactory,
+    InteractsWithMedia,
+    ImageHandler,
     TrackStock;
 
     /**
@@ -143,6 +109,21 @@ class Sku extends Model
     public function stockCount(): HasOne
     {
         return $this->hasOne(StockView::class);
+    }
+
+    /**
+     * Defining image conversion on model
+     *
+     * @param Media $media
+     *
+     * @return void
+     */
+    public function registerMediaConversions(?Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+            ->width(368)
+            ->height(232)
+            ->quality(70);
     }
 
     /**

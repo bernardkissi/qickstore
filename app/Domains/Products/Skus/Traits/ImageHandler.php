@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\Products\Product\Services\ProductImages;
+namespace App\Domains\Products\Skus\Traits;
 
 trait ImageHandler
 {
