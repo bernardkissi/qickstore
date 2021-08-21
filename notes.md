@@ -164,7 +164,6 @@
 }
 ```
 
-
 ordering system pipeline
 
 # order processing pipeline
@@ -172,7 +171,6 @@ ordering system pipeline
 # order processor
 
 # delivery processor
-
 
 processor will be an inheritable interface
 
@@ -203,91 +201,223 @@ processor will be an inheritable interface
 	}
 ```
 
-
 Transition state can be invoked in any of the three ways to run a processor
 
-	Develop a transition mapper
-	1. interface class
-	```
-		public function transitionMapper(): string
-	```
-	2. implementation class
-	```
-		SwooveTransition implements transitionMapper(): string
-		{
-			$state = match($string){
-				// transition mapping to our defined states
-			}
-		}
-	
-	```
-	```
-		AnotherTransition implements transitionMapper(): string
-		{
-			$state = match($string){
-				// transition mapping to our defined states
-			}
-		}
-	
-	```
-	3. 
+    Develop a transition mapper
+    1. interface class
+    ```
+    	public function transitionMapper(): string
+    ```
+    2. implementation class
+    ```
+    	SwooveTransition implements transitionMapper(): string
+    	{
+    		$state = match($string){
+    			// transition mapping to our defined states
+    		}
+    	}
 
-1. ## Through a webhook
-   ```
-  
-     public function __invoke(string $orderId): void
-     {
-     	//retrieve the delivery
-     	$delivery = Delivery::where('delivery_id', $deliveryId)->first();
+    ```
+    ```
+    	AnotherTransition implements transitionMapper(): string
+    	{
+    		$state = match($string){
+    			// transition mapping to our defined states
+    		}
+    	}
 
-       //Run the transition mapper and return the result
-       $state = TransitionMapper::map($state): string
+    ```
+    3.
 
-       //check if the delivery retrieved can transition to thr returned state
-       if(!$delivery->state->canTransitionTo($state)) {
+1.  ## Through a webhook
 
-       	    throws NotTransitionableException();
-       }
+    ```
 
-       $delivery->state->transitionTo($state);
+      public function __invoke(string $orderId): void
+      {
+      	$delivery = Delivery::where('delivery_id', $deliveryId)->first();
 
-     }
+        //Run the transition mapper and return the result
+        $state = MapState::map($state);
 
-   ```
-   ## if we manually check for the state of the delivery through scheduler
-   	``` 
-   	The time difference between now and ( created_at ) is > 4 hours
-   	and is in all state except ['delivered'] to get the collection
-	of delivery or deliveries to be checked
+        //check if the delivery retrieved can transition to thr returned state
+        if (!$delivery->state->canTransitionTo($state)) {
 
-   	```
+            //throws NotTransitionableException();
+        }
+
+        $delivery->state->transitionTo($state);
+
+      }
+
+    ```
+
+    ## if we manually check for the state of the delivery through scheduler
+
+        ```
+        The time difference between now and ( created_at ) is > 4 hours
+        and is in all state except ['delivered'] to get the collection
+
+    of delivery or deliveries to be checked
+
+        ```
+
     Delivery::query()->where('') ... // build query chain
 
     After state has been retrieved from provider (sleep 3)
 
     // if returned state for the delivery equals the current state
-    // contiune with the rest 
+    // contiune with the rest
     // Transition to the state returned
 
+2.  Through a action
+    this
 
-2. Through a action
-	```
-		1. Get the model intended for transition update 
-		2. check if the transition to be applied is applicable
-		3. throw an exception or error status that model can be transition to the that
-		4. Else transistion to state
-	```
+    ```
+    	1. Get the model intended for transition update
+    	2. check if the transition to be applied is applicable
+    	3. throw an exception or error status that model can be transition to the that
+    	4. Else transistion to state
+    ```
 
-3. Through a state processor
+3.  Through a state processor
 
-	```
-		check if transition is applicable to model
+    ```
+    	check if transition is applicable to model
         if not skip and contiune.
-	```
-   
+    ```
+
 sales ser
-   
 
+Returning where not In collections
+$collection = collect([
+['product' => 'Desk', 'price' => 200],
+['product' => 'Chair', 'price' => 100],
+['product' => 'Bookcase', 'price' => 150],
+['product' => 'Door', 'price' => 100],
+]);
 
+$filtered = $collection->whereNotIn('price', [150, 200]);
+$filtered->all()
 
+if updated_at is greater than
+$dtOttawa->diffInHours($dtVancouver);
 
+### Order Process flow
+
+# transition
+
+    -Paid
+        - notify customer
+        - notify vendor
+        - create delivery
+
+# transition
+
+    - Processing
+        - send sms to the buyer
+        - listen to delivery hooks
+            - assigned
+            - picking up
+            - picked up
+            - delivering
+            - delivered
+
+# transition
+
+    - Failed
+        - log failed reason
+        - send notification to buyer with re-purchase link
+
+#
+
+# for digital files
+
+    - Transition to paid after payment is successful
+    - Create a delivery
+        - retrieve the order
+        - get the related media associated with the product
+        - we create a delivery record in the delivery database a signed url to customer using spatie media
+        - if fails retry is set 3 times and with interval of a min
+
+        # on success
+        - we create a delivery record with order id
+        - Run the deliveredProcessor
+
+        #on failure
+        - set retry after a min interval
+        - send slack notification to development team
+
+# for hosted delivery
+
+    - We retrieve the order and and a delivery is created
+    - vendor is then notified of the delivery details
+
+    #on failure
+    <!-- - set retry after a 2 mins interval -->
+    - send a slack notification to the delvelopment to intervene
+
+# System logistics
+
+    - retrieve the order
+    - retrieve the delivery details
+
+    - prepare to hit the provider endpoint with details
+    - retry is set to 3 in 5 mins
+
+    # on success
+    - create and a persist a delivery record
+    - transition order and delivery to the appropriate transitionable class
+
+    # on failure
+    - set retry after 2 mins interval
+    - send a slack notification
+
+# similarities
+
+    - on failure action
+    - on success
+
+# differences
+
+    - delivery process
+
+# Monitoring and dispatch different product types
+
+1.  stage 1
+
+    -   Grab an order you want to process
+    -   Group order items into types
+    -   Run a loop over types and call respective dispatchers to handle delivery
+
+2.  stage 2
+    Check:- given an order with different types
+
+        if(true)
+            -create delivery with batch number
+        if(false)
+            - create delivery no batch number
+
+3.  stage 3.
+    Updating main order
+    transitionOrderState ($delivery):
+        $deliveries = $order->deliveries;
+            if($order->count() > 1){
+
+        }
+        $order->state->canTransition(state::class) ?
+        $order->state->transitionTo(state::class): null
+
+// assumptions
+
+1. delivery will be passed into each process
+
+    - we can retrieve the order of the specific delivery
+
+    - use the order to fetch all the deliveries
+    - we exclude the current delivery from collection list
+    - compare if the current delivery state is less than other delivery state ---- transition
+    - or the state are the same transition
+    - if not dont transition
+
+    - if single transition with state.
