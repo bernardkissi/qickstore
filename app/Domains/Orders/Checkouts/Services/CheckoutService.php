@@ -24,7 +24,7 @@ class CheckoutService implements CheckoutableContract
         $order = $this->customer->orders()->create(
             [
                 'subtotal' => Cart::user()->total()->getAmount(),
-                'service' => 'gateway',
+                'service' => 'tracktry-logistics',
                 'something' => 'something'
             ]
         );

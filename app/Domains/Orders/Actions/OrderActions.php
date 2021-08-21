@@ -23,7 +23,7 @@ class OrderActions
         }
         $order = Checkout::createOrder($data);
 
-        $order->state->transitionTo(Paid::class);
+        $order->status()->create([]);
 
         //// $payment = Payment::charge($data);
 
