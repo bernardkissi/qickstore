@@ -16,6 +16,8 @@ class CreateShippingTable extends Migration
         Schema::create('shipping_providers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('slug');
+            $table->enum('type', ['file', 'custom', 'system']);
             $table->string('description')->nullable();
             $table->integer('price')->nullable();
             $table->json('constraints')->nullable();

@@ -16,12 +16,12 @@ class CreateDeliveriesTable extends Migration
         Schema::create('deliveries', function (Blueprint $table) {
             $table->id();
             $table->string('service');
-            $table->foreignId('order_id')->unsigned()->index()->constrained('orders');
+            $table->foreignId('order_id')->unique()->unsigned()->index()->constrained('orders');
             $table->integer('amount')->default(0);
             $table->string('state');
             $table->string('reference');
-            $table->string('delivery_code');
-            $table->string('client_code')->nullable();
+            $table->string('tracking_code')->unique();
+            $table->string('provider_code')->nullable();
             $table->string('estimate_id')->nullable();
             $table->text('instructions')->nullable();
             $table->string('download_link')->nullable();
