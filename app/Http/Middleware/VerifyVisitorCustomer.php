@@ -51,7 +51,7 @@ class VerifyVisitorCustomer
      * Merge the current visitor into the request
      *
      * @param Request $request
-     * @param Guest $guest
+     * @param Visitor $guest
      *
      * @return void
      */
