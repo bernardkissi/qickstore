@@ -18,7 +18,6 @@ abstract class Processor
     /**
      * Execute the processor
      *
-     * @param Model $model
      * @return void
      */
     public function execute(): void

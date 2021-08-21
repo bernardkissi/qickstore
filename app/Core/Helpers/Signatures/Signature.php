@@ -26,6 +26,6 @@ class Signature implements Signable
      */
     protected static function doSigning(Request $request, WebhookConfig $config): ?bool
     {
-        return null;
+        return false;
     }
 }

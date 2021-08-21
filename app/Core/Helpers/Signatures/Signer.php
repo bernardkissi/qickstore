@@ -41,7 +41,6 @@ class Signer implements SignatureValidator
         $config->signatureHeaderName = $this->signing_header_name;
         $config->signingSecret = $this->signing_secret;
 
-        var_dump($config);
         return $this->resolveSignature($request, $config);
     }
 
