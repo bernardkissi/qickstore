@@ -7,6 +7,7 @@ namespace App\Domains\Delivery\Actions;
 use App\Domains\Delivery\Model\ShippingProvider;
 use App\Domains\Delivery\Resource\ShippingProviderResource;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Str;
 
 class ShippingProviderAction
 {
@@ -19,7 +20,8 @@ class ShippingProviderAction
     public function createShippingService(array $payload): void
     {
         ShippingProvider::create([
-            'name' => $payload['name'],
+            'name' => $name = $payload['name'],
+            'slug' => Str::slug($name),
             'description' => $payload['description'],
             'price' => $payload['price'] ?? null,
             'constraints' => $payload['constraints'] ? $payload['constraints']: null

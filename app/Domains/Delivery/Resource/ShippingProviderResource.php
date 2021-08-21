@@ -17,7 +17,9 @@ class ShippingProviderResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'slug' => $this->slug,
             'price' => $this->price,
+            'description' => $this->description,
             'constraints' => $this->constraints,
         ];
     }

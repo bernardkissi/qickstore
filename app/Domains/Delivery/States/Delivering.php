@@ -20,6 +20,6 @@ class Delivering extends DeliveryState
      */
     public function status(): string
     {
-        return 'Delivering';
+        return 'delivering';
     }
 }

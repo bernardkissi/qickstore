@@ -20,6 +20,6 @@ class Pending extends DeliveryState
      */
     public function status(): string
     {
-        return 'Pending';
+        return 'pending';
     }
 }

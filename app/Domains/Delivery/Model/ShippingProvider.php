@@ -23,7 +23,8 @@ class ShippingProvider extends Model implements HasMedia
         'name',
         'description',
         'price',
-        'constraints'
+        'constraints',
+        'slug'
     ];
 
     /**

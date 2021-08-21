@@ -20,6 +20,6 @@ class Failed extends DeliveryState
      */
     public function status(): string
     {
-        return 'Failed';
+        return 'failed';
     }
 }

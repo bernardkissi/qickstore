@@ -20,6 +20,6 @@ class Assigned extends DeliveryState
      */
     public function status(): string
     {
-        return 'Assigned';
+        return 'assigned';
     }
 }

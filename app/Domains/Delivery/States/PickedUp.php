@@ -20,6 +20,6 @@ class PickedUp extends DeliveryState
      */
     public function status(): string
     {
-        return 'Picked up';
+        return 'pickedup';
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Domains\Delivery\Contract;
 
 use App\Domains\Orders\Model\Order;
-use Illuminate\Http\Request;
 
 interface DeliverableContract
 {
@@ -13,14 +12,5 @@ interface DeliverableContract
      * @return void
      */
 
-    public static function dispatch(Request $request): array; // takes in an order
-
-    /**
-     * Get the delivery information of the order
-     *
-     * @param Order $order
-     *
-     * @return array
-     */
-    public function deliveryInfo(Order $order): array;
+    public static function dispatch(Order $order): void;
 }
