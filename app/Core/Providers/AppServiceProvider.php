@@ -35,6 +35,7 @@ class AppServiceProvider extends ServiceProvider
             'Product' => 'App\Domains\Products\Product\Models\Product',
             'Variation' => 'App\Domains\Products\Product\Models\ProductVariation',
             'User' => 'App\Domains\User\User',
+            'Sku' => 'App\Domains\Products\Skus\Model\Sku',
             'Visitor' => 'App\Domains\User\Visitor',
         ]);
 
