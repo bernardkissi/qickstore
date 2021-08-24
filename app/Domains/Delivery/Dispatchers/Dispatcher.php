@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Domains\Delivery\Facade;
+namespace App\Domains\Delivery\Dispatchers;
 
-use App\Domains\Delivery\Contract\DeliverableContract;
 use Illuminate\Support\Facades\Facade;
 
-class Dispatch extends Facade
+class Dispatcher extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -14,6 +13,6 @@ class Dispatch extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return DeliverableContract::class;
+        return 'Dispatcher';
     }
 }

@@ -3,7 +3,7 @@
 namespace App\Domains\Delivery\Checkers;
 
 use App\Domains\Delivery\Checkers\DeliveryChecker;
-use App\Domains\Delivery\Notifications\RemindVendorToUpdateOrder;
+use App\Domains\Delivery\Notifications\RemindVendorToUpdateOrderNotification;
 use App\Domains\Services\Notifications\Channels\SmsChannel;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
@@ -23,7 +23,7 @@ class VendorDeliveryChecker implements DeliveryChecker
 
         Notification::route('mail', '5e97e062-959f-433f-b0dc-4833de15bda2@usehelo.cloud')
         ->route(SmsChannel::class, $numbers)
-        ->notify(new RemindVendorToUpdateOrder($numbers));
+        ->notify(new RemindVendorToUpdateOrderNotification($numbers));
     }
 
     /**

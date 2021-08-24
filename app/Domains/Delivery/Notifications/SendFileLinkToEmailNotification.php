@@ -20,7 +20,7 @@ class SendFileLinkToEmailNotification extends Notification implements ShouldQueu
      *
      * @return void
      */
-    public function __construct(public Order $order)
+    public function __construct(public string $fileUrl)
     {
         //
     }
@@ -40,16 +40,14 @@ class SendFileLinkToEmailNotification extends Notification implements ShouldQueu
      * Get the mail representation of the notification.
      *
      * @param  mixed  $notifiable
-     * @return SmsMessage
+     * @return MailMessage
      */
     public function toMail($notifiable)
     {
-        $url = URL::signedRoute('download', ['order' => $this->order->id]);
-
         return (new MailMessage)
                 ->greeting('Hello!')
                 ->line('One of your invoices has been paid!')
-                ->action('Download File', $url)
+                ->action('Download File', $this->fileUrl)
                 ->line('Thank you for using our application!');
     }
 

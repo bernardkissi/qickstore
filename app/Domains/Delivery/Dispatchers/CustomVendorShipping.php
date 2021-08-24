@@ -3,15 +3,16 @@
 namespace App\Domains\Delivery\Dispatchers;
 
 use App\Core\Helpers\Dispatchers\Dispatcher;
-use App\Domains\Delivery\Notifications\SendFileLinkToEmailNotification;
+use App\Domains\Delivery\Notifications\PromptVendorForDeliveryNotification;
 use App\Domains\Orders\Model\Order;
+use App\Domains\Services\Notifications\Channels\SmsChannel;
 use Illuminate\Support\Facades\Notification;
-use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Str;
 
-class FileDelivery extends Dispatcher
+class CustomVendorShipping extends Dispatcher
 {
 
-    /**
+     /**
      * Class constructor
      *
      * @param Order $order
@@ -33,15 +34,14 @@ class FileDelivery extends Dispatcher
     }
 
     /**
-     * Send downloadable file link to the customer's email.
+     * Notify vendor of the about the delivery.
      *
      * @return void
      */
     public function dispatch(): void
     {
-        $url = URL::signedRoute('download', ['order' => $this->order['order_id']]);
-
         Notification::route('mail', $this->order['customer_email'])
-            ->notify(new SendFileLinkToEmailNotification($url));
+            ->route(SmsChannel::class, '0543063709')
+            ->notify(new PromptVendorForDeliveryNotification($this->order));
     }
 }
