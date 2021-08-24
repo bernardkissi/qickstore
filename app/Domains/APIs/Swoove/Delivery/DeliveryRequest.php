@@ -3,28 +3,28 @@
 namespace App\Domains\APIs\Swoove\Delivery;
 
 use App\Domains\Delivery\Dtos\DeliveryDto;
-use Illuminate\Http\Request;
+use App\Domains\Orders\Model\Order;
 use const Cerbero\Dto\CAMEL_CASE_ARRAY;
+use Illuminate\Http\Request;
 
 trait DeliveryRequest
 {
-    /**
-     * Prepare user payment information
-     *
-     * @param Request $request
-     *
-     * @return PaymentDto
-     */
-    public static function data(Request $request): array
+   /**
+    * Prepare request data to swoove ddelivery endpoint
+    *
+    * @param Order $order
+    * @return array
+    */
+    public static function data(Order $order): array
     {
         $data = [
                     'pickup'=>[
                         'type'=>'LATLNG',
                         'value'=>'string',
                         'contact'=>[
-                        'name' => 'bernard kissi',
-                        'mobile'=>"05430637089",
-                        'email'=>'bernardkissi@gmail.com'
+                            'name' => 'bernard kissi',
+                            'mobile'=>"05430637089",
+                            'email'=>'bernardkissi@gmail.com'
                         ],
                         'country_code'=>'GH',
                         'lat' => 6.663449,
