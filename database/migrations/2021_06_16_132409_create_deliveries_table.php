@@ -17,7 +17,6 @@ class CreateDeliveriesTable extends Migration
             $table->id();
             $table->string('service');
             $table->foreignId('order_id')->unique()->unsigned()->index()->constrained('orders');
-            $table->integer('amount')->default(0);
             $table->string('state');
             $table->string('reference');
             $table->string('tracking_code')->unique();

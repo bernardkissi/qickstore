@@ -17,6 +17,7 @@ class CreateProductVariationsTable extends Migration
             $table->id();
             $table->foreignId('product_id')->unsigned()->index()->constrained('products')->onDelete('cascade');
             $table->string('name');
+            $table->string('type');
             $table->integer('price')->nullable();
             $table->integer('order')->nullable();
             $table->json('properties')->nullable();

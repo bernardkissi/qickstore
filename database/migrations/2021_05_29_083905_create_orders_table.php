@@ -17,6 +17,7 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->morphs('orderable');
             $table->string('service');
+            $table->foreignId('shipping_id')->unsigned()->index()->constrained('shipping_providers');
             $table->integer('subtotal')->unsigned();
             $table->string('estimate_id')->nullable();
             $table->json('delivery_details')->nullable();
@@ -35,3 +36,5 @@ class CreateOrdersTable extends Migration
         Schema::dropIfExists('orders');
     }
 }
+
+// payment_method_id,
