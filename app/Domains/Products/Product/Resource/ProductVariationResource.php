@@ -5,7 +5,7 @@ namespace App\Domains\Products\Product\Resource;
 use App\Domains\Products\Skus\Resource\SkuResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class VariationResource extends JsonResource
+class ProductVariationResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,8 +16,7 @@ class VariationResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [
-
+        return [,
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
@@ -25,7 +24,7 @@ class VariationResource extends JsonResource
             'identifer' => $this->identifer,
             'properties' => $this->properties,
             'order' => $this->order,
-            'sku' => new SkuResource($this->whenLoaded('sku')),
+            //'sku' => new SkuResource($this->whenLoaded('sku')),
         ];
     }
 }

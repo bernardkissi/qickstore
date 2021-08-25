@@ -3,8 +3,9 @@
 namespace App\Domains\Products\Product\Resource;
 
 use App\Domains\Products\Options\Resource\OptionCollection;
+use App\Domains\Products\Product\Resource\ProductVariationResource;
 
-class SingleProductResource extends ProductResource
+class ProductSingleResource extends ProductResource
 {
     /**
      * Transform the resource into an array.
@@ -21,7 +22,7 @@ class SingleProductResource extends ProductResource
                 $this->mergeWhen(count($this->variations) > 0, [
 
                     'product_options' => OptionCollection::collection($this->options->groupBy('types.name')),
-                    'product_variations' => VariationResource::collection($this->variations),
+                    'product_variations' => ProductVariationResource::collection($this->variations),
 
                 ]),
 
