@@ -237,7 +237,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Payment' => App\Domains\Payments\Facade\Payment::class,
         'Payout' => App\Domains\Payouts\Facade\Payout::class,
-        'Dispatch' => App\Domains\Delivery\Facade\Dispatch::class,
+        'Dispatch' => App\Domains\Delivery\Dispatchers\Dispatcher::class,
         'Cart' => App\Domains\Cart\Facade\Cart::class,
         'Checkout' => App\Domains\Orders\Checkouts\Facade\Checkout::class,
         'Sms' => App\Domains\Services\Notifications\Types\Sms\Facade\Sms::class,

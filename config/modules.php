@@ -1,11 +1,11 @@
 <?php
 
 use App\Domains\Cart\Services\Cart;
-use App\Domains\Delivery\Dispatchers\HostedDelivery;
-use App\Domains\Delivery\Dispatchers\SwooveDelivery;
+use App\Domains\Delivery\Dispatchers\CustomVendorShipping;
+use App\Domains\Delivery\Dispatchers\FileDelivery;
+use App\Domains\Delivery\Dispatchers\SwooveShipping;
 use App\Domains\Delivery\Mappers\SwooveMapper;
 use App\Domains\Delivery\Mappers\TracktryMapper;
-use App\Domains\Delivery\Services\Dispatchers\FilesDelivery;
 use App\Domains\Orders\Checkouts\Services\CheckoutService;
 use App\Domains\Payments\Gateways\CashOnDelivery;
 use App\Domains\Payments\Gateways\Flutterwave;
@@ -64,9 +64,9 @@ return [
     */
 
     'deliveries' => [
-        'swoove' => SwooveDelivery::class,
-        'hosted' => HostedDelivery::class,
-        'files'  => FilesDelivery::class
+        'swoove' => SwooveShipping::class,
+        'hosted' => CustomVendorShipping::class,
+        'files'  => FileDelivery::class
     ],
 
     /*
