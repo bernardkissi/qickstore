@@ -12,7 +12,7 @@ trait ManagesOrderDelivery
      * @param array $payload
      * @return void
      */
-    public function createOrderDelivery(array $payload): void
+    public function createDelivery(array $payload): void
     {
         $this->delivery()->create($payload);
     }

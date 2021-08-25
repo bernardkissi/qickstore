@@ -35,11 +35,12 @@ class Order extends Model
         'order_id',
         'subtotal',
         'service',
-        'error_message'
+        'error_message',
+        'instructions'
     ];
 
     /**
-     * Get the parent commentable model (user or guest).
+     * Get the parent commentable model (user or visitor).
      *
      * @return MorphTo
      */
