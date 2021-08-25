@@ -4,6 +4,7 @@ namespace App\Core\Providers;
 
 use App\Core\Resolver\ResolveTrait;
 use App\Domains\Delivery\Contract\DeliverableContract;
+use App\Domains\Delivery\Dispatchers\DispatchOrder;
 use Illuminate\Support\ServiceProvider;
 
 class DeliveryServiceProvider extends ServiceProvider
@@ -16,9 +17,8 @@ class DeliveryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(DeliverableContract::class, function ($app) {
-            $gateway = $this->resolveService('service', 'swoove', 'modules.deliveries');
-            return new $gateway();
+        $this->app->singleton('Dispatcher', function ($app) {
+            return new DispatchOrder();
         });
     }
 
