@@ -38,7 +38,7 @@ class FileDelivery extends Dispatcher
      */
     public function dispatch(): void
     {
-        $url = URL::signedRoute('download', ['order' => $this->order['order_id']]);
+        $url = URL::signedRoute('api:v1:download', ['order' => $this->order['order_id']]);
 
         Notification::route('mail', $this->order['customer_email'])
             ->notify(new SendFileLinkToEmailNotification($url));
