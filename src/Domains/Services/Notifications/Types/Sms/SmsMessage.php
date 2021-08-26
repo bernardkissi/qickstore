@@ -88,7 +88,6 @@ class SmsMessage
         }
 
         $data = [
-
             'sender' => $this->from,
             'recipients' => explode(',', $this->to),
             'message' =>  implode('', $this->lines),
