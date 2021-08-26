@@ -23,6 +23,7 @@ class Delivery extends Model
     protected $fillable = [
 
         'service',
+        'order_id',
         'status',
         'reference',
         'tracking_code',

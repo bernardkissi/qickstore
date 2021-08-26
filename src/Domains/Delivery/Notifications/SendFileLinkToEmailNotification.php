@@ -34,20 +34,6 @@ class SendFileLinkToEmailNotification extends Notification implements ShouldQueu
         return [SmsChannel::class, 'mail'];
     }
 
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return MailMessage
-     */
-    public function toSms($notifiable)
-    {
-        return (new SmsMessage)
-                ->from('Techshops')
-                ->to('0552377591')
-                ->line('Please an order has been successfully made')
-                ->line('proceed to make delivery');
-    }
 
     /**
     * Get the mail representation of the notification.
@@ -64,6 +50,20 @@ class SendFileLinkToEmailNotification extends Notification implements ShouldQueu
                 ->line('Thank you for using our application!');
     }
 
+    /**
+     * Get the sms representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return SmsMessage
+     */
+    public function toSms($notifiable)
+    {
+        return (new SmsMessage)
+                ->from('Techshops')
+                ->to('0543063709')
+                ->line('Please an order has been successfully made ')
+                ->line(' proceed to make delivery');
+    }
 
     /**
      * Get the array representation of the notification.

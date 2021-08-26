@@ -29,10 +29,14 @@ class DispatchOrder
             ]);
         }]);
 
-        $order['products']->groupBy(function ($item) {
+        $groups = $order['products']->groupBy(function ($item) {
             return $item['skuable']['type'];
-        })->map(function ($item, $key) use ($order) {
-            $this->dispatcher($order, $item, $key);
+        });
+
+        $num_of_groups = $groups->count();
+
+        $groups->map(function ($item, $key) use ($order, $num_of_groups) {
+            $this->dispatcher($order, $item, $key, $num_of_groups);
         });
     }
 
@@ -48,17 +52,18 @@ class DispatchOrder
         Order $order,
         Collection $items,
         string $key,
+        int $count
     ): void {
         $files = config('dispatchers.files');
         $physical = config("dispatchers.physical.$order->service");
         $tickets = config("dispatchers.tickets");
 
-        $payload = $this->extractOrderInfo($order, $items);
+        $payload = $this->extractOrderInfo($order, $items, $count);
 
         $class = match ($key) {
             'physical' => new $physical($payload),
-            'digital' => new $files($payload),
-            'tickets' => new $tickets($payload),
+            'digital' =>  new $files($payload),
+            'tickets' =>  new $tickets($payload),
             'default' => logger('error finding the dispatcher')
         };
 
@@ -71,7 +76,7 @@ class DispatchOrder
      * @param Order $order
      * @return array
      */
-    protected function extractOrderInfo(Order $order, Collection $items): array
+    protected function extractOrderInfo(Order $order, Collection $items, int $num_of_groups): array
     {
         return [
             'service' => $order->service ?? null,
@@ -79,6 +84,7 @@ class DispatchOrder
             'instructions' => $order->instructions ?? null,
             'customer_email' => $order->orderable->email,
             'customer_number' => $order->orderable->mobile,
+            'count' => $num_of_groups,
             'items' => $order->service === 'swoove' ? $items : null
         ];
     }
