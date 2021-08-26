@@ -92,3 +92,6 @@ this way image content will not be read from your disk more than once.
         // if ($this->cancelled_at === null) {
         //     $filtered = $filtered->reject(fn ($value) => $value == 'cancelled');
         // }
+
+
+//TODO: inventory triggers

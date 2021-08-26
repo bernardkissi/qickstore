@@ -43,8 +43,8 @@ return [
                 'signature_validator' =>  \App\Core\Helpers\Signatures\Signer::class,
                 'webhook_profile' => \Spatie\WebhookClient\WebhookProfile\ProcessEverythingWebhookProfile::class,
                 'webhook_response' => \Spatie\WebhookClient\WebhookResponse\DefaultRespondsTo::class,
-                'webhook_model' =>   \App\Domains\Services\Webhooks\WebhookHandler::class,
-                'process_webhook_job' => \App\Domains\Services\Webhooks\Jobs\PaymentWebhookJob::class,
+                'webhook_model' =>   \Domain\Services\Webhooks\WebhookHandler::class,
+                'process_webhook_job' => \Domain\Services\Webhooks\Jobs\PaymentWebhookJob::class,
             ],
             [
                 'name' => 'deliveries',
@@ -53,8 +53,8 @@ return [
                 'signature_validator' => \App\Core\Helpers\Signatures\Signer::class,
                 'webhook_profile' => \Spatie\WebhookClient\WebhookProfile\ProcessEverythingWebhookProfile::class,
                 'webhook_response' => \Spatie\WebhookClient\WebhookResponse\DefaultRespondsTo::class,
-                'webhook_model' => \App\Domains\Services\Webhooks\WebhookHandler::class,
-                'process_webhook_job' => \App\Domains\Services\Webhooks\Jobs\DeliveryWebhookJob::class,
+                'webhook_model' => \Domain\Services\Webhooks\WebhookHandler::class,
+                'process_webhook_job' => \Domain\Services\Webhooks\Jobs\DeliveryWebhookJob::class,
             ],
         ],
 ];

@@ -1,21 +1,21 @@
 <?php
 
-use App\Domains\Cart\Services\Cart;
-use App\Domains\Delivery\Dispatchers\CustomVendorShipping;
-use App\Domains\Delivery\Dispatchers\FileDelivery;
-use App\Domains\Delivery\Dispatchers\SwooveShipping;
-use App\Domains\Delivery\Mappers\SwooveMapper;
-use App\Domains\Delivery\Mappers\TracktryMapper;
-use App\Domains\Orders\Checkouts\Services\CheckoutService;
-use App\Domains\Payments\Gateways\CashOnDelivery;
-use App\Domains\Payments\Gateways\Flutterwave;
-use App\Domains\Payouts\Services\FlutterwavePayoutService;
-use App\Domains\Services\Notifications\Types\Sms\Providers\Arksel as ArkselSms;
-use App\Domains\Services\Notifications\Types\Sms\Providers\Mnotify as MnotifySms;
-use App\Domains\Services\Notifications\Types\Voice\Providers\Arksel as ArkselVoice;
-use App\Domains\Tracking\DeliveryServices\FilesTracking;
-use App\Domains\Tracking\DeliveryServices\HostedTracking;
-use App\Domains\Tracking\DeliveryServices\SwooveTracking;
+use Domain\Cart\Cart;
+use Domain\Delivery\Dispatchers\CustomVendorShipping;
+use Domain\Delivery\Dispatchers\FileDelivery;
+use Domain\Delivery\Dispatchers\SwooveShipping;
+use Domain\Delivery\Mappers\SwooveMapper;
+use Domain\Delivery\Mappers\TracktryMapper;
+use Domain\Orders\Checkouts\Services\CheckoutService;
+use Domain\Payments\Gateways\CashOnDelivery;
+use Domain\Payments\Gateways\Flutterwave;
+use Domain\Payouts\Services\FlutterwavePayoutService;
+use Domain\Services\Notifications\Types\Sms\Providers\Arksel as ArkselSms;
+use Domain\Services\Notifications\Types\Sms\Providers\Mnotify as MnotifySms;
+use Domain\Services\Notifications\Types\Voice\Providers\Arksel as ArkselVoice;
+use Domain\Tracking\DeliveryServices\FilesTracking;
+use Domain\Tracking\DeliveryServices\HostedTracking;
+use Domain\Tracking\DeliveryServices\SwooveTracking;
 
 /*
 |--------------------------------------------------------------------------

@@ -2,7 +2,7 @@
 
 namespace App\Core\Providers;
 
-use App\Domains\Products\Attributes\Resource\AttributeResource;
+use Domain\Products\Attributes\Resource\AttributeResource;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
@@ -32,11 +32,11 @@ class AppServiceProvider extends ServiceProvider
     {
         Relation::morphMap([
 
-            'Product' => 'App\Domains\Products\Product\Models\Product',
-            'Variation' => 'App\Domains\Products\Product\Models\ProductVariation',
-            'User' => 'App\Domains\User\User',
-            'Sku' => 'App\Domains\Products\Skus\Model\Sku',
-            'Visitor' => 'App\Domains\User\Visitor',
+            'Product' => 'Domain\Products\Product\Product',
+            'Variation' => 'Domain\Products\Product\ProductVariation',
+            'User' => 'Domain\User\User',
+            'Sku' => 'Domain\Products\Skus\Sku',
+            'Visitor' => 'Domain\User\Visitor',
         ]);
 
         AttributeResource::withoutWrapping();

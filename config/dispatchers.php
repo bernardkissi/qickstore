@@ -1,8 +1,8 @@
 <?php
 
-use App\Domains\Delivery\Dispatchers\CustomVendorShipping;
-use App\Domains\Delivery\Dispatchers\FileDelivery;
-use App\Domains\Delivery\Dispatchers\SwooveShipping;
+use Domain\Delivery\Dispatchers\CustomVendorShipping;
+use Domain\Delivery\Dispatchers\FileDelivery;
+use Domain\Delivery\Dispatchers\SwooveShipping;
 
 return [
 

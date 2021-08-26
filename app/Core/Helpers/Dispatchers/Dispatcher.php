@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Core\Helpers\Dispatchers;
 
-use Illuminate\Database\Eloquent\Model;
-
 abstract class Dispatcher
 {
     /**

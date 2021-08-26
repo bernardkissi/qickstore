@@ -2,9 +2,9 @@
 
 namespace App\Core\Providers;
 
-use App\Domains\Cart\Contracts\CartContract;
-use App\Domains\Cart\Services\Cart;
 use App\Domains\User\Visitor;
+use Domain\Cart\Cart;
+use Domain\Cart\Contracts\CartContract;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 

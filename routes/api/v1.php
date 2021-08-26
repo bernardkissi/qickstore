@@ -2,7 +2,9 @@
 
 namespace App;
 
-use App\Domains\Orders\Model\Order;
+use Domain\Orders\Order;
+use Domain\Products\Product\Product;
+use Domain\Products\Product\ProductVariation;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Facades\Route;
 
@@ -25,4 +27,6 @@ Route::post('/orders/{order}', function (Order $order) {
         ]);
     }]);
     return $order;
+
+    //return 'hellow we are about to work';
 });

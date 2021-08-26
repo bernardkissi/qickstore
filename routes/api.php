@@ -2,33 +2,55 @@
 
 namespace App;
 
+use App\Core\Helpers\Transitions\MapState;
 use App\Domains\Cart\Actions\CartActions;
-use App\Domains\Cart\Services\Cart;
 
-use App\Domains\Delivery\Facade\Delivery;
+use App\Domains\Cart\Services\Cart;
+use App\Domains\Delivery\Actions\ShippingProviderAction;
+use App\Domains\Delivery\Dispatchers\CustomVendorShipping;
+use App\Domains\Delivery\Dispatchers\DispatchOrder;
+use App\Domains\Delivery\Dispatchers\HostedDelivery;
 use App\Domains\Delivery\Mappers\SwooveMapper;
+use App\Domains\Delivery\Model\Delivery;
+use App\Domains\Delivery\Model\ShippingProvider;
+use App\Domains\Delivery\Notifications\ReminderVendorOfUpdateNotification;
+use App\Domains\Delivery\Notifications\SendFileLinkToEmailNotification;
+use App\Domains\Delivery\Resource\DueDeliveryUpdateResource;
+use App\Domains\Delivery\Services\DeliveryCheckers\VendorDeliveryChecker;
+use App\Domains\Delivery\Webhooks\Signatures\SwooveSign;
+use App\Domains\Delivery\Webhooks\Signatures\TracktrySign;
+
 use App\Domains\Orders\Actions\OrderActions;
+
 use App\Domains\Orders\Checkouts\Contract\CheckoutableContract;
 use App\Domains\Orders\Checkouts\Facade\Checkout;
-
 use App\Domains\Orders\Model\Order;
-
 use App\Domains\Orders\Model\OrderStatus;
+use App\Domains\Orders\Resource\OrderDeliveryResource;
+use App\Domains\Orders\Resource\OrderResource;
 use App\Domains\Orders\Resource\OrderStatusResource;
 use App\Domains\Payments\Facade\Payment;
 use App\Domains\Payouts\Facade\Payout;
 use App\Domains\Products\Product\Actions\ProductActions;
 use App\Domains\Products\Product\Models\Product;
+use App\Domains\Products\Product\Models\ProductVariation;
 use App\Domains\Products\Product\Resource\ProductResource;
+use App\Domains\Products\Skus\Model\Sku;
+use App\Domains\Services\Notifications\Channels\SmsChannel;
 use App\Domains\Services\Notifications\Types\Sms\Facade\Sms;
 use App\Domains\Services\Notifications\Types\Voice\Facade\Voice;
 use App\Domains\Tracking\Contract\TrackableContract;
 use App\Domains\User\User;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
+use Spatie\MediaLibrary\Support\MediaStream;
+use Spatie\WebhookClient\Models\WebhookCall;
+use Spatie\WebhookClient\WebhookConfig;
 
 /*
 |--------------------------------------------------------------------------
@@ -189,9 +211,93 @@ Route::patch('order_history', function () {
 });
 
 
-Route::get('maps', function () {
+Route::post('webhook', function (Request $request) {
+    return [ $request->all(), $request->input()];
+});
 
-    $results = (new SwooveMapper())->map('Ended');
-    return $results;
+Route::get('signatures', function (Request $request, WebhookConfig $config) {
+    return TracktrySign::sign($request, $config);
+});
 
+Route::get('mappers', function (Request $request) {
+    //return MapState::map('Shipped');
+
+    // $payload = DueDeliveryUpdateResource::collection(Delivery::with('order')->updateDue()->get())
+    // ->groupBy('service')->toArray();
+    // return VendorDeliveryChecker::getUpdates($payload['swoove']);
+
+    $order = Order::where('id', 11)->first();
+    return $order->products->count();
+});
+
+
+Route::patch('updateState', function (Request $request) {
+    // dd('fssdf');
+    $delivery = Delivery::where('id', 1)->first();
+    $delivery->updateDeliveryStatus('pickedup');
+});
+
+Route::post('mail', function (Request $request) {
+    // Notification::route(SmsChannel::class, '0543063709')
+    //         ->notify(new ReminderVendorOfUpdateNotification($request->all()));
+    $order = Order::where('id', 3)->first();
+
+    Notification::route('mail', 'bernardkissi18@gmail.com')
+            ->notify(new SendFileLinkToEmailNotification($order));
+});
+
+Route::get('download/{order}', function (Request $request, Order $order) {
+    if (! $request->hasValidSignature()) {
+        abort(401);
+    }
+    $files = $order->load(['products.media']);
+
+    if ($files->count()  > 1) {
+        $downloads = $files->products->map(function ($file) {
+            return $file->getMedia('products');
+        })->unique();
+        return MediaStream::create('download.zip')->addMedia(...$downloads);
+    }
+    return $files->products[0]->getMedia('products')->first();
+})->name('download');
+
+
+Route::post('addMedia', function (Request $request) {
+    $order = Sku::where('id', 6)->first();
+
+    $order->addMediaFromRequest('image')
+            ->toMediaCollection('products');
+});
+
+Route::post('create/carriers', function (Request $request) {
+    return (new ShippingProviderAction())->createShippingService($request->all());
+});
+
+Route::get('carriers', function (Request $request) {
+    return (new ShippingProviderAction())->getShippingServices();
+});
+
+
+Route::post('delivery/{order}', function (Order $order) {
+    //return (new CustomVendorShipping())->dispatch($order);
+});
+
+
+Route::get('/multipleDelivery', function (Request $request) {
+    $delivery = Delivery::where('id', 3)->first();
+    $order = $delivery->order;
+
+    return $order->transitionOrderState($delivery);
+});
+
+
+Route::post('/orders/{order}', function (Order $order) {
+    $order->load(['orderable','products', 'products.skuable' => function (MorphTo $morphTo) {
+        $morphTo->morphWith([
+            Product::class,
+            ProductVariation::class => ['product:id,name'],
+        ]);
+    }]);
+    return $order;
+    //(new DispatchOrder())->dispatch($order);
 });
