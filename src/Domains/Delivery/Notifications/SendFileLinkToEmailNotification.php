@@ -3,7 +3,9 @@
 namespace Domain\Delivery\Notifications;
 
 use Domain\Services\Notifications\Channels\SmsChannel;
+use Domain\Services\Notifications\Channels\VoiceChannel;
 use Domain\Services\Notifications\Types\Sms\SmsMessage;
+use Domain\Services\Notifications\Types\Voice\VoiceMessage;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -34,7 +36,6 @@ class SendFileLinkToEmailNotification extends Notification implements ShouldQueu
         return [SmsChannel::class, 'mail'];
     }
 
-
     /**
     * Get the mail representation of the notification.
     *
@@ -61,8 +62,8 @@ class SendFileLinkToEmailNotification extends Notification implements ShouldQueu
         return (new SmsMessage)
                 ->from('Techshops')
                 ->to('0543063709')
-                ->line('Please an order has been successfully made ')
-                ->line(' proceed to make delivery');
+                ->line('Please an order has been successfully made')
+                ->line("click here to download $this->fileUrl");
     }
 
     /**

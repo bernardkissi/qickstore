@@ -5,17 +5,19 @@ namespace Domain\Delivery\Dispatchers;
 use App\Core\Helpers\Dispatchers\Dispatcher;
 use Domain\Services\Notifications\Channels\SmsChannel;
 use Domain\Delivery\Notifications\PromptVendorForDeliveryNotification;
+use Domain\Delivery\Traits\CanCreateDelivery;
 use Illuminate\Support\Facades\Notification;
 
 class CustomVendorShipping extends Dispatcher
 {
+    use CanCreateDelivery;
 
-     /**
-     * Class constructor
-     *
-     * @param array $order
-     * @param string $fileUrl
-     */
+    /**
+    * Class constructor
+    *
+    * @param array $order
+    * @param string $fileUrl
+    */
     public function __construct(
         public array $order
     ) {
@@ -39,7 +41,9 @@ class CustomVendorShipping extends Dispatcher
     public function dispatch(): void
     {
         Notification::route('mail', $this->order['customer_email'])
-            ->route(SmsChannel::class, '0543063709')
+            ->route(VoiceChannel::class, '0543063709')
             ->notify(new PromptVendorForDeliveryNotification($this->order));
+
+        $this->createDelivery($this->order);
     }
 }

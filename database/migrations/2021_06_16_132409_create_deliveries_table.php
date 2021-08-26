@@ -26,7 +26,7 @@ class CreateDeliveriesTable extends Migration
             $table->string('download_link')->nullable();
             $table->text('error')->nullable();
             $table->json('agent_details')->nullable();
-            $table->string('vehicle')->nullable();
+            $table->json('vehicle')->nullable();
             $table->dateTime('completed_at')->nullable();
             $table->dateTime('failed_at')->nullable();
             $table->timestamps();

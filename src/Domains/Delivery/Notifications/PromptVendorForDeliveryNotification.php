@@ -4,13 +4,15 @@ namespace Domain\Delivery\Notifications;
 
 use Domain\Orders\Order;
 use Domain\Services\Notifications\Channels\SmsChannel;
+use Domain\Services\Notifications\Channels\VoiceChannel;
 use Domain\Services\Notifications\Types\Sms\SmsMessage;
+use Domain\Services\Notifications\Types\Voice\VoiceMessage;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class PromptVendorForDeliveryNotification extends Notification
+class PromptVendorForDeliveryNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -32,23 +34,9 @@ class PromptVendorForDeliveryNotification extends Notification
      */
     public function via($notifiable)
     {
-        return [SmsChannel::class, 'mail'];
+        return [SmsChannel::class, VoiceChannel::class, 'mail'];
     }
 
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return SmsMessage
-     */
-    public function toSms($notifiable)
-    {
-        return (new SmsMessage)
-                ->from('Techshops')
-                ->to('0552377591')
-                ->line('Please an order has been successfully made')
-                ->line('proceed to make delivery');
-    }
 
     /**
      * Get the mail representation of the notification.
@@ -64,6 +52,21 @@ class PromptVendorForDeliveryNotification extends Notification
                 ->line('Please proceed to make delivery.')
                 ->action('View Order', 'http://localhost:8000')
                 ->line('Thank you for using qickshops!');
+    }
+
+    /**
+    * Get the mail representation of the notification.
+    *
+    * @param  mixed  $notifiable
+    * @return SmsMessage
+    */
+    public function toSms($notifiable)
+    {
+        return (new SmsMessage)
+                ->from('Techshops')
+                ->to('0543063709')
+                ->line('Please an order has been successfully made')
+                ->line('proceed to make delivery');
     }
 
     /**

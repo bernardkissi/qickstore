@@ -15,7 +15,7 @@ trait CanCreateDelivery
             'service' => $payload['service'],
             'order_id' => $payload['order_id'],
             'reference' => Str::uuid(),
-            'tracking_code' => Str::random(10),
+            'tracking_code' => Str::random(6),
             'instructions' => $payload['instructions'],
             'download_link' => $payload['download_link'] ?? null,
             'provider_code' => $payload['provider_code'] ?? null,
