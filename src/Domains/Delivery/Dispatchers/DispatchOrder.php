@@ -22,17 +22,7 @@ class DispatchOrder
      */
     public function dispatch(Order $order): void
     {
-        $order->load(['orderable','products', 'products.skuable' => function (MorphTo $morphTo) {
-            $morphTo->morphWith([
-                Product::class,
-                ProductVariation::class => ['product:id,name'],
-            ]);
-        }]);
-
-        $groups = $order['products']->groupBy(function ($item) {
-            return $item['skuable']['type'];
-        });
-
+        $groups = $order->groupItemsByDelivery();
         $num_of_groups = $groups->count();
 
         $groups->map(function ($item, $key) use ($order, $num_of_groups) {
