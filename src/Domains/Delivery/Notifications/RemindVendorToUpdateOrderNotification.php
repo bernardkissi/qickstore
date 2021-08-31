@@ -2,12 +2,12 @@
 
 namespace Domain\Delivery\Notifications;
 
-use Domain\Services\Notifications\Channels\SmsChannel;
-use Domain\Services\Notifications\Types\Sms\SmsMessage;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Service\Notifications\Channels\SmsChannel;
+use Service\Notifications\Types\Sms\SmsMessage;
 
 class RemindVendorToUpdateOrderNotification extends Notification
 {

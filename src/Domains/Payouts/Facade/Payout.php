@@ -2,7 +2,7 @@
 
 namespace Domain\Payouts\Facade;
 
-use App\Domains\Payouts\Contract\PayableContract;
+use Domain\Payouts\Contract\PayableContract;
 use Illuminate\Support\Facades\Facade;
 
 class Payout extends Facade

@@ -19,6 +19,7 @@ class CreateDeliveriesTable extends Migration
             $table->foreignId('order_id')->unique()->unsigned()->index()->constrained('orders');
             $table->string('state');
             $table->string('reference');
+            $table->string('batch_number')->nullable();
             $table->string('tracking_code')->unique();
             $table->string('provider_code')->nullable();
             $table->string('estimate_id')->nullable();

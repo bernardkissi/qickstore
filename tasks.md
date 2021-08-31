@@ -93,5 +93,24 @@ this way image content will not be read from your disk more than once.
         //     $filtered = $filtered->reject(fn ($value) => $value == 'cancelled');
         // }
 
-
 //TODO: inventory triggers
+
+// /\*_
+// _ Create order related delivery
+// _
+// _ @param array $payload
+    //  * @return void
+    //  */
+    // public function createDelivery(array $payload): void
+    // {
+    //     $this->delivery()->create($payload);
+// }
+
+1. we create our exception class to handle errors
+2. we report through slack and use sentry for reporting app on production
+3. use when and unless to make code more readable
+4. use whereRelation instead of whereHas
+5. keep code shorter and performant
+6. design patterns are highly recommended & solid principles
+7. Discuss on using Auto routes to handle routing
+8.

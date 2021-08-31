@@ -3,14 +3,14 @@
 namespace Domain\Delivery\Notifications;
 
 use Domain\Orders\Order;
-use Domain\Services\Notifications\Channels\SmsChannel;
-use Domain\Services\Notifications\Channels\VoiceChannel;
-use Domain\Services\Notifications\Types\Sms\SmsMessage;
 use Domain\Services\Notifications\Types\Voice\VoiceMessage;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Service\Notifications\Channels\SmsChannel;
+use Service\Notifications\Channels\VoiceChannel;
+use Service\Notifications\Types\Sms\SmsMessage;
 
 class PromptVendorForDeliveryNotification extends Notification implements ShouldQueue
 {

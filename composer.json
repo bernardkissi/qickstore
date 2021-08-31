@@ -28,7 +28,9 @@
         "spatie/laravel-medialibrary": "^9.0.0",
         "spatie/laravel-model-states": "^2.1",
         "spatie/laravel-webhook-client": "^2.7",
-        "spatie/laravel-webhook-server": "^1.13"
+        "spatie/laravel-webhook-server": "^1.13",
+        "stancl/tenancy": "^3.4",
+        "unicodeveloper/laravel-paystack": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",
@@ -51,7 +53,9 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
-            "Domain\\": "src/Domains/"
+            "Domain\\": "src/Domains/",
+            "Integration\\": "src/Integrations/",
+            "Service\\": "src/Services/"
         }
     },
     "autoload-dev": {

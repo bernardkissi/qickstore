@@ -17,6 +17,8 @@ class CreatePaymentsTable extends Migration
             $table->id();
             $table->foreignId('order_id')->unsigned()->index()->constrained('orders');
             $table->string('tx_ref');
+            $table->string('auth_code')->nullable();
+            $table->string('customer_code')->nullable();
             $table->string('card_type')->nullable();
             $table->string('subaccount')->nullable();
             $table->string('provider_reference')->nullable();

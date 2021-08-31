@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Domain\Delivery\Webhooks\Signatures;
 
-use App\Core\Helpers\Signatures\Signature;
+use App\Helpers\Signatures\Signature;
 use Illuminate\Http\Request;
 use Spatie\WebhookClient\WebhookConfig;
 

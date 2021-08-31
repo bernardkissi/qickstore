@@ -2,7 +2,7 @@
 
 namespace Domain\Delivery\Dispatchers;
 
-use App\Core\Helpers\Dispatchers\Dispatcher;
+use App\Helpers\Dispatchers\Dispatcher;
 use Domain\Delivery\Notifications\SendFileLinkToEmailNotification;
 use Domain\Delivery\Traits\CanCreateDelivery;
 use Illuminate\Support\Facades\Notification;
@@ -42,8 +42,8 @@ class FileDelivery extends Dispatcher
     {
         $url = URL::signedRoute('api:v1:download', ['order' => $this->order['order_id']]);
 
-        Notification::route('mail', $this->order['customer_email'])
-            ->notify(new SendFileLinkToEmailNotification($url));
+        // Notification::route('mail', $this->order['customer_email'])
+        //     ->notify(new SendFileLinkToEmailNotification($url));
 
         $payload = array_merge($this->order, ['download_link' => $url]);
         $this->createDelivery($payload);

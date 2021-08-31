@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Domain\Delivery\Webhooks\Actions;
 
-use App\Core\Helpers\Transitions\MapState;
+use App\Helpers\Transitions\MapState;
 use Domain\Delivery\Delivery;
 use Domain\Services\Webhooks\WebhookAction;
 

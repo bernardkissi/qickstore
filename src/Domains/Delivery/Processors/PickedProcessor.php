@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace App\Domains\Delivery\Processors;
 
-use App\Core\Helpers\Processor\Processor;
+use App\Helpers\Processor\Processor;
 use Domain\Delivery\Delivery;
 
 class PickedProcessor extends Processor
 {
-     /**
-     * Class constructor
-     *
-     * @var Order $order
-     */
+    /**
+    * Class constructor
+    *
+    * @var Order $order
+    */
     public function __construct(public Delivery $delivery)
     {
     }

@@ -3,8 +3,8 @@
 namespace Domain\Payments\Gateways;
 
 use Domain\APIs\Flutterwave\Payment\MakePayment;
-use Domain\APIs\Flutterwave\Payment\PaymentRequest;
 use Domain\Payments\Contract\PaymentableContract;
+use Integration\Flutterwave\Payment\PaymentRequest;
 
 class Flutterwave implements PaymentableContract
 {

@@ -169,20 +169,20 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Core\Providers\AppServiceProvider::class,
-        App\Core\Providers\AuthServiceProvider::class,
+        App\Providers\AppServiceProvider::class,
+        App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
-        App\Core\Providers\EventServiceProvider::class,
-        App\Core\Providers\RouteServiceProvider::class,
-        App\Core\Providers\CartServiceProvider::class,
-        App\Core\Providers\CheckoutServiceProvider::class,
-        App\Core\Providers\PaymentServiceProvider::class,
-        App\Core\Providers\DeliveryServiceProvider::class,
-        App\Core\Providers\TrackingServiceProvider::class,
-        App\Core\Providers\PayoutServiceProvider::class,
-        App\Core\Providers\MessageServiceProvider::class,
-        App\Core\Providers\VoiceServiceProvider::class,
-        App\Core\Providers\TransitionMapServiceProvider::class,
+        App\Providers\EventServiceProvider::class,
+        App\Providers\RouteServiceProvider::class,
+        App\Providers\CartServiceProvider::class,
+        App\Providers\CheckoutServiceProvider::class,
+        App\Providers\PaymentServiceProvider::class,
+        App\Providers\DeliveryServiceProvider::class,
+        App\Providers\TrackingServiceProvider::class,
+        App\Providers\PayoutServiceProvider::class,
+        App\Providers\MessageServiceProvider::class,
+        App\Providers\VoiceServiceProvider::class,
+        App\Providers\TransitionMapServiceProvider::class,
     ],
 
     /*
@@ -242,7 +242,7 @@ return [
         'Checkout' => Domain\Orders\Checkouts\Facade\Checkout::class,
         'Sms' => Domain\Services\Notifications\Types\Sms\Facade\Sms::class,
         'Voice' => Domain\Services\Notifications\Types\Voice\Facade\Voice::class,
-        'MapState' => App\Core\Helpers\Transitions\MapState::class,
+        'MapState' => App\Helpers\Transitions\MapState::class,
 
     ],
 

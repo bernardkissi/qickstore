@@ -2,8 +2,8 @@
 
 namespace Domain\User;
 
-use App\Domains\Orders\Model\Order;
-use App\Domains\Products\Skus\Model\Sku;
+use Domain\Orders\Order;
+use Domain\Products\Skus\Sku;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;

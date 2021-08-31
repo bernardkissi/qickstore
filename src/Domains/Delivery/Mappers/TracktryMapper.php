@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Domain\Delivery\Mappers;
 
-use App\Core\Helpers\Transitions\TransitionMapper;
+use App\Helpers\Transitions\TransitionMapper;
 use Domain\Delivery\States\Assigned;
 use Domain\Delivery\States\Delivering;
 use Domain\Delivery\States\PickedUp;

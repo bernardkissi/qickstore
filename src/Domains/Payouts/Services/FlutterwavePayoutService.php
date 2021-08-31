@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Domain\Payouts\Services;
 
 use Domain\APIs\Flutterwave\Payouts\PayoutRequest;
-use Domain\APIs\Flutterwave\Payouts\SendPayout;
 use Domain\Payouts\Contract\PayableContract;
 use Domain\Payouts\Events\PayoutCompleted;
 use Domain\Payouts\Payout;
+use Integration\Flutterwave\Payouts\SendPayout;
 use Throwable;
 
 class FlutterwavePayoutService implements PayableContract

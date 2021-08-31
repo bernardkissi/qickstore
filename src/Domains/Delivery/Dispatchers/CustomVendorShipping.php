@@ -2,10 +2,10 @@
 
 namespace Domain\Delivery\Dispatchers;
 
-use App\Core\Helpers\Dispatchers\Dispatcher;
-use Domain\Services\Notifications\Channels\SmsChannel;
+use App\Helpers\Dispatchers\Dispatcher;
 use Domain\Delivery\Notifications\PromptVendorForDeliveryNotification;
 use Domain\Delivery\Traits\CanCreateDelivery;
+use Domain\Services\Notifications\Channels\SmsChannel;
 use Illuminate\Support\Facades\Notification;
 
 class CustomVendorShipping extends Dispatcher

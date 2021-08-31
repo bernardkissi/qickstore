@@ -19,13 +19,7 @@ class OrderActions
         }
         $order = Checkout::createOrder($data);
 
-        $order->status()->create([]);
-
-        //// $payment = Payment::charge($data);
-
         event(new OrderCreatedEvent($order));
-
-        ////dd($payment);
     }
 
 

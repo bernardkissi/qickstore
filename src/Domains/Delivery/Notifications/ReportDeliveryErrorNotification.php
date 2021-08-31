@@ -2,11 +2,11 @@
 
 namespace Domain\Delivery\Notifications;
 
-use Domain\Services\Notifications\Types\Sms\SmsMessage;
-use Domain\Services\Notifications\Channels\SmsChannel;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
+use Service\Notifications\Channels\SmsChannel;
+use Service\Notifications\Types\Sms\SmsMessage;
 
 class ReportDeliveryErrorNotification extends Notification
 {

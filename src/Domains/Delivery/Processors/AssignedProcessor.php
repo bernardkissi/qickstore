@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Domain\Delivery\Processors;
 
-use App\Core\Helpers\Processor\Processor;
+use App\Helpers\Processor\Processor;
 use Domain\Delivery\Delivery;
 
 class AssignedProcessor extends Processor

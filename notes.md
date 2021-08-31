@@ -421,3 +421,164 @@ $dtOttawa->diffInHours($dtVancouver);
     - if not dont transition
 
     - if single transition with state.
+
+### SUBSCRIPTION CREATED
+
+```
+{
+2  "status": true,
+3  "message": "Subscription successfully created",
+4  "data": {
+5      "customer": 24259516,
+6      "plan": 49122,
+7      "integration": 428626,
+8      "domain": "test",
+9      "start": 1590152172,
+10      "status": "active",
+11      "quantity": 1,
+12      "amount": 500000,
+13      "authorization": {
+14        "authorization_code": "AUTH_pmx3mgawyd",
+15        "bin": "408408",
+16        "last4": "4081",
+17        "exp_month": "12",
+18        "exp_year": "2020",
+19        "channel": "card",
+20        "card_type": "visa DEBIT",
+21        "bank": "Test Bank",
+22        "country_code": "NG",
+23        "brand": "visa",
+24        "reusable": true,
+25        "signature": "SIG_2Gvc6pNuzJmj4TCchXfp",
+26        "account_name": null
+27      },
+28      "invoice_limit": 0,
+29      "subscription_code": "SUB_i6wmhzi0lu95oz7",
+30      "email_token": "n27dvho4kjsf1sq",
+31      "id": 161872,
+32      "createdAt": "2020-05-22T12:56:12.514Z",
+33      "updatedAt": "2020-05-22T12:56:12.514Z",
+34      "cron_expression": "0 0 22 * *",
+35      "next_payment_date": "2020-06-22T00:00:00.000Z"
+36  }
+37}
+
+    EVENT HOOK FOR SUBSCRIPTION CREATED
+
+    {
+2  "event": "subscription.create",
+3  "data": {
+4    "domain": "test",
+5    "status": "active",
+6    "subscription_code": "SUB_vsyqdmlzble3uii",
+7    "amount": 50000,
+8    "cron_expression": "0 0 28 * *",
+9    "next_payment_date": "2016-05-19T07:00:00.000Z",
+10    "open_invoice": null,
+11    "createdAt": "2016-03-20T00:23:24.000Z",
+12    "plan": {
+13      "name": "Monthly retainer",
+14      "plan_code": "PLN_gx2wn530m0i3w3m",
+15      "description": null,
+16      "amount": 50000,
+17      "interval": "monthly",
+18      "send_invoices": true,
+19      "send_sms": true,
+20      "currency": "NGN"
+21    },
+22    "authorization": {
+23      "authorization_code": "AUTH_96xphygz",
+24      "bin": "539983",
+25      "last4": "7357",
+26      "exp_month": "10",
+27      "exp_year": "2017",
+28      "card_type": "MASTERCARD DEBIT",
+29      "bank": "GTBANK",
+30      "country_code": "NG",
+31      "brand": "MASTERCARD",
+32      "account_name": "BoJack Horseman"
+33    },
+34    "customer": {
+35      "first_name": "BoJack",
+36      "last_name": "Horseman",
+37      "email": "bojack@horsinaround.com",
+38      "customer_code": "CUS_xnxdt6s1zg1f4nx",
+39      "phone": "",
+40      "metadata": {},
+41      "risk_action": "default"
+42    },
+43    "created_at": "2016-10-01T10:59:59.000Z"
+44  }
+45}
+
+
+```
+
+### SUBSCRIPTION CHARGE PAYMENT
+
+```
+{
+2  "event": "charge.success",
+3  "data": {
+4    "id": 895091250,
+5    "domain": "test",
+6    "status": "success",
+7    "reference": "683e6787-7645-557a-a270-c9035c3a2b65",
+8    "amount": 110000,
+9    "message": null,
+10    "gateway_response": "Approved",
+11    "paid_at": "2020-11-23T11:00:09.000Z",
+12    "created_at": "2020-11-23T11:00:03.000Z",
+13    "channel": "card",
+14    "currency": "NGN",
+15    "ip_address": null,
+16    "metadata": { "invoice_action": "create" },
+17    "log": null,
+18    "fees": 1650,
+19    "fees_split": null,
+20    "authorization": {
+21      "authorization_code": "AUTH_v56svuyn23",
+22      "bin": "408408",
+23      "last4": "4081",
+24      "exp_month": "12",
+25      "exp_year": "2020",
+26      "channel": "card",
+27      "card_type": "visa ",
+28      "bank": "TEST BANK",
+29      "country_code": "NG",
+30      "brand": "visa",
+31      "reusable": true,
+32      "signature": "SIG_H8F4hDXIARayPS41IUwG",
+33      "account_name": null,
+34      "receiver_bank_account_number": null,
+35      "receiver_bank": null
+36    },
+37    "customer": {
+38      "id": 31352593,
+39      "first_name": "Test",
+40      "last_name": "Two",
+41      "email": "test2@live.com",
+42      "customer_code": "CUS_mfkew13owtwcmb2",
+43      "phone": "",
+44      "metadata": null,
+45      "risk_action": "default",
+46      "international_format_phone": null
+47    },
+48    "plan": {
+49      "id": 60905,
+50      "name": "10% off first month",
+51      "plan_code": "PLN_a5vr5skxg72f4lr",
+52      "description": null,
+53      "amount": 110000,
+54      "interval": "monthly",
+55      "send_invoices": true,
+56      "send_sms": true,
+57      "currency": "NGN"
+58    },
+59    "subaccount": {},
+60    "split": {},
+61    "order_id": null,
+62    "paidAt": "2020-11-23T11:00:09.000Z",
+63    "requested_amount": 110000
+64  }
+```

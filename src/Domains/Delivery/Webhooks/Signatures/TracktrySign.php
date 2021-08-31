@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Domains\Delivery\Webhooks\Signatures;
+namespace Domain\Delivery\Webhooks\Signatures;
 
-use App\Core\Helpers\Signatures\Signature;
+use App\Helpers\Signatures\Signature;
 use Illuminate\Http\Request;
 use Spatie\WebhookClient\Exceptions\WebhookFailed;
 use Spatie\WebhookClient\WebhookConfig;

@@ -2,19 +2,19 @@
 
 namespace Domain\Delivery\Dispatchers;
 
-use App\Core\Helpers\Dispatchers\Dispatcher;
-use App\Domains\Orders\Model\Order;
+use App\Helpers\Dispatchers\Dispatcher;
 use Domain\APIs\Swoove\Delivery\CreateDelivery;
-use Domain\APIs\Swoove\Delivery\DeliveryRequest;
+use Domain\Delivery\Traits\CanCreateDelivery;
+use Integration\Swoove\Delivery\DeliveryRequest;
 
 class SwooveShipping extends Dispatcher
 {
-    use DeliveryRequest;
+    use DeliveryRequest,CanCreateDelivery;
 
     /**
      * Class constructor
      *
-     * @param Order $order
+     * @param array $order
      * @param string $fileUrl
      */
     public function __construct(
@@ -39,9 +39,14 @@ class SwooveShipping extends Dispatcher
      */
     public function dispatch(): void
     {
-        CreateDelivery::build()
-        ->withData(static::data($this->order))
-        ->send()
-        ->json();
+        $this->createDelivery($this->order);
+
+        // $some = CreateDelivery::build()
+        // ->withData(static::data($this->order))
+        // ->send()
+        // ->json();
+
+        //send vendor notification after delivery is succesfully created
+        // customer will be notified by email/sms.
     }
 }

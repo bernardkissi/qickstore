@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Domain\Orders\Processors;
 
-use App\Core\Helpers\Processor\Processor;
+use App\Helpers\Processor\Processor;
+
 use Domain\Orders\Order;
 
 class FailedProcessor extends Processor
