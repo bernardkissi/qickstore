@@ -2,7 +2,7 @@
 
 namespace Service\Notifications\Types\Sms;
 
-use Domain\Services\Notifications\Types\Sms\Facade\Sms;
+use Service\Notifications\Types\Sms\Facade\Sms;
 
 class SmsMessage
 {

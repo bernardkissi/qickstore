@@ -3,9 +3,9 @@
 namespace App\Providers;
 
 use App\Traits\ResolveTrait;
-use Domain\Services\Notifications\Types\Sms\SmsContract;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
+use Service\Notifications\Types\Sms\SmsContract;
 
 class MessageServiceProvider extends ServiceProvider implements DeferrableProvider
 {

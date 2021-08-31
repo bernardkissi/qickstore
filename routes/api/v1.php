@@ -32,9 +32,9 @@ Route::post('/orders/{order}', function (Order $order) {
         ]);
     }]);
 
-    return $order;
-    // Dispatcher::dispatch($order);
-})->middleware('treblle');
+    //return $order;
+    Dispatcher::dispatch($order);
+});
 
 
 Route::get('download/{order}', function (Request $request, Order $order) {

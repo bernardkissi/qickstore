@@ -240,8 +240,8 @@ return [
         'Dispatch' => Domain\Delivery\Dispatchers\Dispatcher::class,
         'Cart' => Domain\Cart\Facade\Cart::class,
         'Checkout' => Domain\Orders\Checkouts\Facade\Checkout::class,
-        'Sms' => Domain\Services\Notifications\Types\Sms\Facade\Sms::class,
-        'Voice' => Domain\Services\Notifications\Types\Voice\Facade\Voice::class,
+        'Sms' => Service\Notifications\Types\Sms\Facade\Sms::class,
+        'Voice' => Service\Notifications\Types\Sms\Facade\Voice::class,
         'MapState' => App\Helpers\Transitions\MapState::class,
 
     ],

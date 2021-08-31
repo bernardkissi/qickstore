@@ -2,7 +2,7 @@
 
 namespace Service\Notifications\Types\Voice;
 
-use Domain\Services\Notifications\Types\Voice\Facade\Voice;
+use Service\Notifications\Types\Voice\Facade\Voice;
 
 class VoiceMessage
 {

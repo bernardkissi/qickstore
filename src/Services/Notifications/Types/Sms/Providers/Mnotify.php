@@ -2,9 +2,9 @@
 
 namespace Domain\Services\Notifications\Types\Sms\Providers;
 
-use Domain\APIs\Mnotify\Sms\SendMnotifySms;
 use Domain\Messages\Dtos\MessageDto;
 use Domain\Services\Notifications\Types\Sms\SmsContract;
+use Integration\Mnotify\Sms\SendMnotifySms;
 
 class Mnotify implements SmsContract
 {

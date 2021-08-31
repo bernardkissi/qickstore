@@ -1,10 +1,10 @@
 <?php
 
-namespace Domain\Services\Notifications\Types\Sms\Providers;
+namespace Service\Notifications\Types\Sms\Providers;
 
-use Domain\APIs\Arksel\Sms\SendArkselSms;
 use Domain\Messages\Dtos\MessageDto;
-use Domain\Services\Notifications\Types\Sms\SmsContract;
+use Integration\Arksel\Sms\SendArkselSms;
+use Service\Notifications\Types\Sms\SmsContract;
 
 class Arksel implements SmsContract
 {

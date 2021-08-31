@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Service\Notifications\Types\Voice\Providers;
 
-use Domain\Services\Notifications\Types\Voice\VoiceContract;
 use Integration\Arksel\Voice\MakeArkselCall;
+use Service\Notifications\Types\Voice\VoiceContract;
 
 class Arksel implements VoiceContract
 {
