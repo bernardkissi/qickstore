@@ -12,7 +12,7 @@ use Domain\Payments\Gateways\Flutterwave;
 use Domain\Payouts\Services\FlutterwavePayoutService;
 use Service\Notifications\Types\Sms\Providers\Arksel as ArkselSms;
 use Service\Notifications\Types\Sms\Providers\Mnotify as MnotifySms;
-use Service\Notifications\Types\Sms\Providers\Arksel as ArkselVoice;
+use Service\Notifications\Types\Voice\Providers\Arksel as ArkselVoice;
 use Domain\Tracking\DeliveryServices\FilesTracking;
 use Domain\Tracking\DeliveryServices\HostedTracking;
 use Domain\Tracking\DeliveryServices\SwooveTracking;

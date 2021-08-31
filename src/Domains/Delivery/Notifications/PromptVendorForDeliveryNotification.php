@@ -3,7 +3,6 @@
 namespace Domain\Delivery\Notifications;
 
 use Domain\Orders\Order;
-use Domain\Services\Notifications\Types\Voice\VoiceMessage;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -11,6 +10,7 @@ use Illuminate\Notifications\Notification;
 use Service\Notifications\Channels\SmsChannel;
 use Service\Notifications\Channels\VoiceChannel;
 use Service\Notifications\Types\Sms\SmsMessage;
+use Service\Notifications\Types\Voice\VoiceMessage;
 
 class PromptVendorForDeliveryNotification extends Notification implements ShouldQueue
 {
@@ -67,6 +67,20 @@ class PromptVendorForDeliveryNotification extends Notification implements Should
                 ->to('0543063709')
                 ->line('Please an order has been successfully made')
                 ->line('proceed to make delivery');
+    }
+
+
+    /**
+     * Get the mail representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return \Illuminate\Notifications\Messages\MailMessage
+     */
+    public function toCall($notifiable)
+    {
+        return (new VoiceMessage)
+                    ->to('0543063709')
+                    ->audio('audio here');
     }
 
     /**
