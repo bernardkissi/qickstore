@@ -12,22 +12,22 @@ use Domain\Orders\Dtos\OrderData;
  *
  * @property string $currency
  * @property int $id
- * @property int $orderId
- * @property string $txRef
+ * @property string $reference
  * @property string|null $cardType
  * @property string|null $subaccount
- * @property string|null $providerReference
+ * @property string|null $transRef
  * @property string $status
  * @property int $amount
  * @property string $provider
- * @property string $channel
- * @property string $payment_options
+ * @property string $payment_methods
+ * @property array $channels
  * @property array $customization
  * @property array $subaccounts
  * @property array $customer
- * @property array $meta
  * @property string $redirect_url
- * @property OrderData $order
+ * @property bool $has_subscription
+ * @property int $invoice_limit
+ * @property array $order
  */
 class PaymentDto extends Dto
 {
@@ -37,22 +37,4 @@ class PaymentDto extends Dto
      * @var int
      */
     protected static $defaultFlags = PARTIAL | IGNORE_UNKNOWN_PROPERTIES;
-
-    /**
-     * Default values
-     *
-     * @var array
-     */
-    protected static $defaultValues = [
-
-        'currency' => 'GHS',
-        'payment_options' => 'mobilemoney,card,paypal',
-        'subaccounts' => [
-            [
-                'id' => 'RS_2F2994AA79A4EA872478C535F268A884',
-                'transaction_charge_type' => 'percentage',
-                'transaction_charge' => 0.09,
-            ],
-        ],
-    ];
 }

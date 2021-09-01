@@ -2,8 +2,8 @@
 
 namespace Domain\Payments\Gateways;
 
-use Domain\APIs\Flutterwave\Payment\MakePayment;
 use Domain\Payments\Contract\PaymentableContract;
+use Integration\Flutterwave\Payment\MakePayment;
 use Integration\Flutterwave\Payment\PaymentRequest;
 
 class Flutterwave implements PaymentableContract
@@ -24,7 +24,7 @@ class Flutterwave implements PaymentableContract
             ->json();
     }
 
-    public function track()
+    public function callback(): void
     {
     }
 }

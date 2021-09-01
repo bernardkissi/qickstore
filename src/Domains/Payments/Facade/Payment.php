@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domains\Payments\Facade;
+namespace Domain\Payments\Facade;
 
-use App\Domains\Payments\Contract\PaymentableContract;
+use Domain\Payments\Contract\PaymentableContract;
 use Illuminate\Support\Facades\Facade;
 
 class Payment extends Facade

@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Payments\Services;
+namespace Domain\Payments\Signatures;
 
 use Illuminate\Http\Request;
 use Spatie\WebhookClient\Exceptions\WebhookFailed;

@@ -16,6 +16,11 @@ interface PaymentableContract
      */
     public function charge(array $data): array;
 
-    //TODO: accepts payment reference, or provider id
-    public function track();
+    /**
+     * Returns a payload for making the request
+     *
+     * @param array $data
+     * @return array
+     */
+    public function callback(): void;
 }

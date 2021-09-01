@@ -20,11 +20,7 @@ class CashOnDelivery implements PaymentableContract
         return ['hello'];
     }
 
-    public function payout()
-    {
-    }
-
-    public function track()
+    public function callback(): void
     {
     }
 }
