@@ -27,28 +27,15 @@ class Cart implements CartContract
     protected array | null $delivery;
 
 
-    protected User | Visitor $customer;
-
     /**
      * Class Constructor
      *
      * @param User|Visitor $customer
      */
-    public function __construct()
+    public function __construct(public User | Visitor $customer)
     {
-        //$customer = request('visitor', auth()->user());
-
-        //dd(request('visitor', auth()->user()));
-
-        //$this->customer = $customer->load(['cart.stockCount', 'cart.skuable']);
     }
 
-    public function user(): self
-    {
-        $customer = request('visitor', auth()->user());
-        $this->customer = $customer->load(['cart.stockCount', 'cart.skuable']);
-        return $this;
-    }
 
     /**
      * Set Delivery on cart
@@ -166,7 +153,7 @@ class Cart implements CartContract
      */
     public function isEmpty(): bool
     {
-        return $this->customer->cart->sum('pivot.quantity') === 0;
+        return $this->customer->cart->sum('pivot.quantity') <= 0;
     }
 
     /**
