@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Domain\Delivery\Webhooks\Signatures;
+namespace Service\Webhooks\Signatures;
 
 use App\Helpers\Signatures\Signature;
 use Illuminate\Http\Request;

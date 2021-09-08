@@ -1,13 +1,14 @@
 <?php
 
-namespace Domain\Payments\Signatures;
+namespace Service\Webhooks\Signatures;
 
+use App\Helpers\Signatures\Signature;
 use Illuminate\Http\Request;
 use Spatie\WebhookClient\Exceptions\WebhookFailed;
 use Spatie\WebhookClient\SignatureValidator\SignatureValidator;
 use Spatie\WebhookClient\WebhookConfig;
 
-class PaymentSignatureValidator implements SignatureValidator
+class FlutterwaveSign extends Signature
 {
     /**
      * Check if local signature and incoming are valid
@@ -16,7 +17,7 @@ class PaymentSignatureValidator implements SignatureValidator
      * @param WebhookConfig $config
      * @return boolean
      */
-    public function isValid(Request $request, WebhookConfig $config): bool
+    public static function doSigning(Request $request, WebhookConfig $config): bool
     {
         dd('hey');
         $signature = $request->header($config->signatureHeaderName = '1234');

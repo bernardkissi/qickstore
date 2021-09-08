@@ -1,26 +1,24 @@
 <?php
 
-namespace Domain\Payments\Webhooks\Signatures;
+declare(strict_types=1);
+
+namespace Service\Webhooks\Signatures;
 
 use App\Helpers\Signatures\Signature;
 use Illuminate\Http\Request;
 use Spatie\WebhookClient\Exceptions\WebhookFailed;
-use Spatie\WebhookClient\SignatureValidator\SignatureValidator;
 use Spatie\WebhookClient\WebhookConfig;
 
-class FlutterwaveSign extends Signature
+class TracktrySign extends Signature
 {
     /**
-     * Check if local signature and incoming are valid
+     * Sign the swoove webhook route
      *
-     * @param Request $request
-     * @param WebhookConfig $config
-     * @return boolean
+     * @return string
      */
-    public static function doSigning(Request $request, WebhookConfig $config): bool
+    protected static function doSigning(Request $request, WebhookConfig $config): bool
     {
-        dd('hey');
-        $signature = $request->header($config->signatureHeaderName = '1234');
+        $signature = $request->header($config->signatureHeaderName);
 
         if (! $signature) {
             return false;

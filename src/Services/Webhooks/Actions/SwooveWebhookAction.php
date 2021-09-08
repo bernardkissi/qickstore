@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Domain\Delivery\Webhooks\Actions;
+namespace Service\Webhooks\Actions;
 
 use App\Helpers\Transitions\MapState;
 use Domain\Delivery\Delivery;
-use Domain\Services\Webhooks\WebhookAction;
+use Service\Webhooks\WebhookAction;
 
 class SwooveWebhookAction implements WebhookAction
 {

@@ -1,11 +1,10 @@
 <?php
 
-namespace Domain\Payments\Webhooks\Signatures;
+namespace Service\Webhooks\Signatures;
 
 use App\Helpers\Signatures\Signature;
 use Illuminate\Http\Request;
-use Spatie\WebhookClient\Exceptions\WebhookFailed;
-use Spatie\WebhookClient\SignatureValidator\SignatureValidator;
+use Service\Webhooks\Signatures\FlutterwaveSign;
 use Spatie\WebhookClient\WebhookConfig;
 
 class PaystackSign extends Signature
@@ -23,12 +22,6 @@ class PaystackSign extends Signature
 
         if (! $signature) {
             return false;
-        }
-
-        $signingSecret = $config->signingSecret;
-
-        if (empty($signingSecret)) {
-            throw WebhookFailed::signingSecretNotSet();
         }
 
         $sec_key = 'sk_test_78be11cde858e5e90c7a784865ebafecf5d10a1d';
