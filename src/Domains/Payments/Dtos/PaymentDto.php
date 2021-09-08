@@ -18,6 +18,7 @@ use Domain\Orders\Dtos\OrderData;
  * @property string|null $transRef
  * @property string $status
  * @property int $amount
+ * @property string $email
  * @property string $provider
  * @property string $payment_methods
  * @property array $channels

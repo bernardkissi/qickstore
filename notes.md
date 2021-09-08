@@ -582,3 +582,19 @@ $dtOttawa->diffInHours($dtVancouver);
 63    "requested_amount": 110000
 64  }
 ```
+
+    ```
+    - amount  (string)
+    - email (string)
+    - currency(string)
+    - reference(string)
+    - callback(string)
+    - plan(string)
+    - invoice_limit(int)
+    - metadata(stringtified JSON)
+    - channels(array)
+    - split_code(string)
+    - subaccount(String)
+    - transcation_charge(int)
+    - bearer(string) =  bearer
+    ```

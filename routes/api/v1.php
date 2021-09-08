@@ -2,15 +2,20 @@
 
 namespace App;
 
+use Domain\Cart\Actions\CartActions;
+use Domain\Cart\Facade\Cart;
 use Domain\Delivery\Dispatchers\Dispatcher;
 use Domain\Delivery\Dispatchers\DispatchOrder;
+use Domain\Orders\Actions\OrderActions;
 use Domain\Orders\Order;
+use Domain\Payments\Facade\Payment;
+use Domain\Products\Product\Actions\CreateProduct;
 use Domain\Products\Product\Product;
 use Domain\Products\Product\ProductVariation;
-use Domain\Services\Notifications\Types\Sms\Facade\Sms;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Service\Notifications\Types\Sms\Facade\Sms;
 use Spatie\MediaLibrary\Support\MediaStream;
 
 /*
@@ -37,6 +42,16 @@ Route::post('/orders/{order}', function (Order $order) {
 });
 
 
+Route::post('/create', function (Request $request) {
+    return (new CreateProduct())
+        ->payload($request->all())
+        ->create()
+        ->generateSku()
+        ->assignStock()
+        ->fetch();
+});
+
+
 Route::get('download/{order}', function (Request $request, Order $order) {
     if (! $request->hasValidSignature()) {
         abort(401);
@@ -55,3 +70,19 @@ Route::get('download/{order}', function (Request $request, Order $order) {
 Route::post('/sms', function (Request $request) {
     return Sms::send($request->all());
 })->name('sms');
+
+Route::post('/paystack', function (Request $request) {
+    return Payment::charge($request->all());
+})->name('paystack');
+
+Route::post('cart', function (Request $request, Cart $cart) {
+    return (new CartActions($cart))->addToCart($request->products);
+})->middleware('customer');
+
+Route::get('cart/items', function (Request $request, Cart $cart) {
+    return (new CartActions($cart))->getCart($request->query());
+})->middleware(['customer', 'cart.sync']);
+
+Route::post('/orders', function (Request $request) {
+    return (new OrderActions())->checkout($request->all());
+})->middleware(['customer', 'cart.empty']);

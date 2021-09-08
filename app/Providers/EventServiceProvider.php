@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Domain\Orders\Events\OrderCreatedEvent;
+use Domain\Orders\Listeners\CreatePayment;
+use Domain\Orders\Listeners\EmptyCart;
 use Domain\Orders\Listeners\OrderPaymentFailed;
 use Domain\Orders\Listeners\OrderPaymentSuccessful;
 use Domain\Orders\Listeners\OrderStateChangeListener;
@@ -36,7 +38,8 @@ class EventServiceProvider extends ServiceProvider
         ],
 
         OrderCreatedEvent::class => [
-            //
+            EmptyCart::class,
+            CreatePayment::class
         ],
     ];
 

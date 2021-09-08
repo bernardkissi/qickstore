@@ -2,8 +2,8 @@
 
 namespace App\Http\Middleware;
 
-use App\Domains\User\Visitor;
 use Closure;
+use Domain\User\Visitor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;

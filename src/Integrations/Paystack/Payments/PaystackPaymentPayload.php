@@ -20,11 +20,11 @@ class PaystackPaymentPayload
                 'amount' => $data['amount'],
                 'currency' => 'GHS',
                 'reference' => (string) Str::uuid(),
-                'email' => $data['customer']['email'],
+                'email' => $data['email'],
                 'callback_url' => route('home'),
                 'metadata' => [
-                    'order_id' => $data["order"]['id'],
-                    'has_subscription' => $data["order"]['has_subscritpion'],
+                    'order_id' => $data['id'],
+                    'has_subscription' => $data['has_subscription'],
                 ],
             ];
     }

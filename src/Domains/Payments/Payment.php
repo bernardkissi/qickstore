@@ -23,6 +23,9 @@ class Payment extends Model
         'amount',
         'provider',
         'channel',
+        'order_id',
+        'access_code',
+        'pay_url'
     ];
 
     /**

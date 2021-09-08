@@ -23,12 +23,13 @@ class CheckoutService implements CheckoutableContract
     {
         $order = $this->customer->orders()->create(
             [
-                'subtotal' => Cart::user()->total()->getAmount(),
+                'subtotal' => Cart::total()->getAmount(),
                 'service' => 'tracktry-logistics',
                 'something' => 'something'
             ]
         );
-        $order->products()->sync(Cart::user()->products()->toCollect());
+        $order->products()->sync(Cart::products()->toCollect());
+
         return $order;
     }
 

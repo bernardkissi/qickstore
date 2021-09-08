@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\APIs\Flutterwave\Payment;
+namespace Integration\Flutterwave\Payment;
 
 use Integration\Flutterwave\FlutterwaveRequest;
 

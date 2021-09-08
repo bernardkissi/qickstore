@@ -2,6 +2,7 @@
 
 namespace Domain\Orders\Jobs;
 
+use Domain\Cart\Facade\Cart;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -30,6 +31,5 @@ class NotifyCustomerJob implements ShouldQueue
      */
     public function handle()
     {
-        //
     }
 }

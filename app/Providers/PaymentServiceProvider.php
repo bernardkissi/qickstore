@@ -18,7 +18,7 @@ class PaymentServiceProvider extends ServiceProvider implements DeferrableProvid
     public function register()
     {
         $this->app->singleton(PaymentableContract::class, function ($app) {
-            $gateway = $this->resolveService('gateway', 'flutterwave', 'modules.payments');
+            $gateway = $this->resolveService('gateway', 'paystack', 'modules.payments');
             return new $gateway();
         });
     }

@@ -32,7 +32,7 @@ class Cart implements CartContract
      *
      * @param User|Visitor $customer
      */
-    public function __construct(public User | Visitor $customer)
+    public function __construct(public User | Visitor | null $customer)
     {
     }
 

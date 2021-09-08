@@ -17,7 +17,10 @@ class CartServiceProvider extends ServiceProvider implements DeferrableProvider
     public function register()
     {
         $this->app->singleton(CartContract::class, function ($app) {
-            return new Cart();
+            $customer = request('visitor', auth()->user());
+            $user = $customer?->load(['cart.stockCount', 'cart.skuable']);
+
+            return new Cart($user);
         });
     }
 

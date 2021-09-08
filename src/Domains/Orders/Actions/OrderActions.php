@@ -2,28 +2,29 @@
 
 declare(strict_types=1);
 
-namespace App\Domains\Orders\Actions;
+namespace Domain\Orders\Actions;
 
 use Domain\Cart\Facade\Cart;
 use Domain\Orders\Checkouts\Facade\Checkout;
 use Domain\Orders\Events\OrderCreatedEvent;
+use Domain\Payments\Facade\Payment;
+use Illuminate\Support\Facades\DB;
 
 class OrderActions
 {
     public function checkout(array $data)
     {
-        Cart::user()->sync();
+        $url = null;
 
-        if (Cart::user()->isEmpty()) {
-            return response(['message' => 'Your cart is empty'], 400);
-        }
-        $order = Checkout::createOrder($data);
+        DB::transaction(function () use ($data, &$url) {
+            $order = Checkout::createOrder($data);
+            $payload = array_merge(['id' => $order->id], $data);
 
-        event(new OrderCreatedEvent($order));
-    }
+            $payment = Payment::Charge($payload);
+            event(new OrderCreatedEvent($order, $payment));
+            $url = $payment['data']['authorization_url'];
+        });
 
-
-    public function show()
-    {
+        return $url;
     }
 }
