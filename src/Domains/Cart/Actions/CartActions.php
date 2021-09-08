@@ -18,9 +18,7 @@ class CartActions
      */
     public function getCart(array $query): JsonResource
     {
-        Cart::user()->sync();
-
-        return Cart::user()->cartContents()->additional(
+        return Cart::cartContents()->additional(
             ['meta' => [
 
                     'isEmpty' => Cart::isEmpty(),
@@ -43,7 +41,7 @@ class CartActions
      */
     public function addToCart(array $products)
     {
-        return Cart::user()->add($products);
+        return Cart::add($products);
     }
 
     /**
@@ -56,7 +54,7 @@ class CartActions
      */
     public function updateItem(Sku $sku, int $quantity): void
     {
-        Cart::user()->update($sku->id, $quantity);
+        Cart::update($sku->id, $quantity);
     }
 
     /**
@@ -68,7 +66,7 @@ class CartActions
      */
     public function deleteItem(Sku $sku): void
     {
-        Cart::user()->delete($sku->id);
+        Cart::delete($sku->id);
     }
 
     /**
@@ -78,6 +76,6 @@ class CartActions
      */
     public function clearCart()
     {
-        Cart::user()->clear();
+        Cart::clear();
     }
 }
