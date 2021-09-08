@@ -25,7 +25,9 @@ class CreatePaymentsTable extends Migration
             $table->string('status');
             $table->string('amount');
             $table->string('provider');
-            $table->string('channel');
+            $table->string('channel')->nullable();
+            $table->string('access_code')->nullable();
+            $table->string('pay_url')->nullable();
             $table->timestamps();
         });
     }
