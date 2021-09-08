@@ -6,6 +6,8 @@ namespace App\Helpers\Signatures;
 
 use Domain\Delivery\Webhooks\Signatures\SwooveSign;
 use Domain\Delivery\Webhooks\Signatures\TracktrySign;
+use Domain\Payments\Webhooks\Signatures\FlutterwaveSign;
+use Domain\Payments\Webhooks\Signatures\PaystackSign;
 use Illuminate\Http\Request;
 use Spatie\WebhookClient\SignatureValidator\SignatureValidator;
 use Spatie\WebhookClient\WebhookConfig;
@@ -57,7 +59,8 @@ class Signer implements SignatureValidator
         $signature = match ($config->signatureHeaderName) {
             'tracktry-hash' => TracktrySign::sign($request, $config),
             'swoove-hash' => SwooveSign::sign($request, $config),
-            'verify-hash' => TracktrySign::sign($request, $config),
+            'verify-hash' => FlutterwaveSign::sign($request, $config),
+            'x-paystack-signature' => PaystackSign::sign($request, $config),
         };
 
         return $signature;

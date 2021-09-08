@@ -1,5 +1,7 @@
 <?php
 
+use Service\Webhooks\Jobs\PaymentWebhookJob;
+
 return [
      /*
         |--------------------------------------------------------------------------
@@ -17,7 +19,7 @@ return [
             'swoove-hash'   => '9fbd5b85b01835656ebc73c6a3d633b9',
             'tracktry-hash' => 'd81e66811509864b5ba541e5fe92e02b',
             'verify-hash'   => 'dbcb2e8542168cecd5399d4f7e85085e49861483',
-
+            'x-paystack-signature' => 'dbcb2e8542168cecd5399d4f7e85085e4986148'
         ],
 
         'configs' => [
@@ -40,21 +42,21 @@ return [
                 'name' => 'payments',
                 'signing_secret' => '',
                 'signature_header_name' => 'x-default',
-                'signature_validator' =>  \App\Core\Helpers\Signatures\Signer::class,
+                'signature_validator' =>  \App\Helpers\Signatures\Signer::class,
                 'webhook_profile' => \Spatie\WebhookClient\WebhookProfile\ProcessEverythingWebhookProfile::class,
                 'webhook_response' => \Spatie\WebhookClient\WebhookResponse\DefaultRespondsTo::class,
-                'webhook_model' =>   \Domain\Services\Webhooks\WebhookHandler::class,
-                'process_webhook_job' => \Domain\Services\Webhooks\Jobs\PaymentWebhookJob::class,
+                'webhook_model' =>      \Service\Webhooks\WebhookHandler::class,
+                'process_webhook_job' => \Service\Webhooks\Jobs\PaymentWebhookJob::class,
             ],
             [
                 'name' => 'deliveries',
                 'signing_secret' => '',
                 'signature_header_name' => 'x-default',
-                'signature_validator' => \App\Core\Helpers\Signatures\Signer::class,
+                'signature_validator' => \App\Helpers\Signatures\Signer::class,
                 'webhook_profile' => \Spatie\WebhookClient\WebhookProfile\ProcessEverythingWebhookProfile::class,
                 'webhook_response' => \Spatie\WebhookClient\WebhookResponse\DefaultRespondsTo::class,
-                'webhook_model' => \Domain\Services\Webhooks\WebhookHandler::class,
-                'process_webhook_job' => \Domain\Services\Webhooks\Jobs\DeliveryWebhookJob::class,
+                'webhook_model' =>  \Service\Webhooks\WebhookHandler::class,
+                'process_webhook_job' => \Service\Webhooks\Jobs\DeliveryWebhookJob::class,
             ],
         ],
 ];
