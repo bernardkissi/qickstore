@@ -7,6 +7,7 @@ use Domain\Cart\Facade\Cart;
 use Domain\Delivery\Dispatchers\Dispatcher;
 use Domain\Delivery\Dispatchers\DispatchOrder;
 use Domain\Orders\Actions\OrderActions;
+use Domain\Orders\Actions\OrderCheckout;
 use Domain\Orders\Order;
 use Domain\Payments\Facade\Payment;
 use Domain\Products\Product\Actions\CreateProduct;
@@ -49,7 +50,7 @@ Route::post('/create', function (Request $request) {
         ->generateSku()
         ->assignStock()
         ->fetch();
-});
+})->name('create');
 
 
 Route::get('download/{order}', function (Request $request, Order $order) {
@@ -77,12 +78,12 @@ Route::post('/paystack', function (Request $request) {
 
 Route::post('cart', function (Request $request, Cart $cart) {
     return (new CartActions($cart))->addToCart($request->products);
-})->middleware('customer');
+})->middleware('customer')->name('cart');
 
 Route::get('cart/items', function (Request $request, Cart $cart) {
     return (new CartActions($cart))->getCart($request->query());
-})->middleware(['customer', 'cart.sync']);
+})->middleware(['customer', 'cart.sync'])->name('cart.items');
 
 Route::post('/orders', function (Request $request) {
-    return (new OrderActions())->checkout($request->all());
-})->middleware(['customer', 'cart.empty']);
+    return (new OrderCheckout())->checkout($request->all());
+})->middleware(['customer', 'cart.empty'])->name('orders');

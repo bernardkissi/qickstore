@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Helpers\Signatures;
 
-use Domain\Delivery\Webhooks\Signatures\SwooveSign;
-use Domain\Delivery\Webhooks\Signatures\TracktrySign;
-use Domain\Payments\Webhooks\Signatures\FlutterwaveSign;
-use Domain\Payments\Webhooks\Signatures\PaystackSign;
 use Illuminate\Http\Request;
+use Service\Webhooks\Signatures\FlutterwaveSign;
+use Service\Webhooks\Signatures\PaystackSign;
+use Service\Webhooks\Signatures\SwooveSign;
+use Service\Webhooks\Signatures\TracktrySign;
 use Spatie\WebhookClient\SignatureValidator\SignatureValidator;
 use Spatie\WebhookClient\WebhookConfig;
 

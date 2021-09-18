@@ -6,9 +6,10 @@ namespace Service\Webhooks\Actions;
 
 use App\Helpers\Transitions\MapState;
 use Domain\Delivery\Delivery;
+use Illuminate\Support\Facades\Log;
 use Service\Webhooks\WebhookAction;
 
-class SwooveWebhookAction implements WebhookAction
+class PaystackWebhookAction implements WebhookAction
 {
     /**
      * Action to process swoove webhook calls
@@ -18,14 +19,5 @@ class SwooveWebhookAction implements WebhookAction
      */
     public static function process(array $payload): void
     {
-        $delivery = Delivery::where('delivery_id', $payload['id'])->first();
-
-        $state = MapState::map($payload['status']);
-
-        if (!$delivery->state->canTransitionTo($state)) {
-            return;
-        }
-
-        $delivery->state->transitionTo($state);
     }
 }

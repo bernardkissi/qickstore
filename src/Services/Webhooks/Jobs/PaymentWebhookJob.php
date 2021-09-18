@@ -2,6 +2,7 @@
 
 namespace Service\Webhooks\Jobs;
 
+use Illuminate\Support\Facades\Log;
 use Spatie\WebhookClient\ProcessWebhookJob;
 
 class PaymentWebhookJob extends ProcessWebhookJob
@@ -14,9 +15,24 @@ class PaymentWebhookJob extends ProcessWebhookJob
      */
     public function handle()
     {
-        dd('key');
+        var_dump('you hit me');
+
         //update the payment model.
 
         // transistion order to paid.
     }
+
+    // /**
+    // * Determines which action is to be used by the job
+    // *
+    // * @param string $signature_name
+    // * @return string
+    // */
+    // protected static function useAction(string $signature): string
+    // {
+    //     return match ($signature) {
+    //         'swoove-hash' => SwooveWebhookAction::class,
+    //          default => 'No action found',
+    //     };
+    // }
 }

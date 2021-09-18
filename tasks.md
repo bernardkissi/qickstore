@@ -114,6 +114,7 @@ this way image content will not be read from your disk more than once.
 6. design patterns are highly recommended & solid principles
 7. Discuss on using Auto routes to handle routing
 8.
+
 ```
 <?php
 
@@ -418,4 +419,90 @@ Route::post('/orders/{order}', function (Order $order) {
     return $order;
     //(new DispatchOrder())->dispatch($order);
 });
+
+payment successfull
+
+{
+    "event":"charge.success",
+    "data":{
+        "id":1314205631,
+        "domain":"test",
+        "status":"success",
+        "reference":"3cd8088b-57fd-406e-9ebe-076cd8c86f5f",
+        "amount":200,
+        "message":null,
+        "gateway_response":"Approved",
+        "paid_at":"2021-09-08T23:18:01.000Z",
+        "created_at":"2021-09-08T23:16:46.000Z",
+        "channel":"mobile_money",
+        "currency":"GHS",
+        "ip_address":"154.160.26.131",
+        "metadata":{
+            "order_id":"1423",
+            "has_subscription":"false"
+        },
+        "log":
+        {
+            "start_time":1631143076,
+            "time_spent":2,
+            "attempts":1,
+            "errors":0,
+            "success":false,
+            "mobile":false,
+            "input":[],
+            "history":[
+                {
+                    "type":"action",
+                    "message":"Attempted to pay with mobile money",
+                    "time":2
+                }
+            ]
+        },
+            "fees":4,
+            "fees_split":null,
+            "authorization":{
+                "authorization_code":"AUTH_l005bxe6e5",
+                "bin":"055XXX",
+                "last4":"X987",
+                "exp_month":"12",
+                "exp_year":"9999",
+                "channel":"mobile_money",
+                "card_type":null,
+                "bank":"MTN",
+                "country_code":"GH",
+                "brand":"Mtn",
+                "reusable":false,
+                "signature":null,
+                "account_name":null,
+                "receiver_bank_account_number":null,
+                "receiver_bank":null
+            },
+            "customer":{
+                "id":31727301,
+                "first_name":"bernard",
+                "last_name":"kissi",
+                "email":"bernardkissi18@gmail.com",
+                "customer_code":"CUS_6zrgz1q8hrz5man",
+                "phone":"+2330543063709",
+                "metadata":null,
+                "risk_action":"default",
+                "international_format_phone":"+233543063709"
+            },
+            "plan":[],
+            "subaccount":[],
+            "split":[],
+            "order_id":null,
+            "paidAt":"2021-09-08T23:18:01.000Z",
+            "requested_amount":200,
+            "pos_transaction_data":null,
+            "source":{
+                "type":"api",
+                "source":"merchant_api",
+                "identifier":null
+            }
+            },
+            "order":null,
+            "business_name":"qickstores"
+            }
+
 ```
