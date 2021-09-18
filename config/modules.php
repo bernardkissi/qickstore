@@ -1,12 +1,13 @@
 <?php
 
+use CashlessCheckout;
 use Domain\Cart\Cart;
-use Domain\Delivery\Dispatchers\CustomVendorShipping;
-use Domain\Delivery\Dispatchers\FileDelivery;
-use Domain\Delivery\Dispatchers\SwooveShipping;
+use Domain\Delivery\Handlers\FileDelivery;
+use Domain\Delivery\Handlers\SwooveShipping;
+use Domain\Delivery\Handlers\VendorShipping;
 use Domain\Delivery\Mappers\SwooveMapper;
 use Domain\Delivery\Mappers\TracktryMapper;
-use Domain\Orders\Checkouts\Services\CheckoutService;
+use Domain\Orders\Checkouts\StandardCheckout;
 use Domain\Payments\Gateways\CashOnDelivery;
 use Domain\Payments\Gateways\Flutterwave;
 use Domain\Payments\Gateways\Paystack;
@@ -52,7 +53,8 @@ return [
     | orders or swap default.
     */
     'checkout' => [
-        'default' => CheckoutService::class
+        'default' => StandardCheckout::class,
+        'cashless' => CashlessCheckout::class,
     ],
 
     /*
@@ -66,7 +68,7 @@ return [
 
     'deliveries' => [
         'swoove' => SwooveShipping::class,
-        'hosted' => CustomVendorShipping::class,
+        'hosted' => VendorShipping::class,
         'files'  => FileDelivery::class
     ],
 
