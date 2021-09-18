@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use Domain\Orders\Checkouts\Contract\CheckoutableContract;
+use Domain\Orders\Checkouts\Contract\Checkoutable;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 
@@ -15,7 +15,7 @@ class CheckoutServiceProvider extends ServiceProvider implements DeferrableProvi
      */
     public function register()
     {
-        $this->app->singleton(CheckoutableContract::class, function ($app) {
+        $this->app->singleton(Checkoutable::class, function ($app) {
             $customer = request('visitor', auth()->user());
             $service = $this->resolveService();
             return new $service($customer);
@@ -39,7 +39,7 @@ class CheckoutServiceProvider extends ServiceProvider implements DeferrableProvi
      */
     public function provides()
     {
-        return [CheckoutableContract::class];
+        return [Checkoutable::class];
     }
 
     /**
