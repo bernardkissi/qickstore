@@ -1,12 +1,12 @@
 <?php
 
-use CashlessCheckout;
 use Domain\Cart\Cart;
 use Domain\Delivery\Handlers\FileDelivery;
 use Domain\Delivery\Handlers\SwooveShipping;
 use Domain\Delivery\Handlers\VendorShipping;
 use Domain\Delivery\Mappers\SwooveMapper;
 use Domain\Delivery\Mappers\TracktryMapper;
+use Domain\Orders\Checkouts\CashlessCheckout;
 use Domain\Orders\Checkouts\StandardCheckout;
 use Domain\Payments\Gateways\CashOnDelivery;
 use Domain\Payments\Gateways\Flutterwave;
