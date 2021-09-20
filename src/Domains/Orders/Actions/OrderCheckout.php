@@ -15,6 +15,7 @@ class OrderCheckout
      * checkout users order
      *
      * @param array $data
+     *
      * @return void
      */
     public static function checkout(array $data): string|null

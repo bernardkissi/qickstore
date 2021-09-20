@@ -27,9 +27,8 @@ class OrderStatus extends Model
         'cancelled_at',
         'failed_message',
         'cancelled_reason',
-        'updated_from'
+        'updated_from',
     ];
-
 
     /**
      * Database table for this model
@@ -45,7 +44,7 @@ class OrderStatus extends Model
      */
     protected $casts = [
         'state' => OrderState::class,
-        'updated_from' => 'array'
+        'updated_from' => 'array',
     ];
 
     /**

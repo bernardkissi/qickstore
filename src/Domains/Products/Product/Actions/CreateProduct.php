@@ -43,6 +43,7 @@ class CreateProduct
      * Prepare data for creating product
      *
      * @param array $payload
+     *
      * @return self
      */
     public function payload(array $payload): self
@@ -69,13 +70,13 @@ class CreateProduct
      *
      * @return self
      */
-    public function generateSku():self
+    public function generateSku(): self
     {
         $sku = $this->product->sku()->create([
             'code' => $this->payload['metadata']['sku'],
             'price' => 1000,
             'min_stock' => $this->payload['metadata']['stock'],
-            'unlimited' => $this->payload['metadata']['unlimited']
+            'unlimited' => $this->payload['metadata']['unlimited'],
         ]);
         $this->sku = $sku;
 
@@ -87,7 +88,7 @@ class CreateProduct
      *
      * @return self
      */
-    public function assignStock():self
+    public function assignStock(): self
     {
         $stock = $this->sku->stocks()->create(['quantity' => $this->payload['metadata']['stock'] ?? 0]);
         $this->stock = $stock;

@@ -21,6 +21,6 @@ class Message extends Model
         'message',
         'status',
         'type',
-        'schedule_at'
+        'schedule_at',
     ];
 }

@@ -6,7 +6,6 @@ use Integration\Paystack\PaystackRequest;
 
 class VerifyPayment extends PaystackRequest
 {
-
     /**
      * Base url for the endpoint for the request
      *

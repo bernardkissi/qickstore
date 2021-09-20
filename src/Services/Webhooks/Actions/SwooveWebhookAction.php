@@ -14,6 +14,7 @@ class SwooveWebhookAction implements WebhookAction
      * Action to process swoove webhook calls
      *
      * @param array $data
+     *
      * @return void
      */
     public static function process(array $payload): void
@@ -22,7 +23,7 @@ class SwooveWebhookAction implements WebhookAction
 
         $state = MapState::map($payload['status']);
 
-        if (!$delivery->state->canTransitionTo($state)) {
+        if (! $delivery->state->canTransitionTo($state)) {
             return;
         }
 

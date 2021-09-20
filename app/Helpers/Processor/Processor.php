@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Helpers\Processor;
 
-use Illuminate\Database\Eloquent\Model;
-
 abstract class Processor
 {
     /**

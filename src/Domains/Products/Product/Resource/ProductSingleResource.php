@@ -3,7 +3,6 @@
 namespace Domain\Products\Product\Resource;
 
 use Domain\Products\Options\Resource\OptionCollection;
-use Domain\Products\Product\Resource\ProductVariationResource;
 
 class ProductSingleResource extends ProductResource
 {

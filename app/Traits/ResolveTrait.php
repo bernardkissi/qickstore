@@ -12,11 +12,12 @@ trait ResolveTrait
      * @param string $key
      * @param string $defaultkey
      * @param string $config_path
+     *
      * @return string
      */
     protected function resolveService(string $key, string $defaultkey, string $config_path): string
     {
         $service = request($key, $defaultkey);
-        return config("$config_path.$service");
+        return config("${config_path}.${service}");
     }
 }

@@ -8,7 +8,6 @@ use Integration\Arksel\ArkselRequest;
 
 class SendArkselSms extends ArkselRequest
 {
-
     /**
      * Base url for the endpoint for the request
      *

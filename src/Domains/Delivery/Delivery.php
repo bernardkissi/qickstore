@@ -65,18 +65,19 @@ class Delivery extends Model
     public function scopeUpdateDue($query): Builder
     {
         return $query->whereNotIn('state', ['delivering', 'delivered'])
-             ->where('updated_at', '<', Carbon::parse('-4 hours'));
+            ->where('updated_at', '<', Carbon::parse('-4 hours'));
     }
 
     /**
      * Manually set the state of the delivery.
      *
      * @param string $state
+     *
      * @return void
      */
     public function updateDeliveryStatus(string $state): void
     {
-        if (!$this->state->canTransitionTo($state)) {
+        if (! $this->state->canTransitionTo($state)) {
             //throw an exception
         }
         $this->state->transitionTo($state);

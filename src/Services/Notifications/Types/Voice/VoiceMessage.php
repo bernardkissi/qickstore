@@ -35,6 +35,7 @@ class VoiceMessage
      * Write a message line
      *
      * @param string $line
+     *
      * @return self
      */
     public function audio($audio = ''): self
@@ -48,6 +49,7 @@ class VoiceMessage
      *  Who recieves the sms
      *
      * @param [type] $to
+     *
      * @return self
      */
     public function to($to): self
@@ -64,7 +66,7 @@ class VoiceMessage
      */
     public function send(): array
     {
-        if (!$this->to || !$this->audio) {
+        if (! $this->to || ! $this->audio) {
             throw new \Exception('Voice message is missing some values');
         }
 

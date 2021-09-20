@@ -8,7 +8,6 @@ use Integration\Arksel\ArkselRequest;
 
 class MakeArkselCall extends ArkselRequest
 {
-
     /**
      * Base url for the endpoint for the request
      *
@@ -16,7 +15,7 @@ class MakeArkselCall extends ArkselRequest
      */
     protected string $method = 'POST';
 
-    /**x
+    /*x
      * Add query params to request
      *
      * @var string $query
@@ -30,10 +29,9 @@ class MakeArkselCall extends ArkselRequest
      */
     protected array $data = [];
 
-
     public function attachMedia()
     {
-        $audio  = fopen((public_path('storage/demo.wav')), 'r');
+        $audio = fopen(public_path('storage/demo.wav'), 'r');
 
         $request = $this->getRequest();
         $request->attach('voice_file', $audio, 'demo.wav');

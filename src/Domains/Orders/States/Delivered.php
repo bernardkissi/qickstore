@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Domain\Orders\States;
 
-use Domain\Orders\States\OrderState;
-
 class Delivered extends OrderState
 {
     /**

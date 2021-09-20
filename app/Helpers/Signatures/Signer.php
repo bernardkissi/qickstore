@@ -28,12 +28,12 @@ class Signer implements SignatureValidator
      */
     protected string $signing_header_name;
 
-
     /**
      * Checks for the validity of the signature used by the webhook.
      *
      * @param Request $request
      * @param WebhookConfig $config
+     *
      * @return bool
      */
     public function isValid(Request $request, WebhookConfig $config): bool
@@ -46,31 +46,29 @@ class Signer implements SignatureValidator
         return $this->resolveSignature($request, $config);
     }
 
-
     /**
      * Resolves the signature used by the webhook.
      *
      * @param Request $request
      * @param WebhookConfig $config
+     *
      * @return bool
      */
     public function resolveSignature(Request $request, WebhookConfig $config): bool
     {
-        $signature = match ($config->signatureHeaderName) {
+        return match ($config->signatureHeaderName) {
             'tracktry-hash' => TracktrySign::sign($request, $config),
             'swoove-hash' => SwooveSign::sign($request, $config),
             'verify-hash' => FlutterwaveSign::sign($request, $config),
             'x-paystack-signature' => PaystackSign::sign($request, $config),
         };
-
-        return $signature;
     }
-
 
     /**
      * Derives the signing secret and the header name of the signature
      *
      * @param Request $request
+     *
      * @return void
      */
     protected function generateSignatureInfo(Request $request): void

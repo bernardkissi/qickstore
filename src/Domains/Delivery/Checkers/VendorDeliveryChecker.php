@@ -2,7 +2,6 @@
 
 namespace Domain\Delivery\Checkers;
 
-use Domain\Delivery\Checkers\DeliveryChecker;
 use Domain\Delivery\Notifications\RemindVendorToUpdateOrderNotification;
 use Domain\Services\Notifications\Channels\SmsChannel;
 use Illuminate\Support\Facades\Notification;
@@ -14,6 +13,7 @@ class VendorDeliveryChecker implements DeliveryChecker
      * Remind vendors to update their orders
      *
      * @param array $payload
+     *
      * @return void
      */
     public static function getUpdates(array $payload): void
@@ -22,14 +22,15 @@ class VendorDeliveryChecker implements DeliveryChecker
         $numbers = static::formatNumbersToString($data);
 
         Notification::route('mail', '5e97e062-959f-433f-b0dc-4833de15bda2@usehelo.cloud')
-        ->route(SmsChannel::class, $numbers)
-        ->notify(new RemindVendorToUpdateOrderNotification($numbers));
+            ->route(SmsChannel::class, $numbers)
+            ->notify(new RemindVendorToUpdateOrderNotification($numbers));
     }
 
     /**
      * Uniquely return all vendors to be notified of delivery updates
      *
      * @param array $payload
+     *
      * @return array
      */
     protected static function getVendors(array $payload): string
@@ -45,11 +46,12 @@ class VendorDeliveryChecker implements DeliveryChecker
      * Format numbers to string to be passed into notification
      *
      * @param string $numbers
+     *
      * @return string
      */
     protected static function formatNumbersToString(string $numbers): string
     {
-        $value = Str::replace(array('["','"]'), '', $numbers);
+        $value = Str::replace(['["','"]'], '', $numbers);
         return Str::replace('","', ',', $value);
     }
 }

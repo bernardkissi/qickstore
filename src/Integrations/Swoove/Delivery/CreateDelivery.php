@@ -8,7 +8,6 @@ use Integration\Swoove\SwooveRequest;
 
 class CreateDelivery extends SwooveRequest
 {
-
     /**
      * Base url for the endpoint for the request
      *

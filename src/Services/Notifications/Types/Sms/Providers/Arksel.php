@@ -13,27 +13,29 @@ class Arksel implements SmsContract
      *
      * @param string $message
      * @param array $numbers
+     *
      * @return void
      */
     public function send(array $data): array
     {
         return SendArkselSms::build()
-        ->withData(MessageDto::make(
-            [
+            ->withData(MessageDto::make(
+                [
                 'sender' => 'Techshops',
                 'recipients' => $data['recipients'],
                 'message' => $data['message'],
                 'schedule_at' => '',
-                'sandbox' => false
+                'sandbox' => false,
             ]
-        )->toArray())
-        ->send()->json();
+            )->toArray())
+            ->send()->json();
     }
 
     /**
      * Get message status
      *
      * @param string $messageId
+     *
      * @return array
      */
     public function getStatus(string $messageId): array
@@ -45,6 +47,7 @@ class Arksel implements SmsContract
      * Webhook call route
      *
      * @param array $data
+     *
      * @return void
      */
     public function callback(array $data): void

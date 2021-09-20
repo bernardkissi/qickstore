@@ -20,6 +20,7 @@ interface PaymentableContract
      * Returns a payload for making the request
      *
      * @param array $data
+     *
      * @return array
      */
     public function callback(string $data): array;

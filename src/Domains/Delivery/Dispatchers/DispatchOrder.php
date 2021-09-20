@@ -10,11 +10,11 @@ use Illuminate\Support\Collection;
 
 class DispatchOrder
 {
-
     /**
      * Automatically handles dispatching the order to the appropriate service
      *
      * @param Order $order
+     *
      * @return void
      */
     public function dispatch(Order $order): void
@@ -33,6 +33,7 @@ class DispatchOrder
      * @param array|null $items
      * @param string $key
      * @param string $service
+     *
      * @return void
      */
     protected function dispatcher(
@@ -42,15 +43,15 @@ class DispatchOrder
         int $count
     ): void {
         $files = config('dispatchers.files');
-        $physical = config("dispatchers.physical.$order->service");
-        $tickets = config("dispatchers.tickets");
+        $physical = config("dispatchers.physical.{$order->service}");
+        $tickets = config('dispatchers.tickets');
 
         $payload = $this->extractOrderInfo($order, $items, $count);
 
         $class = match ($key) {
             'physical' => new $physical($payload),
-            'digital' =>  new $files($payload),
-            'tickets' =>  new $tickets($payload),
+            'digital' => new $files($payload),
+            'tickets' => new $tickets($payload),
             'default' => logger('error finding the dispatcher')
         };
 
@@ -61,6 +62,7 @@ class DispatchOrder
      * Extract required information from order to create delivery
      *
      * @param Order $order
+     *
      * @return array
      */
     protected function extractOrderInfo(Order $order, Collection $items, int $num_of_groups): array
@@ -72,7 +74,7 @@ class DispatchOrder
             'customer_email' => $order->orderable->email,
             'customer_number' => $order->orderable->mobile,
             'count' => $num_of_groups,
-            'items' => $order->service === 'swoove' ? $items : null
+            'items' => $order->service === 'swoove' ? $items : null,
         ];
     }
 }

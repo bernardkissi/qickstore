@@ -8,7 +8,6 @@ use Integration\Mnotify\MnotifyRequest;
 
 class SendMnotifySms extends MnotifyRequest
 {
-
     /**
      * Base url for the endpoint for the request
      *

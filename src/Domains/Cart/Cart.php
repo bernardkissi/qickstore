@@ -26,7 +26,6 @@ class Cart implements CartContract
      */
     protected array | null $delivery;
 
-
     /**
      * Class Constructor
      *
@@ -35,7 +34,6 @@ class Cart implements CartContract
     public function __construct(public User | Visitor | null $customer)
     {
     }
-
 
     /**
      * Set Delivery on cart
@@ -70,7 +68,6 @@ class Cart implements CartContract
 
     /**
      * Calculates delivery cost
-     *
      *
      * @return Money
      */

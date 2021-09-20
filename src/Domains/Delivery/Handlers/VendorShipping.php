@@ -5,7 +5,6 @@ namespace Domain\Delivery\Handlers;
 use App\Helpers\Dispatchers\Dispatcher;
 use Domain\Delivery\Notifications\PromptVendorForDeliveryNotification;
 use Domain\Delivery\Traits\CanCreateDelivery;
-use Domain\Services\Notifications\Channels\SmsChannel;
 use Illuminate\Support\Facades\Notification;
 
 class VendorShipping extends Dispatcher
@@ -13,11 +12,11 @@ class VendorShipping extends Dispatcher
     use CanCreateDelivery;
 
     /**
-    * Class constructor
-    *
-    * @param array $order
-    * @param string $fileUrl
-    */
+     * Class constructor
+     *
+     * @param array $order
+     * @param string $fileUrl
+     */
     public function __construct(
         public array $order
     ) {

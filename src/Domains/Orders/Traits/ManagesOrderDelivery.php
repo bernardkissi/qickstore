@@ -16,7 +16,8 @@ trait ManagesOrderDelivery
                 Product::class,
                 ProductVariation::class => ['product:id,name'],
             ]);
-        }]);
+        },
+        ]);
 
         return $order['products']->groupBy(function ($item) {
             return $item['skuable']['type'];

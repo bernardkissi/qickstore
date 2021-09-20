@@ -5699,16 +5699,16 @@
         },
         {
             "name": "spatie/laravel-package-tools",
-            "version": "1.9.0",
+            "version": "1.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-package-tools.git",
-                "reference": "cf4c4cec220575e2864c6082842d76822421f1b1"
+                "reference": "a440e6778970e134f63f3c5e1b07c81db4dedc8f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/cf4c4cec220575e2864c6082842d76822421f1b1",
-                "reference": "cf4c4cec220575e2864c6082842d76822421f1b1",
+                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/a440e6778970e134f63f3c5e1b07c81db4dedc8f",
+                "reference": "a440e6778970e134f63f3c5e1b07c81db4dedc8f",
                 "shasum": ""
             },
             "require": {
@@ -5747,7 +5747,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-package-tools/issues",
-                "source": "https://github.com/spatie/laravel-package-tools/tree/1.9.0"
+                "source": "https://github.com/spatie/laravel-package-tools/tree/1.9.1"
             },
             "funding": [
                 {
@@ -5755,7 +5755,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-05-23T15:12:33+00:00"
+            "time": "2021-09-20T07:41:46+00:00"
         },
         {
             "name": "spatie/laravel-webhook-client",
@@ -10663,12 +10663,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nunomaduro/phpinsights.git",
-                "reference": "723f745818360bba26368895397eb18880755300"
+                "reference": "5988bf19df0075d63763e11c5b3f5abf76e7a3ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nunomaduro/phpinsights/zipball/723f745818360bba26368895397eb18880755300",
-                "reference": "723f745818360bba26368895397eb18880755300",
+                "url": "https://api.github.com/repos/nunomaduro/phpinsights/zipball/5988bf19df0075d63763e11c5b3f5abf76e7a3ad",
+                "reference": "5988bf19df0075d63763e11c5b3f5abf76e7a3ad",
                 "shasum": ""
             },
             "require": {
@@ -10764,7 +10764,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2021-09-15T11:15:11+00:00"
+            "time": "2021-09-20T07:04:20+00:00"
         },
         {
             "name": "pestphp/pest",

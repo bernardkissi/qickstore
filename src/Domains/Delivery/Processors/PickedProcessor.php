@@ -10,10 +10,10 @@ use Domain\Delivery\Delivery;
 class PickedProcessor extends Processor
 {
     /**
-    * Class constructor
-    *
-    * @var Order $order
-    */
+     * Class constructor
+     *
+     * @var Order $order
+     */
     public function __construct(public Delivery $delivery)
     {
     }

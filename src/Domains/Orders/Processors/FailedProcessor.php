@@ -5,16 +5,15 @@ declare(strict_types=1);
 namespace Domain\Orders\Processors;
 
 use App\Helpers\Processor\Processor;
-
 use Domain\Orders\Order;
 
 class FailedProcessor extends Processor
 {
     /**
-    * Class constructor
-    *
-    * @var Order $order
-    */
+     * Class constructor
+     *
+     * @var Order $order
+     */
     public function __construct(public Order $order)
     {
     }

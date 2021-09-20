@@ -30,14 +30,14 @@ class MessageServiceProvider extends ServiceProvider implements DeferrableProvid
      */
     public function boot()
     {
-        //
+        
     }
 
     /**
-    * Get the services provided by the provider.
-    *
-    * @return array
-    */
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
     public function provides()
     {
         return [SmsContract::class];

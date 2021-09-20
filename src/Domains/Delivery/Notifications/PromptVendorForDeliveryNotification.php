@@ -21,15 +21,16 @@ class PromptVendorForDeliveryNotification extends Notification implements Should
      *
      * @return void
      */
-    public function __construct(public Order|array $order)
+    public function __construct(public Order | array $order)
     {
-        //
+        
     }
 
     /**
      * Get the notification's delivery channels.
      *
      * @param  mixed  $notifiable
+     *
      * @return array
      */
     public function via($notifiable)
@@ -37,62 +38,64 @@ class PromptVendorForDeliveryNotification extends Notification implements Should
         return [SmsChannel::class, VoiceChannel::class, 'mail'];
     }
 
-
     /**
      * Get the mail representation of the notification.
      *
      * @param  mixed  $notifiable
+     *
      * @return MailMessage
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
-                ->greeting('Dear Mr.Bernard')
-                ->line('We will like to inform you an order has been succesfully made on your store.')
-                ->line('Please proceed to make delivery.')
-                ->action('View Order', 'http://localhost:8000')
-                ->line('Thank you for using qickshops!');
+        return (new MailMessage())
+            ->greeting('Dear Mr.Bernard')
+            ->line('We will like to inform you an order has been succesfully made on your store.')
+            ->line('Please proceed to make delivery.')
+            ->action('View Order', 'http://localhost:8000')
+            ->line('Thank you for using qickshops!');
     }
-
-    /**
-    * Get the mail representation of the notification.
-    *
-    * @param  mixed  $notifiable
-    * @return SmsMessage
-    */
-    public function toSms($notifiable)
-    {
-        return (new SmsMessage)
-                ->from('Techshops')
-                ->to('0543063709')
-                ->line('Please an order has been successfully made')
-                ->line('proceed to make delivery');
-    }
-
 
     /**
      * Get the mail representation of the notification.
      *
      * @param  mixed  $notifiable
+     *
+     * @return SmsMessage
+     */
+    public function toSms($notifiable)
+    {
+        return (new SmsMessage())
+            ->from('Techshops')
+            ->to('0543063709')
+            ->line('Please an order has been successfully made')
+            ->line('proceed to make delivery');
+    }
+
+    /**
+     * Get the mail representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     *
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toCall($notifiable)
     {
-        return (new VoiceMessage)
-                    ->to('0543063709')
-                    ->audio('audio here');
+        return (new VoiceMessage())
+            ->to('0543063709')
+            ->audio('audio here');
     }
 
     /**
      * Get the array representation of the notification.
      *
      * @param  mixed  $notifiable
+     *
      * @return array
      */
     public function toArray($notifiable)
     {
         return [
-            //
+
         ];
     }
 }

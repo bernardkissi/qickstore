@@ -4,7 +4,6 @@ namespace Service\Webhooks\Signatures;
 
 use App\Helpers\Signatures\Signature;
 use Illuminate\Http\Request;
-use Service\Webhooks\Signatures\FlutterwaveSign;
 use Spatie\WebhookClient\WebhookConfig;
 
 class PaystackSign extends Signature
@@ -14,7 +13,8 @@ class PaystackSign extends Signature
      *
      * @param Request $request
      * @param WebhookConfig $config
-     * @return boolean
+     *
+     * @return bool
      */
     public static function doSigning(Request $request, WebhookConfig $config): bool
     {

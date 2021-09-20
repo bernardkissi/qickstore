@@ -19,13 +19,14 @@ class CustomerOrderNotification extends Notification implements ShouldQueue
      */
     public function __construct(public string $message)
     {
-        //
+        
     }
 
     /**
      * Get the notification's delivery channels.
      *
      * @param  mixed  $notifiable
+     *
      * @return array
      */
     public function via($notifiable)
@@ -37,27 +38,29 @@ class CustomerOrderNotification extends Notification implements ShouldQueue
      * Get the mail representation of the notification.
      *
      * @param  mixed  $notifiable
+     *
      * @return SmsMessage
      */
     public function toSms($notifiable)
     {
-        return (new SmsMessage)
-                    ->from('Techshops')
-                    ->to('0543063709') //TODO: using notifiable grab the customer number
-                    ->line($this->message)
-                    ->line('Thank you for shopping with us!');
+        return (new SmsMessage())
+            ->from('Techshops')
+            ->to('0543063709') //TODO: using notifiable grab the customer number
+            ->line($this->message)
+            ->line('Thank you for shopping with us!');
     }
 
     /**
      * Get the array representation of the notification.
      *
      * @param  mixed  $notifiable
+     *
      * @return array
      */
     public function toArray($notifiable)
     {
         return [
-            //
+
         ];
     }
 }

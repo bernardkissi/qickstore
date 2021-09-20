@@ -30,14 +30,14 @@ class VoiceServiceProvider extends ServiceProvider implements DeferrableProvider
      */
     public function boot()
     {
-        //
+        
     }
 
     /**
-    * Get the services provided by the provider.
-    *
-    * @return array
-    */
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
     public function provides()
     {
         return [VoiceContract::class];

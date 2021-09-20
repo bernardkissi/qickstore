@@ -11,5 +11,5 @@ interface VoiceContract
      *
      * @return array
      */
-    public function call(array $data) : array;
+    public function call(array $data): array;
 }

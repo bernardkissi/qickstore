@@ -11,6 +11,7 @@ interface ScopeContract
      *
      * @param Builder $builder
      * @param string $value
+     *
      * @return void
      */
     public function apply(Builder $builder, string $value);

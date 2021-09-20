@@ -2,7 +2,6 @@
 
 namespace Domain\Orders\Dtos;
 
-use App\Domains\Products\Skus\Model\Dtos\SkuData;
 use Carbon\Carbon;
 use const Cerbero\Dto\IGNORE_UNKNOWN_PROPERTIES;
 use const Cerbero\Dto\PARTIAL;

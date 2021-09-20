@@ -5,7 +5,6 @@ namespace Service\Webhooks\Signatures;
 use App\Helpers\Signatures\Signature;
 use Illuminate\Http\Request;
 use Spatie\WebhookClient\Exceptions\WebhookFailed;
-use Spatie\WebhookClient\SignatureValidator\SignatureValidator;
 use Spatie\WebhookClient\WebhookConfig;
 
 class FlutterwaveSign extends Signature
@@ -15,7 +14,8 @@ class FlutterwaveSign extends Signature
      *
      * @param Request $request
      * @param WebhookConfig $config
-     * @return boolean
+     *
+     * @return bool
      */
     public static function doSigning(Request $request, WebhookConfig $config): bool
     {

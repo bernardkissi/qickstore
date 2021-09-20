@@ -27,7 +27,7 @@ class StandardCheckout implements Checkoutable
             [
                 'subtotal' => Cart::total()->getAmount(),
                 'service' => 'tracktry-logistics',
-                'something' => 'something'
+                'something' => 'something',
             ]
         );
         $order->products()->sync(Cart::products()->toCollect());

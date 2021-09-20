@@ -21,7 +21,7 @@ trait CanCreateDelivery
             'provider_code' => $payload['provider_code'] ?? null,
             'estimate_id' => $payload['estimate_id'] ?? null,
             'agent_details' => $payload['agent_details'] ?? null,
-            'vehicle' => $payload['vehicle'] ?? null
+            'vehicle' => $payload['vehicle'] ?? null,
         ]);
     }
 }

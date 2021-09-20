@@ -9,10 +9,10 @@ use Integration\Flutterwave\FlutterwaveRequest;
 class SendPayout extends FlutterwaveRequest
 {
     /**
-    * Base url for the endpoint for the request
-    *
-    * @var string $baseUrl
-    */
+     * Base url for the endpoint for the request
+     *
+     * @var string $baseUrl
+     */
     protected string $method = 'POST';
 
     /**

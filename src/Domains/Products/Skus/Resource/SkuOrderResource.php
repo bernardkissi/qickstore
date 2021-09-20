@@ -3,7 +3,6 @@
 namespace Domain\Products\Skus\Resource;
 
 use Domain\Products\Product\Resource\ProductOrderResource;
-use Domain\Products\Skus\Resource\SkuResource;
 
 class SkuOrderResource extends SkuResource
 {
@@ -18,7 +17,7 @@ class SkuOrderResource extends SkuResource
     {
         return array_merge(
             [
-                'product' => new ProductOrderResource($this->whenLoaded('skuable'))
+                'product' => new ProductOrderResource($this->whenLoaded('skuable')),
             ],
             parent::toArray($request),
         );

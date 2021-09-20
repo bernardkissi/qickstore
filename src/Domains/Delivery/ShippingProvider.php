@@ -15,16 +15,16 @@ class ShippingProvider extends Model implements HasMedia
     InteractsWithMedia;
 
     /**
-    * Fillable properties of the model.
-    *
-    * @var array
-    */
+     * Fillable properties of the model.
+     *
+     * @var array
+     */
     protected $fillable = [
         'name',
         'description',
         'price',
         'constraints',
-        'slug'
+        'slug',
     ];
 
     /**
@@ -33,7 +33,7 @@ class ShippingProvider extends Model implements HasMedia
      * @var array
      */
     protected $casts = [
-        'constraints' => 'array'
+        'constraints' => 'array',
     ];
 
     /**

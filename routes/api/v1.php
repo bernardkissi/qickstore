@@ -5,8 +5,6 @@ namespace App;
 use Domain\Cart\Actions\CartActions;
 use Domain\Cart\Facade\Cart;
 use Domain\Delivery\Dispatchers\Dispatcher;
-use Domain\Delivery\Dispatchers\DispatchOrder;
-use Domain\Orders\Actions\OrderActions;
 use Domain\Orders\Actions\OrderCheckout;
 use Domain\Orders\Order;
 use Domain\Payments\Facade\Payment;
@@ -36,12 +34,12 @@ Route::post('/orders/{order}', function (Order $order) {
             Product::class,
             ProductVariation::class => ['product:id,name'],
         ]);
-    }]);
+    },
+    ]);
 
     //return $order;
     Dispatcher::dispatch($order);
 });
-
 
 Route::post('/create', function (Request $request) {
     return (new CreateProduct())
@@ -52,14 +50,13 @@ Route::post('/create', function (Request $request) {
         ->fetch();
 })->name('create');
 
-
 Route::get('download/{order}', function (Request $request, Order $order) {
     if (! $request->hasValidSignature()) {
         abort(401);
     }
     $files = $order->load(['products.media']);
 
-    if ($files->count()  > 1) {
+    if ($files->count() > 1) {
         $downloads = $files->products->map(function ($file) {
             return $file->getMedia('products');
         })->unique();

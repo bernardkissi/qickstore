@@ -10,10 +10,10 @@ use Domain\Orders\Order;
 class ShippedProcessor extends Processor
 {
     /**
-    * Class constructor
-    *
-    * @var Order $order
-    */
+     * Class constructor
+     *
+     * @var Order $order
+     */
     public function __construct(public Order $order)
     {
     }

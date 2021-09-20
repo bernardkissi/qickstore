@@ -3,7 +3,6 @@
 namespace Domain\Orders;
 
 use Domain\Delivery\Delivery;
-use Domain\Orders\OrderStatus;
 use Domain\Orders\Traits\HandlesMultipleDeliveryOrderTransition;
 use Domain\Orders\Traits\ManagesOrderDelivery;
 use Domain\Payments\Payment;
@@ -36,7 +35,7 @@ class Order extends Model
         'subtotal',
         'service',
         'error_message',
-        'instructions'
+        'instructions',
     ];
 
     /**

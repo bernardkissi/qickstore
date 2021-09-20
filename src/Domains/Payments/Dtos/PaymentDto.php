@@ -2,10 +2,9 @@
 
 namespace Domain\Payments\Dtos;
 
-use Cerbero\LaravelDto\Dto;
 use const Cerbero\Dto\IGNORE_UNKNOWN_PROPERTIES;
 use const Cerbero\Dto\PARTIAL;
-use Domain\Orders\Dtos\OrderData;
+use Cerbero\LaravelDto\Dto;
 
 /**
  * The data transfer object for the Payment model.

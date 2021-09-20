@@ -3,7 +3,6 @@
 namespace Service\Webhooks\Jobs;
 
 use Domain\Delivery\Webhooks\Actions\SwooveWebhookAction;
-use Exception;
 use Spatie\WebhookClient\ProcessWebhookJob;
 
 class DeliveryWebhookJob extends ProcessWebhookJob
@@ -19,11 +18,11 @@ class DeliveryWebhookJob extends ProcessWebhookJob
         $action::process($this->webhookCall->payload);
     }
 
-
     /**
      * Determines which action is to be used by the job
      *
      * @param string $signature_name
+     *
      * @return string
      */
     protected static function useAction(string $signature): string

@@ -39,7 +39,7 @@ class EventServiceProvider extends ServiceProvider
 
         OrderCreatedEvent::class => [
             EmptyCart::class,
-            CreatePayment::class
+            CreatePayment::class,
         ],
     ];
 

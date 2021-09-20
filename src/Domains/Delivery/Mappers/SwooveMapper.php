@@ -17,11 +17,12 @@ class SwooveMapper implements TransitionMapper
      * Map swoove states to internal delivery states.
      *
      * @param string $state
+     *
      * @return string
      */
     public function map(string $state): string
     {
-        $result = match ($state) {
+        return match ($state) {
             'Assigned' => Assigned::$name,
             'PickingUp' => PickingUp::$name,
             'PickedUp' => PickedUp::$name,
@@ -29,7 +30,5 @@ class SwooveMapper implements TransitionMapper
             'Delivered' => Delivered::$name,
             'Ended' => 'oh wow'
         };
-
-        return $result;
     }
 }

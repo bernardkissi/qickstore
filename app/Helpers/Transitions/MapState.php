@@ -2,7 +2,6 @@
 
 namespace App\Helpers\Transitions;
 
-use App\Helpers\Transitions\TransitionMapper;
 use Illuminate\Support\Facades\Facade;
 
 class MapState extends Facade

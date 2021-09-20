@@ -6,7 +6,6 @@ use Integration\Flutterwave\FlutterwaveRequest;
 
 class MakePayment extends FlutterwaveRequest
 {
-
     /**
      * Base url for the endpoint for the request
      *

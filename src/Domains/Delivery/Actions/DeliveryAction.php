@@ -13,6 +13,7 @@ class DeliveryAction
      * Download the file/s for a given order.
      *
      * @param Order $order
+     *
      * @return void
      */
     public function downloadMedia(Order $order)
@@ -21,7 +22,7 @@ class DeliveryAction
 
         $files = $order->load(['products.media']);
 
-        if ($files->count()  > 1) {
+        if ($files->count() > 1) {
             $downloads = $files->products->map(function ($file) {
                 return $file->getMedia('products');
             })->unique();

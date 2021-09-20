@@ -13,8 +13,6 @@ use Spatie\ModelStates\Events\StateChanged;
 
 class OrderStateChangeListener implements ShouldQueue
 {
-
-
     /**
      * Create the event listener.
      *

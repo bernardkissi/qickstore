@@ -16,11 +16,11 @@ class ArkselRequest extends Request
      */
     protected string $baseUrl = 'https://sms.arkesel.com/api/v2';
 
-
     /**
      * Attach api-token to request
      *
      * @param PendingRequest $request
+     *
      * @return void
      */
     protected function withRequest(PendingRequest $request): void

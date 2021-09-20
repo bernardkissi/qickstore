@@ -10,6 +10,7 @@ class DueDeliveryUpdateResource extends JsonResource
      * Transform the resource into an array.
      *
      * @param  \Illuminate\Http\Request  $request
+     *
      * @return array
      */
     public function toArray($request)
@@ -19,7 +20,7 @@ class DueDeliveryUpdateResource extends JsonResource
             'service' => $this->service,
             'delivery_code' => $this->delivery_code,
             'order' => $this->order->id,
-            'vendor' => '054306709'
+            'vendor' => '054306709',
         ];
     }
 }

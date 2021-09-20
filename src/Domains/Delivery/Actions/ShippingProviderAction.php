@@ -15,6 +15,7 @@ class ShippingProviderAction
      * Create a shipping service provider
      *
      * @param array $payload
+     *
      * @return void
      */
     public function createShippingService(array $payload): void
@@ -24,7 +25,7 @@ class ShippingProviderAction
             'slug' => Str::slug($name),
             'description' => $payload['description'],
             'price' => $payload['price'] ?? null,
-            'constraints' => $payload['constraints'] ? $payload['constraints']: null
+            'constraints' => $payload['constraints'] ? $payload['constraints'] : null,
         ]);
     }
 
@@ -43,6 +44,7 @@ class ShippingProviderAction
      *
      * @param ShippingProvider $provider
      * @param string $image
+     *
      * @return void
      */
     public function addLogo(ShippingProvider $provider, string $image): void
@@ -56,6 +58,7 @@ class ShippingProviderAction
      *
      * @param shippingProvider $provider
      * @param array $payload
+     *
      * @return void
      */
     public function updateShippingProvider(shippingProvider $provider, array $payload): void
@@ -71,6 +74,7 @@ class ShippingProviderAction
      * Delete shipping provider
      *
      * @param shippingProvider $provider
+     *
      * @return void
      */
     public function deleteShippingProvider(shippingProvider $provider): void

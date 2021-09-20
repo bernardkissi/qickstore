@@ -30,16 +30,16 @@ class Paystack implements PaymentableContract
      * Returns the payment request
      *
      * @param array $data
+     *
      * @return array
      */
     public function callback(string $reference): array
     {
         return VerifyPayment::build()
-        ->withQuery(['reference' => $reference])
-        ->send()
-        ->json();
+            ->withQuery(['reference' => $reference])
+            ->send()
+            ->json();
     }
-
 
     protected static function preparePayload(array $data)
     {

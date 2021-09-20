@@ -12,6 +12,7 @@ trait HasTransitionTimeline
      * Updates the state transistion history of the inherited model
      *
      * @param string $state
+     *
      * @return void
      */
     public function updateHistory(string $state): void
@@ -20,7 +21,7 @@ trait HasTransitionTimeline
         $history = Arr::add(
             $this->updated_from ??
             ['pending' => ['state' => 'pending', 'time' => $this->updated_at]],
-            "$from",
+            "${from}",
             ['state' => $from, 'time' => $this->updated_at]
         );
 

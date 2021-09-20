@@ -26,7 +26,6 @@ class SmsMessage
      */
     protected array $lines;
 
-
     /**
      * SmsMessage constructor.
      *
@@ -41,6 +40,7 @@ class SmsMessage
      * Write a message line
      *
      * @param string $line
+     *
      * @return self
      */
     public function line($line = ''): self
@@ -54,6 +54,7 @@ class SmsMessage
      *  Who recieves the sms
      *
      * @param [type] $to
+     *
      * @return self
      */
     public function to($to): self
@@ -67,6 +68,7 @@ class SmsMessage
      * Sender of the notification
      *
      * @param [type] $from
+     *
      * @return self
      */
     public function from($from): self
@@ -83,16 +85,16 @@ class SmsMessage
      */
     public function send(): mixed
     {
-        if (!$this->from || !$this->to || !count($this->lines)) {
+        if (! $this->from || ! $this->to || ! count($this->lines)) {
             throw new \Exception('Sms message is missing some values');
         }
 
         $data = [
             'sender' => $this->from,
             'recipients' => explode(',', $this->to),
-            'message' =>  implode('', $this->lines),
+            'message' => implode('', $this->lines),
             'schedule_at' => '',
-            'sandbox' => false
+            'sandbox' => false,
         ];
 
         return Sms::send($data);

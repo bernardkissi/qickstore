@@ -3,7 +3,6 @@
 namespace Domain\Orders\Listeners;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
 class EmptyCart implements ShouldQueue
 {
@@ -14,13 +13,14 @@ class EmptyCart implements ShouldQueue
      */
     public function __construct()
     {
-        //
+        
     }
 
     /**
      * Handle the event.
      *
      * @param  object  $event
+     *
      * @return void
      */
     public function handle($event)

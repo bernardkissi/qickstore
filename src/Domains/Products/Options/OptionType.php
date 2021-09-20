@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Domain\Products\Options;
 
 use Database\Factories\OptionTypeFactory;
-use Domain\Products\Options\Option;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;

@@ -6,7 +6,6 @@ use Integration\Paystack\PaystackRequest;
 
 class InitializePayment extends PaystackRequest
 {
-
     /**
      * Base url for the endpoint for the request
      *

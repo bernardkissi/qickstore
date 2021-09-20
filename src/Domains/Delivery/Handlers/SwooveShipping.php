@@ -3,7 +3,6 @@
 namespace Domain\Delivery\Handlers;
 
 use App\Helpers\Dispatchers\Dispatcher;
-use Domain\APIs\Swoove\Delivery\CreateDelivery;
 use Domain\Delivery\Traits\CanCreateDelivery;
 use Integration\Swoove\Delivery\DeliveryRequest;
 

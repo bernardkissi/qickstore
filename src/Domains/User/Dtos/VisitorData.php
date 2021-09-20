@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Domain\User\Dtos;
 
 use Carbon\Carbon;
-use Cerbero\LaravelDto\Dto;
 use const Cerbero\Dto\CAST_PRIMITIVES;
 use const Cerbero\Dto\PARTIAL;
+use Cerbero\LaravelDto\Dto;
 use Domain\Orders\Dtos\OrderData;
 
 /**

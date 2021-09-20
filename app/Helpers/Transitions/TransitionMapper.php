@@ -10,6 +10,7 @@ interface TransitionMapper
      * Map external states to internal state
      *
      * @param string $state
+     *
      * @return string
      */
     public function map(string $state): string;

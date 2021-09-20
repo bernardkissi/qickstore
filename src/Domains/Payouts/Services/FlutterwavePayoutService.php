@@ -24,8 +24,8 @@ class FlutterwavePayoutService implements PayableContract
     {
         dispatch(function () use ($data) {
             $response = SendPayout::build()
-            ->withData(static::data($data))
-            ->send();
+                ->withData(static::data($data))
+                ->send();
 
             if ($response->successful()) {
                 Payout::create(

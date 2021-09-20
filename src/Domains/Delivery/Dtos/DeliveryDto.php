@@ -3,9 +3,9 @@
 namespace Domain\Delivery\Dtos;
 
 use Carbon\Carbon;
+use const Cerbero\Dto\CAST_PRIMITIVES;
 use const Cerbero\Dto\IGNORE_UNKNOWN_PROPERTIES;
 use const Cerbero\Dto\PARTIAL;
-use const Cerbero\Dto\CAST_PRIMITIVES;
 use Cerbero\LaravelDto\Dto;
 
 /**

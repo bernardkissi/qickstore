@@ -2,12 +2,10 @@
 
 namespace Service\Webhooks\Jobs;
 
-use Illuminate\Support\Facades\Log;
 use Spatie\WebhookClient\ProcessWebhookJob;
 
 class PaymentWebhookJob extends ProcessWebhookJob
 {
-
     /**
      * Execute the job.
      *

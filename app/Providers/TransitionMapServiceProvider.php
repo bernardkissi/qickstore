@@ -30,7 +30,7 @@ class TransitionMapServiceProvider extends ServiceProvider implements Deferrable
      */
     public function boot()
     {
-        //
+        
     }
 
     /**

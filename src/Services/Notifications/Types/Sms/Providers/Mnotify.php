@@ -13,27 +13,29 @@ class Mnotify implements SmsContract
      *
      * @param string $message
      * @param array $numbers
+     *
      * @return void
      */
     public function send(array $data): array
     {
         return SendMnotifySms::build()
-        ->withData(MessageDto::make(
-            [
+            ->withData(MessageDto::make(
+                [
                 'sender' => 'bernard',
                 'recipient' => $data['recipients'],
                 'message' => 'A buyer just bought a t-shirt from your shop',
                 'schedule_date' => null,
-                'is_schedule' => false
+                'is_schedule' => false,
             ]
-        )->toArray())
-        ->send()->json();
+            )->toArray())
+            ->send()->json();
     }
 
     /**
      * Get message status
      *
      * @param string $messageId
+     *
      * @return array
      */
     public function getStatus(string $messageId): array
@@ -45,6 +47,7 @@ class Mnotify implements SmsContract
      * Webhook call route
      *
      * @param array $data
+     *
      * @return void
      */
     public function callback(array $data): void

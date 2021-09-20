@@ -21,13 +21,13 @@ class CartActions
         return Cart::cartContents()->additional(
             ['meta' => [
 
-                    'isEmpty' => Cart::isEmpty(),
-                    'subtotal' => Cart::subTotal(),
-                    'delivery_details' => Cart::withDelivery($query)->deliveryDetails(),
-                    'delivery_cost' =>Cart::deliveryCost(),
-                    'total' =>Cart::total(),
-                    'changed' => Cart::hasChanged(),
-                ],
+                'isEmpty' => Cart::isEmpty(),
+                'subtotal' => Cart::subTotal(),
+                'delivery_details' => Cart::withDelivery($query)->deliveryDetails(),
+                'delivery_cost' => Cart::deliveryCost(),
+                'total' => Cart::total(),
+                'changed' => Cart::hasChanged(),
+            ],
             ]
         );
     }

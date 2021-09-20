@@ -4,7 +4,6 @@ namespace Domain\Orders\Listeners;
 
 use Domain\Payments\Payment;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
 class CreatePayment implements ShouldQueue
 {
@@ -15,13 +14,14 @@ class CreatePayment implements ShouldQueue
      */
     public function __construct()
     {
-        //
+        
     }
 
     /**
      * Handle the event.
      *
      * @param  object  $event
+     *
      * @return void
      */
     public function handle($event)
@@ -34,7 +34,7 @@ class CreatePayment implements ShouldQueue
             'provider' => 'paystack',
             'channel' => 'mobile money',
             'amount' => $event->order->subtotal,
-            'order_id' => $event->order->id
+            'order_id' => $event->order->id,
         ]);
     }
 }

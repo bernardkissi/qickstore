@@ -25,7 +25,7 @@ class Payment extends Model
         'channel',
         'order_id',
         'access_code',
-        'pay_url'
+        'pay_url',
     ];
 
     /**

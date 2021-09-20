@@ -3,7 +3,6 @@
 namespace Domain\Products\Product;
 
 use Domain\Products\Product\Casts\Currency;
-use Domain\Products\Product\Product;
 use Domain\Products\Skus\Sku;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

@@ -20,13 +20,14 @@ class SendFileLinkToEmailNotification extends Notification implements ShouldQueu
      */
     public function __construct(public string $fileUrl)
     {
-        //
+        
     }
 
     /**
      * Get the notification's delivery channels.
      *
      * @param  mixed  $notifiable
+     *
      * @return array
      */
     public function via($notifiable)
@@ -35,45 +36,48 @@ class SendFileLinkToEmailNotification extends Notification implements ShouldQueu
     }
 
     /**
-    * Get the mail representation of the notification.
-    *
-    * @param  mixed  $notifiable
-    * @return MailMessage
-    */
+     * Get the mail representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     *
+     * @return MailMessage
+     */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
-                ->greeting('Hello!')
-                ->line('One of your invoices has been paid!')
-                ->action('Download File', $this->fileUrl)
-                ->line('Thank you for using our application!');
+        return (new MailMessage())
+            ->greeting('Hello!')
+            ->line('One of your invoices has been paid!')
+            ->action('Download File', $this->fileUrl)
+            ->line('Thank you for using our application!');
     }
 
     /**
      * Get the sms representation of the notification.
      *
      * @param  mixed  $notifiable
+     *
      * @return SmsMessage
      */
     public function toSms($notifiable)
     {
-        return (new SmsMessage)
-                ->from('Techshops')
-                ->to('0543063709')
-                ->line('Please an order has been successfully made')
-                ->line("click here to download $this->fileUrl");
+        return (new SmsMessage())
+            ->from('Techshops')
+            ->to('0543063709')
+            ->line('Please an order has been successfully made')
+            ->line("click here to download {$this->fileUrl}");
     }
 
     /**
      * Get the array representation of the notification.
      *
      * @param  mixed  $notifiable
+     *
      * @return array
      */
     public function toArray($notifiable)
     {
         return [
-            //
+
         ];
     }
 }

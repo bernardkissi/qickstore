@@ -11,18 +11,18 @@ use Spatie\WebhookClient\WebhookConfig;
 class WebhookHandler extends WebhookCall
 {
     /**
-    *  Custom model table
-    *
-    * @var string
-    */
+     *  Custom model table
+     *
+     * @var string
+     */
     protected $table = 'webhook_calls';
-
 
     /**
      * Saves webhooks payload into our datastore
      *
      * @param WebhookConfig $config
      * @param Request $request
+     *
      * @return WebhookCall
      */
     public static function storeWebhook(WebhookConfig $config, Request $request): WebhookCall

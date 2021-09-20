@@ -10,7 +10,6 @@ use Domain\Products\Categories\Category;
 use Domain\Products\Collections\Models\Collection;
 use Domain\Products\Options\Option;
 use Domain\Products\Product\Casts\Currency;
-use Domain\Products\Product\ProductVariation;
 use Domain\Products\Product\Scopes\Scoper;
 use Domain\Products\Skus\Sku;
 use Illuminate\Database\Eloquent\Builder;

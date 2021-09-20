@@ -13,6 +13,7 @@ class Arksel implements VoiceContract
      * Make call to a number.
      *
      * @param array $data
+     *
      * @return array
      */
     public function call(array $data): array
@@ -20,18 +21,18 @@ class Arksel implements VoiceContract
         $payload = $this->formData($data);
 
         $res = MakeArkselCall::build()
-        ->attachMedia()
-        ->withData($payload)
-        ->send();
+            ->attachMedia()
+            ->withData($payload)
+            ->send();
 
         return $res->json();
     }
-
 
     /**
      * Format form data into supported Mulitpart format
      *
      * @param array $data
+     *
      * @return array
      */
     protected function formData(array $data): array
@@ -39,7 +40,7 @@ class Arksel implements VoiceContract
         $output = [];
 
         foreach ($data as $key => $value) {
-            if (!is_array($value)) {
+            if (! is_array($value)) {
                 $output[] = ['name' => $key, 'contents' => $value];
                 continue;
             }

@@ -20,6 +20,7 @@ class PaystackRequest extends Request
      * Attach api-token to request
      *
      * @param PendingRequest $request
+     *
      * @return void
      */
     protected function withRequest(PendingRequest $request): void
