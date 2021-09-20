@@ -4,8 +4,9 @@ namespace Domain\Payments\Gateways;
 
 use Domain\Payments\Contract\PaymentableContract;
 use Domain\Payments\Dtos\PaymentDto;
+use Illuminate\Support\Str;
 use Integration\Paystack\Payments\InitializePayment;
-use Integration\Paystack\Payments\PaystackPaymentPayload;
+use Integration\Paystack\Payments\VerifyPayment;
 
 class Paystack implements PaymentableContract
 {
@@ -20,7 +21,7 @@ class Paystack implements PaymentableContract
     {
         $payload = PaymentDto::make($data)->toArray();
         return InitializePayment::build()
-            ->withData(PaystackPaymentPayload::payload($payload))
+            ->withData(static::preparePayload($payload))
             ->send()
             ->json();
     }
@@ -31,7 +32,27 @@ class Paystack implements PaymentableContract
      * @param array $data
      * @return array
      */
-    public function callback(): void
+    public function callback(string $reference): array
     {
+        return VerifyPayment::build()
+        ->withQuery(['reference' => $reference])
+        ->send()
+        ->json();
+    }
+
+
+    protected static function preparePayload(array $data)
+    {
+        return PaymentDto::make([
+            'amount' => $data['amount'],
+            'currency' => 'GHS',
+            'reference' => (string) Str::uuid(),
+            'email' => $data['email'],
+            'callback_url' => route('home'),
+            'metadata' => [
+                'order_id' => $data['id'],
+                'has_subscription' => $data['has_subscription'],
+            ],
+        ])->toArray();
     }
 }

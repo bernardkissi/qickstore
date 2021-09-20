@@ -37,4 +37,14 @@ class Payment extends Model
     {
         return $this->belongsTo(Order::class);
     }
+
+    /**
+     * Returns an order of the payment
+     *
+     * @return Order
+     */
+    public function getOrder(): Order
+    {
+        return $this->order;
+    }
 }

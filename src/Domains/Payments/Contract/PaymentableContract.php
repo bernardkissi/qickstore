@@ -22,5 +22,5 @@ interface PaymentableContract
      * @param array $data
      * @return array
      */
-    public function callback(): void;
+    public function callback(string $data): array;
 }

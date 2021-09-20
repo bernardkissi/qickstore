@@ -24,7 +24,8 @@ class Flutterwave implements PaymentableContract
             ->json();
     }
 
-    public function callback(): void
+    public function callback(string $reference): array
     {
+        return [];
     }
 }
