@@ -2,7 +2,7 @@
 
 namespace Domain\Orders\Checkouts\Facade;
 
-use Domain\Orders\Checkouts\Contract\CheckoutableContract;
+use Domain\Orders\Checkouts\Contract\Checkoutable;
 use Illuminate\Support\Facades\Facade;
 
 class Checkout extends Facade
@@ -14,6 +14,6 @@ class Checkout extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return CheckoutableContract::class;
+        return Checkoutable::class;
     }
 }
