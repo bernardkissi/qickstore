@@ -7,7 +7,6 @@ namespace Domain\Orders\Actions;
 use Domain\Orders\Checkouts\Facade\Checkout;
 use Domain\Orders\Events\OrderCreatedEvent;
 use Domain\Orders\Order;
-use Domain\Payments\Facade\Payment;
 use Illuminate\Support\Facades\DB;
 
 class OrderCheckout
