@@ -17,21 +17,19 @@ class OrderCheckout
      * @param array $data
      * @return void
      */
-    public function checkout(array $data): array
+    public static function checkout(array $data): string|null
     {
         $url = null;
 
-        //DB::transaction(function () use ($data, &$url) {
-        $order = Checkout::createOrder($data);
-        $payload = array_merge(['id' => $order->id], $data);
+        DB::transaction(function () use ($data, &$url) {
+            $order = Checkout::createOrder($data);
+            $payload = array_merge(['id' => $order->id], $data);
 
-        $payment = Payment::Charge($payload);
-        event(new OrderCreatedEvent($order, $payment));
-        //$url = $payment['data']['authorization_url'];
-        //});
+            $payment = Payment::Charge($payload);
+            event(new OrderCreatedEvent($order, $payment));
+            $url = $payment['data']['authorization_url'];
+        });
 
-        return $payment;
-
-        //TODO: catch payment exception from controller
+        return $url;
     }
 }

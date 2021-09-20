@@ -6,7 +6,7 @@ namespace Domain\Orders\Checkouts\Contract;
 
 use Domain\Orders\Order;
 
-interface CheckoutableContract
+interface Checkoutable
 {
     /**
      * Create customer order

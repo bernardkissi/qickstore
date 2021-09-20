@@ -1,14 +1,16 @@
 <?php
 
-namespace Domain\Orders\Checkouts\Services;
+declare(strict_types=1);
+
+namespace Domain\Orders\Checkouts;
 
 use Domain\Cart\Facade\Cart;
-use Domain\Orders\Checkouts\Contract\CheckoutableContract;
+use Domain\Orders\Checkouts\Contract\Checkoutable;
 use Domain\Orders\Order;
 use Domain\User\User;
 use Domain\User\Visitor;
 
-class CheckoutService implements CheckoutableContract
+class StandardCheckout implements Checkoutable
 {
     /**
      * Class constructor
