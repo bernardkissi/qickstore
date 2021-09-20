@@ -7,6 +7,7 @@ namespace Domain\Orders\Checkouts;
 use Domain\Cart\Facade\Cart;
 use Domain\Orders\Checkouts\Contract\Checkoutable;
 use Domain\Orders\Order;
+use Domain\Payments\Facade\Payment;
 use Domain\User\User;
 use Domain\User\Visitor;
 
@@ -40,8 +41,8 @@ class StandardCheckout implements Checkoutable
      *
      * @return string
      */
-    public function payOrder(): string
+    public function payOrder(?array $payload): ?array
     {
-        return 'Are ready to pay for order? ....';
+        return Payment::Charge($payload);
     }
 }

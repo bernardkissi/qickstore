@@ -17,7 +17,7 @@ class OrderCreatedEvent
      *
      * @return void
      */
-    public function __construct(public Order $order, public array $payment)
+    public function __construct(public Order $order, public ?array $payment)
     {
     }
 

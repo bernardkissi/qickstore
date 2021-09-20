@@ -6,31 +6,33 @@ namespace Domain\Orders\Actions;
 
 use Domain\Orders\Checkouts\Facade\Checkout;
 use Domain\Orders\Events\OrderCreatedEvent;
+use Domain\Orders\Order;
 use Domain\Payments\Facade\Payment;
 use Illuminate\Support\Facades\DB;
 
 class OrderCheckout
 {
-    /**
-     * checkout users order
-     *
-     * @param array $data
-     *
-     * @return void
-     */
-    public static function checkout(array $data): string|null
+    public static function checkout(array $data): Order|string|null
     {
-        $url = null;
+        $response = null;
 
-        DB::transaction(function () use ($data, &$url) {
+        DB::transaction(function () use ($data, &$response) {
             $order = Checkout::createOrder($data);
-            $payload = array_merge(['id' => $order->id], $data);
 
-            $payment = Payment::Charge($payload);
+            $payload  = array_merge(['id' => $order->id], $data);
+            $payment = Checkout::payOrder($payload);
+
+            if (empty($payment)) {
+                $response = $order;
+            }
+
+            if ($payment) {
+                $response = $payment['data']['authorization_url'];
+            }
+
             event(new OrderCreatedEvent($order, $payment));
-            $url = $payment['data']['authorization_url'];
         });
 
-        return $url;
+        return $response;
     }
 }

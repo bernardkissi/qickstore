@@ -38,8 +38,8 @@ class CashlessCheckout implements Checkoutable
      *
      * @return string
      */
-    public function payOrder(): string
+    public function payOrder(?array $data): ?array
     {
-        return 'Are ready to pay for order? ....';
+        return null;
     }
 }

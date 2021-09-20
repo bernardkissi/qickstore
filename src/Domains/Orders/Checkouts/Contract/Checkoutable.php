@@ -20,5 +20,5 @@ interface Checkoutable
      *
      * @return string
      */
-    public function payOrder(): string;
+    public function payOrder(?array $payload): ?array;
 }
