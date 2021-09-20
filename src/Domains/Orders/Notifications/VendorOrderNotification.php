@@ -19,7 +19,6 @@ class VendorOrderNotification extends Notification implements ShouldQueue
      */
     public function __construct()
     {
-        
     }
 
     /**

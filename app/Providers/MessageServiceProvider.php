@@ -30,7 +30,6 @@ class MessageServiceProvider extends ServiceProvider implements DeferrableProvid
      */
     public function boot()
     {
-        
     }
 
     /**

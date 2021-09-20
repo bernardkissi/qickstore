@@ -18,7 +18,6 @@ class PaymentCreated
      */
     public function __construct()
     {
-        
     }
 
     /**

@@ -23,7 +23,6 @@ class PromptVendorForDeliveryNotification extends Notification implements Should
      */
     public function __construct(public Order | array $order)
     {
-        
     }
 
     /**

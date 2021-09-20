@@ -19,7 +19,6 @@ class NotifyCustomerJob implements ShouldQueue
      */
     public function __construct()
     {
-        
     }
 
     /**

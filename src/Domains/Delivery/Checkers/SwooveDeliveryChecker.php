@@ -6,6 +6,5 @@ class SwooveDeliveryChecker implements DeliveryChecker
 {
     public static function getUpdates(array $payload): void
     {
-        
     }
 }

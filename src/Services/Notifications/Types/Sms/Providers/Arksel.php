@@ -21,12 +21,12 @@ class Arksel implements SmsContract
         return SendArkselSms::build()
             ->withData(MessageDto::make(
                 [
-                'sender' => 'Techshops',
-                'recipients' => $data['recipients'],
-                'message' => $data['message'],
-                'schedule_at' => '',
-                'sandbox' => false,
-            ]
+                    'sender' => 'Techshops',
+                    'recipients' => $data['recipients'],
+                    'message' => $data['message'],
+                    'schedule_at' => '',
+                    'sandbox' => false,
+                ]
             )->toArray())
             ->send()->json();
     }

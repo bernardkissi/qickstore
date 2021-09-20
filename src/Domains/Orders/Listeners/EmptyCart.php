@@ -13,7 +13,6 @@ class EmptyCart implements ShouldQueue
      */
     public function __construct()
     {
-        
     }
 
     /**

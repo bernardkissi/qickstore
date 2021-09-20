@@ -21,12 +21,12 @@ class Mnotify implements SmsContract
         return SendMnotifySms::build()
             ->withData(MessageDto::make(
                 [
-                'sender' => 'bernard',
-                'recipient' => $data['recipients'],
-                'message' => 'A buyer just bought a t-shirt from your shop',
-                'schedule_date' => null,
-                'is_schedule' => false,
-            ]
+                    'sender' => 'bernard',
+                    'recipient' => $data['recipients'],
+                    'message' => 'A buyer just bought a t-shirt from your shop',
+                    'schedule_date' => null,
+                    'is_schedule' => false,
+                ]
             )->toArray())
             ->send()->json();
     }

@@ -18,7 +18,6 @@ class ReportDeliveryErrorNotification extends Notification
      */
     public function __construct()
     {
-        
     }
 
     /**

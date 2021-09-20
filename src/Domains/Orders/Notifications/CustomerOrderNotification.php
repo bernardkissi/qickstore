@@ -19,7 +19,6 @@ class CustomerOrderNotification extends Notification implements ShouldQueue
      */
     public function __construct(public string $message)
     {
-        
     }
 
     /**

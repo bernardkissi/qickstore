@@ -19,7 +19,6 @@ class RemindVendorToUpdateOrderNotification extends Notification
      */
     public function __construct(public string $vendors)
     {
-        
     }
 
     /**

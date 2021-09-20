@@ -30,7 +30,6 @@ class VoiceServiceProvider extends ServiceProvider implements DeferrableProvider
      */
     public function boot()
     {
-        
     }
 
     /**

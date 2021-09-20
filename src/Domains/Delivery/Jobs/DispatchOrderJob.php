@@ -35,7 +35,6 @@ class DispatchOrderJob implements ShouldQueue, ShouldBeUnique
      */
     public function __construct()
     {
-        
     }
 
     /**

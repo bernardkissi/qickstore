@@ -20,7 +20,6 @@ class SendFileLinkToEmailNotification extends Notification implements ShouldQueu
      */
     public function __construct(public string $fileUrl)
     {
-        
     }
 
     /**

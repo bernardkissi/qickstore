@@ -19,7 +19,6 @@ class VerifyOrderJob implements ShouldQueue
      */
     public function __construct(string $reference)
     {
-        
     }
 
     /**
@@ -29,6 +28,5 @@ class VerifyOrderJob implements ShouldQueue
      */
     public function handle()
     {
-        
     }
 }

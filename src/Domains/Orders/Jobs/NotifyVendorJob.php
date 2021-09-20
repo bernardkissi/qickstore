@@ -19,7 +19,6 @@ class NotifyVendorJob implements ShouldQueue
      */
     public function __construct()
     {
-        
     }
 
     /**
@@ -29,6 +28,5 @@ class NotifyVendorJob implements ShouldQueue
      */
     public function handle()
     {
-        
     }
 }

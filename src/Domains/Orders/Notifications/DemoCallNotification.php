@@ -19,7 +19,6 @@ class DemoCallNotification extends Notification implements ShouldQueue
      */
     public function __construct()
     {
-        
     }
 
     /**
