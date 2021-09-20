@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Delivery\Dispatchers;
+namespace Domain\Delivery\Handlers;
 
 use App\Helpers\Dispatchers\Dispatcher;
 use Domain\Delivery\Notifications\PromptVendorForDeliveryNotification;
@@ -8,7 +8,7 @@ use Domain\Delivery\Traits\CanCreateDelivery;
 use Domain\Services\Notifications\Channels\SmsChannel;
 use Illuminate\Support\Facades\Notification;
 
-class CustomVendorShipping extends Dispatcher
+class VendorShipping extends Dispatcher
 {
     use CanCreateDelivery;
 
