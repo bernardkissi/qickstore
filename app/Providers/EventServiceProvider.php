@@ -34,7 +34,7 @@ class EventServiceProvider extends ServiceProvider
         ],
 
         OrderCreatedEvent::class => [
-            EmptyCart::class,
+            // EmptyCart::class,
             CreatePayment::class,
         ],
     ];
