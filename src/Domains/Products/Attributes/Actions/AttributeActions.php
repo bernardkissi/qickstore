@@ -14,6 +14,13 @@ use Illuminate\Support\Str;
 class AttributeActions
 {
     /**
+     * Product filters
+     *
+     * @var array
+     */
+    private array $filters;
+
+    /**
      *  Store product filters
      *
      * @param  Product $product
@@ -31,7 +38,7 @@ class AttributeActions
     /**
      * Return filters under a category
      *
-     * @param  App\Domains\Categories\Models\Category $category
+     * @param Category $category
      *
      * @return array
      */
@@ -43,7 +50,7 @@ class AttributeActions
     /**
      * Delete a filter
      *
-     * @param  App\Domains\Filters\Models\Filter $filter
+     * @param Attribute $filter
      *
      * @return void
      */
@@ -73,7 +80,7 @@ class AttributeActions
     /**
      * Grouping filters
      *
-     * @param  Illuminate\Http\Resources\Json\AnonymousResourceCollection $filters
+     * @param AnonymousResourceCollection $filters
      *
      * @return array
      */
@@ -99,13 +106,12 @@ class AttributeActions
      */
     private function setFilters(array $arr, string $key): array
     {
-        $filters = [];
         foreach ($arr[$key] as $filter) {
-            $filters[] = [
+            $this->filters[] = [
                 'property_name' => Str::of($key)->lower(),
                 'property_value' => $filter,
             ];
         }
-        return $filters;
+        return $this->filters;
     }
 }

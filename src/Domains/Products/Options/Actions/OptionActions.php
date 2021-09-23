@@ -13,7 +13,7 @@ class OptionActions
     /**
      * @var array
      */
-    public function __construct(public array $options)
+    public function __construct(public array $options, public array $set_options = [])
     {
     }
 
@@ -65,14 +65,14 @@ class OptionActions
      */
     private function setOptions(string $key): bool | array
     {
-        $options = [];
+        $this->set_options = [];
         foreach ($this->options[$key] as $option) {
             if (! $this->optionExist($option, $key)) {
                 $options[] = ['name' => $option];
             }
             continue;
         }
-        return $options;
+        return $this->set_options = [];
     }
 
     /**
