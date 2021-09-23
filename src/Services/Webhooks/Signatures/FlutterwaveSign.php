@@ -28,7 +28,7 @@ class FlutterwaveSign extends Signature
 
         $signingSecret = $config->signingSecret;
 
-        if (empty($signingSecret)) {
+        if (! $signingSecret) {
             throw WebhookFailed::signingSecretNotSet();
         }
 

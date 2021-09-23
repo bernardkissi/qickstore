@@ -5,8 +5,11 @@ namespace App;
 use Domain\Cart\Actions\CartActions;
 use Domain\Cart\Facade\Cart;
 use Domain\Delivery\Dispatchers\Dispatcher;
+use Domain\Orders\Actions\OrderCancel;
 use Domain\Orders\Actions\OrderCheckout;
+use Domain\Orders\Jobs\VerifyOrderJob;
 use Domain\Orders\Order;
+use Domain\Payments\Actions\PaymentRetry;
 use Domain\Payments\Facade\Payment;
 use Domain\Products\Product\Actions\CreateProduct;
 use Domain\Products\Product\Product;
@@ -84,3 +87,10 @@ Route::get('cart/items', function (Request $request, Cart $cart) {
 Route::post('/orders', function (Request $request) {
     return (new OrderCheckout())->checkout($request->all());
 })->middleware(['customer', 'cart.empty'])->name('orders');
+
+Route::get('/verification', function (Request $request) {
+    ///return OrderVerification::verify($request->reference);
+    VerifyOrderJob::dispatch($request->reference);
+    //return PaymentRetry::getPaymentLink($request->reference);
+    //OrderCancel::cancel($request->reference);
+})->middleware('customer')->name('verification');

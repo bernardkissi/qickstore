@@ -93,9 +93,9 @@ class VerifyVisitorCustomer
      *
      * @return void
      */
-    public function setCacheVisitor(string $cookie, Visitor $visitor, int $seconds = 3600): void
+    public function setCacheVisitor(string $cookie, Visitor $visitor): void
     {
-        Cache::add($cookie, $visitor, $seconds);
+        Cache::add($cookie, $visitor, 3600);
     }
 
     /**
