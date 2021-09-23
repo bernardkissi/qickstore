@@ -26,6 +26,21 @@ class Payment extends Model
         'order_id',
         'access_code',
         'pay_url',
+        'history',
+        'currency',
+        'customer_code',
+        'authorization_code',
+        'ip_address',
+        'paid_at',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'history' => 'array',
     ];
 
     /**

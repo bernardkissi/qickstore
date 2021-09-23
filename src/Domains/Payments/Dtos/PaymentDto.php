@@ -28,6 +28,7 @@ use Cerbero\LaravelDto\Dto;
  * @property bool $has_subscription
  * @property int $invoice_limit
  * @property array $order
+ * @property array $metadata
  */
 class PaymentDto extends Dto
 {

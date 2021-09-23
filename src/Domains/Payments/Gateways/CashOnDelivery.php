@@ -20,7 +20,8 @@ class CashOnDelivery implements PaymentableContract
         return ['hello'];
     }
 
-    public function callback(): void
+    public function verify(string $reference): ?array
     {
+        return null;
     }
 }
