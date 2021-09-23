@@ -5,14 +5,12 @@ namespace App\Providers;
 use Domain\Orders\Events\OrderCreatedEvent;
 use Domain\Orders\Listeners\CreatePayment;
 use Domain\Orders\Listeners\EmptyCart;
-use Domain\Orders\Listeners\OrderPaymentFailed;
-use Domain\Orders\Listeners\OrderPaymentSuccessful;
-use Domain\Orders\Listeners\OrderStateChangeListener;
 use Domain\Payouts\Events\PayoutCompleted;
 use Domain\Payouts\Listeners\PayoutNotification;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Service\Modifiers\StateChangeProcessor;
 use Spatie\ModelStates\Events\StateChanged;
 
 class EventServiceProvider extends ServiceProvider
@@ -28,9 +26,7 @@ class EventServiceProvider extends ServiceProvider
         ],
 
         StateChanged::class => [
-            OrderPaymentSuccessful::class,
-            OrderPaymentFailed::class,
-            OrderStateChangeListener::class,
+            StateChangeProcessor::class,
         ],
 
         PayoutCompleted::class => [

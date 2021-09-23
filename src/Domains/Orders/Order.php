@@ -89,4 +89,18 @@ class Order extends Model
     {
         return $this->hasMany(Delivery::class);
     }
+
+    /**
+     * Model Booting method
+     *
+     * @return void
+     */
+    public static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($order) {
+            $order->status()->create([]);
+        });
+    }
 }

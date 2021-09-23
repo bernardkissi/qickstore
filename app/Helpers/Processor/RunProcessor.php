@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Helpers\Processor;
 
-use App\Core\Helpers\Processor\Processor;
+use App\Helpers\Processor\Processor;
 
 class RunProcessor
 {

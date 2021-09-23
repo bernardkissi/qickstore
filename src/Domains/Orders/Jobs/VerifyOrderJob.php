@@ -2,6 +2,8 @@
 
 namespace Domain\Orders\Jobs;
 
+use Domain\Payments\Facade\Payment as PaymentGateway;
+use Domain\Payments\Payment;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -17,7 +19,7 @@ class VerifyOrderJob implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(string $reference)
+    public function __construct(public string $reference)
     {
     }
 
@@ -26,7 +28,12 @@ class VerifyOrderJob implements ShouldQueue
      *
      * @return void
      */
-    public function handle()
+    public function handle(): void
     {
+        $data = PaymentGateway::verify($this->reference)['data'];
+        $payment = Payment::firstWhere('tx_ref', $this->reference);
+        PaymentGateway::updatePayment($payment, $data);
+        
+        // call payment event handle
     }
 }

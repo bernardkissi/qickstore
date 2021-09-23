@@ -12,6 +12,7 @@ use Spatie\ModelStates\State;
 #[
     AllowTransition(Pending::class, Paid::class),
     AllowTransition(Pending::class, Cancelled::class),
+    AllowTransition(Cancelled::class, Paid::class),
     AllowTransition(Pending::class, Failed::class, PendingToFailed::class),
     AllowTransition(Failed::class, Paid::class),
     AllowTransition(Processing::class, Shipped::class),
