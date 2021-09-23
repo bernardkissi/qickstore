@@ -12,11 +12,4 @@ class VerifyPayment extends PaystackRequest
      * @var string $baseUrl
      */
     protected string $method = 'GET';
-
-    /**
-     * Request path to the endpoint
-     *
-     * @var string $query
-     */
-    protected string $path = '/transaction/verify';
 }
