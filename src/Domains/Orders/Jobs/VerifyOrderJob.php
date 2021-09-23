@@ -33,7 +33,10 @@ class VerifyOrderJob implements ShouldQueue
         $data = PaymentGateway::verify($this->reference)['data'];
         $payment = Payment::firstWhere('tx_ref', $this->reference);
         PaymentGateway::updatePayment($payment, $data);
-        
+
+        if ($data) {
+            $payment->order->orderable->cart()->detach();
+        }
         // call payment event handle
     }
 }
