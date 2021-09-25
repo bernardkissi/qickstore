@@ -1,8 +1,8 @@
 <?php
 
-use Domain\Delivery\Dispatchers\CustomVendorShipping;
-use Domain\Delivery\Dispatchers\FileDelivery;
-use Domain\Delivery\Dispatchers\SwooveShipping;
+use Domain\Delivery\Handlers\FileDelivery;
+use Domain\Delivery\Handlers\SwooveShipping;
+use Domain\Delivery\Handlers\VendorShipping;
 
 return [
 
@@ -27,7 +27,7 @@ return [
     */
     'physical' => [
         'swoove' => SwooveShipping::class,
-        'custom' => CustomVendorShipping::class,
+        'custom' => VendorShipping::class,
         'gigs'   => null,
     ],
 
