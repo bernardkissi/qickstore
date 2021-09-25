@@ -4,6 +4,7 @@ namespace Domain\Delivery;
 
 use Carbon\Carbon;
 use Domain\Delivery\States\DeliveryState;
+use Domain\Delivery\Traits\CanTransitionDelivery;
 use Domain\Orders\Order;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,7 +14,10 @@ use Spatie\ModelStates\HasStates;
 
 class Delivery extends Model
 {
-    use HasFactory, HasStates;
+    use
+    HasFactory,
+    CanTransitionDelivery,
+    HasStates;
 
     /**
      * Fillable properties of the model.
@@ -66,20 +70,5 @@ class Delivery extends Model
     {
         return $query->whereNotIn('state', ['delivering', 'delivered'])
             ->where('updated_at', '<', Carbon::parse('-4 hours'));
-    }
-
-    /**
-     * Manually set the state of the delivery.
-     *
-     * @param string $state
-     *
-     * @return void
-     */
-    public function updateDeliveryStatus(string $state): void
-    {
-        if (! $this->state->canTransitionTo($state)) {
-            //throw an exception
-        }
-        $this->state->transitionTo($state);
     }
 }

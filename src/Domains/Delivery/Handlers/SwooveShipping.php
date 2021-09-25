@@ -4,6 +4,9 @@ namespace Domain\Delivery\Handlers;
 
 use App\Helpers\Dispatchers\Dispatcher;
 use Domain\Delivery\Traits\CanCreateDelivery;
+use Domain\Orders\Order;
+use Domain\Orders\States\Processing;
+use Illuminate\Support\Facades\DB;
 use Integration\Swoove\Delivery\DeliveryRequest;
 
 class SwooveShipping extends Dispatcher
@@ -38,14 +41,11 @@ class SwooveShipping extends Dispatcher
      */
     public function dispatch(): void
     {
-        $this->createDelivery($this->order);
+        DB::transaction(function () {
+            $this->createDelivery($this->order);
 
-        // $some = CreateDelivery::build()
-        // ->withData(static::data($this->order))
-        // ->send()
-        // ->json();
-
-        //send vendor notification after delivery is succesfully created
-        // customer will be notified by email/sms.
+            $order = Order::find($this->order['order_id']);
+            $order->transitionState('processing');
+        });
     }
 }

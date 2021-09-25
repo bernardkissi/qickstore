@@ -2,6 +2,8 @@
 
 namespace Domain\Delivery\Jobs;
 
+use Domain\Delivery\Dispatchers\Dispatcher;
+use Domain\Orders\Order;
 use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
@@ -33,8 +35,9 @@ class DispatchOrderJob implements ShouldQueue, ShouldBeUnique
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(
+        public Order $order
+    ) {
     }
 
     /**
@@ -54,6 +57,7 @@ class DispatchOrderJob implements ShouldQueue, ShouldBeUnique
      */
     public function handle(): void
     {
+        Dispatcher::dispatch($this->order);
     }
 
     /**
