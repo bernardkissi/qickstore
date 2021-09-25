@@ -8,6 +8,7 @@ use Domain\Orders\Processors\CompletedProcessor;
 use Domain\Orders\Processors\DeliveryProcessor;
 use Domain\Orders\Processors\FailedProcessor;
 use Domain\Orders\Processors\PaidProcessor;
+use Domain\Orders\Processors\ProcessedProcessor;
 use Domain\Orders\Processors\ShippedProcessor;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Spatie\ModelStates\Events\StateChanged;
@@ -36,6 +37,7 @@ class StateChangeProcessor implements ShouldQueue
 
         $processor = match ($state) {
             'paid'      => new PaidProcessor($event->model),
+            'processing' => new ProcessedProcessor($event->model),
             'failed'    => new FailedProcessor($event->model),
             'shipped'   => new ShippedProcessor($event->model),
             'delivered' => new DeliveryProcessor($event->model),
