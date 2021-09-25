@@ -4,6 +4,7 @@ namespace Domain\Orders\Jobs;
 
 use Domain\Orders\Order;
 use Domain\Payments\Facade\Payment as PaymentGateway;
+use Domain\Payments\Jobs\PaymentCompletedJob;
 use Domain\Payments\Payment;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -40,7 +41,5 @@ class VerifyOrderJob implements ShouldQueue
         if ($data) {
             $this->order->orderable->cart()->detach();
         }
-
-        // call payment event handle
     }
 }

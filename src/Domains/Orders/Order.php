@@ -3,7 +3,7 @@
 namespace Domain\Orders;
 
 use Domain\Delivery\Delivery;
-use Domain\Orders\Traits\HandlesMultipleDeliveryOrderTransition;
+use Domain\Orders\Traits\CanTransitionOrder;
 use Domain\Orders\Traits\ManagesOrderDelivery;
 use Domain\Payments\Payment;
 use Domain\Products\Skus\Sku;
@@ -20,7 +20,7 @@ class Order extends Model
     use
     HasFactory,
     ManagesOrderDelivery,
-    HandlesMultipleDeliveryOrderTransition,
+    CanTransitionOrder,
     Notifiable;
 
     /**

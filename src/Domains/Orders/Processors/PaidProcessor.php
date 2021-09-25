@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace Domain\Orders\Processors;
 
 use App\Helpers\Processor\Processor;
-use Domain\Orders\Order;
+use Domain\Orders\OrderStatus;
 
 class PaidProcessor extends Processor
 {
     /**
      * Class constructor
      *
-     * @var Order $order
+     * @var OrderStatus $order
      */
-    public function __construct(public Order $order)
+    public function __construct(public OrderStatus $order)
     {
     }
 
@@ -35,6 +35,6 @@ class PaidProcessor extends Processor
      */
     public function execute(): void
     {
-        dump($this->order);
+        var_dump('Paid: we notify customer and seller');
     }
 }

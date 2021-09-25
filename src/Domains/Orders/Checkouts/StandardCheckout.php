@@ -27,7 +27,7 @@ class StandardCheckout implements Checkoutable
         $order = $this->customer->orders()->create(
             [
                 'subtotal' => Cart::total()->getAmount(),
-                'service' => 'tracktry-logistics',
+                'service' => 'custom',
                 'something' => 'something',
             ]
         );

@@ -7,7 +7,7 @@ namespace Domain\Orders\Processors;
 use App\Helpers\Processor\Processor;
 use Domain\Orders\OrderStatus;
 
-class CompletedProcessor extends Processor
+class ProcessedProcessor extends Processor
 {
     /**
      * Class constructor
@@ -35,6 +35,6 @@ class CompletedProcessor extends Processor
      */
     public function execute(): void
     {
-        dump($this->order);
+        var_dump('notify_customer order is been processed and voice call seller');
     }
 }
