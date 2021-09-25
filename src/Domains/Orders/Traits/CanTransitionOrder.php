@@ -47,6 +47,7 @@ trait CanTransitionOrder
     {
         if ($status->state->canTransitionTo($state)) {
             $status->state->transitionTo($state);
+            $status->updateHistory($state);
         }
     }
 

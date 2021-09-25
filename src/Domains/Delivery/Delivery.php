@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Domain\Delivery\States\DeliveryState;
 use Domain\Delivery\Traits\CanTransitionDelivery;
 use Domain\Orders\Order;
+use Domain\Orders\Traits\HasTransitionTimeline;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -17,6 +18,7 @@ class Delivery extends Model
     use
     HasFactory,
     CanTransitionDelivery,
+    HasTransitionTimeline,
     HasStates;
 
     /**
@@ -40,6 +42,7 @@ class Delivery extends Model
         'error',
         'completed_at',
         'failed_at',
+        'updates'
     ];
 
     /**

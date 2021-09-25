@@ -6,7 +6,7 @@ Task 1 handle order process flow
 // 2. check if the the cart is not empty
 // 3. get items from cart
 // 4. create the order -- set the transition state to pending
-// make payment of the order -- after the webhook response we set order to state of paid
+// 5. make payment of the order -- after the webhook response we set order to state of paid
 
 //jobs behind the scene
 
@@ -506,3 +506,11 @@ payment successfull
             }
 
 ```
+
+// $some = CreateDelivery::build()
+        // ->withData(static::data($this->order))
+// ->send()
+// ->json();
+
+        //send vendor notification after delivery is succesfully created
+        // customer will be notified by email/sms.
