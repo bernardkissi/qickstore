@@ -4,7 +4,6 @@ namespace Domain\Delivery\Handlers;
 
 use App\Helpers\Dispatchers\Dispatcher;
 use Domain\Delivery\Notifications\SendFileLinkToEmailNotification;
-use Domain\Delivery\States\Delivered;
 use Domain\Delivery\Traits\CanCreateDelivery;
 use Domain\Orders\Order;
 use Illuminate\Support\Facades\DB;
@@ -51,7 +50,8 @@ class FileDelivery extends Dispatcher
             ->notify(new SendFileLinkToEmailNotification($url));
 
             $payload = array_merge($this->order, ['download_link' => $url]);
-            $this->createDelivery($payload);
+            $delivery = $this->createDelivery($payload);
+            $delivery->transitionDelivery('delivered');
 
             $order = Order::find($this->order['order_id']);
             $order->transitionState('delivered');

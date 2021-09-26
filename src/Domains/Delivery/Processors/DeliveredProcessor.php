@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Domains\Delivery\Processors;
+namespace Domain\Delivery\Processors;
 
 use App\Helpers\Processor\Processor;
 use Domain\Delivery\Delivery;
@@ -35,6 +35,6 @@ class DeliveredProcessor extends Processor
      */
     public function execute(): void
     {
-        dump($this->delivery);
+        var_dump('notify customer that delivery has been completed');
     }
 }

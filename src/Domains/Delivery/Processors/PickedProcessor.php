@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Domains\Delivery\Processors;
+namespace Domain\Delivery\Processors;
 
 use App\Helpers\Processor\Processor;
 use Domain\Delivery\Delivery;

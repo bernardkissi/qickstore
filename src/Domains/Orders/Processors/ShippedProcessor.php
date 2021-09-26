@@ -35,6 +35,6 @@ class ShippedProcessor extends Processor
      */
     public function execute(): void
     {
-        dump($this->order);
+        var_dump('order has been shipped');
     }
 }

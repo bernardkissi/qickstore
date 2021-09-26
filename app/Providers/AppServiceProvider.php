@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Relation::morphMap([
+        Relation::enforceMorphMap([
 
             'Product' => 'Domain\Products\Product\Product',
             'Variation' => 'Domain\Products\Product\ProductVariation',

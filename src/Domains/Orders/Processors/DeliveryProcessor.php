@@ -35,6 +35,6 @@ class DeliveryProcessor extends Processor
      */
     public function execute(): void
     {
-        dump($this->order);
+        var_dump('your entire is now completed: please rate your shopping experience');
     }
 }

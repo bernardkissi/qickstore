@@ -21,14 +21,14 @@ class DispatchOrderJob implements ShouldQueue, ShouldBeUnique
      *
      * @var int
      */
-    public $tries = 3;
+    public $tries = 1;
 
     /**
      * The maximum number of unhandled exceptions to allow before failing.
      *
      * @var int
      */
-    public $maxExceptions = 3;
+    public $maxExceptions = 1;
 
     /**
      * Create a new job instance.

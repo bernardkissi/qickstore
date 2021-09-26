@@ -2,15 +2,11 @@
 
 namespace Service\Modifiers;
 
-use App\Helpers\Processor\RunProcessor;
-use Domain\Orders\Processors\CancelledProcessor;
-use Domain\Orders\Processors\CompletedProcessor;
-use Domain\Orders\Processors\DeliveryProcessor;
-use Domain\Orders\Processors\FailedProcessor;
-use Domain\Orders\Processors\PaidProcessor;
-use Domain\Orders\Processors\ProcessedProcessor;
-use Domain\Orders\Processors\ShippedProcessor;
+use Domain\Delivery\Delivery;
+use Domain\Orders\OrderStatus;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Service\Modifiers\Handlers\DeliveryStateProcessor;
+use Service\Modifiers\Handlers\OrderStateProcessor;
 use Spatie\ModelStates\Events\StateChanged;
 
 class StateChangeProcessor implements ShouldQueue
@@ -35,16 +31,9 @@ class StateChangeProcessor implements ShouldQueue
     {
         $state = strval($event->finalState);
 
-        $processor = match ($state) {
-            'paid'      => new PaidProcessor($event->model),
-            'processing' => new ProcessedProcessor($event->model),
-            'failed'    => new FailedProcessor($event->model),
-            'shipped'   => new ShippedProcessor($event->model),
-            'delivered' => new DeliveryProcessor($event->model),
-            'completed' => new CompletedProcessor($event->model),
-            'cancelled' => new CancelledProcessor($event->model)
+        match (get_class($event->model)) {
+            'Domain\Delivery\Delivery' => DeliveryStateProcessor::process($event->model, $state),
+            'Domain\Orders\OrderStatus' => OrderStateProcessor::process($event->model, $state),
         };
-
-        RunProcessor::run($processor);
     }
 }

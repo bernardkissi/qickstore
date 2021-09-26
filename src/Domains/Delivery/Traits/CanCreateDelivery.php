@@ -9,9 +9,9 @@ use Illuminate\Support\Str;
 
 trait CanCreateDelivery
 {
-    public function createDelivery(array $payload): void
+    public function createDelivery(array $payload): Delivery
     {
-        Delivery::create([
+        $delivery = Delivery::create([
             'service' => $payload['service'],
             'order_id' => $payload['order_id'],
             'reference' => Str::uuid(),
@@ -23,5 +23,7 @@ trait CanCreateDelivery
             'agent_details' => $payload['agent_details'] ?? null,
             'vehicle' => $payload['vehicle'] ?? null,
         ]);
+
+        return $delivery;
     }
 }
