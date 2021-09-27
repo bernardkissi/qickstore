@@ -28,11 +28,11 @@ trait CanTransitionOrder
             )->min();
 
             $mapState = static::deliveryOrderStateMapping($value);
-            static::transition($status, $mapState);
+            $this->transition($status, $mapState);
         }
 
         if ($deliveries->count() <= 1) {
-            static::transition($status, $state);
+            $this->transition($status, $state);
         }
     }
 
@@ -43,14 +43,16 @@ trait CanTransitionOrder
      * @param string $state
      * @return void
      */
-    private static function transition(OrderStatus $status, string $state): void
+    public function transition(OrderStatus $status, string $state): bool
     {
         if ($status->state->canTransitionTo($state)) {
             $status->state->transitionTo($state);
-            $status->updateHistory($state);
+            $status->updateTimeline($state);
+            return true;
         }
+        return false;
     }
-
+ 
     /**
      * Map delivery status to order status
      *

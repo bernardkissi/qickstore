@@ -15,14 +15,13 @@ trait HasTransitionTimeline
      *
      * @return void
      */
-    public function updateHistory(string $state): void
+    public function updateTimeline(string $state): void
     {
         $from = $this->getOriginal('state');
         $history = Arr::add(
-            $this->updated_from ??
-            ['pending' => ['state' => 'pending', 'time' => $this->updated_at]],
+            $this->updated_from ?? ['pending' => ['state' => 'pending', 'time' => $this->created_at]],
             "${from}",
-            ['state' => $from, 'time' => $this->updated_at]
+            ['state' => $from, 'time' => now()]
         );
 
         $this->update(['state' => $state, 'updated_from' => $history]);
