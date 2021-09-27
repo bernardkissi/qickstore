@@ -21,6 +21,7 @@ use Spatie\ModelStates\State;
     AllowTransition(Paid::class, Delivered::class),
     AllowTransition(Shipped::class, Delivered::class),
     AllowTransition([Paid::class, Delivered::class], Refunded::class),
+    AllowTransition(Delivered::class, Completed::class),
     DefaultState(Pending::class),
 ]
 
