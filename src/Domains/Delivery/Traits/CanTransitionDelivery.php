@@ -10,7 +10,7 @@ trait CanTransitionDelivery
     {
         if ($this->state->canTransitionTo($state)) {
             $this->state->transitionTo($state);
-            $this->updateHistory($state);
+            $this->updateTimeline($state);
         }
     }
 }

@@ -38,7 +38,7 @@ class PaymentCompletedJob implements ShouldQueue
 
         if ($orderState->state->canTransitionTo(Paid::class)) {
             $orderState->state->transitionTo(Paid::class);
-            $orderState->updateHistory('paid');
+            $orderState->updateTimeline('paid');
         }
     }
 }

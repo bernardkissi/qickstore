@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Domain\Orders\Actions;
 
-use Domain\Delivery\Dispatchers\Dispatcher;
 use Domain\Delivery\Jobs\DispatchOrderJob;
 use Domain\Orders\Jobs\VerifyOrderJob;
 use Domain\Orders\Order;
@@ -18,6 +17,7 @@ class OrderVerification
     {
         $payment = Payment::firstWhere('tx_ref', $paymentReference);
         $order = $payment->getOrder();
+
 
         //if payment is already marked as paid
         // skip verificaition and print order
