@@ -57,7 +57,11 @@ class DispatchOrderJob implements ShouldQueue, ShouldBeUnique
      */
     public function handle(): void
     {
-        Dispatcher::dispatch($this->order);
+        $order = $this->order->loadCount('deliveries');
+
+        if ($order->deliveries_count <= 0) {
+            Dispatcher::dispatch($this->order);
+        }
     }
 
     /**
