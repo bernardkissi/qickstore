@@ -16,12 +16,17 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->foreignId('category_id')->nullable()->unsigned()->index()->constrained('categories');
-            $table->text('description')->nullable();
+            $table->string('name');
             $table->string('slug')->unique();
-            $table->integer('price')->nullable();
+            $table->text('description')->nullable();
+
+            $table->foreignId('category_id')->unsigned()->index()->nullable()->constrained('categories');
+
             $table->string('type')->nullable();
+            $table->boolean('is_active')->default(true);
+            $table->dateTime('is_scheduled_at')->nullable();
             $table->string('barcode')->nullable();
+
             $table->softDeletes();
             $table->timestamps();
         });

@@ -16,9 +16,7 @@ class CreateStocksTable extends Migration
         Schema::create('stocks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('sku_id')->unsigned()->index()->constrained('skus')->onDelete('cascade');
-            $table->integer('quantity')->unsigned();
-            $table->integer('min_stock')->default(0);
-            $table->boolean('unlimited')->default(false);
+            $table->integer('quantity')->unsigned()->default(0);
         });
     }
 

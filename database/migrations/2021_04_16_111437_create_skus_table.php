@@ -16,11 +16,12 @@ class CreateSkusTable extends Migration
         Schema::create('skus', function (Blueprint $table) {
             $table->id();
             $table->morphs('skuable');
-            $table->string('code')->unique();
+            $table->uuid('uuid')->unique();
             $table->integer('price');
+            $table->integer('compare_price')->nullable();
+
             $table->integer('min_stock')->default(0);
             $table->boolean('unlimited')->default(false);
-            $table->timestamps();
         });
     }
 
