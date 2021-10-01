@@ -15,8 +15,6 @@ return [
     | orders. eg. tickets, physical goods, files, etc.
     */
 
-
-
     /**
     * Process tickets generation for tickets orders
     */
@@ -45,6 +43,4 @@ return [
     * Process payments for courses orders
     */
     'course'   => null,
-
-
 ];
