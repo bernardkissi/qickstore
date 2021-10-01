@@ -15,13 +15,18 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid')->unique();
             $table->morphs('orderable');
-            $table->string('service');
+            $table->integer('items_count')->default(0);
             $table->foreignId('shipping_id')->unsigned()->index()->constrained('shipping_providers');
-            $table->integer('subtotal')->unsigned();
+            $table->foreignId('address_id')->unsigned()->index()->constrained('addresses');
+            $table->string('shipping_service')->default('custom');
+            $table->string('payment_gateway')->nullable();
+            $table->integer('total')->unsigned();
             $table->string('estimate_id')->nullable();
             $table->json('delivery_details')->nullable();
             $table->text('instructions')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -36,5 +41,3 @@ class CreateOrdersTable extends Migration
         Schema::dropIfExists('orders');
     }
 }
-
-// payment_method_id,

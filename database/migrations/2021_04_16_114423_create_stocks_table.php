@@ -17,7 +17,8 @@ class CreateStocksTable extends Migration
             $table->id();
             $table->foreignId('sku_id')->unsigned()->index()->constrained('skus')->onDelete('cascade');
             $table->integer('quantity')->unsigned();
-            $table->timestamps();
+            $table->integer('min_stock')->default(0);
+            $table->boolean('unlimited')->default(false);
         });
     }
 

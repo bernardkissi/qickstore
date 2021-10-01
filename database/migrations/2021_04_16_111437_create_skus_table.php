@@ -18,7 +18,7 @@ class CreateSkusTable extends Migration
             $table->morphs('skuable');
             $table->string('code')->unique();
             $table->integer('price');
-            $table->int('min_stock')->default(0);
+            $table->integer('min_stock')->default(0);
             $table->boolean('unlimited')->default(false);
             $table->timestamps();
         });

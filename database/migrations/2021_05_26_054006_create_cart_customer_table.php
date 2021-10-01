@@ -15,6 +15,7 @@ class CreateCartCustomerTable extends Migration
     {
         Schema::create('cart_customer', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid')->unique()->nullable();
             $table->morphs('cartable');
             $table->foreignId('sku_id')->unsigned()->index()->constrained('skus');
             $table->integer('quantity')->unsigned()->default(0);

@@ -15,13 +15,15 @@ class CreateShippingTable extends Migration
     {
         Schema::create('shipping_providers', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid')->unique();
             $table->string('name');
             $table->string('slug');
-            $table->enum('type', ['file', 'custom', 'system']);
+            $table->string('type')->nullable();
             $table->string('description')->nullable();
             $table->integer('price')->nullable();
             $table->json('constraints')->nullable();
             $table->boolean('isEnabled')->default(true);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -33,6 +35,8 @@ class CreateShippingTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('shipping_providers');
+        Schema::enableForeignKeyConstraints();
     }
 }

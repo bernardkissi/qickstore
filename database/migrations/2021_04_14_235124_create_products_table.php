@@ -15,8 +15,8 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            // $table->foreignId('category_id')->nullable()->unsigned()->index()->constrained('categories');
-            $table->string('name');
+            $table->uuid('uuid')->unique();
+            $table->foreignId('category_id')->nullable()->unsigned()->index()->constrained('categories');
             $table->text('description')->nullable();
             $table->string('slug')->unique();
             $table->integer('price')->nullable();
@@ -34,6 +34,8 @@ class CreateProductsTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('products');
+        Schema::enableForeignKeyConstraints();
     }
 }

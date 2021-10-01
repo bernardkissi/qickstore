@@ -15,8 +15,8 @@ class CreateOptionProductTable extends Migration
     {
         Schema::create('option_product', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('option_id')->unsigned()->index()->constrained('options');
-            $table->foreignId('product_id')->unsigned()->index()->constrained('products');
+            $table->foreignId('option_id')->unsigned()->index()->constrained('options')->cascadeOnDelete();
+            $table->foreignId('product_id')->unsigned()->index()->constrained('products')->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateOptionProductTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('option_type_product');
+        Schema::dropIfExists('option_product');
     }
 }

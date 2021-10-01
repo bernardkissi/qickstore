@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePaymentsTable extends Migration
+class CreateTranscationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class CreatePaymentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('payments', function (Blueprint $table) {
+        Schema::create('transcations', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid')->unique();
             $table->foreignId('order_id')->unsigned()->index()->constrained('orders');
             $table->string('tx_ref');
             $table->string('status');
@@ -36,6 +37,7 @@ class CreatePaymentsTable extends Migration
             $table->dateTime('paid_at')->nullable();
             $table->ipAddress('ip_address')->nullable();
             $table->boolean('has_subscription')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -47,6 +49,6 @@ class CreatePaymentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payments');
+        Schema::dropIfExists('transcations');
     }
 }

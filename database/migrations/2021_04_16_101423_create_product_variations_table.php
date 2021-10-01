@@ -34,6 +34,6 @@ class CreateProductVariationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products_variations');
+        Schema::dropIfExists('product_variations');
     }
 }

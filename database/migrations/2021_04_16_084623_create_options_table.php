@@ -15,7 +15,7 @@ class CreateOptionsTable extends Migration
     {
         Schema::create('options', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('option_type_id')->unsigned()->index()->constrained('option_types')->onDelete('cascade');
+            $table->foreignId('option_type_id')->unsigned()->index()->constrained('option_types');
             $table->string('name');
             $table->timestamps();
         });
@@ -28,6 +28,8 @@ class CreateOptionsTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('options');
+        Schema::enableForeignKeyConstraints();
     }
 }

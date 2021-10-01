@@ -15,9 +15,11 @@ class CreateDeliveriesTable extends Migration
     {
         Schema::create('deliveries', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid')->unique();
             $table->string('service');
             $table->foreignId('order_id')->unique()->unsigned()->index()->constrained('orders');
             $table->string('state');
+            $table->json('updates')->nullable();
             $table->string('reference');
             $table->string('batch_number')->nullable();
             $table->string('tracking_code')->unique();
