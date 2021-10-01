@@ -24,6 +24,7 @@ class Paystack implements PaymentableContract
     public function charge(array $data): array
     {
         $ref = (string) Str::uuid();
+
         return InitializePayment::build()
             ->withData(
                 PaymentDto::make([

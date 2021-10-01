@@ -6,10 +6,13 @@ use Domain\Orders\Order;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use JamesMills\Uuid\HasUuidTrait;
 
 class Payment extends Model
 {
-    use HasFactory;
+    use
+    HasUuidTrait,
+    HasFactory;
 
     /**
      * Fillable properties of the model
@@ -33,6 +36,13 @@ class Payment extends Model
         'ip_address',
         'paid_at',
     ];
+
+    /**
+     * Model table name
+     *
+     * @var string
+     */
+    protected $table = 'transcations';
 
     /**
      * The attributes that should be cast.

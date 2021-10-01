@@ -15,10 +15,12 @@ use Domain\Products\Skus\Sku;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use JamesMills\Uuid\HasUuidTrait;
 
 class Product extends Model
 {
     use
+    HasUuidTrait,
     HasFactory;
 
     /**

@@ -3,23 +3,27 @@
 namespace Domain\Orders;
 
 use Domain\Delivery\Delivery;
+use Domain\Delivery\ShippingProvider;
 use Domain\Orders\Traits\CanTransitionOrder;
 use Domain\Orders\Traits\ManagesOrderDelivery;
 use Domain\Payments\Payment;
 use Domain\Products\Skus\Sku;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Notifications\Notifiable;
+use JamesMills\Uuid\HasUuidTrait;
 
 class Order extends Model
 {
     use
     HasFactory,
     ManagesOrderDelivery,
+    HasUuidTrait,
     CanTransitionOrder,
     Notifiable;
 
@@ -88,6 +92,27 @@ class Order extends Model
     public function deliveries(): HasMany
     {
         return $this->hasMany(Delivery::class);
+    }
+
+    /**
+     * Returns the shipping provider ascociated with an order
+     *
+     * @return BelongsTo
+     */
+    public function shipping(): BelongsTo
+    {
+        return $this->belongsTo(ShippingProvider::class);
+    }
+
+
+    /**
+    * Returns the address associated with an order
+    *
+    * @return BelongsTo
+    */
+    public function address(): BelongsTo
+    {
+        return $this->belongsTo(Address::class);
     }
 
     /**
