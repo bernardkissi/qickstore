@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Domains\Products\Product\Models\Product;
+use Domain\Products\Product\Product;
 use Illuminate\Database\Seeder;
 
 class ProductSeeder extends Seeder
@@ -14,6 +14,11 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        Product::factory()->count(100)->hasSku()->create();
+        Product::factory()
+            ->count(10)
+            ->canBeDifferentProductTypes()
+            ->canBeAvailableAndUnavailable()
+            ->canScheduledAvailability()
+            ->create();
     }
 }
