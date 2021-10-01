@@ -2,8 +2,12 @@
 
 namespace Domain\Delivery;
 
+use Domain\Orders\Order;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use JamesMills\Uuid\HasUuidTrait;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -12,6 +16,8 @@ class ShippingProvider extends Model implements HasMedia
 {
     use
     HasFactory,
+    SoftDeletes,
+    HasUuidTrait,
     InteractsWithMedia;
 
     /**
@@ -49,5 +55,15 @@ class ShippingProvider extends Model implements HasMedia
             ->width(368)
             ->height(232)
             ->quality(70);
+    }
+
+    /**
+     * Return the orders of the shipping provider
+     *
+     * @return HasMany
+     */
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
     }
 }

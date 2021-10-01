@@ -73,6 +73,6 @@ class DispatchOrderJob implements ShouldQueue, ShouldBeUnique
      */
     public function failed(Exception $e): void
     {
-        $this->order->status->state->transitionTo(Failed::class, 'Failed to dispatch delivery');
+        $this->order->status->state->transitionTo(Failed::class, $e->getMessage());
     }
 }

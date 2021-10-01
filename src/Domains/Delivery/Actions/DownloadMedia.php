@@ -7,7 +7,7 @@ namespace Domain\Delivery\Actions;
 use Domain\Orders\Order;
 use Spatie\MediaLibrary\Support\MediaStream;
 
-class DeliveryAction
+class DownloadMedia
 {
     /**
      * Download the file/s for a given order.
@@ -16,7 +16,7 @@ class DeliveryAction
      *
      * @return void
      */
-    public function downloadMedia(Order $order)
+    public static function download(Order $order)
     {
         //TODO: Add signature check to the controller
 
