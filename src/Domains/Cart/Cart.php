@@ -5,6 +5,7 @@ namespace Domain\Cart;
 use Cknow\Money\Money;
 use Domain\Cart\Contracts\CartContract;
 use Domain\Cart\Resource\CartResource;
+use Domain\Delivery\ShippingProvider;
 use Domain\User\User;
 use Domain\User\Visitor;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -26,33 +27,58 @@ class Cart implements CartContract
      */
     protected array | null $delivery;
 
+
+    /**
+     * Shipping provider used
+     *
+     * @var ShippingProvider
+     */
+    protected ShippingProvider $shipping;
+
+
+    /**
+    * Number of items in cart
+    *
+    * @var Integer
+    */
+    protected int $ItemsCount = 0;
+
+
     /**
      * Class Constructor
      *
      * @param User|Visitor $customer
      */
-    public function __construct(public User | Visitor | null $customer)
-    {
+    public function __construct(
+        public User | Visitor | null $customer
+    ) {
     }
 
     /**
-     * Set Delivery on cart
+     * Set shipping on cart
      *
      * @param array|null $delivery
      *
      * @return self
      */
-    public function withDelivery(?array $delivery): self
+    public function withShipping(int $shippingId): self
     {
-        $type = key((array) $delivery);
+        $this->shipping = ShippingProvider::find($shippingId);
 
-        $option = match ($type) {
-            'swoove' => $delivery,
-            'hosted' => User::find($delivery['hosted']),
-            null => null
-        };
+        return $this;
+    }
 
-        $this->delivery = $option;
+    /**
+     * Set cart without shipping
+     *
+     * @param array|null $delivery
+     *
+     * @return self
+     */
+    public function withoutShipping(int $shippingId): self
+    {
+        $this->shipping = null;
+
         return $this;
     }
 
@@ -61,9 +87,9 @@ class Cart implements CartContract
      *
      * @return array|null
      */
-    public function deliveryDetails(): ?array
+    public function shippingDetails(): ShippingProvider
     {
-        return $this->delivery;
+        return $this->shipping;
     }
 
     /**
@@ -71,9 +97,9 @@ class Cart implements CartContract
      *
      * @return Money
      */
-    public function deliveryCost(): Money
+    public function shippingCost(): Money
     {
-        return Money::GHS($this->delivery['price'] ?? '0');
+        return Money::GHS($this->shipping->price ?? '0');
     }
 
     /**
@@ -163,6 +189,20 @@ class Cart implements CartContract
         return $this->changed;
     }
 
+
+    /**
+     * Get count items in cart
+     *
+     * @return integer
+     */
+    public function countItems(): int
+    {
+        $items = $this->customer->loadCount('cart');
+        $this->ItemsCount = $items->cart_count;
+
+        return $this->ItemsCount;
+    }
+
     /**
      *  Sync items in the cart with stock
      *
@@ -200,7 +240,7 @@ class Cart implements CartContract
      */
     public function total(): Money
     {
-        return $this->subTotal()->add(Money::GHS($this->delivery['price'] ?? '0'));
+        return $this->subTotal()->add(Money::GHS($this->shipping->price ?? '0'));
     }
 
     /**

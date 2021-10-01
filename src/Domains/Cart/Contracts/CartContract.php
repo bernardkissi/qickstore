@@ -92,7 +92,7 @@ interface CartContract
      *
      * @return Money
      */
-    public function deliveryCost(): Money;
+    public function shippingCost(): Money;
 
     /**
      * Check if which delivery option is to be used
@@ -101,5 +101,5 @@ interface CartContract
      *
      * @return self
      */
-    public function withDelivery(?array $delivery): self; // return a delivery model{self}
+    public function withShipping(int $shippingId): self;
 }

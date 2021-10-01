@@ -15,8 +15,10 @@ class CartResource extends JsonResource
      */
     public function toArray($request)
     {
+        $cart = SkuCartResource::collection($this->whenLoaded('cart'));
         return [
-            'cart' => SkuCartResource::collection($this->whenLoaded('cart')),
+            'cart_count' => $cart->count(),
+            'cart' => $cart,
         ];
     }
 }
