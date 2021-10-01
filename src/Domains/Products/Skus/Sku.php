@@ -36,9 +36,8 @@ class Sku extends Model implements HasMedia
      * @var array
      */
     protected $fillable = [
-
-        'code',
         'price',
+        'compare_price',
         'unlimited',
         'min_stock',
         'skuable_id',
@@ -53,6 +52,14 @@ class Sku extends Model implements HasMedia
     protected $casts = [
         'unlimited' => 'boolean',
     ];
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
     /**
      * Skuable model relationship
      *
