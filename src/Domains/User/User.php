@@ -5,6 +5,8 @@ namespace Domain\User;
 use Database\Factories\UserFactory;
 use Domain\Orders\Order;
 use Domain\Products\Skus\Sku;
+use Domain\User\Traits\HasAddress;
+use Domain\User\Traits\ManagesAddress;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
@@ -13,7 +15,11 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use
+    HasFactory,
+    Notifiable,
+    ManagesAddress,
+    HasAddress;
 
     /**
      * The attributes that are mass assignable.
@@ -64,6 +70,7 @@ class User extends Authenticatable
     {
         return $this->morphMany(Order::class, 'orderable');
     }
+
 
     /**
      * Create a new factory instance for the model.

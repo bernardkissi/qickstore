@@ -4,6 +4,8 @@ namespace Domain\User;
 
 use Domain\Orders\Order;
 use Domain\Products\Skus\Sku;
+use Domain\User\Traits\HasAddress;
+use Domain\User\Traits\ManagesAddress;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -11,7 +13,10 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Visitor extends Model
 {
-    use HasFactory;
+    use
+    HasFactory,
+    ManagesAddress,
+    HasAddress;
 
     /**
      * The attributes that are mass assignable.
