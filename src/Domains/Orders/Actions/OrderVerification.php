@@ -18,10 +18,6 @@ class OrderVerification
         $payment = Payment::firstWhere('tx_ref', $paymentReference);
         $order = $payment->getOrder();
 
-
-        //if payment is already marked as paid
-        // skip verificaition and print order
-
         Bus::chain([
             new VerifyOrderJob($paymentReference, $payment, $order),
             new PaymentCompletedJob($order, $payment),

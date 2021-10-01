@@ -32,7 +32,7 @@ class OrderManageStates
     }
 
     /**
-     * Returns all state an order has undergone through
+     * Returns all states an order has undergone through
      *
      * @param Order $order
      * @return array
