@@ -15,14 +15,12 @@ class CreateProductVariationsTable extends Migration
     {
         Schema::create('product_variations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->unsigned()->index()->constrained('products')->onDelete('cascade');
+            $table->uuid('uuid')->unique();
+            $table->foreignId('product_id')->unsigned()->index()->constrained('products')->cascadeOnDelete();
             $table->string('name');
-            $table->string('type');
-            $table->integer('price')->nullable();
+            $table->string('slug');
             $table->integer('order')->nullable();
             $table->json('properties')->nullable();
-            $table->string('identifier')->nullable();
-            $table->string('barcode')->nullable();
             $table->timestamps();
         });
     }

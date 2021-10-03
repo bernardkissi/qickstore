@@ -17,7 +17,6 @@ class CreateOptionProductTable extends Migration
             $table->id();
             $table->foreignId('option_id')->unsigned()->index()->constrained('options')->cascadeOnDelete();
             $table->foreignId('product_id')->unsigned()->index()->constrained('products')->cascadeOnDelete();
-            $table->timestamps();
         });
     }
 

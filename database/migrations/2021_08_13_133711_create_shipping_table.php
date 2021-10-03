@@ -16,13 +16,14 @@ class CreateShippingTable extends Migration
         Schema::create('shipping_providers', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
+            $table->foreignId('user_id')->unsigned()->index()->constrained()->cascadeOnDelete();
             $table->string('name');
             $table->string('slug');
             $table->string('type')->nullable();
             $table->string('description')->nullable();
             $table->integer('price')->nullable();
             $table->json('constraints')->nullable();
-            $table->boolean('isEnabled')->default(true);
+            $table->boolean('is_enabled')->default(true);
             $table->softDeletes();
             $table->timestamps();
         });
