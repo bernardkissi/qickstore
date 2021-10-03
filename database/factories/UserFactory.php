@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Domain\User\Address\Address;
 use Domain\User\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -42,6 +43,25 @@ class UserFactory extends Factory
             return [
                 'email_verified_at' => null,
             ];
+        });
+    }
+
+    /**
+    * Configure the model factory.
+    *
+    * @return $this
+    */
+    public function configure()
+    {
+        return $this->afterMaking(function (User $user) {
+            //
+        })->afterCreating(function (User $user) {
+            $user->addresses()->save(Address::factory()->haslimit()->create(
+                [
+                    'skuable_id' => $user->id,
+                    'skuable_type' => User::class
+                ]
+            ));
         });
     }
 }

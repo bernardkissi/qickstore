@@ -18,6 +18,8 @@ class CreateVisitorTable extends Migration
             $table->string('identifier');
             $table->string('mobile')->nullable();
             $table->string('email')->nullable();
+            $table->ipAddress('ip_address')->nullable();
+            $table->longText('user_agent')->nullable();
             $table->timestamps();
         });
     }
