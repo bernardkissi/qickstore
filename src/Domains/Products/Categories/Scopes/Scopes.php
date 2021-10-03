@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Domains\Products\Categories\Scopes;
+namespace Domain\Products\Categories\Scopes;
 
 use Illuminate\Database\Eloquent\Builder;
 

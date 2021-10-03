@@ -2,6 +2,7 @@
 
 namespace Domain\Products\Options;
 
+use Database\Factories\OptionFactory;
 use Domain\Products\Product\Models\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -37,5 +38,15 @@ class Option extends Model
     public function products()
     {
         return $this->belongsToMany(Product::class);
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    protected static function newFactory()
+    {
+        return OptionFactory::new();
     }
 }

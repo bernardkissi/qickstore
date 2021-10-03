@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Domain\Products\Categories;
 
-use App\Domains\Products\Attributes\Models\Attribute;
-use App\Domains\Products\Categories\Scopes\Scopes;
-use App\Domains\Products\Product\Models\Product;
 use Database\Factories\CategoryFactory;
+use Domain\Products\Attributes\Attribute;
+use Domain\Products\Categories\Scopes\Scopes;
+use Domain\Products\Product\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,7 +20,14 @@ class Category extends Model
      *
      * @var array
      */
-    protected $fillable = ['name','slug', 'order'];
+    protected $fillable = ['name','slug', 'order', 'parent_id'];
+
+    /**
+    * Indicates if the model should be timestamped.
+    *
+    * @var bool
+    */
+    public $timestamps = false;
 
     /**
      * Subcategory relationship
