@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use Domain\Products\Options\OptionType;
+use Domain\Delivery\ShippingProvider;
 use Illuminate\Database\Seeder;
 
-class OptionTypeSeeder extends Seeder
+class ShippingProviderSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,9 +14,9 @@ class OptionTypeSeeder extends Seeder
      */
     public function run()
     {
-        OptionType::factory()
+        ShippingProvider::factory()
             ->count(3)
-            ->canHaveDifferentInputTypes()
+            ->canBeEnabledOrDisabled()
             ->create();
     }
 }

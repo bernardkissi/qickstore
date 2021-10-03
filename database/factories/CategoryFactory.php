@@ -2,8 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Domains\Products\Categories\Models\Category;
+use Domain\Products\Categories\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Support\Str;
 
 class CategoryFactory extends Factory
@@ -28,13 +29,19 @@ class CategoryFactory extends Factory
         ];
     }
 
-
-    public function hasChildren()
+    /**
+     * Set up child child categories
+     *
+     * @return boolean
+     */
+    public function canHaveChildCategories()
     {
-        return $this->state(function (array $attributes) {
-            return [
-                'parent_id' => null,
-            ];
-        });
+        return $this->state(new Sequence(
+            ['parent_id' => '1'],
+            ['parent_id' => '2'],
+            ['parent_id' => '3'],
+            ['parent_id' => '4'],
+            ['parent_id' => null ],
+        ));
     }
 }

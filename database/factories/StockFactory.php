@@ -23,7 +23,7 @@ class StockFactory extends Factory
     public function definition()
     {
         return [
-            'quantity' => $this->faker->numberBetween(1, 100),
+            'quantity' => $this->faker->numberBetween(0, 100),
         ];
     }
 }

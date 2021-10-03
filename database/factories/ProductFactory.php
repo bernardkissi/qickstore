@@ -44,8 +44,7 @@ class ProductFactory extends Factory
         return $this->state(new Sequence(
             ['type' => 'digital'],
             ['type' => 'physical'],
-            ['type' => 'tickets'],
-            ['type' => null]
+            ['type' => 'tickets']
         ));
     }
 
@@ -77,6 +76,21 @@ class ProductFactory extends Factory
     }
 
     /**
+     * Can be made available or unavailable.
+     *
+     * @return boolean
+     */
+    public function canBelongToManyCategories()
+    {
+        return $this->state(new Sequence(
+            ['category_id' => 1],
+            ['category_id' => 2],
+            ['category_id' => 3],
+            ['category_id' => null]
+        ));
+    }
+
+    /**
      * Switch the visibility of the product.
      *
      * @return void
@@ -98,7 +112,7 @@ class ProductFactory extends Factory
         return $this->afterMaking(function (Product $product) {
             //
         })->afterCreating(function (Product $product) {
-            $product->sku()->save(Sku::factory()->create(
+            $product->sku()->save(Sku::factory()->haslimit()->create(
                 [
                     'skuable_id' => $product->id,
                     'skuable_type' => Product::class
