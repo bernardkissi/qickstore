@@ -56,10 +56,10 @@ class UserFactory extends Factory
         return $this->afterMaking(function (User $user) {
             //
         })->afterCreating(function (User $user) {
-            $user->addresses()->save(Address::factory()->haslimit()->create(
+            $user->addresses()->save(Address::factory()->canBeDefault()->create(
                 [
-                    'skuable_id' => $user->id,
-                    'skuable_type' => User::class
+                    'addressable_id' => $user->id,
+                    'addressable_type' => User::class
                 ]
             ));
         });

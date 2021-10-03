@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Domain\Products\Categories\Category;
 use Domain\Products\Product\Product;
 use Domain\Products\Skus\Sku;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -26,7 +27,8 @@ class ProductFactory extends Factory
     {
         $price = mt_rand(100, 500);
         return [
-
+            'category_id' => Category::factory()->create()->id,
+            'name' => $this->faker->name,
             'name' => $product = $this->faker->unique()->name(),
             'slug' => Str::slug($product),
             'description' => $this->faker->sentence(5),
@@ -75,20 +77,6 @@ class ProductFactory extends Factory
         ));
     }
 
-    /**
-     * Can be made available or unavailable.
-     *
-     * @return boolean
-     */
-    public function canBelongToManyCategories()
-    {
-        return $this->state(new Sequence(
-            ['category_id' => 1],
-            ['category_id' => 2],
-            ['category_id' => 3],
-            ['category_id' => null]
-        ));
-    }
 
     /**
      * Switch the visibility of the product.

@@ -37,6 +37,7 @@ class Product extends Model
         'status',
         'featured',
         'schedule_at',
+        'category_id'
     ];
 
     /**

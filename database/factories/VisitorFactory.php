@@ -41,10 +41,10 @@ class VisitorFactory extends Factory
         return $this->afterMaking(function (Visitor $visitor) {
             //
         })->afterCreating(function (Visitor $visitor) {
-            $visitor->addresses()->save(Address::factory()->haslimit()->create(
+            $visitor->addresses()->save(Address::factory()->canBeDefault()->create(
                 [
-                    'skuable_id' => $visitor->id,
-                    'skuable_type' => User::class
+                    'addressable_id' => $visitor->id,
+                    'addressable_type' => Visitor::class
                 ]
             ));
         });

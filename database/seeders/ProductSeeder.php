@@ -19,7 +19,6 @@ class ProductSeeder extends Seeder
             ->canBeDifferentProductTypes()
             ->canBeAvailableAndUnavailable()
             ->canScheduledAvailability()
-            ->canBelongToManyCategories()
             ->create();
     }
 }

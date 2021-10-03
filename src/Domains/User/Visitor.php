@@ -2,6 +2,7 @@
 
 namespace Domain\User;
 
+use Database\Factories\VisitorFactory;
 use Domain\Orders\Order;
 use Domain\Products\Skus\Sku;
 use Domain\User\Traits\HasAddress;
@@ -47,5 +48,15 @@ class Visitor extends Model
     public function orders(): MorphMany
     {
         return $this->morphMany(Order::class, 'orderable');
+    }
+
+    /**
+    * Create a new factory instance for the model.
+    *
+    * @return \Illuminate\Database\Eloquent\Factories\Factory
+    */
+    protected static function newFactory()
+    {
+        return VisitorFactory::new();
     }
 }

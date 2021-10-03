@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Model;
+use Domain\User\Address\Address;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 
@@ -13,7 +13,7 @@ class AddressFactory extends Factory
      *
      * @var string
      */
-    protected $model = Model::class;
+    protected $model = Address::class;
 
     /**
      * Define the model's default state.
@@ -24,10 +24,10 @@ class AddressFactory extends Factory
     {
         return [
             'city' => $this->faker->city,
-            'region' => $this->faker->unique()->randomElements(['Ashanti', 'Greater Accra', 'Eastern'])[0],
+            'region' => $this->faker->randomElements(['Ashanti', 'Greater Accra', 'Eastern'])[0],
             'state' => $this->faker->state,
             'country' => $this->faker->country,
-            'digital' => $this->faker->numberBetween(1000000, 9999999),
+            'digital_address' => $this->faker->numberBetween(1000000, 9999999),
 
             'firstname' => $this->faker->firstName,
             'lastname' => $this->faker->lastName,
@@ -41,7 +41,7 @@ class AddressFactory extends Factory
     *
     * @return boolean
     */
-    public function canHaveChildCategories()
+    public function canBeDefault()
     {
         return $this->state(new Sequence(
             ['is_default' => true],

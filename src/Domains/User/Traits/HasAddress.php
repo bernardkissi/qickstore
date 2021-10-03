@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Domain\User\Traits;
 
+use Domain\User\Address\Address;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 trait HasAddress
@@ -11,10 +12,10 @@ trait HasAddress
     /**
      * Return the user's addresses.
      *
-     * @return HasMany
+     * @return MorphMany
      */
     public function addresses(): MorphMany
     {
-        return $this->morphMany(Comment::class, 'addressable');
+        return $this->morphMany(Address::class, 'addressable');
     }
 }

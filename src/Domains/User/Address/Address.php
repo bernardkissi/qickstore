@@ -2,6 +2,7 @@
 
 namespace Domain\User\Address;
 
+use Database\Factories\AddressFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
@@ -42,6 +43,14 @@ class Address extends Model
     }
 
     /**
+    * Indicates if the model should be timestamped.
+    *
+    * @var bool
+    */
+    public $timestamps = false;
+
+
+    /**
     * Undocumented function
     *
     * @return void
@@ -49,5 +58,16 @@ class Address extends Model
     public static function boot(): void
     {
         parent::boot();
+    }
+
+
+    /**
+    * Create a new factory instance for the model.
+    *
+    * @return \Illuminate\Database\Eloquent\Factories\Factory
+    */
+    protected static function newFactory()
+    {
+        return AddressFactory::new();
     }
 }
