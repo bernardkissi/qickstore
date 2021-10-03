@@ -2,6 +2,7 @@
 
 namespace Domain\Delivery;
 
+use Database\Factories\ShippingProviderFactory;
 use Domain\Orders\Order;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -65,5 +66,15 @@ class ShippingProvider extends Model implements HasMedia
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
+    }
+
+    /**
+    * Create a new factory instance for the model.
+    *
+    * @return \Illuminate\Database\Eloquent\Factories\Factory
+    */
+    protected static function newFactory()
+    {
+        return ShippingProviderFactory::new();
     }
 }
