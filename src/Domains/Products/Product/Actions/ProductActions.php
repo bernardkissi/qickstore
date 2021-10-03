@@ -114,7 +114,6 @@ class ProductActions
         collect($request['variations'])->map(function ($variant) use ($product) {
             return tap($product->variations()->create([
 
-                'type' => $product->type,
                 'name' => $variant['name'],
                 'properties' => json_encode($variant['properties']),
                 'slug' => Str::slug($variant['name']),

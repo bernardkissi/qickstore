@@ -2,14 +2,21 @@
 
 namespace Domain\Products\Product;
 
+use Database\Factories\ProductVariationFactory;
 use Domain\Products\Product\Casts\Currency;
 use Domain\Products\Skus\Sku;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
+use JamesMills\Uuid\HasUuidTrait;
 
 class ProductVariation extends Model
 {
-    use HasFactory;
+    use
+    HasUuidTrait,
+    HasFactory;
 
     /**
      * Fillable properties of the model.
@@ -41,9 +48,9 @@ class ProductVariation extends Model
     /**
      *  Variation product relationship
      *
-     * @return Illuminate\Database\Eloquent\Concerns\belongsTo
+     * @return BelongsTo
      */
-    public function product()
+    public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
     }
@@ -51,10 +58,20 @@ class ProductVariation extends Model
     /**
      *  Product sku relationship
      *
-     * @return Illuminate\Database\Eloquent\Concerns\morphOne
+     * @return MorphOne
      */
-    public function sku()
+    public function sku(): MorphOne
     {
         return $this->morphOne(Sku::class, 'skuable');
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return Factory
+     */
+    protected static function newFactory(): Factory
+    {
+        return ProductVariationFactory::new();
     }
 }
