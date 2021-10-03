@@ -8,6 +8,7 @@ use Domain\Cart\Facade\Cart;
 use Domain\Orders\Checkouts\Contract\Checkoutable;
 use Domain\Orders\Order;
 use Domain\Payments\Facade\Payment;
+use Domain\User\Address\Address;
 use Domain\User\User;
 use Domain\User\Visitor;
 
@@ -24,11 +25,21 @@ class StandardCheckout implements Checkoutable
 
     public function createOrder(array $data): Order
     {
+        $shipping = $data['shipping_id'] !== null ?
+        Cart::withShipping($data['shipping_id']) : Cart::withoutShipping();
+
+        $addressId = $this->customer->createAddress($data['address'], $data['address_id']);
+
         $order = $this->customer->orders()->create(
             [
-                'subtotal' => Cart::total()->getAmount(),
-                'service' => 'custom',
-                'something' => 'something',
+                'total' => Cart::total()->getAmount(),
+                'items_count' => Cart::itemsCount(),
+                'shipping_id' => $shipping?->shippingDetails()->id,
+                'shipping_service' => $shipping?->shippingDetails()->type,
+                'delivery_cost' => Cart::shippingCost()->getAmount(),
+                'payment_gateway' => $data['gateway'],
+                'instructions' => $data['instructions'],
+                'address_id' => $addressId,
             ]
         );
         $order->products()->sync(Cart::products()->toCollect());
