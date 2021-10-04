@@ -23,9 +23,9 @@ class AddressFactory extends Factory
     public function definition()
     {
         return [
+            'full_address' => $this->faker->address,
             'city' => $this->faker->city,
-            'region' => $this->faker->randomElements(['Ashanti', 'Greater Accra', 'Eastern'])[0],
-            'state' => $this->faker->state,
+            'state' => $this->faker->randomElements(['Ashanti', 'Greater Accra', 'Eastern'])[0],
             'country' => $this->faker->country,
             'digital_address' => $this->faker->numberBetween(1000000, 9999999),
 

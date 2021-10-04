@@ -18,13 +18,16 @@ class CreateOrdersTable extends Migration
             $table->uuid('uuid')->unique();
             $table->morphs('orderable');
             $table->integer('items_count')->default(0);
+
             $table->foreignId('shipping_id')->unsigned()->index()->constrained('shipping_providers');
             $table->foreignId('address_id')->unsigned()->index()->constrained('addresses');
             $table->string('shipping_service')->default('custom');
+            $table->json('shipping_cost')->nullable();
+
             $table->string('payment_gateway')->nullable();
             $table->integer('total')->unsigned();
             $table->string('estimate_id')->nullable();
-            $table->json('delivery_details')->nullable();
+
             $table->text('instructions')->nullable();
             $table->softDeletes();
             $table->timestamps();

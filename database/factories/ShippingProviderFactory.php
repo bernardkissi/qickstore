@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Domain\Delivery\ShippingProvider;
+use Domain\User\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Support\Str;
@@ -26,8 +27,9 @@ class ShippingProviderFactory extends Factory
         return [
             'name' => $name = $this->faker->unique()->company,
             'slug' => Str::slug($name),
-            'type' => $this->faker->unique()->randomElement(['DHL', 'Swoove', 'Custom'])[0],
+            'type' => $this->faker->unique()->randomElements(['DHL', 'Swoove', 'Custom'])[0],
             'description' => $this->faker->sentence(5),
+            'price' => $this->faker->numberBetween(100, 1000),
         ];
     }
 
@@ -41,6 +43,15 @@ class ShippingProviderFactory extends Factory
         return $this->state(new Sequence(
             ['is_enabled' => true],
             ['is_enabled' => false],
+        ));
+    }
+
+
+    public function canBeGlobalOrCustom()
+    {
+        return $this->state(new Sequence(
+            ['user_id' => User::factory()->create()->id],
+            ['user_id' => null],
         ));
     }
 }

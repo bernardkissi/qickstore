@@ -17,16 +17,16 @@ class CreateAddressTable extends Migration
             $table->id();
             $table->morphs('addressable');
             $table->uuid('identifer')->unique()->nullable();
+            $table->string('full_address');
             $table->string('city');
-            $table->string('region');
             $table->string('digital_address')->nullable();
             $table->string('state')->nullable();
             $table->string('country')->nullable();
 
-            $table->string('firstname')->nullable();
-            $table->string('lastname')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('email')->nullable();
+            $table->string('firstname');
+            $table->string('lastname');
+            $table->string('phone');
+            $table->string('email');
             $table->boolean('is_default')->default(false);
         });
     }

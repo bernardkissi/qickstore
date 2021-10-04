@@ -16,6 +16,7 @@ class ShippingProviderSeeder extends Seeder
     {
         ShippingProvider::factory()
             ->count(3)
+            ->canBeGlobalOrCustom()
             ->canBeEnabledOrDisabled()
             ->create();
     }

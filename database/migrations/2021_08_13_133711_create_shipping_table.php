@@ -16,7 +16,7 @@ class CreateShippingTable extends Migration
         Schema::create('shipping_providers', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->foreignId('user_id')->unsigned()->index()->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->nullable()->unsigned()->index()->constrained()->cascadeOnDelete();
             $table->string('name');
             $table->string('slug');
             $table->string('type')->nullable();

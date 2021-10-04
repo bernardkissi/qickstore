@@ -32,6 +32,7 @@ class CreateDeliveriesTable extends Migration
             $table->json('vehicle')->nullable();
             $table->dateTime('completed_at')->nullable();
             $table->dateTime('failed_at')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
