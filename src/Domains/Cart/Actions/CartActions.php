@@ -18,14 +18,16 @@ class CartActions
      */
     public function getCart(array $query): JsonResource
     {
+        $shippingId = $query['shipping_id'] ?? null;
+
         return Cart::cartContents()->additional(
             ['meta' => [
-
-                'isEmpty' => Cart::isEmpty(),
-                'subtotal' => Cart::subTotal(),
-                'total' => Cart::total(),
-                'changed' => Cart::hasChanged(),
-            ],
+                    'isEmpty' => Cart::isEmpty(),
+                    'subtotal' => Cart::withShipping($shippingId)->subTotal(),
+                    'shipping' => Cart::shippingCost(),
+                    'total' => Cart::total(),
+                    'changed' => Cart::hasChanged(),
+                ],
             ]
         );
     }

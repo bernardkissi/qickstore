@@ -61,9 +61,11 @@ class Cart implements CartContract
      *
      * @return self
      */
-    public function withShipping(int $shippingId): self
+    public function withShipping(?int $shippingId): self
     {
-        $this->shipping = ShippingProvider::find($shippingId);
+        if ($shippingId) {
+            $this->shipping = ShippingProvider::find($shippingId);
+        }
 
         return $this;
     }
@@ -75,7 +77,7 @@ class Cart implements CartContract
      *
      * @return self
      */
-    public function withoutShipping(int $shippingId): self
+    public function withoutShipping(): self
     {
         $this->shipping = null;
 
