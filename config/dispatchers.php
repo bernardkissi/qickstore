@@ -1,5 +1,6 @@
 <?php
 
+use Domain\Delivery\Handlers\DHLShipping;
 use Domain\Delivery\Handlers\FileDelivery;
 use Domain\Delivery\Handlers\SwooveShipping;
 use Domain\Delivery\Handlers\VendorShipping;
@@ -25,6 +26,7 @@ return [
     */
     'physical' => [
         'swoove' => SwooveShipping::class,
+        'DHL' => DHLShipping::class,
         'custom' => VendorShipping::class,
         'gigs'   => null,
     ],
