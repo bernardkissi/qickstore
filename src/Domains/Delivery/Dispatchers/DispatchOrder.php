@@ -68,13 +68,13 @@ class DispatchOrder
     protected function extractOrderInfo(Order $order, Collection $items, int $num_of_groups): array
     {
         return [
-            'service' => $order->service ?? null,
+            'service' => $order->shipping_service ?? null,
             'order_id' => $order->id,
             'instructions' => $order->instructions ?? null,
             'customer_email' => $order->orderable->email,
             'customer_number' => $order->orderable->mobile,
             'count' => $num_of_groups,
-            'items' => $order->service === 'swoove' ? $items : null,
+            'items' => $order->shipping_service === 'swoove' || 'DHL' ? $items : null,
         ];
     }
 }
