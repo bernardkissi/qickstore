@@ -16,10 +16,9 @@ class OrderCheckout
         $response = null;
 
         DB::transaction(function () use ($data, &$response) {
-
             $order = Checkout::createOrder($data);
 
-            $payload = array_merge(['id' => $order->id], $data);
+            $payload = array_merge(['id' => $order->id, 'total' => $order->total], $data);
             $payment = Checkout::payOrder($payload);
 
             if (! $payment) {

@@ -17,22 +17,24 @@ trait ManagesAddress
      */
     public function createAddress(?array $address, ?int $addressId): Address
     {
-        $address = $this->addresses->select('id')
-            ->where('id', $addressId)->firstOr(function () use ($address) {
-                return $this->addresses()->create([
-                    'city' => $address['city'],
-                    'region' => $address['region'],
-                    'country' => $address['country'],
-                    'state' => $address['state'],
-                    'digital_address' => $address['digital_address'],
-                    'country' => $address['country'],
-                    'firstname' => $address['firstname'],
-                    'lastname' => $address['lastname'],
-                    'phone' => $address['phone'],
-                    'email' => $address['email'],
-                ])->id;
-            });
+        if ($addressId) {
+            $addr = $this->addresses->where('id', $addressId)->first();
+        }
 
-        return $address;
+        if ($address) {
+            $addr = $this->addresses()->create([
+                'city' => $address['city'],
+                'full_address' => $address['full_address'],
+                'country' => $address['country'],
+                'state' => $address['state'] ?? null,
+                'digital_address' => $address['digital_address'] ?? null,
+                'country' => $address['country'] ?? null,
+                'firstname' => $address['firstname'] ,
+                'lastname' => $address['lastname'],
+                'phone' => $address['phone'],
+                'email' => $address['email'],
+            ]);
+        }
+        return $addr;
     }
 }

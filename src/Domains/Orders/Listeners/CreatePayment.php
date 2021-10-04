@@ -33,7 +33,7 @@ class CreatePayment implements ShouldQueue
             'status' => $event->payment === null ? 'success' : 'pending',
             'provider' => $event->payment === null ? 'qickspace' : 'paystack',
             'channel' => $event->payment === null ? 'cashless' : 'mobile money',
-            'amount' => $event->order->subtotal,
+            'amount' => $event->order->total,
             'order_id' => $event->order->id,
         ]);
     }

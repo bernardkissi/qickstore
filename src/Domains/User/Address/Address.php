@@ -11,8 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Address extends Model
 {
     use
-    HasFactory,
-    SoftDeletes;
+    HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -20,10 +19,9 @@ class Address extends Model
      * @var array
      */
     protected $fillable = [
-        'fulladdress',
+        'full_address',
         'city',
         'state',
-        'region',
         'country',
         'digital address',
         'firstname',

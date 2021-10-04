@@ -36,9 +36,14 @@ class Order extends Model
 
         'status',
         'order_id',
-        'subtotal',
-        'service',
+        'total',
+        'items_count',
+        'shipping_id',
+        'address_id',
+        'shipping_service',
         'error_message',
+        'shipping_cost',
+        'payment_gateway',
         'instructions',
     ];
 
