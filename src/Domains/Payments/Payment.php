@@ -6,11 +6,13 @@ use Domain\Orders\Order;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use JamesMills\Uuid\HasUuidTrait;
 
 class Payment extends Model
 {
     use
+    SoftDeletes,
     HasUuidTrait,
     HasFactory;
 
@@ -35,6 +37,7 @@ class Payment extends Model
         'authorization_code',
         'ip_address',
         'paid_at',
+        'deleted_at'
     ];
 
     /**

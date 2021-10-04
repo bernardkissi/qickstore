@@ -28,7 +28,7 @@ class Paystack implements PaymentableContract
         return InitializePayment::build()
             ->withData(
                 PaymentDto::make([
-                    'amount'    => $data['amount'],
+                    'amount'    => (int) $data['total'],
                     'currency'  => 'GHS',
                     'reference' =>  $ref,
                     'email'     => $data['email'],
