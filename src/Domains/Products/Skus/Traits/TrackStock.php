@@ -13,7 +13,7 @@ trait TrackStock
      */
     public function inStock(): bool
     {
-        return $this->stockCount->stock > 0 || $this->unlimited;
+        return $this->stockCount->in_stock > 0;
     }
 
     /**
