@@ -35,6 +35,8 @@ class FailedProcessor extends Processor
      */
     public function execute(): void
     {
-        dump($this->delivery);
+        var_dump('notify seller the delivery failed');
+        var_dump('call/SMS customer to inform the delivery failed');
+        var_dump('notify adminstrators');
     }
 }

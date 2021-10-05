@@ -35,6 +35,6 @@ class ProcessedProcessor extends Processor
      */
     public function execute(): void
     {
-        var_dump('notify_customer order is been processed and voice call seller');
+        var_dump('notify_customer order is been processed');
     }
 }

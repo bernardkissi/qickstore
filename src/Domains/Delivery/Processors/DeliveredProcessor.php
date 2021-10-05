@@ -35,6 +35,7 @@ class DeliveredProcessor extends Processor
      */
     public function execute(): void
     {
-        var_dump('notify customer that delivery has been completed');
+        var_dump('notify seller that delivery has been completed');
+        var_dump('transition order to delivered');
     }
 }

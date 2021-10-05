@@ -35,6 +35,9 @@ class CompletedProcessor extends Processor
      */
     public function execute(): void
     {
-        dump($this->order);
+        var_dump('
+            Thank customer for shopping on your store
+            with suggested products similar to what he ordered
+        ');
     }
 }

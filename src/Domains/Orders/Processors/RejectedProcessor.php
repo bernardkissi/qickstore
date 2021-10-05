@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Domain\Delivery\Processors;
+namespace Domain\Orders\Processors;
 
 use App\Helpers\Processor\Processor;
-use Domain\Delivery\Delivery;
+use Domain\Orders\OrderStatus;
 
-class PickingProcessor extends Processor
+class RejectedProcessor extends Processor
 {
     /**
      * Class constructor
      *
-     * @var Order $order
+     * @var OrderStatus $order
      */
-    public function __construct(public Delivery $delivery)
+    public function __construct(public OrderStatus $order)
     {
     }
 
@@ -25,7 +25,7 @@ class PickingProcessor extends Processor
      */
     public function getInstance(): Processor
     {
-        return new self($this->delivery);
+        return new self($this->order);
     }
 
     /**
@@ -35,7 +35,6 @@ class PickingProcessor extends Processor
      */
     public function execute(): void
     {
-        var_dump('notify seller driver is picking up the package');
-        var_dump('notify customer driver is picking up his package');
+        var_dump('notify customer dispute was rejected with reason');
     }
 }

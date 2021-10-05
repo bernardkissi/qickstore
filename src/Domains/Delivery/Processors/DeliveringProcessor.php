@@ -35,6 +35,7 @@ class DeliveringProcessor extends Processor
      */
     public function execute(): void
     {
-        dump($this->delivery);
+        var_dump('notify the customer your package is on the way to be delivered');
+        var_dump('transition order to shipped');
     }
 }

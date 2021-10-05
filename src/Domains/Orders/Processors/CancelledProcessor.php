@@ -35,6 +35,7 @@ class CancelledProcessor extends Processor
      */
     public function execute(): void
     {
-        var_dump('Notify customer with payment link and seller to follow up');
+        var_dump('Notify customer with payment link to re-order.');
+        var_dump('Notify the seller an order has been cancelled');
     }
 }

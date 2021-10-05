@@ -35,6 +35,6 @@ class AssignedProcessor extends Processor
      */
     public function execute(): void
     {
-        dump($this->delivery);
+        var_dump('notify customer your delivery has been assigned to a driver');
     }
 }

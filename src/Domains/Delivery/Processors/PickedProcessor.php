@@ -35,6 +35,6 @@ class PickedProcessor extends Processor
      */
     public function execute(): void
     {
-        dump($this->delivery);
+        var_dump('notify the customer the item has been picked up');
     }
 }

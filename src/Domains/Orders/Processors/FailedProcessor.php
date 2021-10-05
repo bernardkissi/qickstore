@@ -34,6 +34,6 @@ class FailedProcessor extends Processor
      */
     public function execute(): void
     {
-        dump($this->order);
+        var_dump('notify administrators on slack');
     }
 }

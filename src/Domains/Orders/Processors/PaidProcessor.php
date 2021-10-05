@@ -35,6 +35,6 @@ class PaidProcessor extends Processor
      */
     public function execute(): void
     {
-        var_dump('Paid: we notify customer and seller');
+        var_dump('Notify customer with payment complete message and order details');
     }
 }

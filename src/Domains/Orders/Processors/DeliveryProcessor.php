@@ -35,6 +35,6 @@ class DeliveryProcessor extends Processor
      */
     public function execute(): void
     {
-        var_dump('your entire is now completed: please rate your shopping experience');
+        var_dump('Send customer with the satisfaction rating encrypted link');
     }
 }
