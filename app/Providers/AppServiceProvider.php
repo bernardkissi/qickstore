@@ -37,6 +37,8 @@ class AppServiceProvider extends ServiceProvider
             'User' => 'Domain\User\User',
             'Sku' => 'Domain\Products\Skus\Sku',
             'Visitor' => 'Domain\User\Visitor',
+            'Order' => 'Domain\Orders\Order',
+            'Payout' => 'Domain\Payouts\Payout'
         ]);
 
         AttributeResource::withoutWrapping();
