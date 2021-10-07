@@ -8,9 +8,11 @@ use App\Helpers\Processor\RunProcessor;
 use Domain\Orders\Processors\CancelledProcessor;
 use Domain\Orders\Processors\CompletedProcessor;
 use Domain\Orders\Processors\DeliveryProcessor;
+use Domain\Orders\Processors\DisputedProcessor;
 use Domain\Orders\Processors\FailedProcessor;
 use Domain\Orders\Processors\PaidProcessor;
 use Domain\Orders\Processors\ProcessedProcessor;
+use Domain\Orders\Processors\RefundedProcessor;
 use Domain\Orders\Processors\ShippedProcessor;
 use Illuminate\Database\Eloquent\Model;
 use Service\Modifiers\Handlers\Contract\StateProcessContract;
@@ -26,7 +28,9 @@ class OrderStateProcessor extends StateProcessContract
             'shipped'   => new ShippedProcessor($model),
             'delivered' => new DeliveryProcessor($model),
             'completed' => new CompletedProcessor($model),
-            'cancelled' => new CancelledProcessor($model)
+            'cancelled' => new CancelledProcessor($model),
+            'disputed' => new DisputedProcessor($model),
+            'refunded' => new RefundedProcessor($model),
         };
 
         RunProcessor::run($processor);
