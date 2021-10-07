@@ -8,12 +8,16 @@ use Domain\Orders\Traits\CanTransitionOrder;
 use Domain\Orders\Traits\ManagesOrderDelivery;
 use Domain\Payments\Payment;
 use Domain\Products\Skus\Sku;
+use Domain\Refunds\Dispute;
+use Domain\Refunds\Refund;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Notifications\Notifiable;
 use JamesMills\Uuid\HasUuidTrait;
@@ -121,6 +125,28 @@ class Order extends Model
     }
 
     /**
+     * Returns the refund for the order
+     *
+     * @return HasOneThrough
+     */
+    public function refund(): HasOneThrough
+    {
+        return $this->hasOneThrough(Refund::class, Dispute::class);
+    }
+
+
+    /**
+    *  Returns the dispute associated with an order
+    *
+    * @return MorphOne
+    */
+    public function dispute(): MorphOne
+    {
+        return $this->morphOne(Dispute::class, 'disputable');
+    }
+
+
+    /**
      * Model Booting method
      *
      * @return void
@@ -132,5 +158,11 @@ class Order extends Model
         static::created(function ($order) {
             $order->status()->create([]);
         });
+    }
+
+
+    public function getRouteKeyName()
+    {
+        return 'id';
     }
 }
