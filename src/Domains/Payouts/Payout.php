@@ -2,8 +2,10 @@
 
 namespace Domain\Payouts;
 
+use Domain\Refunds\Dispute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Payout extends Model
 {
@@ -29,4 +31,14 @@ class Payout extends Model
         'is_approved',
         'error',
     ];
+
+    /**
+    * Returns the dispute associated with a payout
+    *
+    * @return MorphOne
+    */
+    public function dispute(): MorphOne
+    {
+        return $this->morphOne(Dispute::class, 'disputable');
+    }
 }
