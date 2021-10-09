@@ -15,7 +15,7 @@ trait ResolveTrait
      *
      * @return string
      */
-    protected function resolveService(string $key, string $defaultkey, string $config_path): string
+    protected function resolveService(string $key, string $defaultkey = null, string $config_path): string
     {
         $service = request($key, $defaultkey);
         return config("${config_path}.${service}");
