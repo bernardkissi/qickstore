@@ -33,6 +33,7 @@ class CreateDispute
             if ($data['has_attachment']) {
                 $dispute->uploadAttachment($data['attachment']);
             }
+
             $order->transition($order->status, 'disputed');
         });
     }

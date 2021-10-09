@@ -17,7 +17,7 @@ class CreateOrderStatusTable extends Migration
             $table->id();
             $table->foreignId('order_id')->unsigned()->index()->constrained('orders');
             $table->string('state');
-            $table->json('updated_from')->nullable();
+            $table->json('history')->nullable();
             $table->dateTime('failed_at')->nullable();
             $table->dateTime('cancelled_at')->nullable();
             $table->dateTime('refunded_at')->nullable();

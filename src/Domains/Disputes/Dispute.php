@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace Domain\Disputes;
 
+use App\Traits\HasTimeline;
 use Domain\Disputes\DisputeAction;
+use Domain\Disputes\States\DisputeState;
 use Domain\Disputes\Traits\CanAttachFiles;
+use Domain\Disputes\Traits\CanTransitionDispute;
 use Domain\Refunds\Refund;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -15,6 +18,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\ModelStates\HasStates;
 
 class Dispute extends Model implements HasMedia
 {
@@ -22,6 +26,9 @@ class Dispute extends Model implements HasMedia
     SoftDeletes,
     InteractsWithMedia,
     CanAttachFiles,
+    HasTimeline,
+    HasStates,
+    CanTransitionDispute,
     HasFactory;
 
     /**
@@ -39,7 +46,8 @@ class Dispute extends Model implements HasMedia
         'has_attachment',
         'customer_mobile',
         'customer_email',
-        'status'
+        'state',
+        'history'
     ];
 
     /**
@@ -48,6 +56,15 @@ class Dispute extends Model implements HasMedia
     * @var string
     */
     protected $table = 'disputes';
+
+    /**
+     * Cast properties of the model
+     *
+     * @var array
+     */
+    protected $casts = [
+        'state' => DisputeState::class,
+    ];
 
     /**
      * Get the order that owns the order dispute.

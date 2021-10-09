@@ -24,7 +24,8 @@ class CreateDisputesTable extends Migration
             $table->boolean('has_attachment')->default(false);
             $table->string('customer_mobile');
             $table->string('customer_email')->nullable();
-            $table->enum('status', ['open', 'declined', 'accepted', 'resolved'])->default('open');
+            $table->json('history')->nullable();
+            $table->string('state');
             $table->softDeletes();
             $table->timestamps();
         });
