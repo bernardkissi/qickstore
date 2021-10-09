@@ -4,11 +4,11 @@ namespace Domain\Orders;
 
 use Domain\Delivery\Delivery;
 use Domain\Delivery\ShippingProvider;
+use Domain\Disputes\Dispute;
 use Domain\Orders\Traits\CanTransitionOrder;
 use Domain\Orders\Traits\ManagesOrderDelivery;
 use Domain\Payments\Payment;
 use Domain\Products\Skus\Sku;
-use Domain\Refunds\Dispute;
 use Domain\Refunds\Refund;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

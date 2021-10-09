@@ -19,11 +19,11 @@ trait HasTransitionTimeline
     {
         $from = $this->getOriginal('state');
         $history = Arr::add(
-            $this->updated_from ?? ['pending' => ['state' => 'pending', 'time' => $this->created_at]],
+            $this->history ?? ['pending' => ['state' => 'pending', 'time' => $this->created_at]],
             "${from}",
             ['state' => $from, 'time' => now()]
         );
 
-        $this->update(['state' => $state, 'updated_from' => $history]);
+        $this->update(['state' => $state, 'history' => $history]);
     }
 }
