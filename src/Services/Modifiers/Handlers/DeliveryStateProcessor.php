@@ -19,12 +19,12 @@ class DeliveryStateProcessor extends StateProcessContract
     public static function process(Model $model, string $state): void
     {
         $processor = match ($state) {
-            'paid' => new AssignedProcessor($model),
-            'processing' => new PickedProcessor($model),
-            'failed'    => new PickingProcessor($model),
-            'shipped'   => new DeliveringProcessor($model),
+            'assigned' => new AssignedProcessor($model),
+            'pickedup' => new PickedProcessor($model),
+            'pickingup'    => new PickingProcessor($model),
+            'delivering'   => new DeliveringProcessor($model),
             'delivered' => new DeliveredProcessor($model),
-            'completed' => new FailedProcessor($model),
+            'failed' => new FailedProcessor($model),
         };
 
         RunProcessor::run($processor);
