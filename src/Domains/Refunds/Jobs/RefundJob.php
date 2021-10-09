@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Orders\Jobs;
+namespace Domain\Refunds\Jobs;
 
 use Domain\Refunds\Refund;
 use Illuminate\Bus\Queueable;

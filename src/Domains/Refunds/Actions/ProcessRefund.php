@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Domain\Refunds\Actions;
 
-use Domain\Refunds\Dispute;
+use Domain\Disputes\Dispute;
 use Illuminate\Support\Facades\DB;
 
 class ProcessRefund
