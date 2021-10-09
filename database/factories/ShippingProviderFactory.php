@@ -27,7 +27,7 @@ class ShippingProviderFactory extends Factory
         return [
             'name' => $name = $this->faker->unique()->company,
             'slug' => Str::slug($name),
-            'type' => $this->faker->unique()->randomElements(['DHL', 'Swoove', 'Custom'])[0],
+            'type' => $this->faker->unique()->randomElements(['DHL', 'swoove', 'custom'])[0],
             'description' => $this->faker->sentence(5),
             'price' => $this->faker->numberBetween(100, 1000),
         ];
