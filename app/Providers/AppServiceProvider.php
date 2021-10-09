@@ -38,7 +38,9 @@ class AppServiceProvider extends ServiceProvider
             'Sku' => 'Domain\Products\Skus\Sku',
             'Visitor' => 'Domain\User\Visitor',
             'Order' => 'Domain\Orders\Order',
-            'Payout' => 'Domain\Payouts\Payout'
+            'Payout' => 'Domain\Payouts\Payout',
+            'Dispute' => 'Domain\Disputes\Dispute',
+            'DisputeAction' => 'Domain\Disputes\DisputeAction'
         ]);
 
         AttributeResource::withoutWrapping();

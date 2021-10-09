@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Domain\Disputes\Dispute;
+use Domain\Disputes\Observers\DisputeObserver;
 use Domain\Orders\Events\OrderCreatedEvent;
 use Domain\Orders\Listeners\CreatePayment;
 use Domain\Orders\Listeners\EmptyCart;
@@ -46,5 +48,6 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Dispute::observe(DisputeObserver::class);
     }
 }
