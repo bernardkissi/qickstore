@@ -2,11 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Domain\Refunds\Actions;
+namespace Domain\Disputes\Actions;
 
 use Domain\Orders\Order;
-use Domain\Refunds\Dispute;
-use File;
 use Illuminate\Support\Facades\DB;
 
 class CreateDispute

@@ -3,7 +3,7 @@
 namespace Domain\Disputes\Observers;
 
 use Domain\Disputes\DisputeAction;
-use Domain\Refunds\Jobs\PersitDisputeActionsJob;
+use Domain\Disputes\Jobs\PersitDisputeActionsJob;
 
 class DisputeActionObserver
 {

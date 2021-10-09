@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Refunds\Actions;
+namespace Domain\Disputes\Actions;
 
 use Domain\Disputes\DisputeAction;
 use Illuminate\Support\Facades\DB;

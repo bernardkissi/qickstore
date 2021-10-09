@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Domain\Disputes\Observers;
 
 use Domain\Disputes\Dispute;
-use Domain\Refunds\Jobs\PersitDisputeActionsJob;
+use Domain\Disputes\Jobs\PersitDisputeActionsJob;
 
 class DisputeObserver
 {

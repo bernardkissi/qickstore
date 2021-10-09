@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Refunds\Jobs;
+namespace Domain\Disputes\Jobs;
 
 use Domain\Disputes\Dispute;
 use Domain\Disputes\DisputeAction;

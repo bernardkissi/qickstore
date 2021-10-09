@@ -6,14 +6,14 @@ namespace Domain\Disputes\States;
 
 use Domain\Disputes\States\DisputeState;
 
-class Declined extends DisputeState
+class Resolved extends DisputeState
 {
     /**
      * Property name of this state in DB
      *
      * @var string
      */
-    public static $name = 'declined';
+    public static $name = 'resolved';
 
     /**
      * Returns the paid state of an order
@@ -22,6 +22,6 @@ class Declined extends DisputeState
      */
     public function status(): string
     {
-        return 'Dispute has been declined by merchant';
+        return 'Dispute has been resolved';
     }
 }
