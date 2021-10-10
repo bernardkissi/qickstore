@@ -6,15 +6,16 @@ namespace Domain\Disputes\Processors;
 
 use App\Helpers\Processor\Processor;
 use Domain\Disputes\Dispute;
+use Domain\Refunds\Refund;
 
-class ResolvedProcessor extends Processor
+class PendingProcessor extends Processor
 {
     /**
      * Class constructor
      *
      * @var Dispute $order
      */
-    public function __construct(public Dispute $dispute)
+    public function __construct(public Refund $refund)
     {
     }
 
@@ -25,7 +26,7 @@ class ResolvedProcessor extends Processor
      */
     public function getInstance(): Processor
     {
-        return new self($this->dispute);
+        return new self($this->refund);
     }
 
     /**
@@ -35,7 +36,6 @@ class ResolvedProcessor extends Processor
      */
     public function execute(): void
     {
-        dump('Your refund has been processed and dispute is closed');
-        dump('update order state to refunded');
+        dump('Your refund is been processed, details will fowarded to you soon!');
     }
 }

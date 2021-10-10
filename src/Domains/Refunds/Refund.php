@@ -2,17 +2,20 @@
 
 namespace Domain\Refunds;
 
-use Domain\Refunds\Dispute;
+use Domain\Disputes\Dispute;
+use Domain\Refunds\States\RefundState;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\ModelStates\HasStates;
 
 class Refund extends Model
 {
     use
     SoftDeletes,
+    HasStates,
     InteractsWithMedia,
     HasFactory;
 
@@ -29,7 +32,7 @@ class Refund extends Model
         'refund_amount',
         'refund_at',
         'transcation_reference',
-        'status'
+        'state'
     ];
 
     /**
@@ -38,6 +41,15 @@ class Refund extends Model
     * @var string
     */
     protected $table = 'refunds';
+
+    /**
+    * Cast properties of the model
+    *
+    * @var array
+    */
+    protected $casts = [
+        'state' => RefundState::class,
+    ];
 
     /**
      * Returns dispute for refund

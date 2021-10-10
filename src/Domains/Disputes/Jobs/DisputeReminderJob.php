@@ -38,7 +38,9 @@ class DisputeReminderJob implements ShouldQueue
 
         $contacts = implode(",", $contacts);
 
-        Notification::route(SmsChannel::class, $contacts)
+        if ($contacts) {
+            Notification::route(SmsChannel::class, $contacts)
             ->notify(new RemindDisputeWithoutResponse($contacts));
+        }
     }
 }

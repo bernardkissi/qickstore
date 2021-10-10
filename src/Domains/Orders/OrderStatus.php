@@ -27,7 +27,7 @@ class OrderStatus extends Model
         'cancelled_at',
         'failed_message',
         'cancelled_reason',
-        'updated_from',
+        'history',
     ];
 
     /**
