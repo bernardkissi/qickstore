@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Notification;
+use Illuminate\Support\Facades\Notification;
 use Service\Notifications\Channels\SmsChannel;
 
 class DisputeReminderJob implements ShouldQueue
