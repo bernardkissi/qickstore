@@ -22,7 +22,7 @@ class CreateOrderRefundsTable extends Migration
             $table->integer('refund_amount')->nullable();
             $table->dateTime('refund_at')->nullable();
             $table->dateTime('expected_at')->nullable();
-            $table->enum('status', ['pending', 'refunded'])->default('pending');
+            $table->string('state');
             $table->softDeletes();
             $table->timestamps();
         });
