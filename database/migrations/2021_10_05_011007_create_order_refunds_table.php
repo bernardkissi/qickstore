@@ -15,9 +15,9 @@ class CreateOrderRefundsTable extends Migration
     {
         Schema::create('refunds', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_dispute_id')->unsigned()->index()->constrained('disputes');
+            $table->foreignId('dispute_id')->unsigned()->index()->constrained('disputes');
             $table->string('transcation_reference');
-            $table->string('refund_reason');
+            $table->string('refund_reason')->nullable();
             $table->string('refund_id')->nullable();
             $table->integer('refund_amount')->nullable();
             $table->dateTime('refund_at')->nullable();

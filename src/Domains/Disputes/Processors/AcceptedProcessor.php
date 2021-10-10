@@ -6,6 +6,7 @@ namespace Domain\Disputes\Processors;
 
 use App\Helpers\Processor\Processor;
 use Domain\Disputes\Dispute;
+use Domain\Refunds\Actions\ProcessRefund;
 
 class AcceptedProcessor extends Processor
 {
@@ -35,6 +36,6 @@ class AcceptedProcessor extends Processor
      */
     public function execute(): void
     {
-        dump('disputed is accepted and refund details will forwarded to you soon!');
+        ProcessRefund::refund($this->dispute);
     }
 }

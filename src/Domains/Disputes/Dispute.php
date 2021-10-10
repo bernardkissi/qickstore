@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace Domain\Disputes;
 
 use App\Traits\HasTimeline;
+use Carbon\Carbon;
 use Domain\Disputes\DisputeAction;
 use Domain\Disputes\States\DisputeState;
 use Domain\Disputes\Traits\CanAttachFiles;
 use Domain\Disputes\Traits\CanTransitionDispute;
 use Domain\Refunds\Refund;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -94,5 +96,13 @@ class Dispute extends Model implements HasMedia
     public function actions(): HasMany
     {
         return $this->hasMany(DisputeAction::class);
+    }
+
+
+    public function scopeNoResponse($query): Builder
+    {
+        return $query->whereNull('merchant_response')
+                ->whereNotIn('state', ['accepted', 'declined', 'resolved'])
+                ->where('created_at', '<', Carbon::parse('-1 hours'));
     }
 }

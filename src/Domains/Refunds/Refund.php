@@ -22,10 +22,13 @@ class Refund extends Model
      * @var array
      */
     public $fillable = [
-        'order_dispute_id',
+        'dispute_id',
+        'refund_id',
+        'expected_at',
         'refund_reason',
         'refund_amount',
         'refund_at',
+        'transcation_reference',
         'status'
     ];
 

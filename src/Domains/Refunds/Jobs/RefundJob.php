@@ -2,6 +2,7 @@
 
 namespace Domain\Refunds\Jobs;
 
+use Carbon\Carbon;
 use Domain\Refunds\Refund;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -33,17 +34,22 @@ class RefundJob implements ShouldQueue
     {
         $refund = RefundPayment::build()
             ->withData([
-                'transcation' => $this->refund->transaction_reference,
+                'transaction' => $this->refund->transcation_reference,
                 'amount' => $this->refund->refund_amount,
                 'merchant_reason' => $this->refund->refund_reason,
             ])
             ->send()
             ->json();
 
-        $this->refund->update([
-            'status' => $refund['data']['status'],
-            'refund_reference' => $refund['data']['dispute'],
-            'refund_amount' => $refund['data']['amount'],
-        ]);
+        if ($refund['status']) {
+            $this->refund->update([
+                'status' => $refund['data']['status'],
+                'refund_amount' => $refund['data']['amount'],
+                'refund_reason' => $refund['data']['merchant_note'],
+                'expected_at' => Carbon::parse($refund['data']['expected_at'])->toDateTimeString(),
+                'refund_at' =>Carbon::parse($refund['data']['createdAt'])->toDateTimeString(),
+                'refund_id' => $refund['data']['id'],
+            ]);
+        }
     }
 }
