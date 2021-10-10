@@ -47,18 +47,6 @@ class Address extends Model
     */
     public $timestamps = false;
 
-
-    /**
-    * Undocumented function
-    *
-    * @return void
-    */
-    public static function boot(): void
-    {
-        parent::boot();
-    }
-
-
     /**
     * Create a new factory instance for the model.
     *
