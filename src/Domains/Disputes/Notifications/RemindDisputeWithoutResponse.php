@@ -2,12 +2,10 @@
 
 namespace Domain\Disputes\Notifications;
 
-use Domain\Disputes\Dispute;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Support\Str;
 use Service\Notifications\Channels\SmsChannel;
 use Service\Notifications\Types\Sms\SmsMessage;
 
@@ -47,7 +45,10 @@ class RemindDisputeWithoutResponse extends Notification
                     ->from('Techshops')
                     ->to($this->contacts)
                     ->line('Dear Merchant, ')
-                    ->line('A dispute has raised been against an order. Please respond to the dispute within 24 hours.');
+                    ->line(
+                        'A dispute has raised been against an order.
+                        Please respond to the dispute within 24 hours.'
+                    );
     }
 
     /**
