@@ -77,7 +77,7 @@ class Dispute extends Model implements HasMedia
     {
         return $this->morphTo();
     }
-
+    
     /**
      * Returns refund for dispute
      *

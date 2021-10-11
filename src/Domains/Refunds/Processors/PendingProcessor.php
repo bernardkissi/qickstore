@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Domain\Disputes\Processors;
+namespace Domain\Refunds\Processors;
 
 use App\Helpers\Processor\Processor;
 use Domain\Disputes\Dispute;
