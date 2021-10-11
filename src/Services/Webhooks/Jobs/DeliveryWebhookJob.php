@@ -3,6 +3,7 @@
 namespace Service\Webhooks\Jobs;
 
 use Domain\Delivery\Webhooks\Actions\SwooveWebhookAction;
+use Service\Webhooks\Actions\PaystackWebhookAction;
 use Spatie\WebhookClient\ProcessWebhookJob;
 
 class DeliveryWebhookJob extends ProcessWebhookJob
@@ -14,22 +15,9 @@ class DeliveryWebhookJob extends ProcessWebhookJob
      */
     public function handle()
     {
-        $action = self::useAction($this->webhookCall->signature);
-        $action::process($this->webhookCall->payload);
-    }
-
-    /**
-     * Determines which action is to be used by the job
-     *
-     * @param string $signature_name
-     *
-     * @return string
-     */
-    protected static function useAction(string $signature): string
-    {
-        return match ($signature) {
-            'swoove-hash' => SwooveWebhookAction::class,
-             default => 'No action found',
+        match ($this->webhookCall->signature) {
+            'x-paystack-signature' => PaystackWebhookAction::process($this->webhookCall->payload),
+              default => 'No action found',
         };
     }
 }

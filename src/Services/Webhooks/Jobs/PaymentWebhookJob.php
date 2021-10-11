@@ -2,6 +2,7 @@
 
 namespace Service\Webhooks\Jobs;
 
+use Service\Webhooks\Actions\PaystackWebhookAction;
 use Spatie\WebhookClient\ProcessWebhookJob;
 
 class PaymentWebhookJob extends ProcessWebhookJob
@@ -13,24 +14,9 @@ class PaymentWebhookJob extends ProcessWebhookJob
      */
     public function handle()
     {
-        var_dump('you hit me');
-
-        //update the payment model.
-
-        // transistion order to paid.
+        match ($this->webhookCall->signature) {
+            'x-paystack-signature' => PaystackWebhookAction::process($this->webhookCall->payload),
+              default => 'No action found',
+        };
     }
-
-    // /**
-    // * Determines which action is to be used by the job
-    // *
-    // * @param string $signature_name
-    // * @return string
-    // */
-    // protected static function useAction(string $signature): string
-    // {
-    //     return match ($signature) {
-    //         'swoove-hash' => SwooveWebhookAction::class,
-    //          default => 'No action found',
-    //     };
-    // }
 }
