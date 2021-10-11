@@ -106,9 +106,3 @@ jobs:
         run: vendor/bin/pest
         
         #run static analyser on code 
-      - name: Psalm – Static Analysis for PHP
-        uses: psalm/psalm-github-actions@1.1.2
-        with:
-          security_analysis: false
-          composer_require_dev: false
-          composer_ignore_platform_reqs: true
