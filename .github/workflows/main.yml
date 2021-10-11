@@ -104,3 +104,8 @@ jobs:
           DB_USER: root
 
         run: vendor/bin/pest
+        
+        #run static analyser on code 
+      - name: Psalm – Static Analysis for PHP
+        uses: psalm/psalm-github-actions@1.1.2
+
