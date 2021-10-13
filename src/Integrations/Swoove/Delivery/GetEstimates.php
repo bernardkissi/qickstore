@@ -6,7 +6,7 @@ namespace Integration\Swoove\Delivery;
 
 use Integration\Swoove\SwooveRequest;
 
-class CreateDelivery extends SwooveRequest
+class GetEstimates extends SwooveRequest
 {
     /**
      * Base url for the endpoint for the request
@@ -20,7 +20,7 @@ class CreateDelivery extends SwooveRequest
      *
      * @var string $query
      */
-    protected string $path = 'delivery/create-delivery';
+    protected string $path = 'estimates/create-estimate';
 
     /**
      * Data attached to the request

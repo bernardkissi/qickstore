@@ -3,15 +3,18 @@
 namespace Domain\Delivery\Handlers;
 
 use App\Helpers\Dispatchers\Dispatcher;
+use Domain\Delivery\Dtos\DeliveryDto;
 use Domain\Delivery\Traits\CanCreateDelivery;
 use Domain\Orders\Order;
-use Domain\Orders\States\Processing;
 use Illuminate\Support\Facades\DB;
-use Integration\Swoove\Delivery\DeliveryRequest;
+use Integration\Swoove\Delivery\CreateDelivery;
+use Integration\Swoove\Delivery\SwooveDto;
+
+use const Cerbero\Dto\CAMEL_CASE_ARRAY;
 
 class SwooveShipping extends Dispatcher
 {
-    use DeliveryRequest,CanCreateDelivery;
+    use CanCreateDelivery;
 
     /**
      * Class constructor
@@ -44,6 +47,12 @@ class SwooveShipping extends Dispatcher
         DB::transaction(function () {
             $this->createDelivery($this->order);
 
+            $some = CreateDelivery::build()
+                    ->withData(SwooveDto::deliveryTransferObject($this->order))
+                    ->send()
+                    ->json();
+
+            dump($some);
             $order = Order::find($this->order['order_id']);
             $order->transitionState('processing');
         });

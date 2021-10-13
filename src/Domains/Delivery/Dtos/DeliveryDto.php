@@ -18,7 +18,7 @@ use Cerbero\LaravelDto\Dto;
  * @property string $state
  * @property string $deliveryCode
  * @property string|null $clientCode
- * @property string|null $estimateId
+ * @property string|null $estimate_id
  * @property string|null $instructions
  * @property string|null $downloadLink
  * @property string|null $error
@@ -35,7 +35,7 @@ use Cerbero\LaravelDto\Dto;
  * @property array $dropoff
  * @property mixed $items
  * @property array $contact
- * @property string $estimate_id
+ * @property string $reference
  */
 class DeliveryDto extends Dto
 {
