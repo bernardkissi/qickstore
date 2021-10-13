@@ -15,19 +15,19 @@ class UpdatePayment
 
         if ($payment) {
             $payment->update([
-                'status' => $payload['status'],
-                'history' => $payload['log']['history'],
-                'provider_reference' => $payload['id'],
-                'currency' => $payload['currency'],
-                'customer_code' => $payload['customer']['customer_code'],
-                'authorization_code' => $payload['authorization']['authorization_code'],
-                'ip_address' => $payload['ip_address'],
-                'channel' => $payload['channel'],
-                'plan' => $payload['plan'],
-                'paid_at' => Carbon::parse($payload['paid_at']),
-                'has_subscription' => $payload['metadata']['has_subscription'],
-                'subaccount' => $payload['subaccount'],
-                'card_type' => $payload['authorization']['card_type'],
+                'status' => $payload['data']['status'],
+                'history' => $payload['data']['log']['history'],
+                'provider_reference' => $payload['data']['id'],
+                'currency' => $payload['data']['currency'],
+                'customer_code' => $payload['data']['customer']['customer_code'],
+                'authorization_code' => $payload['data']['authorization']['authorization_code'],
+                'ip_address' => $payload['data']['ip_address'],
+                'channel' => $payload['data']['channel'],
+                'plan' => $payload['data']['plan'],
+                'paid_at' => Carbon::parse($payload['data']['paid_at']),
+                'has_subscription' => $payload['data']['metadata']['has_subscription'],
+                'subaccount' => $payload['data']['subaccount'],
+                'card_type' => $payload['data']['authorization']['card_type'],
             ]);
         }
     }

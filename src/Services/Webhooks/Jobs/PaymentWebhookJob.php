@@ -16,7 +16,7 @@ class PaymentWebhookJob extends ProcessWebhookJob
     {
         match ($this->webhookCall->signature) {
             'x-paystack-signature' => PaystackWebhookAction::process($this->webhookCall->payload),
-              default => 'No action found',
+             default => 'No action found',
         };
     }
 }
