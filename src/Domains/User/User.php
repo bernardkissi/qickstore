@@ -58,7 +58,8 @@ class User extends Authenticatable
      */
     public function cart(): MorphToMany
     {
-        return $this->morphToMany(Sku::class, 'cartable', 'cart_customer')->withPivot(['quantity']);
+        return $this->morphToMany(Sku::class, 'cartable', 'cart_customer')
+            ->withPivot(['quantity', 'in_bundle', 'discount']);
     }
 
     /**
