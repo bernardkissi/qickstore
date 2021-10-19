@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\RunSales;
 use Domain\Disputes\Jobs\DisputeReminderJob;
 use Domain\Disputes\Notifications\RemindDisputeWithoutResponse;
 use Illuminate\Console\Scheduling\Schedule;
@@ -27,7 +28,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->job(new DisputeReminderJob)->everyMinute();
+        //$schedule->job(new DisputeReminderJob)->everyMinute();
+        $schedule->command('sales:run')->everyMinute();
+        $schedule->command('sales:end')->everyMinute();
     }
 
     /**
