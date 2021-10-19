@@ -19,6 +19,7 @@ class CreateSkusTable extends Migration
             $table->uuid('uuid')->unique();
             $table->integer('price');
             $table->integer('compare_price')->nullable();
+            $table->integer('discount_percentage')->nullable();
 
             $table->integer('min_stock')->default(0);
             $table->boolean('unlimited')->default(false);

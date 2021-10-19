@@ -17,6 +17,7 @@ class CreateProductStockView extends Migration
             SELECT
                 `p`.`id` AS `sku_id`,
                 `p`.`uuid` AS `uuid`,
+                `o`.`quantity` AS `ordered`,
                 coalesce((sum(`s`.`quantity`) - coalesce(sum(`o`.`quantity`), 0)), 0) AS `stock`,
                 (
                     CASE WHEN (coalesce((sum(`s`.`quantity`) - coalesce(sum(`o`.`quantity`), 0))) > 0) THEN

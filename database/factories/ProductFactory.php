@@ -27,7 +27,6 @@ class ProductFactory extends Factory
     {
         $price = mt_rand(100, 500);
         return [
-            'category_id' => Category::factory()->create()->id,
             'name' => $this->faker->name,
             'name' => $product = $this->faker->unique()->name(),
             'slug' => Str::slug($product),
