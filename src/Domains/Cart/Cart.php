@@ -229,7 +229,13 @@ class Cart implements CartContract
     public function subTotal(): Money
     {
         $subTotal = $this->customer->cart->sum(function ($product) {
-            return Money::parse($product->price, 'GHS')->amount()->multiply($product->pivot->quantity)->getAmount();
+            $price = $product->price;
+
+            if ($product->pivot->discount) {
+                $price = $product ->calcDiscountPrice();
+            }
+
+            return Money::parse($price, 'GHS')->amount()->multiply($product->pivot->quantity)->getAmount();
         });
 
         return Money::GHS($subTotal);
@@ -255,7 +261,11 @@ class Cart implements CartContract
     private function getStorePayload(array $products): array
     {
         return collect($products)->keyBy('id')->map(function ($product) {
-            return [ 'quantity' => $product['quantity'] + $this->getCurrentQuanity($product['id'])];
+            return [
+                'quantity' => $product['quantity'] + $this->getCurrentQuanity($product['id']),
+                'in_bundle' => $product['in_bundle'] ?? false,
+                'discount' => $product['discount'] ?? null,
+            ];
         })->toArray();
     }
 
@@ -273,5 +283,18 @@ class Cart implements CartContract
             return $product->pivot->quantity;
         }
         return 0;
+    }
+
+    /**
+     * Calculates product discounted price
+     *
+     * @param int $product_price
+     * @param int $discount
+     * @return int
+     */
+    private function calcProductPrice(int $product_price, int $discount): int
+    {
+        $difference = $product_price * ($discount/100);
+        return $product_price - $difference;
     }
 }
