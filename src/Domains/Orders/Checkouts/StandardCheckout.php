@@ -24,7 +24,6 @@ class StandardCheckout implements Checkoutable
 
     public function createOrder(array $data): Order
     {
-        //dd($data['address']);
         $shipping = $data['shipping_id'] !== null ?
         Cart::withShipping($data['shipping_id']) : Cart::withoutShipping();
 
