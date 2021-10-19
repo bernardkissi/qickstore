@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Domain\Products\Product\Actions;
 
+use Domain\Products\Product\Filters\CategoryScope;
 use Domain\Products\Product\Product;
 use Domain\Products\Product\ProductVariation;
-use Domain\Products\Product\Scopes\Filters\CategoryScope;
 use Domain\Products\Skus\Sku;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;

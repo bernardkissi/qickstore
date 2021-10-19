@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Domain\Products\Product\Scopes\Filters;
+namespace Domain\Products\Product\Filters;
 
-use Domain\Products\Product\Scopes\ScopeContract;
+use App\Helpers\Scopes\ScopeContract;
 use Illuminate\Database\Eloquent\Builder;
 
 class CategoryScope implements ScopeContract
@@ -12,10 +12,10 @@ class CategoryScope implements ScopeContract
     /**
      * Filter products based on categories
      *
-     * @param  Illuminate\Database\Eloquent\Builder $builder
+     * @param  Builder $builder
      * @param  string  $value
      *
-     * @return Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     public function apply(Builder $builder, $value): Builder
     {

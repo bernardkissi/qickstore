@@ -13,7 +13,7 @@ trait TrackStock
      */
     public function inStock(): bool
     {
-        return $this->stockCount->in_stock > 0;
+        return $this->stockCount->in_stock > 0 || $this->unlimited === true;
     }
 
     /**
@@ -47,6 +47,9 @@ trait TrackStock
      */
     public function minStock(int $count): int
     {
+        if ($this->unlimited) {
+            return $count;
+        }
         return (int) min($this->stockCount->stock, $count);
     }
 
@@ -57,7 +60,7 @@ trait TrackStock
      *
      * @return int
      */
-    private function calcLowStockValue(int $value): int
+    private function calcLowStockValue(int $value = 1): int
     {
         $level = 90 / 100 * $value;
         return (int) $value -= $level;

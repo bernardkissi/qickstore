@@ -4,17 +4,22 @@ declare(strict_types=1);
 
 namespace Domain\Products\Product;
 
+use App\Helpers\Scopes\Scoper;
 use Database\Factories\ProductFactory;
 use Domain\Products\Attributes\Attribute;
 use Domain\Products\Categories\Category;
 use Domain\Products\Collections\Models\Collection;
 use Domain\Products\Options\Option;
 use Domain\Products\Product\Casts\Currency;
-use Domain\Products\Product\Scopes\Scoper;
 use Domain\Products\Skus\Sku;
+use Domain\Products\Stocks\StockView;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use JamesMills\Uuid\HasUuidTrait;
 
 class Product extends Model
@@ -63,9 +68,9 @@ class Product extends Model
     /**
      *  Product belongs to category relationship
      *
-     * @return Illuminate\Database\Eloquent\Concerns\belongsToMany
+     * @return BelongsToMany
      */
-    public function categories()
+    public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class);
     }
@@ -73,7 +78,7 @@ class Product extends Model
     /**
      * Product has options relationship
      *
-     * @return Illuminate\Database\Eloquent\Concerns\belongsToMany
+     * @return BelongsToMany
      */
     public function options()
     {
@@ -83,9 +88,9 @@ class Product extends Model
     /**
      *  Product has variations relationship
      *
-     * @return Illuminate\Database\Eloquent\Concerns\hasMany
+     * @return HasMany
      */
-    public function variations()
+    public function variations(): HasMany
     {
         return $this->hasMany(ProductVariation::class)->orderBy('order', 'desc');
     }
@@ -93,19 +98,27 @@ class Product extends Model
     /**
      *  Product sku relationship
      *
-     * @return Illuminate\Database\Eloquent\Concerns\morphOne
+     * @return MorphOne
      */
-    public function sku()
+    public function sku(): MorphOne
     {
         return $this->morphOne(Sku::class, 'skuable');
     }
 
     /**
+    * Get all of the deployments for the project.
+    */
+    public function stock()
+    {
+        return $this->hasOneThrough(StockView::class, Sku::class, 'skuable_id', 'sku_id');
+    }
+
+    /**
      *  Product collections relationship
      *
-     * @return Illuminate\Database\Eloquent\Concerns\morphOne
+     * @return BelongsToMany
      */
-    public function collections()
+    public function collections(): BelongsToMany
     {
         return $this->belongsToMany(Collection::class);
     }
@@ -113,9 +126,9 @@ class Product extends Model
     /**
      *  Product properties relationship
      *
-     * @return Illuminate\Database\Eloquent\Concerns\HasMany
+     * @return HasMany
      */
-    public function filters()
+    public function filters(): HasMany
     {
         return $this->hasMany(Attribute::class);
     }
@@ -128,7 +141,7 @@ class Product extends Model
      *
      * @return Builder
      */
-    public function scopeWithFilter(Builder $builder, $scopes = [])
+    public function scopeWithFilter(Builder $builder, $scopes = []): Builder
     {
         return (new Scoper(request()))->apply($builder, $scopes);
     }
@@ -148,7 +161,7 @@ class Product extends Model
      *
      * @return \Illuminate\Database\Eloquent\Factories\Factory
      */
-    protected static function newFactory()
+    protected static function newFactory(): Factory
     {
         return ProductFactory::new();
     }

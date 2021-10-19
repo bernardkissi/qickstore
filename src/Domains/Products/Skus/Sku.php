@@ -2,20 +2,27 @@
 
 namespace Domain\Products\Skus;
 
+use App\Helpers\Scopes\Scoper;
 use Database\Factories\SkuFactory;
+use Domain\Products\Categories\Category;
 use Domain\Products\Product\Product;
 use Domain\Products\Skus\Collection\SkuCollection;
+use Domain\Products\Skus\Traits\CanBeBundled;
 use Domain\Products\Skus\Traits\ImageHandler;
 use Domain\Products\Skus\Traits\TrackStock;
 use Domain\Products\Stocks\Stock;
 use Domain\Products\Stocks\StockView;
 use Domain\User\User;
 use Domain\User\Visitor;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use JamesMills\Uuid\HasUuidTrait;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -28,6 +35,7 @@ class Sku extends Model implements HasMedia
     InteractsWithMedia,
     HasUuidTrait,
     ImageHandler,
+    CanBeBundled,
     TrackStock;
 
     /**
@@ -42,6 +50,7 @@ class Sku extends Model implements HasMedia
         'min_stock',
         'skuable_id',
         'skuable_type',
+        'discount_percentage'
     ];
 
     /**
@@ -63,9 +72,9 @@ class Sku extends Model implements HasMedia
     /**
      * Skuable model relationship
      *
-     * @return Illuminate\Database\Eloquent\Concerns\morphTo
+     * @return morphTo
      */
-    public function skuable()
+    public function skuable(): MorphTo
     {
         return $this->morphTo();
     }
@@ -93,7 +102,7 @@ class Sku extends Model implements HasMedia
     /**
      * Product sku relationship
      *
-     * @return  Illuminate\Database\Eloquent\Concerns\BelongsTo
+     * @return BelongsTo
      */
     public function product(): BelongsTo
     {
@@ -103,7 +112,7 @@ class Sku extends Model implements HasMedia
     /**
      * Product stock relationship
      *
-     * @return  Illuminate\Database\Eloquent\Concerns\hasMany
+     * @return HasMany
      */
     public function stocks(): HasMany
     {
@@ -111,13 +120,44 @@ class Sku extends Model implements HasMedia
     }
 
     /**
+     * Returns the associated products
+     *
+     * @return BelongsToMany
+     */
+    public function products(): BelongsToMany
+    {
+        return $this->belongsToMany(Bundle::class, 'bundle_product');
+    }
+
+    /**
      * Sku product stock count relationship
      *
-     * @return Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
     public function stockCount(): HasOne
     {
         return $this->hasOne(StockView::class);
+    }
+
+
+    /**
+     * Sku product stock count relationship
+     *
+     * @return BelongsToMany
+     */
+    public function bundles(): BelongsToMany
+    {
+        return $this->belongsToMany(Bundle::class);
+    }
+
+    /**
+     * Returns sales belognging to a product
+     *
+     * @return BelongsToMany
+     */
+    public function sales(): BelongsToMany
+    {
+        return $this->belongsToMany(Sale::class, 'sale_product');
     }
 
     /**
@@ -133,6 +173,20 @@ class Sku extends Model implements HasMedia
             ->width(368)
             ->height(232)
             ->quality(70);
+    }
+
+
+    /**
+     * Scopes filter on model
+     *
+     * @param  Builder $builder
+     * @param  array   $scopes
+     *
+     * @return Builder
+     */
+    public function scopeWithFilter(Builder $builder, $scopes = []): Builder
+    {
+        return (new Scoper(request()))->apply($builder, $scopes);
     }
 
     /**
