@@ -33,6 +33,7 @@ class AppServiceProvider extends ServiceProvider
         Relation::enforceMorphMap([
 
             'Product' => 'Domain\Products\Product\Product',
+            'Bundle' => 'Domain\Products\Product\Bundle',
             'Variation' => 'Domain\Products\Product\ProductVariation',
             'User' => 'Domain\User\User',
             'Sku' => 'Domain\Products\Skus\Sku',
