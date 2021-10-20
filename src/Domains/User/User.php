@@ -3,6 +3,7 @@
 namespace Domain\User;
 
 use Database\Factories\UserFactory;
+use Domain\Coupons\Traits\CanRedeemCoupon;
 use Domain\Orders\Order;
 use Domain\Products\Skus\Sku;
 use Domain\User\Traits\HasAddress;
@@ -19,6 +20,7 @@ class User extends Authenticatable
     HasFactory,
     Notifiable,
     ManagesAddress,
+    CanRedeemCoupon,
     HasAddress;
 
     /**

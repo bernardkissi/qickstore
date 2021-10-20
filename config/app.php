@@ -182,6 +182,7 @@ return [
         App\Providers\PayoutServiceProvider::class,
         App\Providers\MessageServiceProvider::class,
         App\Providers\VoiceServiceProvider::class,
+        App\Providers\CouponServiceProvider::class,
         App\Providers\TransitionMapServiceProvider::class,
     ],
 
@@ -242,6 +243,7 @@ return [
         'Checkout' => Domain\Orders\Checkouts\Facade\Checkout::class,
         'Sms' => Service\Notifications\Types\Sms\Facade\Sms::class,
         'Voice' => Service\Notifications\Types\Sms\Facade\Voice::class,
+        'Coupon' => Domain\Coupons\Facade\Coupon::class,
         'MapState' => App\Helpers\Transitions\MapState::class,
 
     ],

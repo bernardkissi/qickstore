@@ -3,6 +3,7 @@
 namespace Domain\User;
 
 use Database\Factories\VisitorFactory;
+use Domain\Coupons\Traits\CanRedeemCoupon;
 use Domain\Orders\Order;
 use Domain\Products\Skus\Sku;
 use Domain\User\Traits\HasAddress;
@@ -17,6 +18,7 @@ class Visitor extends Model
     use
     HasFactory,
     ManagesAddress,
+    CanRedeemCoupon,
     HasAddress;
 
     /**
