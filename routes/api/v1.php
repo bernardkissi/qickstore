@@ -4,6 +4,7 @@ namespace App;
 
 use Domain\Cart\Actions\CartActions;
 use Domain\Cart\Facade\Cart;
+use Domain\Coupons\Facade\Coupon;
 use Domain\Delivery\Delivery;
 use Domain\Delivery\Dispatchers\Dispatcher;
 use Domain\Orders\Actions\OrderCancel;
@@ -101,3 +102,12 @@ Route::get('/multiDelivery', function () {
     $order =  Order::firstWhere('id', 1522);
     $order->transitionState('processing');
 });
+
+
+Route::post('/coupons', function (Request $request) {
+    return Coupon::create($request->all(), 3);
+});
+
+Route::get('/coupons', function (Request $request) {
+    return $request->visitor->redeemCode($request->code);
+})->middleware('customer')->name('coupons');

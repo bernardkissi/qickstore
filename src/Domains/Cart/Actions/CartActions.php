@@ -23,7 +23,9 @@ class CartActions
         return Cart::cartContents()->additional(
             ['meta' => [
                     'isEmpty' => Cart::isEmpty(),
-                    'subtotal' => Cart::withShipping($shippingId)->subTotal(),
+                    'subtotal' => $subtotal = Cart::withShipping($shippingId)->subTotal(),
+                    'coupon' => Cart::setCoupon()->getCoupon()->code ?? null,
+                    'discount' => Cart::discount($subtotal),
                     'shipping' => Cart::shippingCost(),
                     'total' => Cart::total(),
                     'changed' => Cart::hasChanged(),
