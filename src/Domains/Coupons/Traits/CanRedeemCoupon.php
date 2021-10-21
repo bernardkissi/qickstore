@@ -15,6 +15,7 @@ use Domain\Coupons\Facade\Coupon as Coupons;
 use Domain\User\User;
 use Domain\User\Visitor;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Support\Facades\Cache;
 
 trait CanRedeemCoupon
 {
@@ -56,6 +57,8 @@ trait CanRedeemCoupon
             $coupon->save();
         }
 
+        $this->persistInCache($coupon);
+
         return $coupon;
     }
 
@@ -91,6 +94,12 @@ trait CanRedeemCoupon
     public function checkOrderTotalRequired(Coupon $coupon): bool
     {
         return Cart::subTotal()->getAmount() >= $coupon->min_value_required;
+    }
+
+    public function persistInCache(Coupon $coupon): void
+    {
+        $name = $this->identifier;
+        Cache::put("$name-coupon", $coupon, 3600);
     }
 
     /**

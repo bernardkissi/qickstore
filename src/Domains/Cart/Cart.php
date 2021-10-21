@@ -5,11 +5,13 @@ namespace Domain\Cart;
 use Cknow\Money\Money;
 use Domain\Cart\Contracts\CartContract;
 use Domain\Cart\Resource\CartResource;
+use Domain\Coupons\Coupon;
 use Domain\Delivery\ShippingProvider;
 use Domain\User\User;
 use Domain\User\Visitor;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 
 class Cart implements CartContract
 {
@@ -43,6 +45,19 @@ class Cart implements CartContract
     */
     protected int $ItemsCount = 0;
 
+    /**
+     * Coupon to attached to cart
+     *
+     * @var Coupon
+     */
+    protected $coupon;
+
+    /**
+     * Cart subtotal
+     *
+     * @var Money
+     */
+    protected Money $subTotal;
 
     /**
      * Class Constructor
@@ -69,6 +84,7 @@ class Cart implements CartContract
 
         return $this;
     }
+
 
     /**
      * Set cart without shipping
@@ -191,6 +207,42 @@ class Cart implements CartContract
         return $this->changed;
     }
 
+    /**
+     * Attach coupon to the cart
+     *
+     * @return void
+     */
+    public function setCoupon()
+    {
+        $this->coupon = Cache::get($this->customer->identifier.'-coupon');
+        return $this;
+    }
+
+    /**
+     * Get coupon attached to cart
+     *
+     * @return void
+     */
+    public function getCoupon()
+    {
+        return $this->coupon;
+    }
+
+    /**
+     * Calculate discount on cart
+     *
+     * @return int
+     */
+    public function discount($subTotal): Money
+    {
+        if (!empty($this->coupon)) {
+            return match ($this->coupon->type) {
+                'percentage' => Money::GHS($this->subTotal->getAmount() * ($this->coupon->discount / 100)),
+                'fixed' => Money::GHS($this->coupon->discount),
+            };
+        }
+        return Money::GHS(0);
+    }
 
     /**
      * Get count items in cart
@@ -235,10 +287,14 @@ class Cart implements CartContract
                 $price = $product ->calcDiscountPrice();
             }
 
-            return Money::parse($price, 'GHS')->amount()->multiply($product->pivot->quantity)->getAmount();
+            return (int) Money::parse($price, 'GHS')
+                    ->amount()
+                    ->multiply($product->pivot->quantity)
+                    ->getAmount();
         });
+        $this->subTotal = Money::GHS($subTotal);
 
-        return Money::GHS($subTotal);
+        return $this->subTotal;
     }
 
     /**
@@ -248,7 +304,9 @@ class Cart implements CartContract
      */
     public function total(): Money
     {
-        return $this->subTotal()->add(Money::GHS($this->shipping->price ?? '0'));
+        return $this->subTotal()
+                ->subtract($this->discount($this->subTotal))
+                ->add(Money::GHS($this->shipping->price ?? '0'));
     }
 
     /**
