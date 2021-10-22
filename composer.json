@@ -14,6 +14,7 @@
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "glorand/laravel-model-settings": "^4.2",
+        "grimzy/laravel-mysql-spatial": "^4.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "jamesmills/eloquent-uuid": "^1.6",
         "juststeveking/laravel-transporter": "^0.6.0",
