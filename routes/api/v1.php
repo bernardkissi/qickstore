@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+
 
 use Domain\Cart\Actions\CartActions;
 use Domain\Cart\Facade\Cart;
@@ -58,7 +58,7 @@ Route::post('/create', function (Request $request) {
 
 Route::get('download/{order}', function (Request $request, Order $order) {
     if (! $request->hasValidSignature()) {
-        abort(401);
+        return response()->json(['error' => 'Invalid signature'], 400);
     }
     $files = $order->load(['products.media']);
 
