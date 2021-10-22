@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Domain\Coupons\Traits;
 
+use Carbon\Carbon;
 use Domain\Cart\Facade\Cart;
 use Domain\Coupons\Coupon;
 use Domain\Coupons\Exceptions\CouponExpired;
@@ -49,7 +50,7 @@ trait CanRedeemCoupon
         }
 
         $this->coupons()->attach($coupon, [
-            'redeemed_at' => now()
+            'redeemed_at' => Carbon::now()
         ]);
 
         if (!is_null($coupon->usage_limit)) {
@@ -96,6 +97,12 @@ trait CanRedeemCoupon
         return Cart::subTotal()->getAmount() >= $coupon->min_value_required;
     }
 
+    /**
+     * Persist the coupon in the cache.
+     *
+     * @param Coupon $coupon
+     * @return void
+     */
     public function persistInCache(Coupon $coupon): void
     {
         $name = $this->identifier;

@@ -5,7 +5,7 @@ namespace Domain\Coupons\Exceptions;
 use Domain\Coupons\Coupon;
 use Exception;
 
-class CouponLImitReached extends Exception
+class CouponLimitReached extends Exception
 {
     protected $message = 'The coupon has reached usage limit.';
 
