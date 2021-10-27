@@ -7,6 +7,7 @@ namespace Domain\Delivery\Dispatchers;
 use App\Helpers\Dispatchers\RunDispatcher;
 use Domain\Orders\Order;
 use Illuminate\Support\Collection;
+use OutOfBoundsException;
 
 class DispatchOrder
 {
@@ -52,7 +53,7 @@ class DispatchOrder
             'physical' => new $physical($payload),
             'digital' => new $files($payload),
             'tickets' => new $tickets($payload),
-            'default' => logger('error finding the dispatcher')
+            'default' => throw new OutOfBoundsException('Invalid delivery service'),
         };
 
         RunDispatcher::run($class);
