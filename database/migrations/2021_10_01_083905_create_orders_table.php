@@ -21,11 +21,15 @@ class CreateOrdersTable extends Migration
 
             $table->foreignId('shipping_id')->unsigned()->index()->constrained('shipping_providers');
             $table->foreignId('address_id')->unsigned()->index()->constrained('addresses');
-            $table->string('shipping_service')->default('custom');
-            $table->json('shipping_cost')->nullable();
+            $table->foreignId('coupon_id')->nullable()->unsigned()->index()->constrained('coupons');
+
+            $table->string('shipping_service')->nullable();
+            $table->integer('shipping_cost')->nullable();
 
             $table->string('payment_gateway')->nullable();
             $table->integer('total')->unsigned();
+            $table->integer('discount')->unsigned()->nullable();
+
             $table->string('estimate_id')->nullable();
 
             $table->text('instructions')->nullable();
@@ -41,6 +45,8 @@ class CreateOrdersTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('orders');
+        Schema::enableForeignKeyConstraints();
     }
 }
