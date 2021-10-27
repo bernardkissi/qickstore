@@ -24,20 +24,19 @@ class StandardCheckout implements Checkoutable
 
     public function createOrder(array $data): Order
     {
-        $shipping = $data['shipping_id'] !== null ?
-        Cart::withShipping($data['shipping_id']) : Cart::withoutShipping();
-
         $addressId = $this->customer->createAddress($data['address'], $data['address_id'])->id;
 
         $order = $this->customer->orders()->create(
             [
-                'total' => Cart::total()->getAmount(),
-                'items_count' => Cart::countItems(),
-                'shipping_id' => $shipping?->shippingDetails()->id,
-                'shipping_service' => $shipping?->shippingDetails()->type,
-                'shipping_cost' => Cart::shippingCost()->getAmount(),
+                'items_count' => $data['items_count'],
+                'shipping_id' => $data['shipping']['id'] ?? null,
+                'shipping_service' => $data['shipping']['service'] ?? null,
+                'shipping_cost' => $data['shipping']['amount'] ?? null,
                 'payment_gateway' => $data['gateway'],
                 'instructions' => $data['instructions'],
+                'coupon_id' => $data['discount']['coupon_id'] ?? null,
+                'discount' => $data['discount']['amount'] ?? null,
+                'total' => $data['total'],
                 'address_id' => $addressId,
             ]
         );

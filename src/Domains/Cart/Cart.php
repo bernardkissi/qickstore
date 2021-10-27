@@ -305,8 +305,8 @@ class Cart implements CartContract
     public function total(): Money
     {
         return $this->subTotal()
-                ->subtract($this->discount($this->subTotal))
-                ->add(Money::GHS($this->shipping->price ?? '0'));
+                ->add(Money::GHS($this->shipping->price ?? '0'))
+                ->subtract($this->discount($this->subTotal));
     }
 
     /**

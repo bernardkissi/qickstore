@@ -44,7 +44,7 @@ class OrderStatus extends Model
      */
     protected $casts = [
         'state' => OrderState::class,
-        'updated_from' => 'array',
+        'history' => 'array',
     ];
 
     /**

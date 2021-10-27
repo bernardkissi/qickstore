@@ -2,6 +2,7 @@
 
 namespace Domain\Orders;
 
+use Domain\Coupons\Coupon;
 use Domain\Delivery\Delivery;
 use Domain\Delivery\ShippingProvider;
 use Domain\Disputes\Dispute;
@@ -41,6 +42,7 @@ class Order extends Model
         'status',
         'order_id',
         'total',
+        'discount',
         'items_count',
         'shipping_id',
         'address_id',
@@ -49,6 +51,7 @@ class Order extends Model
         'shipping_cost',
         'payment_gateway',
         'instructions',
+        'coupon_id'
     ];
 
     /**
@@ -122,6 +125,17 @@ class Order extends Model
     public function address(): BelongsTo
     {
         return $this->belongsTo(Address::class);
+    }
+
+
+    /**
+    * Returns the coupon associated with an order
+    *
+    * @return BelongsTo
+    */
+    public function coupon(): HasOne
+    {
+        return $this->hasOne(Coupon::class);
     }
 
     /**

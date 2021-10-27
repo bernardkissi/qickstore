@@ -24,9 +24,15 @@ class CartActions
             ['meta' => [
                     'isEmpty' => Cart::isEmpty(),
                     'subtotal' => $subtotal = Cart::withShipping($shippingId)->subTotal(),
-                    'coupon' => Cart::setCoupon()->getCoupon()->code ?? null,
-                    'discount' => Cart::discount($subtotal),
-                    'shipping' => Cart::shippingCost(),
+                    'discount' => [
+                        'coupon_id' => Cart::setCoupon()->getCoupon()->id ?? null,
+                         'value' => Cart::discount($subtotal)
+                    ],
+                    'shipping' => [
+                        'id' => Cart::shippingDetails()->id,
+                        'service' => Cart::shippingDetails()->type,
+                        'value' => Cart::shippingCost(),
+                    ],
                     'total' => Cart::total(),
                     'changed' => Cart::hasChanged(),
                 ],

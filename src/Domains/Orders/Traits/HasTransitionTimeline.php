@@ -18,12 +18,9 @@ trait HasTransitionTimeline
     public function updateTimeline(string $state): void
     {
         $from = $this->getOriginal('state');
-        $history = Arr::add(
-            $this->history ?? ['pending' => ['state' => 'pending', 'time' => $this->created_at]],
-            "${from}",
-            ['state' => $from, 'time' => now()]
-        );
+        $initialState = $this->history ?? array(['state' =>  'pending', 'time' => $this->created_at]);
+        $history =  array_push($initialState, ['state' => $state, 'time' => now()]);
 
-        $this->update(['state' => $state, 'history' => $history]);
+        $this->update(['state' => $state, 'history' => $initialState]);
     }
 }
