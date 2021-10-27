@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCouponablesTable extends Migration
+class CreateBanksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateCouponablesTable extends Migration
      */
     public function up()
     {
-        Schema::create('couponables', function (Blueprint $table) {
+        Schema::create('banks', function (Blueprint $table) {
             $table->id();
-            $table->morphs('couponable');
-            $table->foreignId('coupon_id')->unsigned()->index()->constrained('coupons');
-            $table->dateTime('redeemed_at');
-
-            $table->timestamps();
+            $table->integer('bank_id');
+            $table->string('code');
+            $table->string('name');
         });
     }
 
@@ -30,6 +28,6 @@ class CreateCouponablesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('couponables');
+        Schema::dropIfExists('banks');
     }
 }
