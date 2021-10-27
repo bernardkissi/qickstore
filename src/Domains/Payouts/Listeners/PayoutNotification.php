@@ -22,6 +22,6 @@ class PayoutNotification
      */
     public function handle($event)
     {
-        echo json_encode($event->merchant);
+        echo json_encode($event->payout);
     }
 }

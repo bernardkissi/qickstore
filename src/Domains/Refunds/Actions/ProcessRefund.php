@@ -17,7 +17,7 @@ class ProcessRefund
                 'transcation_reference' => $dispute->disputable_transcation_reference,
                 'refund_at' => now(),
             ];
-            dump($payload);
+
             if (!empty($data)) {
                 $payload = collect($payload)->merge($data)->toArray();
             }

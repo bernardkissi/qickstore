@@ -16,7 +16,7 @@ class PayoutCompleted
      *
      * @return void
      */
-    public function __construct(public string $merchant)
+    public function __construct(public array $payout)
     {
     }
 
