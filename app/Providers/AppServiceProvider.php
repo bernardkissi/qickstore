@@ -41,7 +41,8 @@ class AppServiceProvider extends ServiceProvider
             'Order' => 'Domain\Orders\Order',
             'Payout' => 'Domain\Payouts\Payout',
             'Dispute' => 'Domain\Disputes\Dispute',
-            'DisputeAction' => 'Domain\Disputes\DisputeAction'
+            'DisputeAction' => 'Domain\Disputes\DisputeAction',
+            'ProductPlan' => 'Domain\Products\Product\ProductPlan',
         ]);
 
         AttributeResource::withoutWrapping();
