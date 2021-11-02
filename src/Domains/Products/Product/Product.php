@@ -96,6 +96,16 @@ class Product extends Model
     }
 
     /**
+     *  Product has plans relationship
+     *
+     * @return HasMany
+     */
+    public function plans(): HasMany
+    {
+        return $this->hasMany(ProductPlan::class)->orderBy('order', 'desc');
+    }
+
+    /**
      *  Product sku relationship
      *
      * @return MorphOne

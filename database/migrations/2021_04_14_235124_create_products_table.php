@@ -24,6 +24,8 @@ class CreateProductsTable extends Migration
             $table->boolean('is_active')->default(true);
             $table->dateTime('is_scheduled_at')->nullable();
             $table->string('barcode')->nullable();
+            $table->boolean('is_subscribable')->nullable();
+
 
             $table->softDeletes();
             $table->timestamps();

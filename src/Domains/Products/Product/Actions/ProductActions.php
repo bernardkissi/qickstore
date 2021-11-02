@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Domain\Products\Product\Actions;
 
 use Domain\Products\Product\Filters\CategoryScope;
+use Domain\Products\Product\Jobs\SyncPlan;
 use Domain\Products\Product\Product;
+use Domain\Products\Product\ProductPlan;
 use Domain\Products\Product\ProductVariation;
 use Domain\Products\Skus\Sku;
 use Illuminate\Database\Eloquent\Model;
@@ -15,6 +17,7 @@ use Illuminate\Support\Str;
 
 class ProductActions
 {
+    //TODO: use upserts to handle product insert/update
     /**
      * Create a product in store
      *
@@ -22,17 +25,17 @@ class ProductActions
      *
      * @return void
      */
-    public function createProduct(Request $request)
+    public function createProduct(array $data)
     {
         return tap(Product::create([
 
-            'name' => $request['name'],
-            'description' => $request['description'],
-            'slug' => Str::slug($request['name']),
-            'barcode' => $request['barcode'],
+            'name' => $data['name'],
+            'description' => $data['description'],
+            'slug' => Str::slug($data['name']),
+            'barcode' => $data['barcode'],
 
-        ]), function (Product $product) use ($request) {
-            $this->syncProductSkuStock($product, $request['meta']);
+        ]), function (Product $product) use ($data) {
+            $this->syncProductSkuStock($product, $data['meta']);
         });
     }
 
@@ -101,17 +104,16 @@ class ProductActions
     }
 
     /**
-     * Creates Product variations
+     * Add variations to a product
      *
      * @param Product $product
      * @param Request $request
      *
      * @return void
      */
-    public function createVariations(Request $request): void //Product $product,
+    public function addProductVariations(Product $product, array $data): void
     {
-        $product = Product::find(1);
-        collect($request['variations'])->map(function ($variant) use ($product) {
+        collect($data['variations'])->map(function ($variant) use ($product) {
             return tap($product->variations()->create([
 
                 'name' => $variant['name'],
@@ -120,6 +122,38 @@ class ProductActions
 
             ]), function (ProductVariation $variation) use ($variant) {
                 $this->syncProductSkuStock($variation, $variant['meta']);
+            });
+        });
+    }
+
+    /**
+     * Add plans to a product
+     *
+     * @param Product $product
+     *
+     * @return void
+     */
+    public static function addProductPlans(Product $product, array $plans): void
+    {
+        collect($plans)->map(function ($plan) use ($product) {
+            return tap($product->plans()->create([
+
+                'plan_name' => $plan['plan_name'],
+                'plan_code' => $plan['plan_code'],
+                'price'     => $plan['price'],
+                'plan_description' => $plan['plan_description'],
+                'interval' => $plan['interval'],
+                'currency' => $plan['currency'],
+                'duration' => $plan['duration'],
+                'send_sms' => $plan['send_sms'] ?? null,
+
+            ]), function (ProductPlan $productPlan) use ($plan) {
+                static::syncProductSkuStock($productPlan, [
+                    'price' => $plan['price'],
+                    'stock' => 0,
+                    'unlimited' => true
+                ]);
+                SyncPlan::dispatch($productPlan);
             });
         });
     }
@@ -142,14 +176,12 @@ class ProductActions
      *
      * @return void
      */
-    protected function syncProductSkuStock(Model $product, array $data)
+    protected static function syncProductSkuStock(Model $product, array $data)
     {
         return tap($product->sku()->create([
-
-            'code' => $data['sku'],
-            'price' => 1000,
-            'min_stock' => $data['stock'],
-            'unlimited' => $data['unlimited'],
+            'price' => $data['price'],
+            'min_stock' => $data['stock'] ?? 0,
+            'unlimited' => $data['unlimited'] ?? false,
 
         ]), function (Sku $sku) use ($data) {
             $sku->stocks()->create(['quantity' => $data['stock'] ?? 0]);
