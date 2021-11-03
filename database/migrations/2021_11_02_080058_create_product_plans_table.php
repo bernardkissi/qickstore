@@ -19,6 +19,7 @@ class CreateProductPlansTable extends Migration
             $table->string('plan_name');
             $table->string('plan_code')->nullable();
             $table->text('plan_description');
+            $table->string('type');
 
             $table->integer('price');
             $table->string('interval')->default('monthly');

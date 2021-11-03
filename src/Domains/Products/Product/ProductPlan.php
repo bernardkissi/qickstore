@@ -23,6 +23,7 @@ class ProductPlan extends Model
 
         'plan_name',
         'plan_code',
+        'type',
         'price',
         'plan_description',
         'interval',

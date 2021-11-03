@@ -140,6 +140,7 @@ class ProductActions
 
                 'plan_name' => $plan['plan_name'],
                 'plan_code' => $plan['plan_code'],
+                'type' => $product->type,
                 'price' => $plan['price'],
                 'plan_description' => $plan['plan_description'],
                 'interval' => $plan['interval'],
