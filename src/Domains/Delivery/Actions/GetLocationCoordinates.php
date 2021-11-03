@@ -12,6 +12,7 @@ class GetLocationCoordinates
      * Fetches the coordinates of a location.
      *
      * @param string $location
+     *
      * @return array
      */
     public static function fetch(string $location): array
@@ -26,7 +27,7 @@ class GetLocationCoordinates
         return [
             'lat' => $results['lat'],
             'lng' => $results['lng'],
-            'address' => $results['formatted_address']
+            'address' => $results['formatted_address'],
         ];
     }
 }

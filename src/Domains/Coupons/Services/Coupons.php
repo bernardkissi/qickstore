@@ -5,7 +5,6 @@ namespace Domain\Coupons\Services;
 use Domain\Coupons\Coupon;
 use Domain\Coupons\Exceptions\CouponExpired;
 use Domain\Coupons\Exceptions\CouponIsInvalid;
-use Domain\Coupons\Services\CouponGenerator;
 use Illuminate\Database\Eloquent\Model;
 
 class Coupons
@@ -26,6 +25,7 @@ class Coupons
      * Generate the specified amount of codes and return codes
      *
      * @param int $amount
+     *
      * @return array
      */
     public function generate(?string $prefix, int $amount = 1): array
@@ -46,6 +46,7 @@ class Coupons
      * @param int $amount
      * @param array $data
      * @param null $expires_at
+     *
      * @return array
      */
     public function create(array $data, int $amount = 1)
@@ -68,13 +69,14 @@ class Coupons
         return $coupons;
     }
 
-
     /**
      * Checks the validity of the coupon
      *
      * @param string $code
+     *
      * @throws VoucherIsInvalid
      * @throws VoucherExpired
+     *
      * @return Voucher
      */
     public function check(string $code)
@@ -95,7 +97,9 @@ class Coupons
      * Expire code as it won't be usable anymore.
      *
      * @param string $code
+     *
      * @return bool
+     *
      * @throws CouponIsInvalid
      */
     public function disable($code)

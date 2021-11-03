@@ -12,7 +12,8 @@ trait ManagesAddress
      * Create a new address.
      *
      * @param array|null $address
-     * @param integer|null $addressId
+     * @param int|null $addressId
+     *
      * @return Address
      */
     public function createAddress(?array $address, ?int $addressId): Address
@@ -29,7 +30,7 @@ trait ManagesAddress
                 'state' => $address['state'] ?? null,
                 'digital_address' => $address['digital_address'] ?? null,
                 'country' => $address['country'] ?? null,
-                'firstname' => $address['firstname'] ,
+                'firstname' => $address['firstname'],
                 'lastname' => $address['lastname'],
                 'phone' => $address['phone'],
                 'email' => $address['email'],

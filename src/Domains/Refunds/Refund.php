@@ -32,21 +32,21 @@ class Refund extends Model
         'refund_amount',
         'refund_at',
         'transcation_reference',
-        'state'
+        'state',
     ];
 
     /**
-    * Database table for this model
-    *
-    * @var string
-    */
+     * Database table for this model
+     *
+     * @var string
+     */
     protected $table = 'refunds';
 
     /**
-    * Cast properties of the model
-    *
-    * @var array
-    */
+     * Cast properties of the model
+     *
+     * @var array
+     */
     protected $casts = [
         'state' => RefundState::class,
     ];

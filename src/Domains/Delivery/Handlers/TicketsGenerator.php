@@ -4,12 +4,8 @@ namespace Domain\Delivery\Handlers;
 
 use App\Helpers\Dispatchers\Dispatcher;
 use Domain\Delivery\Traits\CanCreateDelivery;
-use Domain\Orders\Order;
-use Illuminate\Support\Facades\DB;
-use Integration\Swoove\Delivery\CreateDelivery;
-use Integration\Swoove\Delivery\SwooveDto;
 
-class SwooveShipping extends Dispatcher
+class TicketsGenerator extends Dispatcher
 {
     use CanCreateDelivery;
 
@@ -41,17 +37,6 @@ class SwooveShipping extends Dispatcher
      */
     public function dispatch(): void
     {
-        DB::transaction(function () {
-            $this->createDelivery($this->order);
-
-            $some = CreateDelivery::build()
-                ->withData(SwooveDto::deliveryTransferObject($this->order))
-                ->send()
-                ->json();
-
-            dump($some);
-            $order = Order::find($this->order['order_id']);
-            $order->transitionState('processing');
-        });
+        echo 'generate a ticket and send to the customer';
     }
 }

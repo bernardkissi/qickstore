@@ -47,7 +47,7 @@ class RefundJob implements ShouldQueue
                 'refund_amount' => $refund['data']['amount'],
                 'refund_reason' => $refund['data']['merchant_note'],
                 'expected_at' => Carbon::parse($refund['data']['expected_at'])->toDateTimeString(),
-                'refund_at' =>Carbon::parse($refund['data']['createdAt'])->toDateTimeString(),
+                'refund_at' => Carbon::parse($refund['data']['createdAt'])->toDateTimeString(),
                 'refund_id' => $refund['data']['id'],
             ]);
         }

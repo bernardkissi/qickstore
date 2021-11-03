@@ -51,7 +51,7 @@ class Order extends Model
         'shipping_cost',
         'payment_gateway',
         'instructions',
-        'coupon_id'
+        'coupon_id',
     ];
 
     /**
@@ -116,23 +116,21 @@ class Order extends Model
         return $this->belongsTo(ShippingProvider::class);
     }
 
-
     /**
-    * Returns the address associated with an order
-    *
-    * @return BelongsTo
-    */
+     * Returns the address associated with an order
+     *
+     * @return BelongsTo
+     */
     public function address(): BelongsTo
     {
         return $this->belongsTo(Address::class);
     }
 
-
     /**
-    * Returns the coupon associated with an order
-    *
-    * @return BelongsTo
-    */
+     * Returns the coupon associated with an order
+     *
+     * @return BelongsTo
+     */
     public function coupon(): HasOne
     {
         return $this->hasOne(Coupon::class);
@@ -148,17 +146,15 @@ class Order extends Model
         return $this->hasOneThrough(Refund::class, Dispute::class);
     }
 
-
     /**
-    *  Returns the dispute associated with an order
-    *
-    * @return MorphOne
-    */
+     *  Returns the dispute associated with an order
+     *
+     * @return MorphOne
+     */
     public function dispute(): MorphOne
     {
         return $this->morphOne(Dispute::class, 'disputable');
     }
-
 
     /**
      * Model Booting method
@@ -173,7 +169,6 @@ class Order extends Model
             $order->status()->create([]);
         });
     }
-
 
     public function getRouteKeyName()
     {

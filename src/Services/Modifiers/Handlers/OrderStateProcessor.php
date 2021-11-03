@@ -25,7 +25,7 @@ class OrderStateProcessor extends StateProcessContract
             'paid' => new PaidProcessor($model),
             'processing' => new ProcessedProcessor($model),
             'failed' => new FailedProcessor($model),
-            'shipped'   => new ShippedProcessor($model),
+            'shipped' => new ShippedProcessor($model),
             'delivered' => new DeliveryProcessor($model),
             'completed' => new CompletedProcessor($model),
             'cancelled' => new CancelledProcessor($model),

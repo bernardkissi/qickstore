@@ -44,7 +44,7 @@ class DispatchOrder
         int $count
     ): void {
         $files = config('dispatchers.files');
-        $physical = config("dispatchers.physical.$order->shipping_service");
+        $physical = config("dispatchers.physical.{$order->shipping_service}");
         $tickets = config('dispatchers.tickets');
 
         $payload = $this->extractOrderInfo($order, $items, $count);

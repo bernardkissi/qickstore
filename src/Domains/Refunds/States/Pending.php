@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Domain\Refunds\States;
 
-use Domain\Refunds\States\RefundState;
-
 class Pending extends RefundState
 {
     /**

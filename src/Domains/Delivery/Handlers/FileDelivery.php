@@ -46,8 +46,8 @@ class FileDelivery extends Dispatcher
             $url = URL::signedRoute('api:v1:download', ['order' => $this->order['order_id']]);
 
             Notification::route('mail', $this->order['customer_email'])
-            ->route(VoiceChannel::class, '0543063709')
-            ->notify(new SendFileLinkToEmailNotification($url));
+                ->route(VoiceChannel::class, '0543063709')
+                ->notify(new SendFileLinkToEmailNotification($url));
 
             $payload = array_merge($this->order, ['download_link' => $url]);
             $delivery = $this->createDelivery($payload);

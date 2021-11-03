@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Domain\Orders\Actions;
 
 use Domain\Orders\Order;
-use Domain\Orders\OrderStatus;
 use Illuminate\Http\JsonResponse;
 
 class OrderManageStates
@@ -15,6 +14,7 @@ class OrderManageStates
      *
      * @param Order $order
      * @param string $state
+     *
      * @return void
      */
     public static function changeState(Order $order, string $state): array|JsonResponse
@@ -26,7 +26,7 @@ class OrderManageStates
             return static::formatTimeline($status->updated_from);
         }
         return response()->json(
-            ['message' => "The order is already in $state or is not a supported transition"],
+            ['message' => "The order is already in ${state} or is not a supported transition"],
             401
         );
     }
@@ -35,6 +35,7 @@ class OrderManageStates
      * Returns all states an order has undergone through
      *
      * @param Order $order
+     *
      * @return array
      */
     public static function getTimeline(Order $order): array
@@ -47,6 +48,7 @@ class OrderManageStates
      * Sort the statuses with time updated
      *
      * @param array $updates
+     *
      * @return array
      */
     private static function formatTimeline(array $updates): array

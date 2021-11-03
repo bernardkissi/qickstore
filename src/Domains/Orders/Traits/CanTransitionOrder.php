@@ -15,6 +15,7 @@ trait CanTransitionOrder
      * Perform delivery order transition
      *
      * @param string $state
+     *
      * @return void
      */
     public function transitionState(string $state): void
@@ -41,6 +42,7 @@ trait CanTransitionOrder
      *
      * @param OrderStatus $status
      * @param string $state
+     *
      * @return void
      */
     public function transition(OrderStatus $status, string $state): bool
@@ -52,11 +54,12 @@ trait CanTransitionOrder
         }
         return false;
     }
- 
+
     /**
      * Map delivery status to order status
      *
-     * @param integer $value
+     * @param int $value
+     *
      * @return void
      */
     private static function deliveryOrderStateMapping(int $value): string

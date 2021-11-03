@@ -29,7 +29,6 @@ class Cart implements CartContract
      */
     protected array | null $delivery;
 
-
     /**
      * Shipping provider used
      *
@@ -37,12 +36,11 @@ class Cart implements CartContract
      */
     protected ShippingProvider $shipping;
 
-
     /**
-    * Number of items in cart
-    *
-    * @var Integer
-    */
+     * Number of items in cart
+     *
+     * @var int
+     */
     protected int $ItemsCount = 0;
 
     /**
@@ -84,7 +82,6 @@ class Cart implements CartContract
 
         return $this;
     }
-
 
     /**
      * Set cart without shipping
@@ -235,9 +232,9 @@ class Cart implements CartContract
      */
     public function discount($subTotal): Money
     {
-        if (!empty($this->coupon)) {
+        if (! empty($this->coupon)) {
             return match ($this->coupon->type) {
-                'percentage' => Money::GHS($this->subTotal->getAmount() * ($this->coupon->discount / 100)),
+                'percentage' => Money::GHS($this->subTotal->getAmount() * $this->coupon->discount / 100),
                 'fixed' => Money::GHS($this->coupon->discount),
             };
         }
@@ -247,7 +244,7 @@ class Cart implements CartContract
     /**
      * Get count items in cart
      *
-     * @return integer
+     * @return int
      */
     public function countItems(): int
     {
@@ -284,13 +281,13 @@ class Cart implements CartContract
             $price = $product->price;
 
             if ($product->pivot->discount) {
-                $price = $product ->calcDiscountPrice();
+                $price = $product->calcDiscountPrice();
             }
 
             return (int) Money::parse($price, 'GHS')
-                    ->amount()
-                    ->multiply($product->pivot->quantity)
-                    ->getAmount();
+                ->amount()
+                ->multiply($product->pivot->quantity)
+                ->getAmount();
         });
         $this->subTotal = Money::GHS($subTotal);
 
@@ -305,8 +302,8 @@ class Cart implements CartContract
     public function total(): Money
     {
         return $this->subTotal()
-                ->add(Money::GHS($this->shipping->price ?? '0'))
-                ->subtract($this->discount($this->subTotal));
+            ->add(Money::GHS($this->shipping->price ?? '0'))
+            ->subtract($this->discount($this->subTotal));
     }
 
     /**
@@ -348,11 +345,12 @@ class Cart implements CartContract
      *
      * @param int $product_price
      * @param int $discount
+     *
      * @return int
      */
     private function calcProductPrice(int $product_price, int $discount): int
     {
-        $difference = $product_price * ($discount/100);
+        $difference = $product_price * $discount / 100;
         return $product_price - $difference;
     }
 }

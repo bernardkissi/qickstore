@@ -32,10 +32,9 @@ class SkuCartResource extends JsonResource
             'type' => $this->skuable_type,
             'item' => $resourceType::make($this->whenLoaded('skuable')),
             'total_price' => Money::parse($this->pivot->discount ? $this->calcDiscountPrice() : $this->price, 'GHS')
-                            ->amount()->multiply($this->pivot->quantity)->format(),
+                ->amount()->multiply($this->pivot->quantity)->format(),
         ];
     }
-
 
     // private function calcDiscountPrice(): ?int
     // {

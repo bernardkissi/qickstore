@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Domain\Disputes;
 
-use Domain\Disputes\Dispute;
 use Domain\Disputes\Traits\CanAttachFiles;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -30,21 +29,21 @@ class DisputeAction extends Model implements HasMedia
         'dispute_id',
         'action',
         'message',
-        'has_attachment'
+        'has_attachment',
     ];
 
     /**
-    * Database table for this model
-    *
-    * @var string
-    */
+     * Database table for this model
+     *
+     * @var string
+     */
     protected $table = 'dispute_actions';
 
     /**
-    * Returns actions associated with a dispute.
-    *
-    * @return BelongsTo
-    */
+     * Returns actions associated with a dispute.
+     *
+     * @return BelongsTo
+     */
     public function dispute(): BelongsTo
     {
         return $this->belongsTo(Dispute::class);

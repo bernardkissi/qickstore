@@ -21,7 +21,7 @@ class OrderVerification
         Bus::chain([
             new VerifyOrderJob($paymentReference, $payment, $order),
             new PaymentCompletedJob($order, $payment),
-            new DispatchOrderJob($order)
+            new DispatchOrderJob($order),
         ])->dispatch();
 
         return $order->load(['products']);

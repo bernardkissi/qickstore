@@ -16,9 +16,9 @@ class GetBanks extends FlutterwaveRequest
     protected string $method = 'GET';
 
     /**
-    * Add query params to request
-    *
-    * @var string $query
-    */
-    protected string $path = "/banks";
+     * Add query params to request
+     *
+     * @var string $query
+     */
+    protected string $path = '/banks';
 }

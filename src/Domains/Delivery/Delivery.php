@@ -46,7 +46,7 @@ class Delivery extends Model
         'error',
         'completed_at',
         'failed_at',
-        'updates'
+        'updates',
     ];
 
     /**

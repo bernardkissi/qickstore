@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Domain\Disputes\States;
 
-use Domain\Disputes\States\DisputeState;
-
 class Open extends DisputeState
 {
     /**

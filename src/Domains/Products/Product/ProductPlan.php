@@ -15,10 +15,10 @@ class ProductPlan extends Model
     use HasFactory;
 
     /**
-    * Fillable properties of the model.
-    *
-    * @var array
-    */
+     * Fillable properties of the model.
+     *
+     * @var array
+     */
     protected $fillable = [
 
         'plan_name',
@@ -32,10 +32,10 @@ class ProductPlan extends Model
     ];
 
     /**
-    * The attributes that should be cast.
-    *
-    * @var array
-    */
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
     protected $casts = [
 
         'send_sms' => 'boolean',

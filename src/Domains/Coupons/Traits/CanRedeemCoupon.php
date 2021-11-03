@@ -14,7 +14,6 @@ use Domain\Coupons\Exceptions\CouponMinValueRequired;
 use Domain\Coupons\Exceptions\CouponRedeemed;
 use Domain\Coupons\Facade\Coupon as Coupons;
 use Domain\User\User;
-use Domain\User\Visitor;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Facades\Cache;
 
@@ -22,23 +21,24 @@ trait CanRedeemCoupon
 {
     /**
      * @param string $code
+     *
      * @throws CouponExpired
      * @throws CouponIsInvalid
      * @throws CouponRedeemed
+     *
      * @return mixed
      */
     public function redeemCode(string $code)
     {
         $coupon = Coupons::check($code);
 
-        if (!is_null($coupon->usage_limit) && $this->checkOverUsedLimit($coupon)) {
+        if (! is_null($coupon->usage_limit) && $this->checkOverUsedLimit($coupon)) {
             throw CouponLImitReached::create($coupon);
         }
 
-        if (!is_null($coupon->min_value_required) && !$this->checkOrderTotalRequired($coupon)) {
+        if (! is_null($coupon->min_value_required) && ! $this->checkOrderTotalRequired($coupon)) {
             throw CouponMinValueRequired::withCode($coupon);
         }
-
 
         $users = $this instanceof User ? $coupon->users() : $coupon->visitors();
 
@@ -50,10 +50,10 @@ trait CanRedeemCoupon
         }
 
         $this->coupons()->attach($coupon, [
-            'redeemed_at' => Carbon::now()
+            'redeemed_at' => Carbon::now(),
         ]);
 
-        if (!is_null($coupon->usage_limit)) {
+        if (! is_null($coupon->usage_limit)) {
             $coupon->used += 1;
             $coupon->save();
         }
@@ -65,9 +65,11 @@ trait CanRedeemCoupon
 
     /**
      * @param Coupon $coupon
+     *
      * @throws CouponExpired
      * @throws CouponIsInvalid
      * @throws CouponRedeemed
+     *
      * @return mixed
      */
     public function redeemCoupon(Coupon $coupon)
@@ -79,7 +81,8 @@ trait CanRedeemCoupon
      * Check if coupon has reached its usage limit.
      *
      * @param Coupon $coupon
-     * @return boolean
+     *
+     * @return bool
      */
     public function checkOverUsedLimit(Coupon $coupon): bool
     {
@@ -90,7 +93,8 @@ trait CanRedeemCoupon
      * Checks if the order total surpasses the min_required value.
      *
      * @param Coupon $coupon
-     * @return boolean
+     *
+     * @return bool
      */
     public function checkOrderTotalRequired(Coupon $coupon): bool
     {
@@ -101,12 +105,13 @@ trait CanRedeemCoupon
      * Persist the coupon in the cache.
      *
      * @param Coupon $coupon
+     *
      * @return void
      */
     public function persistInCache(Coupon $coupon): void
     {
         $name = $this->identifier;
-        Cache::put("$name-coupon", $coupon, 3600);
+        Cache::put("${name}-coupon", $coupon, 3600);
     }
 
     /**

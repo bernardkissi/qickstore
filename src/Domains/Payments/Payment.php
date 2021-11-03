@@ -37,7 +37,7 @@ class Payment extends Model
         'authorization_code',
         'ip_address',
         'paid_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     /**

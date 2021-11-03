@@ -30,7 +30,7 @@ class Coupon extends Model
         'min_value_required',
         'used',
         'starts_at',
-        'expires_at'
+        'expires_at',
     ];
 
     /**
@@ -39,7 +39,7 @@ class Coupon extends Model
     public function users()
     {
         return $this->morphedByMany(User::class, 'couponable')
-                ->withPivot(['redeemed_at', 'used']);
+            ->withPivot(['redeemed_at', 'used']);
     }
 
     /**
@@ -50,7 +50,6 @@ class Coupon extends Model
         return $this->morphedByMany(Visitor::class, 'couponable')
             ->withPivot(['redeemed_at', 'used']);
     }
-
 
     /**
      * Query builder to find promocode using code.
@@ -89,6 +88,7 @@ class Coupon extends Model
      * Query builder to get expired promotion codes.
      *
      * @param $query
+     *
      * @return mixed
      */
     public function scopeExpired($query)

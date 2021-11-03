@@ -27,6 +27,6 @@ class ShippingZone extends Model
      * @var array
      */
     protected $spatialFields = [
-        'area'
+        'area',
     ];
 }

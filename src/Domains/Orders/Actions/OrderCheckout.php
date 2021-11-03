@@ -21,7 +21,7 @@ class OrderCheckout
             $payload = array_merge(['id' => $order->id, 'total' => $order->total], $data);
             $payment = Checkout::payOrder($payload);
 
-            if (!$payment) {
+            if (! $payment) {
                 $response = $order;
             }
 

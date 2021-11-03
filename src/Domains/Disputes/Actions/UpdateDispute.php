@@ -12,6 +12,7 @@ class UpdateDispute
      *
      * @param Dispute $dispute
      * @param array $data
+     *
      * @return void
      */
     public static function reply(Dispute $dispute, array $data): void

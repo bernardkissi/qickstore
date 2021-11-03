@@ -4,7 +4,6 @@ namespace Domain\Products\Skus;
 
 use App\Helpers\Scopes\Scoper;
 use Database\Factories\SkuFactory;
-use Domain\Products\Categories\Category;
 use Domain\Products\Product\Product;
 use Domain\Products\Skus\Collection\SkuCollection;
 use Domain\Products\Skus\Traits\CanBeBundled;
@@ -21,7 +20,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use JamesMills\Uuid\HasUuidTrait;
 use Spatie\MediaLibrary\HasMedia;
@@ -39,6 +37,13 @@ class Sku extends Model implements HasMedia
     TrackStock;
 
     /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * Fillable properties of the model
      *
      * @var array
@@ -50,7 +55,7 @@ class Sku extends Model implements HasMedia
         'min_stock',
         'skuable_id',
         'skuable_type',
-        'discount_percentage'
+        'discount_percentage',
     ];
 
     /**
@@ -61,13 +66,6 @@ class Sku extends Model implements HasMedia
     protected $casts = [
         'unlimited' => 'boolean',
     ];
-
-    /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
-    public $timestamps = false;
 
     /**
      * Skuable model relationship
@@ -139,7 +137,6 @@ class Sku extends Model implements HasMedia
         return $this->hasOne(StockView::class);
     }
 
-
     /**
      * Sku product stock count relationship
      *
@@ -175,7 +172,6 @@ class Sku extends Model implements HasMedia
             ->quality(70);
     }
 
-
     /**
      * Scopes filter on model
      *
@@ -210,4 +206,18 @@ class Sku extends Model implements HasMedia
     {
         return SkuFactory::new();
     }
+
+    // /**
+    //  * Model Booting method
+    //  *
+    //  * @return void
+    //  */
+    // public static function boot()
+    // {
+    //     parent::boot();
+
+    //     static::creating(function ($sku) {
+    //         $sku->uuid = (string) Str::uuid();
+    //     });
+    // }
 }

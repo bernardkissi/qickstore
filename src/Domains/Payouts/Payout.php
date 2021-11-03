@@ -33,10 +33,10 @@ class Payout extends Model
     ];
 
     /**
-    * Returns the dispute associated with a payout
-    *
-    * @return MorphOne
-    */
+     * Returns the dispute associated with a payout
+     *
+     * @return MorphOne
+     */
     public function dispute(): MorphOne
     {
         return $this->morphOne(Dispute::class, 'disputable');

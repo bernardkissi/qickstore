@@ -13,7 +13,7 @@ trait CanAttachFiles
         $extension = $file->getClientOriginalExtension();
 
         $this->addMediaFromRequest($attachment)
-                ->usingFileName("$this->id.$extension")
-                ->toMediaCollection('dispute_attachments');
+            ->usingFileName("{$this->id}.${extension}")
+            ->toMediaCollection('dispute_attachments');
     }
 }

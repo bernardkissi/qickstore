@@ -18,7 +18,7 @@ class ProcessRefund
                 'refund_at' => now(),
             ];
 
-            if (!empty($data)) {
+            if (! empty($data)) {
                 $payload = collect($payload)->merge($data)->toArray();
             }
 

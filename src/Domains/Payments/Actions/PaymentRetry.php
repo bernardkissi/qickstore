@@ -10,7 +10,6 @@ class PaymentRetry
 {
     public static function getPaymentLink(string $paymentReference): string
     {
-        $link = Payment::firstWhere('tx_ref', $paymentReference)->pay_url;
-        return $link;
+        return Payment::firstWhere('tx_ref', $paymentReference)->pay_url;
     }
 }

@@ -22,20 +22,20 @@ class CartActions
 
         return Cart::cartContents()->additional(
             ['meta' => [
-                    'isEmpty' => Cart::isEmpty(),
-                    'subtotal' => $subtotal = Cart::withShipping($shippingId)->subTotal(),
-                    'discount' => [
-                        'coupon_id' => Cart::setCoupon()->getCoupon()->id ?? null,
-                         'value' => Cart::discount($subtotal)
-                    ],
-                    'shipping' => [
-                        'id' => Cart::shippingDetails()->id,
-                        'service' => Cart::shippingDetails()->type,
-                        'value' => Cart::shippingCost(),
-                    ],
-                    'total' => Cart::total(),
-                    'changed' => Cart::hasChanged(),
+                'isEmpty' => Cart::isEmpty(),
+                'subtotal' => $subtotal = Cart::withShipping($shippingId)->subTotal(),
+                'discount' => [
+                    'coupon_id' => Cart::setCoupon()->getCoupon()->id ?? null,
+                    'value' => Cart::discount($subtotal),
                 ],
+                'shipping' => [
+                    'id' => Cart::shippingDetails()->id,
+                    'service' => Cart::shippingDetails()->type,
+                    'value' => Cart::shippingCost(),
+                ],
+                'total' => Cart::total(),
+                'changed' => Cart::hasChanged(),
+            ],
             ]
         );
     }

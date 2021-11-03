@@ -13,7 +13,7 @@ class HasSaleRunning implements Rule
      */
     public function __construct()
     {
-        //
+        
     }
 
     /**
@@ -21,11 +21,12 @@ class HasSaleRunning implements Rule
      *
      * @param  string  $attribute
      * @param  mixed  $value
+     *
      * @return bool
      */
     public function passes($attribute, $value)
     {
-        //
+        
     }
 
     /**

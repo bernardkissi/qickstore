@@ -20,11 +20,10 @@ class Branch extends Model
         'branch_code',
         'branch_name',
         'swift_code',
-        'bic'
+        'bic',
     ];
 
-
-    /**5
+    /*5
      * Returns banks branches
      *
      * @return HasMany

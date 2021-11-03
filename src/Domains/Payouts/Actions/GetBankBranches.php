@@ -10,7 +10,7 @@ class GetBankBranches
 {
     public static function get(int $bankId): array
     {
-        return GetBranches::build()->setPath("/banks/$bankId/branches")
+        return GetBranches::build()->setPath("/banks/${bankId}/branches")
             ->send()
             ->json();
     }

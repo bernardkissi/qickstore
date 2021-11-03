@@ -13,7 +13,7 @@ trait CanBeBundled
      */
     public function calcDiscountPrice(): int|float
     {
-        $difference = round($this->price * ($this->pivot->discount/100));
+        $difference = round($this->price * $this->pivot->discount / 100);
         return $this->price - $difference;
     }
 }

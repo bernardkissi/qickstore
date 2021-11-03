@@ -16,9 +16,9 @@ class GetBranches extends FlutterwaveRequest
     protected string $method = 'GET';
 
     /**
-    * Add query params to request
-    *
-    * @var string $query
-    */
-    protected string $path = "";
+     * Add query params to request
+     *
+     * @var string $query
+     */
+    protected string $path = '';
 }

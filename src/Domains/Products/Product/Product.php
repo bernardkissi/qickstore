@@ -42,7 +42,7 @@ class Product extends Model
         'status',
         'featured',
         'schedule_at',
-        'category_id'
+        'category_id',
     ];
 
     /**
@@ -116,8 +116,8 @@ class Product extends Model
     }
 
     /**
-    * Get all of the deployments for the project.
-    */
+     * Get all of the deployments for the project.
+     */
     public function stock()
     {
         return $this->hasOneThrough(StockView::class, Sku::class, 'skuable_id', 'sku_id');

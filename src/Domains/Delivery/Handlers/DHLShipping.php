@@ -3,12 +3,7 @@
 namespace Domain\Delivery\Handlers;
 
 use App\Helpers\Dispatchers\Dispatcher;
-use Domain\Delivery\Notifications\SendFileLinkToEmailNotification;
 use Domain\Delivery\Traits\CanCreateDelivery;
-use Domain\Orders\Order;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Notification;
-use Illuminate\Support\Facades\URL;
 
 class DHLShipping extends Dispatcher
 {
@@ -42,6 +37,6 @@ class DHLShipping extends Dispatcher
      */
     public function dispatch(): void
     {
-        echo "we are shipping with DHL";
+        echo 'we are shipping with DHL';
     }
 }

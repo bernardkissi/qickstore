@@ -4,21 +4,47 @@ declare(strict_types=1);
 
 namespace Integration\Swoove\Delivery;
 
-use Domain\Delivery\Dtos\DeliveryDto;
 use const Cerbero\Dto\CAMEL_CASE_ARRAY;
+use Domain\Delivery\Dtos\DeliveryDto;
 
 class SwooveDto
 {
+
+    /**
+     * Prepare the data to be sent to the Estimate endpoint.
+     *
+     * @param array $data
+     *
+     * @return array
+     */
+
+    public static function estimateTransferObject(array $data): array
+    {
+        return static::transferObject($data);
+    }
+
+    /**
+     * Prepare the data to be sent to the delivery API.
+     *
+     * @param array $data
+     *
+     * @return array
+     */
+    public static function deliveryTransferObject(array $data): array
+    {
+        return static::transferObject($data);
+    }
     /**
      * Swoove API transfer Object
      *
      * @param array $data
+     *
      * @return array
      */
     private static function transferObject(array $data): array
     {
         $data = [
-           'pickup' => [
+            'pickup' => [
                 'type' => 'LATLNG',
                 'value' => 'string',
                 'contact' => [
@@ -28,7 +54,7 @@ class SwooveDto
                 ],
                 'country_code' => 'GH',
                 'lat' => 5.563102400000001,
-                'lng' =>  -0.1813863,
+                'lng' => -0.1813863,
                 'location' => 'F739, 2 Oxford St, Accra, Ghana',
             ],
             'dropoff' => [
@@ -60,28 +86,5 @@ class SwooveDto
         ];
 
         return DeliveryDto::make($data, CAMEL_CASE_ARRAY)->toArray();
-    }
-
-    /**
-    * Prepare the data to be sent to the Estimate endpoint.
-    *
-    * @param array $data
-    * @return array
-    */
-
-    public static function estimateTransferObject(array $data): array
-    {
-        return static::transferObject($data);
-    }
-
-    /**
-     * Prepare the data to be sent to the delivery API.
-     *
-     * @param array $data
-     * @return array
-     */
-    public static function deliveryTransferObject(array $data): array
-    {
-        return static::transferObject($data);
     }
 }

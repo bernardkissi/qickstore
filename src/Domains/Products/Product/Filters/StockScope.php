@@ -6,7 +6,6 @@ namespace Domain\Products\Product\Filters;
 
 use App\Helpers\Scopes\ScopeContract;
 use Domain\Products\Product\Traits\FilterModes;
-use Domain\Products\Stocks\StockView;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 
@@ -31,8 +30,8 @@ class StockScope implements ScopeContract
     public function getMedian(): int
     {
         return DB::table('product_stock_view')
-                ->select('stock')
-                ->get()
-                ->median('stock');
+            ->select('stock')
+            ->get()
+            ->median('stock');
     }
 }

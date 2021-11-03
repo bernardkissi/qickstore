@@ -36,18 +36,16 @@ class Sale extends Model
         'state',
     ];
 
-
     /**
-    * Cast properties of the model
-    *
-    * @var array
-    */
+     * Cast properties of the model
+     *
+     * @var array
+     */
     protected $casts = [
         'state' => SalesState::class,
         'starts_on',
-        'ends_on'
+        'ends_on',
     ];
-
 
     public function changeState($state): void
     {

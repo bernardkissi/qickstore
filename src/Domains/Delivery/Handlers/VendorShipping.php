@@ -6,7 +6,6 @@ use App\Helpers\Dispatchers\Dispatcher;
 use Domain\Delivery\Notifications\PromptVendorForDeliveryNotification;
 use Domain\Delivery\Traits\CanCreateDelivery;
 use Domain\Orders\Order;
-use Domain\Orders\States\Processing;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 
@@ -44,8 +43,8 @@ class VendorShipping extends Dispatcher
     {
         DB::transaction(function () {
             Notification::route('mail', $this->order['customer_email'])
-            ->route(VoiceChannel::class, '0543063709')
-            ->notify(new PromptVendorForDeliveryNotification($this->order));
+                ->route(VoiceChannel::class, '0543063709')
+                ->notify(new PromptVendorForDeliveryNotification($this->order));
 
             $this->createDelivery($this->order);
 

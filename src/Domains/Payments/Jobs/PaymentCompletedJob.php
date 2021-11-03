@@ -2,7 +2,6 @@
 
 namespace Domain\Payments\Jobs;
 
-use Domain\Delivery\Dispatchers\Dispatcher;
 use Domain\Orders\Order;
 use Domain\Orders\States\Paid;
 use Domain\Payments\Payment;
@@ -30,6 +29,7 @@ class PaymentCompletedJob implements ShouldQueue
     /**
      * Execute the job.
      * todo: add payment transition
+     *
      * @return void
      */
     public function handle(): void

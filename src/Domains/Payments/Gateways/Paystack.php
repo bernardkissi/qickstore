@@ -2,7 +2,6 @@
 
 namespace Domain\Payments\Gateways;
 
-use Carbon\Carbon;
 use Domain\Payments\Contract\PaymentableContract;
 use Domain\Payments\Dtos\PaymentDto;
 use Domain\Payments\Traits\PaystackUpdater;
@@ -28,14 +27,14 @@ class Paystack implements PaymentableContract
         return InitializePayment::build()
             ->withData(
                 PaymentDto::make([
-                    'amount'    => (int) $data['total'],
-                    'currency'  => 'GHS',
-                    'reference' =>  $ref,
-                    'email'     => $data['email'],
+                    'amount' => (int) $data['total'],
+                    'currency' => 'GHS',
+                    'reference' => $ref,
+                    'email' => $data['email'],
                     'callback_url' => route('home'),
                     'metadata' => [
-                        'cancel_action' => "http://store.test/cancel?ref=$ref",
-                        'order_id'  => $data['id'],
+                        'cancel_action' => "http://store.test/cancel?ref=${ref}",
+                        'order_id' => $data['id'],
                         'has_subscription' => $data['has_subscription'],
                     ],
                 ])->toArray()

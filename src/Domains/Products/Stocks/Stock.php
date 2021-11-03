@@ -12,18 +12,18 @@ class Stock extends Model
     use HasFactory;
 
     /**
-     *  Stock attributes
-     *
-     * @var array
-     */
-    protected $fillable = ['quantity'];
-
-    /**
      * Indicates if the model should be timestamped.
      *
      * @var bool
      */
     public $timestamps = false;
+
+    /**
+     *  Stock attributes
+     *
+     * @var array
+     */
+    protected $fillable = ['quantity'];
 
     /**
      * Product sku relationship

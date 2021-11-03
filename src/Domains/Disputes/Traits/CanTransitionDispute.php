@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace Domain\Disputes\Traits;
 
-use App\Traits\HasTimeline;
-
 trait CanTransitionDispute
 {
     /**
      * @param string $state
+     *
      * @return bool
      */
     public function transitionDisputeTo(string $state): bool

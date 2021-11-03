@@ -9,47 +9,46 @@ use Illuminate\Support\Str;
 class CouponGenerator
 {
     /**
-    * Coupon code characters
-    *
-    * @var string
-    */
+     * Coupon code characters
+     *
+     * @var string
+     */
     protected $characters;
 
     /**
-    * Mask for code generation
-    *
-    * @var string
-    */
+     * Mask for code generation
+     *
+     * @var string
+     */
     protected $mask;
 
     /**
-    * Prefix for code generation
-    *
-    * @var string
-    */
+     * Prefix for code generation
+     *
+     * @var string
+     */
     protected $prefix;
 
     /**
-    * Sufix for code generation
-    *
-    * @var string
-    */
+     * Sufix for code generation
+     *
+     * @var string
+     */
     protected $suffix;
 
     /**
-    * Separator for code generation
-    *
-    * @var string
-    */
+     * Separator for code generation
+     *
+     * @var string
+     */
     protected $separator = '-';
 
     /**
-    * Prefix for code generation
-    *
-    * @var array
-    */
+     * Prefix for code generation
+     *
+     * @var array
+     */
     protected $generatedCodes = [];
-
 
     public function __construct(string $characters = 'ABCDEFGHJKLMNOPQRSTUVWXYZ234567890', string $mask = '****')
     {
@@ -61,6 +60,7 @@ class CouponGenerator
      * Set code prefix
      *
      * @param string|null $prefix
+     *
      * @return self
      */
     public function setPrefix(?string $prefix): self
@@ -70,31 +70,12 @@ class CouponGenerator
     }
 
     /**
-    * Get code prefix
-    *
-    * @return string
-    */
-    protected function getPrefix(): string
-    {
-        return $this->prefix !== null ? $this->prefix . $this->separator : '';
-    }
-
-    /**
-     * Get code suffix
+     * Set code prefix
      *
-     * @return string
+     * @param string|null $prefix
+     *
+     * @return self
      */
-    protected function getSuffix(): string
-    {
-        return $this->suffix !== null ? $this->separator . $this->suffix : '';
-    }
-
-    /**
-    * Set code prefix
-    *
-    * @param string|null $prefix
-    * @return self
-    */
     public function setSuffix(?string $suffix): self
     {
         $this->suffix = $suffix;
@@ -105,6 +86,7 @@ class CouponGenerator
      * Set code separator
      *
      * @param string $separator
+     *
      * @return void
      */
     public function setSeparator(string $separator): void
@@ -130,10 +112,10 @@ class CouponGenerator
     }
 
     /**
-    * Generate coupon code
-    *
-    * @return string
-    */
+     * Generate coupon code
+     *
+     * @return string
+     */
     public function generate(): string
     {
         $length = substr_count($this->mask, '*');
@@ -150,5 +132,25 @@ class CouponGenerator
         $code .= $this->getSuffix();
 
         return $code;
+    }
+
+    /**
+     * Get code prefix
+     *
+     * @return string
+     */
+    protected function getPrefix(): string
+    {
+        return $this->prefix !== null ? $this->prefix . $this->separator : '';
+    }
+
+    /**
+     * Get code suffix
+     *
+     * @return string
+     */
+    protected function getSuffix(): string
+    {
+        return $this->suffix !== null ? $this->separator . $this->suffix : '';
     }
 }

@@ -2,8 +2,6 @@
 
 namespace Service\Modifiers;
 
-use Domain\Delivery\Delivery;
-use Domain\Orders\OrderStatus;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Service\Modifiers\Handlers\DeliveryStateProcessor;
 use Service\Modifiers\Handlers\DisputeStateProcessor;

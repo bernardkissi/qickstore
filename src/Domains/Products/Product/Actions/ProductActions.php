@@ -74,9 +74,9 @@ class ProductActions
     /**
      * Returns a single product
      *
-     * @param  App\Domains\Products\Models\Product $product
+     * @param  Product $product
      *
-     * @return App\Domains\Products\Models\Product;
+     * @return Product;
      */
     public function getProduct(Product $product): Product
     {
@@ -140,7 +140,7 @@ class ProductActions
 
                 'plan_name' => $plan['plan_name'],
                 'plan_code' => $plan['plan_code'],
-                'price'     => $plan['price'],
+                'price' => $plan['price'],
                 'plan_description' => $plan['plan_description'],
                 'interval' => $plan['interval'],
                 'currency' => $plan['currency'],
@@ -151,7 +151,7 @@ class ProductActions
                 static::syncProductSkuStock($productPlan, [
                     'price' => $plan['price'],
                     'stock' => 0,
-                    'unlimited' => true
+                    'unlimited' => true,
                 ]);
                 SyncPlan::dispatch($productPlan);
             });

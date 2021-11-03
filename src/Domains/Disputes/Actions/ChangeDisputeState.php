@@ -13,11 +13,11 @@ class ChangeDisputeState
      *
      * @param Dispute $dispute
      * @param string $state
+     *
      * @return void
      */
     public static function change(Dispute $dispute, string $state): bool
     {
-        $trans = $dispute->transitionDisputeTo($state);
-        return $trans;
+        return $dispute->transitionDisputeTo($state);
     }
 }

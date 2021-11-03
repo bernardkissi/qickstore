@@ -2,7 +2,6 @@
 
 namespace Service\Webhooks\Jobs;
 
-use Domain\Delivery\Webhooks\Actions\SwooveWebhookAction;
 use Service\Webhooks\Actions\PaystackWebhookAction;
 use Spatie\WebhookClient\ProcessWebhookJob;
 

@@ -29,9 +29,8 @@ class Bundle extends Model
         'is_active',
         'schedule_at',
         'bundle_price',
-        'percentage_decrease'
+        'percentage_decrease',
     ];
-
 
     /**
      * Returns the associated products

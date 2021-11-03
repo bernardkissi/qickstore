@@ -11,7 +11,7 @@ trait CanCreateDelivery
 {
     public function createDelivery(array $payload): Delivery
     {
-        $delivery = Delivery::create([
+        return Delivery::create([
             'service' => $payload['service'],
             'order_id' => $payload['order_id'],
             'reference' => Str::uuid(),
@@ -23,7 +23,5 @@ trait CanCreateDelivery
             'agent_details' => $payload['agent_details'] ?? null,
             'vehicle' => $payload['vehicle'] ?? null,
         ]);
-
-        return $delivery;
     }
 }

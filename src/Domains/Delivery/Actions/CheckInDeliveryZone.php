@@ -12,9 +12,9 @@ class CheckInDeliveryZone
     {
         return CheckZone::build()->withData([
             'longitude' => $longitude,
-             'latitude' => $latitude,
+            'latitude' => $latitude,
         ])
-        ->send()
-        ->json();
+            ->send()
+            ->json();
     }
 }

@@ -14,7 +14,6 @@ use Throwable;
 
 class FlutterwavePayoutService implements PayableContract
 {
-
     /**
      * Send payout request to our payment gateway
      *
@@ -50,7 +49,6 @@ class FlutterwavePayoutService implements PayableContract
             throw new \Exception($e->getMessage());
         });
     }
-
 
     /**
      * Prepare merchant payout request

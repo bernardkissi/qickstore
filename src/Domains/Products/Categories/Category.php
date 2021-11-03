@@ -16,18 +16,18 @@ class Category extends Model
     use HasFactory, Scopes;
 
     /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * Fillable attributes of the model
      *
      * @var array
      */
     protected $fillable = ['name','slug', 'order', 'parent_id'];
-
-    /**
-    * Indicates if the model should be timestamped.
-    *
-    * @var bool
-    */
-    public $timestamps = false;
 
     /**
      * Subcategory relationship

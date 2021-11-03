@@ -9,10 +9,10 @@ use Integration\Paystack\PaystackRequest;
 class CreatePlan extends PaystackRequest
 {
     /**
-    * Base url for the endpoint for the request
-    *
-    * @var string $baseUrl
-    */
+     * Base url for the endpoint for the request
+     *
+     * @var string $baseUrl
+     */
     protected string $method = 'POST';
 
     /**

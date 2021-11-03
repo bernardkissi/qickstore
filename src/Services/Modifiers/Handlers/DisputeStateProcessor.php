@@ -19,8 +19,8 @@ class DisputeStateProcessor extends StateProcessContract
         $processor = match ($state) {
             'open' => new OpenProcessor($model),
             'accepted' => new AcceptedProcessor($model),
-            'declined'    => new DeclinedProcessor($model),
-            'resolved'   => new ResolvedProcessor($model),
+            'declined' => new DeclinedProcessor($model),
+            'resolved' => new ResolvedProcessor($model),
         };
 
         RunProcessor::run($processor);

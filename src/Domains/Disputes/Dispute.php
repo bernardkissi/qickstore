@@ -6,7 +6,6 @@ namespace Domain\Disputes;
 
 use App\Traits\HasTimeline;
 use Carbon\Carbon;
-use Domain\Disputes\DisputeAction;
 use Domain\Disputes\States\DisputeState;
 use Domain\Disputes\Traits\CanAttachFiles;
 use Domain\Disputes\Traits\CanTransitionDispute;
@@ -49,14 +48,14 @@ class Dispute extends Model implements HasMedia
         'customer_mobile',
         'customer_email',
         'state',
-        'history'
+        'history',
     ];
 
     /**
-    * Database table for this model
-    *
-    * @var string
-    */
+     * Database table for this model
+     *
+     * @var string
+     */
     protected $table = 'disputes';
 
     /**
@@ -77,7 +76,7 @@ class Dispute extends Model implements HasMedia
     {
         return $this->morphTo();
     }
-    
+
     /**
      * Returns refund for dispute
      *
@@ -89,20 +88,19 @@ class Dispute extends Model implements HasMedia
     }
 
     /**
-    * Returns actions associated with a dispute.
-    *
-    * @return HasMany
-    */
+     * Returns actions associated with a dispute.
+     *
+     * @return HasMany
+     */
     public function actions(): HasMany
     {
         return $this->hasMany(DisputeAction::class);
     }
 
-
     public function scopeNoResponse($query): Builder
     {
         return $query->whereNull('merchant_response')
-                ->whereNotIn('state', ['accepted', 'declined', 'resolved'])
-                ->where('created_at', '<', Carbon::parse('-1 hours'));
+            ->whereNotIn('state', ['accepted', 'declined', 'resolved'])
+            ->where('created_at', '<', Carbon::parse('-1 hours'));
     }
 }

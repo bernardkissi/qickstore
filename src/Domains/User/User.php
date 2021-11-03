@@ -74,7 +74,6 @@ class User extends Authenticatable
         return $this->morphMany(Order::class, 'orderable');
     }
 
-
     /**
      * Create a new factory instance for the model.
      *

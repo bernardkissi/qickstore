@@ -10,8 +10,8 @@ trait FilterModes
     {
         return match ($value) {
             'high' => '>',
-            'low'  => '<',
-            default  => '<=',
+            'low' => '<',
+            default => '<=',
         };
     }
 }

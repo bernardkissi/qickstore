@@ -10,7 +10,7 @@ class GetBanks
 {
     public static function get(string $countryCode): array
     {
-        return Banks::build()->setPath("/banks/$countryCode")
+        return Banks::build()->setPath("/banks/${countryCode}")
             ->send()
             ->json();
     }

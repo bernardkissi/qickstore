@@ -36,11 +36,11 @@ class DisputeReminderJob implements ShouldQueue
             return $dispute->customer_mobile;
         })->toArray();
 
-        $contacts = implode(",", $contacts);
+        $contacts = implode(',', $contacts);
 
         if ($contacts) {
             Notification::route(SmsChannel::class, $contacts)
-            ->notify(new RemindDisputeWithoutResponse($contacts));
+                ->notify(new RemindDisputeWithoutResponse($contacts));
         }
     }
 }

@@ -21,8 +21,8 @@ class DeliveryStateProcessor extends StateProcessContract
         $processor = match ($state) {
             'assigned' => new AssignedProcessor($model),
             'pickedup' => new PickedProcessor($model),
-            'pickingup'    => new PickingProcessor($model),
-            'delivering'   => new DeliveringProcessor($model),
+            'pickingup' => new PickingProcessor($model),
+            'delivering' => new DeliveringProcessor($model),
             'delivered' => new DeliveredProcessor($model),
             'failed' => new FailedProcessor($model),
         };

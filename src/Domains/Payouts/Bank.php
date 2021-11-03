@@ -11,17 +11,6 @@ class Bank extends Model
     use HasFactory;
 
     /**
-     * Model properties
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'bank_id',
-        'code',
-        'name'
-    ];
-
-    /**
      * Indicates if the model should be timestamped.
      *
      * @var bool
@@ -29,15 +18,25 @@ class Bank extends Model
     public $timestamps = false;
 
     /**
+     * Model properties
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'bank_id',
+        'code',
+        'name',
+    ];
+
+    /**
      * Get the route key for the model.
      *
      * @return string
-    */
+     */
     public function getRouteKeyName()
     {
         return 'bank_id';
     }
-
 
     /**
      * Returns banks branches

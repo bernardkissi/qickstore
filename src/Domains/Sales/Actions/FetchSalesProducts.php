@@ -14,9 +14,9 @@ class FetchSalesProducts
     public static function get()
     {
         return Product::with(['sku'])
-        ->withFilter(static::scopes())
-        ->select(['id', 'name'])
-        ->paginate(10);
+            ->withFilter(static::scopes())
+            ->select(['id', 'name'])
+            ->paginate(10);
     }
 
     /**
@@ -29,7 +29,7 @@ class FetchSalesProducts
         return [
             'stock' => new StockScope(),
             'category' => new CategoryScope(),
-            'ordered' => new OrderedScope()
+            'ordered' => new OrderedScope(),
         ];
     }
 }

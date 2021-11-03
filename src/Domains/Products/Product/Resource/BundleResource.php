@@ -21,7 +21,7 @@ class BundleResource extends JsonResource
             'name' => $this->name,
             'active' => $this->is_active ? true : false,
             'type' => 'physical',
-            'products' => SkuResource::collection($this->whenLoaded('skus'))
+            'products' => SkuResource::collection($this->whenLoaded('skus')),
 
         ];
     }
