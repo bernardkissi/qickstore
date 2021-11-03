@@ -42,7 +42,7 @@ class AppServiceProvider extends ServiceProvider
             'Payout' => 'Domain\Payouts\Payout',
             'Dispute' => 'Domain\Disputes\Dispute',
             'DisputeAction' => 'Domain\Disputes\DisputeAction',
-            'ProductPlan' => 'Domain\Products\Product\ProductPlan',
+            'Subscription' => 'Domain\Products\Product\ProductPlan',
         ]);
 
         AttributeResource::withoutWrapping();

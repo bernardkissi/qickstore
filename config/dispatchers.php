@@ -3,6 +3,7 @@
 use Domain\Delivery\Handlers\DHLShipping;
 use Domain\Delivery\Handlers\FileDelivery;
 use Domain\Delivery\Handlers\SwooveShipping;
+use Domain\Delivery\Handlers\TicketGenerator;
 use Domain\Delivery\Handlers\VendorShipping;
 
 return [
@@ -19,7 +20,7 @@ return [
     /**
     * Process tickets generation for tickets orders
     */
-    'tickets'  => null,
+    'tickets'  => TicketGenerator::class,
 
     /**
     * Process phyisical goods for physical goods orders

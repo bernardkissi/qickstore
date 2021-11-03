@@ -2,9 +2,6 @@
 
 namespace App\Console;
 
-use App\Console\Commands\RunSales;
-use Domain\Disputes\Jobs\DisputeReminderJob;
-use Domain\Disputes\Notifications\RemindDisputeWithoutResponse;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 

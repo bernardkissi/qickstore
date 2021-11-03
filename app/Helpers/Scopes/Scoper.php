@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Helpers\Scopes;
 
-use App\Helpers\Scopes\ScopeContract;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;

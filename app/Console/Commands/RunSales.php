@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use Carbon\Carbon;
 use Domain\Sales\Sale;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -41,8 +40,8 @@ class RunSales extends Command
     public function handle()
     {
         $sales = Sale::query()
-                ->where('starts_on', now()->toDateTimeString())
-                ->get();
+            ->where('starts_on', now()->toDateTimeString())
+            ->get();
 
         $sales->each(function ($sale) {
             $sale->changeState('active');

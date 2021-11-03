@@ -40,8 +40,8 @@ class EndSales extends Command
     public function handle()
     {
         $sales = Sale::query()
-                ->where('ends_on', now()->toDateTimeString())
-                ->get();
+            ->where('ends_on', now()->toDateTimeString())
+            ->get();
 
         $sales->each(function ($sale) {
             $sale->changeState('ended');

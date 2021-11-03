@@ -6,7 +6,6 @@ use Domain\Disputes\Dispute;
 use Domain\Disputes\Observers\DisputeObserver;
 use Domain\Orders\Events\OrderCreatedEvent;
 use Domain\Orders\Listeners\CreatePayment;
-use Domain\Orders\Listeners\EmptyCart;
 use Domain\Payouts\Events\PayoutCompleted;
 use Domain\Payouts\Listeners\PayoutNotification;
 use Illuminate\Auth\Events\Registered;

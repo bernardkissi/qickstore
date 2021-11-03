@@ -30,6 +30,6 @@ class CouponServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        
     }
 }
