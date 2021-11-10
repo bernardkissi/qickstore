@@ -598,3 +598,11 @@ $dtOttawa->diffInHours($dtVancouver);
     - transcation_charge(int)
     - bearer(string) =  bearer
     ```
+
+key improvements to product table
+
+1. buy button label
+2. file access
+3. pre-order
+4. pre-order release date
+5. preview files
