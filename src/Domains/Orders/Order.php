@@ -8,6 +8,7 @@ use Domain\Delivery\ShippingProvider;
 use Domain\Disputes\Dispute;
 use Domain\Orders\Traits\CanTransitionOrder;
 use Domain\Orders\Traits\ManagesOrderDelivery;
+use Domain\Orders\Traits\ManageSubscription;
 use Domain\Payments\Payment;
 use Domain\Products\Skus\Sku;
 use Domain\Refunds\Refund;
@@ -30,6 +31,7 @@ class Order extends Model
     ManagesOrderDelivery,
     HasUuidTrait,
     CanTransitionOrder,
+    ManageSubscription,
     Notifiable;
 
     /**

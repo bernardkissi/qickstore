@@ -3,6 +3,7 @@
 namespace Domain\Products\Skus;
 
 use App\Helpers\Scopes\Scoper;
+use App\ProductSubscription;
 use Database\Factories\SkuFactory;
 use Domain\Products\Product\Product;
 use Domain\Products\Skus\Collection\SkuCollection;
@@ -145,6 +146,16 @@ class Sku extends Model implements HasMedia
     public function bundles(): BelongsToMany
     {
         return $this->belongsToMany(Bundle::class);
+    }
+
+    /**
+     * Sku product stock count relationship
+     *
+     * @return HasMany
+     */
+    public function subscription(): HasMany
+    {
+        return $this->hasMany(ProductSubscription::class);
     }
 
     /**

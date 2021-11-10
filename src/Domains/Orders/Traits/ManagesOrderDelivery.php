@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Domain\Orders\Traits;
 
-use Domain\Products\Product\ProductPlan;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Collection;
 

@@ -24,9 +24,7 @@ class SubscriptionCartResource extends JsonResource
             'subscription' => [
                 'name' => $this->plan_name,
                 'interval' => $this->interval,
-                
-            ]
-
+            ],
         ];
     }
 }
