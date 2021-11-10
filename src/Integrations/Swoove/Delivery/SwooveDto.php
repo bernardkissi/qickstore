@@ -9,7 +9,6 @@ use Domain\Delivery\Dtos\DeliveryDto;
 
 class SwooveDto
 {
-
     /**
      * Prepare the data to be sent to the Estimate endpoint.
      *
