@@ -8,7 +8,7 @@ use App\ProductSubscription;
 
 class CreateProductSubsctription
 {
-    public function execute(array $data): void
+    public static function execute(array $data): void
     {
         var_dump('creating product subscription');
         // ProductSubscription::create([

@@ -6,8 +6,8 @@ namespace Domain\Payments\Actions;
 
 class CreatePayment
 {
-    public function execute(array $data): array
+    public static function execute(array $data): void
     {
-        return $data;
+        var_dump('creating payment');
     }
 }

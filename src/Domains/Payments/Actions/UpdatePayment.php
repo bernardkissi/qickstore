@@ -9,26 +9,27 @@ use Domain\Payments\Payment;
 
 class UpdatePayment
 {
-    public function execute(array $payload): void
+    public static function execute(array $payload): void
     {
-        $payment = Payment::firstWhere('tx_ref', $payload['data']['reference']);
+        var_dump('updating payment');
+        // $payment = Payment::firstWhere('tx_ref', $payload['data']['reference']);
 
-        if ($payment) {
-            $payment->update([
-                'status' => $payload['data']['status'],
-                'history' => $payload['data']['log']['history'],
-                'provider_reference' => $payload['data']['id'],
-                'currency' => $payload['data']['currency'],
-                'customer_code' => $payload['data']['customer']['customer_code'],
-                'authorization_code' => $payload['data']['authorization']['authorization_code'],
-                'ip_address' => $payload['data']['ip_address'],
-                'channel' => $payload['data']['channel'],
-                'plan' => $payload['data']['plan'],
-                'paid_at' => Carbon::parse($payload['data']['paid_at']),
-                'has_subscription' => $payload['data']['metadata']['has_subscription'],
-                'subaccount' => $payload['data']['subaccount'],
-                'card_type' => $payload['data']['authorization']['card_type'],
-            ]);
-        }
+        // if ($payment) {
+        //     $payment->update([
+        //         'status' => $payload['data']['status'],
+        //         'history' => $payload['data']['log']['history'],
+        //         'provider_reference' => $payload['data']['id'],
+        //         'currency' => $payload['data']['currency'],
+        //         'customer_code' => $payload['data']['customer']['customer_code'],
+        //         'authorization_code' => $payload['data']['authorization']['authorization_code'],
+        //         'ip_address' => $payload['data']['ip_address'],
+        //         'channel' => $payload['data']['channel'],
+        //         'plan' => $payload['data']['plan'],
+        //         'paid_at' => Carbon::parse($payload['data']['paid_at']),
+        //         'has_subscription' => $payload['data']['metadata']['has_subscription'],
+        //         'subaccount' => $payload['data']['subaccount'],
+        //         'card_type' => $payload['data']['authorization']['card_type'],
+        //     ]);
+        // }
     }
 }
