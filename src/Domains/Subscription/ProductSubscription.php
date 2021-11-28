@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Domain\Subscription;
 
 use Domain\Products\Skus\Sku;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -31,12 +31,15 @@ class ProductSubscription extends Model
         'email_token',
         'channel',
         'card_type',
-        'plan',
+        'plan_id',
+        'plan_code',
         'customer_code',
         'customer_email',
+        'invoice_limit',
         'start_date',
         'end_date',
-        'next_due_date',
+        'next_billing_date',
+        'subscription_id',
         'cron_expression',
         'status',
     ];

@@ -15,15 +15,19 @@ class CreateProductSubscriptions extends Migration
     {
         Schema::create('product_subscriptions', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid');
             $table->foreignId('sku_id')->unsigned()->index()->constrained('skus');
             $table->foreignId('order_id')->unsigned()->index()->constrained('orders');
             $table->foreignId('plan_id')->unsigned()->index()->constrained('product_plans');
 
-            $table->string('subscription_code');
+            $table->string('subscription_code')->nullable();
+            $table->string('plan_code');
             $table->string('auth_code');
             $table->string('email_token')->nullable();
             $table->string('channel')->nullable();
             $table->string('card_type')->nullable();
+            $table->integer('invoice_limit')->nullable();
+            $table->integer('subscription_id')->nullable();
 
             $table->string('customer_code');
             $table->string('customer_email')->nullable();

@@ -6,6 +6,7 @@ use App\Helpers\Scopes\Scoper;
 use App\ProductSubscription;
 use Database\Factories\SkuFactory;
 use Domain\Products\Product\Product;
+use Domain\Products\Product\ProductPlan;
 use Domain\Products\Skus\Collection\SkuCollection;
 use Domain\Products\Skus\Traits\CanBeBundled;
 use Domain\Products\Skus\Traits\ImageHandler;
@@ -106,6 +107,17 @@ class Sku extends Model implements HasMedia
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
+    }
+
+
+    /**
+     * ProductPlan sku relationship
+     *
+     * @return BelongsTo
+     */
+    public function plans(): BelongsTo
+    {
+        return $this->belongsTo(ProductPlan::class);
     }
 
     /**

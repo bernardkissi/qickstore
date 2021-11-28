@@ -4,27 +4,32 @@ declare(strict_types=1);
 
 namespace Domain\Subscription\Actions;
 
-use App\ProductSubscription;
+use Domain\Orders\Order;
+use Domain\Subscription\Jobs\SubscribeToProductWithProvider;
+use Domain\Subscription\ProductSubscription;
 
 class CreateProductSubsctription
 {
-    public static function execute(array $data): void
+    public static function execute(array $payload): void
     {
-        var_dump('creating product subscription');
-        // ProductSubscription::create([
-        //     'sku_id' => $data['sku_id'],
-        //     'order_id' => $data['order_id'],
-        //     'plan_id' => $data['plan_id'],
-        //     'auth_code' => $data['authorization']['authorization_code'],
-        //     'email_token' => $data['email_token'] ?? null,
-        //     'channel' => $data['channel'],
-        //     'plan' => $data['plan'],
-        //     'customer_code' => $data['customer_code'],
-        //     'customer_email' => $data['customer_email'],
-        //     'start_date' => $data['start_date'] ?? null,
-        //     'end_date' => $data['end_date'] ?? null,
-        //     'next_billing_date' => $data['next_billing_date'] ?? null,
-        //     'cron_expression' => $data['cron_expression'] ?? null,
-        // ]);
+        $order = Order::find($payload['data']['metadata']['order_id']);
+        $product = $order->load([
+            'products' => fn ($query) => $query->where('skuable_type', 'Subscription'),
+            'products.skuable'
+        ])->products->first();
+
+        $subscription = ProductSubscription::create([
+            'sku_id' => $product->id,
+            'order_id' => $payload['data']['metadata']['order_id'],
+            'plan_id' => $product->skuable->id,
+            'plan_code' => $product->skuable->plan_code,
+            'auth_code' => $payload['data']['authorization']['authorization_code'],
+            'channel' => $payload['data']['channel'],
+            'customer_code' => $payload['data']['customer']['customer_code'],
+            'customer_email' => $payload['data']['customer']['email'],
+            'start_date' => now(),
+        ]);
+
+        SubscribeToProductWithProvider::dispatch($subscription);
     }
 }
