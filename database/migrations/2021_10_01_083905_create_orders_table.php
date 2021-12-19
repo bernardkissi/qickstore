@@ -25,6 +25,8 @@ class CreateOrdersTable extends Migration
 
             $table->string('shipping_service')->nullable();
             $table->integer('shipping_cost')->nullable();
+            $table->integer('provider_order_id')->unique()->nullable();
+            $table->enum('order_type', ['subcription', 'general'])->default('general');
 
             $table->string('payment_gateway')->nullable();
             $table->integer('total')->unsigned();

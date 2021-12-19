@@ -35,6 +35,10 @@ class CreateProductSubscriptions extends Migration
             $table->dateTime('start_date');
             $table->dateTime('end_date')->nullable();
             $table->dateTime('next_billing_date')->nullable();
+            $table->dateTime('cancelled_at')->nullable();
+
+            $table->boolean('open_invoice')->nullable();
+            $table->json('invoice_history')->nullable();
 
             $table->string('cron_expression')->nullable();
             $table->string('state')->nullable();

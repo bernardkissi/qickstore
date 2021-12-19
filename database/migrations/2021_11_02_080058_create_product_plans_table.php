@@ -33,7 +33,7 @@ class CreateProductPlansTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
+     *p
      * @return void
      */
     public function down()
