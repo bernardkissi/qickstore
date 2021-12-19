@@ -15,10 +15,10 @@ interface Checkoutable
      */
     public function createOrder(array $data): Order;
 
-    /**
-     * Pay for the order
-     *
-     * @return string
-     */
-    public function payOrder(?array $payload): ?array;
+    // /**
+    //  * Pay for the order
+    //  *
+    //  * @return string
+    //  */
+    // public function payOrder(?array $payload): ?array;
 }

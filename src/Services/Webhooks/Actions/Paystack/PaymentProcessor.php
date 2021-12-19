@@ -32,7 +32,7 @@ class PaymentProcessor
     }
 
     /**
-     * Runs when payment has subscription but no has plan
+     * Runs when payment has subscription is true but no has plan
      *
      * @param array $payload
      * @return void
@@ -46,7 +46,7 @@ class PaymentProcessor
     }
 
     /**
-     * Runs when payment already has a subscription plan
+     * Runs when payment is a subscription payment and has a plan
      *
      * @param array $payload
      * @return void
@@ -54,9 +54,8 @@ class PaymentProcessor
     private static function hasPlan(array $payload): void
     {
         Bus::chain([
-            fn () => CreatePayment::execute($payload),
-            fn () => UpdateProductSubscription::execute($payload),
             fn () => GenerateOrder::execute($payload),
+            fn () => CreatePayment::execute($payload),
         ])->dispatch();
     }
 }

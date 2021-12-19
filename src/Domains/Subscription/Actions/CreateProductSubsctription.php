@@ -13,10 +13,7 @@ class CreateProductSubsctription
     public static function execute(array $payload): void
     {
         $order = Order::find($payload['data']['metadata']['order_id']);
-        $product = $order->load([
-            'products' => fn ($query) => $query->where('skuable_type', 'Subscription'),
-            'products.skuable'
-        ])->products->first();
+        $product = $order->fetchSubscribedProduct();
 
         $subscription = ProductSubscription::create([
             'sku_id' => $product->id,

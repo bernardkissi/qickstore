@@ -21,6 +21,7 @@ use Domain\Products\Product\Actions\ProductActions;
 use Domain\Products\Product\Product;
 use Domain\Products\Product\ProductPlan;
 use Domain\Products\Product\ProductVariation;
+use Domain\Subscription\ProductSubscription;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
@@ -178,7 +179,14 @@ Route::get('/order/{order}', function (Request $request, Order $order) {
 })->name('product_plans');
 
 Route::get('/subscribes/{order}', function (Request $request, Order $order) {
-    return $order->load(['products'
-            => fn ($query) => $query->select('skuable_type', 'skuable_id')->where('skuable_type', '=', 'Subscription'),
-            'products.skuable:id,plan_code']);
+    // return $order->load(['products'
+    //         => fn ($query) => $query->select('skuable_type', 'skuable_id')->where('skuable_type', '=', 'Subscription'),
+    //         'products.skuable:id,plan_code']);
+    // $subscription = ProductSubscription::find(1);
+    // return $subscription->order->load(['products'
+    //         => fn ($query) => $query->select('skuable_type', 'skuable_id')->where('skuable_type', '=', 'Subscription'),
+    //         'products.skuable:id,plan_code']);
+    $subscription = ProductSubscription::searchSubscription('PLN_1hxjlmxrx58e35n', 'CUS_6zrgz1q8hrz5man');
+    $sku = $subscription->order->load(['products', 'orderable'])['products'];
+    dump($sku->first()->skuable->type);
 })->name('product_subscribed');

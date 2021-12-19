@@ -12,6 +12,7 @@ use Domain\Orders\Traits\ManageSubscription;
 use Domain\Payments\Payment;
 use Domain\Products\Skus\Sku;
 use Domain\Refunds\Refund;
+use Domain\Subscription\ProductSubscription;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -54,6 +55,7 @@ class Order extends Model
         'payment_gateway',
         'instructions',
         'coupon_id',
+        'order_type',
     ];
 
     /**
@@ -156,6 +158,16 @@ class Order extends Model
     public function dispute(): MorphOne
     {
         return $this->morphOne(Dispute::class, 'disputable');
+    }
+
+    /**
+     *  Returns the product subscription subscribed with an order
+     *
+     * @return HasOne
+     */
+    public function subscription(): HasOne
+    {
+        return $this->hasOne(ProductSubscription::class);
     }
 
     /**

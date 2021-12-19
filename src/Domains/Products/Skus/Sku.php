@@ -5,6 +5,7 @@ namespace Domain\Products\Skus;
 use App\Helpers\Scopes\Scoper;
 use App\ProductSubscription;
 use Database\Factories\SkuFactory;
+use Domain\Products\Product\Bundle;
 use Domain\Products\Product\Product;
 use Domain\Products\Product\ProductPlan;
 use Domain\Products\Skus\Collection\SkuCollection;
