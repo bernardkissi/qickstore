@@ -2,26 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="60b71749-45c4-44b8-b4a5-3964b924b93f" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/blade.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/commandlinetools/Laravel_23_04_2021__1_01_AM.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/commandlinetools/schemas/frameworkDescriptionVersion1.1.4.xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/phpunit.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/store.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/symfony2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.phpintel/index" beforeDir="false" afterPath="$PROJECT_DIR$/.phpintel/index" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Core/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Core/Providers/AppServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Domains/Categories/Models/Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Domains/Categories/Models/Category.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Domains/Categories/Resources/CategoryResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Domains/Categories/Resources/CategoryResource.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Domains/Categories/Scopes/Scopes.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Domains/Categories/Scopes/Scopes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Domains/Products/Models/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Domains/Products/Models/Product.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/factories/SubCategoryFactory.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Domains/Subscription/ProductSubscription.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Domains/Subscription/ProductSubscription.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Services/Webhooks/Actions/Paystack/PaymentProcessor.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Webhooks/Actions/Paystack/PaymentProcessor.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -308,6 +291,8 @@
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="FullScreen" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
@@ -362,9 +347,6 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/Domains/Products/Actions/ProductActions.php">
