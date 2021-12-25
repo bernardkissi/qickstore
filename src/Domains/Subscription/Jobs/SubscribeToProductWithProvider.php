@@ -4,6 +4,7 @@ namespace Domain\Subscription\Jobs;
 
 use Carbon\Carbon;
 use Domain\Subscription\ProductSubscription;
+use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -41,14 +42,16 @@ class SubscribeToProductWithProvider implements ShouldQueue
             'start_date' => $this->subscription->start_date
         ])->send()->json();
 
-        if ($subscription['data']) {
-            $this->subscription->update([
+        if (!array_key_exists('data', $subscription)) {
+            return;
+        }
+
+        $this->subscription->update([
                  'email_token' => $subscription['data']['email_token'],
                  'cron_expression' => $subscription['data']['cron_expression'],
                  'next_billing_date' => Carbon::parse($subscription['data']['next_payment_date']),
                  'invoice_limit' => $subscription['data']['invoice_limit'],
                  'subscription_id' => $subscription['data']['id']
-             ]);
-        }
+        ]);
     }
 }
