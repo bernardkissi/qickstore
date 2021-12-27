@@ -47,7 +47,7 @@ class DispatchOrder
         $physical = config("dispatchers.physical.{$order->shipping_service}");
         $tickets = config('dispatchers.tickets');
 
-        $payload = $this->extractOrderInfo($order, $items, $count);
+        $payload = $this->extractOrderInfo($order, $items, $count, $key);
 
         $class = match ($key) {
             'physical' => new $physical($payload),
@@ -66,10 +66,10 @@ class DispatchOrder
      *
      * @return array
      */
-    protected function extractOrderInfo(Order $order, Collection $items, int $num_of_groups): array
+    protected function extractOrderInfo(Order $order, Collection|array|null $items, int $num_of_groups, string $key): array
     {
         return [
-            'service' => $order->shipping_service ?? null,
+            'service' => $order->shipping_service ?? $key.'_processor',
             'order_id' => $order->id,
             'instructions' => $order->instructions ?? null,
             'customer_email' => $order->orderable->email,
