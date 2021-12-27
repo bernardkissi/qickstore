@@ -32,11 +32,11 @@ class RecurringCheckout implements Checkoutable
                 'shipping_id' => $data['shipping_id'] ?? null,
                 'shipping_service' => $data['shipping_service'] ?? null,
                 'shipping_cost' => $data['shipping_amount']?? null,
-                'payment_gateway' => $data['gateway'],
+                'payment_gateway' => $data['payment_gateway'],
                 'instructions' => $data['instructions'],
                 'total' => $data['total'],
                 'address_id' => $addressId,
-                'provider_order_id' => $data['provider_id']
+                'provider_order_id' => $data['provider_order_id']
             ]
         );
         $order->products()->sync([$data['product_id'] => ['quantity' => 1]]);

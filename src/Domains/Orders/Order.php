@@ -56,6 +56,7 @@ class Order extends Model
         'instructions',
         'coupon_id',
         'order_type',
+        'provider_order_id',
     ];
 
     /**
