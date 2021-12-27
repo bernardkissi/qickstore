@@ -19,8 +19,8 @@ class CreateOrdersTable extends Migration
             $table->morphs('orderable');
             $table->integer('items_count')->default(0);
 
-            $table->foreignId('shipping_id')->unsigned()->index()->constrained('shipping_providers');
-            $table->foreignId('address_id')->unsigned()->index()->constrained('addresses');
+            $table->foreignId('shipping_id')->nullable()->unsigned()->index()->constrained('shipping_providers');
+            $table->foreignId('address_id')->nullable()->unsigned()->index()->constrained('addresses');
             $table->foreignId('coupon_id')->nullable()->unsigned()->index()->constrained('coupons');
 
             $table->string('shipping_service')->nullable();
