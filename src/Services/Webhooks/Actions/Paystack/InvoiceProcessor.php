@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Service\Webhooks\Actions\Paystack;
 
-use PDO;
-
 class InvoiceProcessor
 {
     public function execute(array $payload): void
@@ -38,7 +36,6 @@ class InvoiceProcessor
         //status
     }
 }
-
 
 //invoice.create
 // Remind the customer subscription is almost due for renewal

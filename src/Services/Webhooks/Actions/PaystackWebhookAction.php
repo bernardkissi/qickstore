@@ -13,8 +13,6 @@ class PaystackWebhookAction implements WebhookAction
      * Action to process swoove webhook calls
      *
      * @param array $data
-     *
-     *
      */
     public static function process(array $payload): void
     {
