@@ -23,7 +23,6 @@ use Domain\Products\Product\ProductPlan;
 use Domain\Products\Product\ProductVariation;
 use Domain\Subscription\ProductSubscription;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
