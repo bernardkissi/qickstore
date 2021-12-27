@@ -110,7 +110,6 @@ class Sku extends Model implements HasMedia
         return $this->belongsTo(Product::class);
     }
 
-
     /**
      * ProductPlan sku relationship
      *
