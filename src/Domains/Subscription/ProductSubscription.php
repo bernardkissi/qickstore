@@ -21,10 +21,10 @@ class ProductSubscription extends Model
     HasFactory;
 
     /**
-    * Fillable properties of the model.
-    *
-    * @var array
-    */
+     * Fillable properties of the model.
+     *
+     * @var array
+     */
     public $fillable = [
 
         'sku_id',
@@ -58,10 +58,10 @@ class ProductSubscription extends Model
     }
 
     /**
-    * Returns the product subscribed to.
-    *
-    * @return BelongsTo
-    */
+     * Returns the product subscribed to.
+     *
+     * @return BelongsTo
+     */
     public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class);

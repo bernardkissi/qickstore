@@ -17,10 +17,10 @@ class VerifySubscriptionJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
-    * Create a new job instance.
-    *
-    * @return void
-    */
+     * Create a new job instance.
+     *
+     * @return void
+     */
     public function __construct(
         public string $reference,
         public Payment $payment,
@@ -37,8 +37,8 @@ class VerifySubscriptionJob implements ShouldQueue
     public function handle(): void
     {
         $data = PaymentGateway::verify($this->reference)['data'];
-        if (!$data) {
-            throw new Exception("Error verifying payment");
+        if (! $data) {
+            throw new Exception('Error verifying payment');
         }
         PaymentGateway::updatePayment($this->payment, $data);
     }
