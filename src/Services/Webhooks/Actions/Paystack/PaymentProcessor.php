@@ -18,10 +18,11 @@ class PaymentProcessor
 {
     public static function handle(array $payload): void
     {
-        $subscription = $payload['data']['metadata']['has_subscription']  === 'true' ? true : false;
+        $subscription = array_key_exists('has_subscription', $payload['data']['metadata']) ?? false;
+        $has_subscription = $subscription ? $payload['data']['metadata']['has_subscription'] : false;
         $plan = $payload['data']['plan'];
 
-        if ($subscription === true || is_null($plan) !== false) {
+        if (($subscription && $has_subscription) || !empty($plan)) {
             match (empty($plan)) {
                 true => static::doesntHavePlan($payload),
                 false => static::hasPlan($payload),

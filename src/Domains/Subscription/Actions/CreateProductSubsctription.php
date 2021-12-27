@@ -12,6 +12,7 @@ class CreateProductSubsctription
 {
     public static function execute(array $payload): void
     {
+        //TODO: check if the subscription is already created
         $order = Order::find($payload['data']['metadata']['order_id']);
         $product = $order->fetchSubscribedProduct();
 

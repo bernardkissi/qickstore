@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Domain\Subscription\Actions;
+namespace Domains\Subscription\Actions;
 
 class UpdateProductSubscription
 {
