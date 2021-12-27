@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Domain\Payments\Actions;
 
+use Carbon\Carbon;
 use Domain\Delivery\Jobs\DispatchOrderJob;
 use Domain\Orders\Order;
 use Domain\Payments\Jobs\PaymentCompletedJob;
@@ -17,8 +18,9 @@ class CreatePayment
     {
         $order = Order::firstWhere('provider_order_id', $data['data']['id']);
         $paymentRef = $data['data']['reference'];
+
         $payment =  Payment::create([
-                        'tx_ref' => $data['data']['reference'],
+                        'tx_ref' => $paymentRef,
                         'status' => $data['data']['status'],
                         'provider' => 'paystack',
                         'channel' => $data['data']['channel'],
@@ -27,7 +29,7 @@ class CreatePayment
                         'authorization_code' => $data['data']['authorization']['authorization_code'],
                         'plan_code' => $data['data']['plan']['plan_code'],
                         'currency' => $data['data']['currency'],
-                        'paid_at' => $data['data']['paidAt'],
+                        'paid_at' => Carbon::parse($data['data']['paidAt']),
                         'ip' => $data['data']['ip_address'],
                         'provider_reference' => $data['data']['id'],
                         'order_id' => $order->id,

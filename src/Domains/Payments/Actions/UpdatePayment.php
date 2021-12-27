@@ -25,7 +25,7 @@ class UpdatePayment
                 'channel' => $payload['data']['channel'],
                 'plan' => $payload['data']['plan'],
                 'paid_at' => Carbon::parse($payload['data']['paid_at']),
-                'has_subscription' => $payload['data']['metadata']['has_subscription'],
+                'has_subscription' => array_key_exists('has_subscription', $payload['data']['metadata']) ?? false,
                 'subaccount' => $payload['data']['subaccount'],
                 'card_type' => $payload['data']['authorization']['card_type'],
             ]);
