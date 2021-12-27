@@ -17,7 +17,6 @@ class GenerateOrder
         $total = $payload['data']['amount'];
         $providerId = $payload['data']['id'];
 
-
         $subscription = ProductSubscription::searchSubscription($planCode, $customerCode);
 
         if ($subscription) {
@@ -32,6 +31,7 @@ class GenerateOrder
      * Retriving parent order details
      *
      * @param array $payload
+     *
      * @return array
      */
     private static function orderData(Order $payload, int $total, int $providerId): array
@@ -50,7 +50,7 @@ class GenerateOrder
             'address_id' => $payload['address_id'],
             'address' => null,
             'product_id' => $payload['products']->first()->id,
-            'provider_order_id' => 895091250 //$providerId
+            'provider_order_id' => 895091250, //$providerId
         ];
     }
 }
