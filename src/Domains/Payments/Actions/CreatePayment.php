@@ -19,22 +19,22 @@ class CreatePayment
         $order = Order::firstWhere('provider_order_id', $data['data']['id']);
         $paymentRef = $data['data']['reference'];
 
-        $payment =  Payment::create([
-                        'tx_ref' => $paymentRef,
-                        'status' => $data['data']['status'],
-                        'provider' => 'paystack',
-                        'channel' => $data['data']['channel'],
-                        'amount' => $data['data']['amount'],
-                        'customer_code' => $data['data']['customer']['customer_code'],
-                        'authorization_code' => $data['data']['authorization']['authorization_code'],
-                        'plan_code' => $data['data']['plan']['plan_code'],
-                        'currency' => $data['data']['currency'],
-                        'paid_at' => Carbon::parse($data['data']['paidAt']),
-                        'ip' => $data['data']['ip_address'],
-                        'provider_reference' => $data['data']['id'],
-                        'order_id' => $order->id,
-                        'has_subscription' => true,
-                    ]);
+        $payment = Payment::create([
+            'tx_ref' => $paymentRef,
+            'status' => $data['data']['status'],
+            'provider' => 'paystack',
+            'channel' => $data['data']['channel'],
+            'amount' => $data['data']['amount'],
+            'customer_code' => $data['data']['customer']['customer_code'],
+            'authorization_code' => $data['data']['authorization']['authorization_code'],
+            'plan_code' => $data['data']['plan']['plan_code'],
+            'currency' => $data['data']['currency'],
+            'paid_at' => Carbon::parse($data['data']['paidAt']),
+            'ip' => $data['data']['ip_address'],
+            'provider_reference' => $data['data']['id'],
+            'order_id' => $order->id,
+            'has_subscription' => true,
+        ]);
 
         Bus::chain([
             new VerifySubscriptionJob($paymentRef, $payment, $order),
