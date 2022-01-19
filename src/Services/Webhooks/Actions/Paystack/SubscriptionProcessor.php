@@ -4,8 +4,14 @@ declare(strict_types=1);
 
 namespace Service\Webhooks\Actions\Paystack;
 
-class SubscriptionProcessor
+use Service\Webhooks\Actions\ActionHandler;
+
+class SubscriptionProcessor implements ActionHandler
 {
+    public static function handle(array $payload): void
+    {
+        //
+    }
 }
 
 // 'subscription.create',

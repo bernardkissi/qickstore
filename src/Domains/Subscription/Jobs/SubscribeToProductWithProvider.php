@@ -50,6 +50,7 @@ class SubscribeToProductWithProvider implements ShouldQueue
             'next_billing_date' => Carbon::parse($subscription['data']['next_payment_date']),
             'invoice_limit' => $subscription['data']['invoice_limit'],
             'subscription_id' => $subscription['data']['id'],
+            'subscription_code' => $subscription['data']['subscription_code'],
         ]);
     }
 }

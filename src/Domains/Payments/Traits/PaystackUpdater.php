@@ -13,14 +13,14 @@ trait PaystackUpdater
     {
         $payment->update([
             'status' => $data['status'],
-            'history' => $data['log']['history'],
+            'history' => $data['log']['history'] ?? null,
             'provider_reference' => $data['id'],
             'currency' => $data['currency'],
             'customer_code' => $data['customer']['customer_code'],
             'authorization_code' => $data['authorization']['authorization_code'],
             'ip_address' => $data['ip_address'],
             'channel' => $data['channel'],
-            'plan' => $data['plan'],
+            'plan' => $data['plan'] ?? null,
             'paid_at' => Carbon::parse($data['paid_at']),
         ]);
     }

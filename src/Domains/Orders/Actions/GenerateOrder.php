@@ -21,7 +21,7 @@ class GenerateOrder
 
         if ($subscription) {
             $parentOrder = $subscription->order->load(['products', 'orderable']);
-            $orderDetails = static::orderData($parentOrder, $total, $providerId);
+            $orderDetails = static::orderData($parentOrder, $total, $providerId, $subscription->id);
 
             (new RecurringCheckout($parentOrder['orderable']))->createOrder($orderDetails);
         }
@@ -34,23 +34,24 @@ class GenerateOrder
      *
      * @return array
      */
-    private static function orderData(Order $payload, int $total, int $providerId): array
+    private static function orderData(Order $order, int $total, int $providerId, int $subscriptionId): array
     {
-        $sku = $payload['products']->first()->skuable->type;
+        $sku = $order['products']->first()->skuable->type;
         $state = $sku === 'digital' ? true : false;
 
         return [
             'items_count' => 1,
-            'shipping_id' => $payload['shipping_id'],//$state ? null : $payload['shipping_id'],
-            'shipping_service' => $payload['shipping_service'], //$state ? null : ,
+            'shipping_id' => $order['shipping_id'],//$state ? null : $payload['shipping_id'],
+            'shipping_service' => $order['shipping_service'], //$state ? null : ,
             'shipping_cost' => 20,
             'payment_gateway' => 'paystack',
-            'instructions' => $state ? null : $payload['instructions'],
+            'instructions' => $state ? null : $order['instructions'],
             'total' => $total,
-            'address_id' => $payload['address_id'],
+            'address_id' => $order['address_id'],
             'address' => null,
-            'product_id' => $payload['products']->first()->id,
-            'provider_order_id' => 895091250, //$providerId
+            'product_id' => $order['products']->first()->id,
+            'provider_order_id' => $providerId,
+            'subscription_id' => $subscriptionId,
         ];
     }
 }

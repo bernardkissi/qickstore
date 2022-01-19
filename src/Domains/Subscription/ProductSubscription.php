@@ -3,11 +3,14 @@
 namespace Domain\Subscription;
 
 use Domain\Orders\Order;
+use Domain\Payments\Facade\Payment;
 use Domain\Products\Skus\Sku;
+use Domain\Subscription\States\SubscriptionState;
 use Domain\Subscription\Traits\Searchable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use JamesMills\Uuid\HasUuidTrait;
 use Spatie\ModelStates\HasStates;
@@ -48,6 +51,15 @@ class ProductSubscription extends Model
     ];
 
     /**
+     * Cast properties of the model
+     *
+     * @var array
+     */
+    protected $casts = [
+        'state' => SubscriptionState::class
+    ];
+
+    /**
      * Returns the product subscribed to.
      *
      * @return HasOne
@@ -65,5 +77,15 @@ class ProductSubscription extends Model
     public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class);
+    }
+
+    /**
+    * Returns the payments made for this subscription.
+    *
+    * @return HasMany
+    */
+    public function transcations(): HasMany
+    {
+        return $this->hasMany(Payment::class);
     }
 }

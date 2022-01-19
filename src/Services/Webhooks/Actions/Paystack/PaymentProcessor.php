@@ -9,11 +9,13 @@ use Domain\Payments\Actions\CreatePayment;
 use Domain\Payments\Actions\UpdatePayment;
 use Domain\Subscription\Actions\CreateProductSubsctription;
 use Illuminate\Support\Facades\Bus;
+use Service\Webhooks\Actions\ActionHandler;
 
-class PaymentProcessor
+class PaymentProcessor implements ActionHandler
 {
     public static function handle(array $payload): void
     {
+        dump($payload);
         $subscription = array_key_exists('has_subscription', $payload['data']['metadata']) ?? false;
         $has_subscription = $subscription ? $payload['data']['metadata']['has_subscription'] : false;
         $plan = $payload['data']['plan'];
