@@ -556,3 +556,204 @@ App\Complex::class,
     ];
 
 });
+
+# subscription charge success
+
+```
+"event" => "charge.success"
+  "data" => array:27 [
+    "id" => 1569920434
+    "domain" => "test"
+    "status" => "success"
+    "reference" => "cdb32ccd-8dc7-55b4-b33a-b2244d056d29"
+    "amount" => 300
+    "message" => null
+    "gateway_response" => "Approved"
+    "paid_at" => "2022-01-18T03:00:34.000Z"
+    "created_at" => "2022-01-18T03:00:05.000Z"
+    "channel" => "card"
+    "currency" => "GHS"
+    "ip_address" => null
+    "metadata" => array:1 [
+      "invoice_action" => "create"
+    ]
+    "log" => null
+    "fees" => 6
+    "fees_split" => null
+    "authorization" => array:15 [
+      "authorization_code" => "AUTH_u6g2hz9dbh"
+      "bin" => "408408"
+      "last4" => "4081"
+      "exp_month" => "12"
+      "exp_year" => "2030"
+      "channel" => "card"
+      "card_type" => "visa"
+      "bank" => "TEST BANK"
+      "country_code" => "GH"
+      "brand" => "visa"
+      "reusable" => true
+      "signature" => "SIG_7iwW1QZ1hEpllSnnuseg"
+      "account_name" => null
+      "receiver_bank_account_number" => null
+      "receiver_bank" => null
+    ]
+    "customer" => array:9 [
+      "id" => 67489095
+      "first_name" => null
+      "last_name" => null
+      "email" => "bernardkissi18@live.com"
+      "customer_code" => "CUS_aslzwdvtzavwh6u"
+      "phone" => null
+      "metadata" => null
+      "risk_action" => "default"
+      "international_format_phone" => null
+    ]
+    "plan" => array:9 [
+      "id" => 215118
+      "name" => "Basic ZVollier"
+      "plan_code" => "PLN_0m2oz2zcyl65kig"
+      "description" => null
+      "amount" => 300
+      "interval" => "hourly"
+      "send_invoices" => true
+      "send_sms" => false
+      "currency" => "GHS"
+    ]
+    "subaccount" => []
+    "split" => []
+    "order_id" => null
+    "paidAt" => "2022-01-18T03:00:34.000Z"
+    "requested_amount" => 300
+    "pos_transaction_data" => null
+    "source" => array:3 [
+      "source" => "merchant_api"
+      "identifier" => null
+      "event_type" => "api"
+    ]
+    "fees_breakdown" => null
+  ]
+  "order" => null
+  "business_name" => "qickstores"
+]
+
+```
+
+# invoice.create payload
+
+```
+"event" => "invoice.create"
+  "data" => array:15 [
+    "id" => 4163894
+    "domain" => "test"
+    "invoice_code" => "INV_apf526wejvgh8o0"
+    "amount" => 300
+    "period_start" => "2022-01-18T03:00:00.000Z"
+    "period_end" => "2022-01-18T03:59:59.000Z"
+    "status" => "success"
+    "paid" => true
+    "paid_at" => "2022-01-18T03:00:34.000Z"
+    "description" => null
+    "authorization" => array:13 [
+      "authorization_code" => "AUTH_u6g2hz9dbh"
+      "bin" => "408408"
+      "last4" => "4081"
+      "exp_month" => "12"
+      "exp_year" => "2030"
+      "channel" => "card"
+      "card_type" => "visa"
+      "bank" => "TEST BANK"
+      "country_code" => "GH"
+      "brand" => "visa"
+      "reusable" => true
+      "signature" => "SIG_7iwW1QZ1hEpllSnnuseg"
+      "account_name" => null
+    ]
+    "subscription" => array:7 [
+      "status" => "active"
+      "subscription_code" => "SUB_gmsivrku570bks2"
+      "email_token" => "sd457cl04stz0zk"
+      "amount" => 300
+      "cron_expression" => "0 * * * *"
+      "next_payment_date" => "2022-01-18T04:00:01.000Z"
+      "open_invoice" => null
+    ]
+    "customer" => array:9 [
+      "id" => 67489095
+      "first_name" => null
+      "last_name" => null
+      "email" => "bernardkissi18@live.com"
+      "customer_code" => "CUS_aslzwdvtzavwh6u"
+      "phone" => null
+      "metadata" => null
+      "risk_action" => "default"
+      "international_format_phone" => null
+    ]
+    "transaction" => array:4 [
+      "reference" => "cdb32ccd-8dc7-55b4-b33a-b2244d056d29"
+      "status" => "success"
+      "amount" => 300
+      "currency" => "GHS"
+    ]
+    "created_at" => "2022-01-18T03:00:04.000Z"
+  ]
+]
+
+
+```
+
+# invoice.payment_failed
+
+```
+"event" => "invoice.payment_failed"
+  "data" => array:15 [
+    "id" => 4163190
+    "domain" => "test"
+    "invoice_code" => "INV_qbhf2wk5mzwjqqw"
+    "amount" => 300
+    "period_start" => "2022-01-18T00:00:00.000Z"
+    "period_end" => "2022-01-18T00:59:59.000Z"
+    "status" => "failed"
+    "paid" => false
+    "paid_at" => null
+    "description" => "Email does not match Authorization code. Authorization may be inactive or belong to a different email. Please confirm."
+    "authorization" => array:13 [
+      "authorization_code" => "AUTH_leifonndr4"
+      "bin" => "055XXX"
+      "last4" => "X987"
+      "exp_month" => "12"
+      "exp_year" => "9999"
+      "channel" => "mobile_money"
+      "card_type" => null
+      "bank" => "MTN"
+      "country_code" => "GH"
+      "brand" => "Mtn"
+      "reusable" => false
+      "signature" => null
+      "account_name" => null
+    ]
+    "subscription" => array:7 [
+      "status" => "attention"
+      "subscription_code" => "SUB_ih1duh8h8u1f25g"
+      "email_token" => "1brpp85zhc2nwpn"
+      "amount" => 300
+      "cron_expression" => "0 * * * *"
+      "next_payment_date" => "2022-01-18T04:00:01.000Z"
+      "open_invoice" => "INV_qbhf2wk5mzwjqqw"
+    ]
+    "customer" => array:9 [
+      "id" => 65399761
+      "first_name" => null
+      "last_name" => null
+      "email" => "bernardkissi9@live.com"
+      "customer_code" => "CUS_dia2akpp3comqq4"
+      "phone" => null
+      "metadata" => null
+      "risk_action" => "default"
+      "international_format_phone" => null
+    ]
+    "transaction" => []
+    "created_at" => "2022-01-18T00:00:14.000Z"
+  ]
+]
+
+```
