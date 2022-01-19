@@ -40,6 +40,7 @@ class VerifySubscriptionJob implements ShouldQueue
         if (! $data) {
             throw new Exception('Error verifying payment');
         }
+        dump($data);
         PaymentGateway::updatePayment($this->payment, $data);
     }
 }
