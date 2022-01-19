@@ -31,6 +31,8 @@ class CreateOrdersTable extends Migration
             $table->string('payment_gateway')->nullable();
             $table->integer('total')->unsigned();
             $table->integer('discount')->unsigned()->nullable();
+            $table->integer('subscription_id')->nullable();
+
 
             $table->string('estimate_id')->nullable();
 

@@ -17,6 +17,8 @@ class CreateTranscationsTable extends Migration
             $table->id();
             $table->uuid('uuid')->unique();
             $table->foreignId('order_id')->unsigned()->index()->constrained('orders');
+            $table->foreignId('subscription_id')->nullable()->unsigned()->index()->constrained('product_subscriptions');
+
             $table->string('tx_ref');
             $table->string('status');
             $table->string('amount');
