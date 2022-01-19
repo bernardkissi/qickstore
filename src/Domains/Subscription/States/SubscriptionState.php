@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Domain\Subscription\States;
 
-use Domain\Orders\Transitions\PendingToFailed;
 use Spatie\ModelStates\Attributes\AllowTransition;
 use Spatie\ModelStates\Attributes\DefaultState;
 use Spatie\ModelStates\State;

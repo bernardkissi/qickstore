@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Domain\Subscription\States;
 
-class Disabled extends SubscriptionState
+class CardExpiry extends SubscriptionState
 {
     /**
      * Property name of this state in DB

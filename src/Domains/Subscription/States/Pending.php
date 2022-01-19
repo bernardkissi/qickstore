@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Domain\Subscription\States;
 
-class Disabled extends SubscriptionState
+class Pending extends SubscriptionState
 {
     /**
      * Property name of this state in DB
      *
      * @var string
      */
-    public static $name = 'diabled';
+    public static $name = 'pending';
 
     /**
      * Returns the paid state of an order
@@ -20,6 +20,6 @@ class Disabled extends SubscriptionState
      */
     public function status(): string
     {
-        return 'Subscription is disabled';
+        return 'Subscription is pending';
     }
 }
