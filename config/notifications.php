@@ -1,0 +1,37 @@
+<?php
+
+return  [
+    'messages' => [
+
+            'created' => 'has been created successfully',
+            'updated' => 'has been updated successfully',
+            'deleted' => 'has been deleted successfully',
+            'activated' => 'has been activated successfully',
+            'deactivated' => 'has been deactivated successfully',
+            'enabled' => 'has been enabled successfully',
+            'disabled' => 'has been disabled successfully',
+            'sent' => 'has been sent successfully',
+            'received' => 'has been received successfully',
+            'approved' => 'has been approved successfully',
+            'rejected' => 'has been rejected successfully',
+            'paid' => 'has been paid successfully',
+            'cancelled' => 'has been cancelled successfully',
+            'refunded' => 'has been refunded successfully',
+            'charged' => 'has been charged successfully',
+            'paidout' => 'has been paidout successfully',
+            'sent_to_bank' => 'has been sent to bank successfully',
+            'received_from_bank' => 'has been received from bank successfully',
+            'sent_to_customer' => 'has been sent to customer successfully',
+            'received_from_customer' => 'has been received from customer successfully',
+            'sent_to_merchant' => 'has been sent to merchant successfully',
+            'received_from_merchant' => 'has been received from merchant successfully',
+            'sent_to_vendor' => 'has been sent to vendor successfully',
+            'received_from_vendor' => 'has been received from vendor successfully',
+            'sent_to_customer_bank' => 'has been sent to customer bank successfully',
+            'received_from_customer_bank' => 'has been received from customer bank successfully',
+            'sent_to_merchant_bank' =>  'has been sent to merchant bank successfully',
+            'received_from_merchant_bank' => ':name has been received from',
+            'invoice_created' => 'You are being notified about the pending subscription payment on ',
+    ],
+    "notifcation.handlers" => [],
+];

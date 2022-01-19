@@ -4,31 +4,38 @@ declare(strict_types=1);
 
 namespace Service\Webhooks\Actions\Paystack;
 
-class InvoiceProcessor
+use Domain\Subscription\Notifications\CreateInvoiceNotification;
+use Illuminate\Support\Facades\Notification;
+use Service\Notifications\Channels\SmsChannel;
+use Service\Webhooks\Actions\ActionHandler;
+
+class InvoiceProcessor implements ActionHandler
 {
-    public function execute(array $payload): void
+    public static function handle(array $payload): void
     {
         match ($payload['event']) {
-            'invoice.create' => $this->createInvoice($payload),
-            'invoice.payment_failed' => $this->paymentFailed($payload),
-            'invoice.update' => $this->updateInvoice($payload),
+            'invoice.create' => static::createInvoice($payload),
+            'invoice.payment_failed' => static::paymentFailed($payload),
+            'invoice.update' => static::updateInvoice($payload),
         };
     }
 
-    protected function createInvoice(array $data)
+    protected static function createInvoice(array $payload)
     {
-        //notify customer about the impending subscription payment
+        dump($payload); // Notification::route(SmsChannel::class, $payload['data']['customer']['phone'])
+        //         ->notify(new CreateInvoiceNotification($payload));
     }
 
-    protected function paymentFailed(array $data)
+    protected static function paymentFailed(array $payload)
     {
+        dump($payload);
         //status
         //descritpion
         //open invoice
         //card_type
     }
 
-    protected function updateInvoice(array $data)
+    protected static function updateInvoice(array $data)
     {
         //subscription_code
         //card_type
@@ -41,7 +48,8 @@ class InvoiceProcessor
 // Remind the customer subscription is almost due for renewal
 
 //invoice.payment_failed
-//notify customer subscription payment
+//notify customer subscription payment failed
+//update the statement
 //option to retry
 
 //invoice.update

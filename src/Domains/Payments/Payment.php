@@ -3,6 +3,7 @@
 namespace Domain\Payments;
 
 use Domain\Orders\Order;
+use Domain\Subscription\ProductSubscription;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -29,6 +30,7 @@ class Payment extends Model
         'provider',
         'channel',
         'order_id',
+        'subscription_id',
         'access_code',
         'pay_url',
         'history',
@@ -57,13 +59,23 @@ class Payment extends Model
     ];
 
     /**
-     * Register payments for order
+     * Returns payments for an order
      *
      * @return BelongsTo
      */
     public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class);
+    }
+
+    /**
+     * Returns the product the payment is subscribed to.
+     *
+     * @return BelongsTo
+     */
+    public function subscription(): BelongsTo
+    {
+        return $this->belongsTo(ProductSubscription::class);
     }
 
     /**

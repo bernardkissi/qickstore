@@ -34,6 +34,7 @@ class CreatePayment
             'provider_reference' => $data['data']['id'],
             'order_id' => $order->id,
             'has_subscription' => true,
+            'subscription_id' => $order->subscription_id,
         ]);
 
         Bus::chain([

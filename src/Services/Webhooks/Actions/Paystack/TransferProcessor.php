@@ -4,8 +4,14 @@ declare(strict_types=1);
 
 namespace Service\Webhooks\Actions\Paystack;
 
-class TransferProcessor
+use Service\Webhooks\Actions\ActionHandler;
+
+class TransferProcessor implements ActionHandler
 {
+    public static function handle(array $payload): void
+    {
+        //
+    }
 }
 
 //transfer.success
