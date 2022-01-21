@@ -9,22 +9,17 @@ class SmsMessage
     /**
      * @var string
      */
-    protected string $to;
+    protected string $to = '';
 
     /**
      * @var string
      */
-    protected string $from;
-
-    /**
-     * @var string
-     */
-    protected string $message;
+    protected string $from = '';
 
     /**
      * @var array
      */
-    protected array $lines;
+    protected array $lines = [];
 
     /**
      * SmsMessage constructor.
@@ -53,7 +48,7 @@ class SmsMessage
     /**
      *  Who recieves the sms
      *
-     * @param [type] $to
+     * @param string $to
      *
      * @return self
      */
@@ -67,7 +62,7 @@ class SmsMessage
     /**
      * Sender of the notification
      *
-     * @param [type] $from
+     * @param string $from
      *
      * @return self
      */
@@ -94,7 +89,7 @@ class SmsMessage
             'recipients' => explode(',', $this->to),
             'message' => implode('', $this->lines),
             'schedule_at' => '',
-            'sandbox' => false,
+            'sandbox' => true,
         ];
 
         return Sms::send($data);

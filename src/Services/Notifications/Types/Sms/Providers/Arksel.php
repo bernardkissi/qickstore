@@ -25,7 +25,7 @@ class Arksel implements SmsContract
                     'recipients' => $data['recipients'],
                     'message' => $data['message'],
                     'schedule_at' => '',
-                    'sandbox' => false,
+                    'sandbox' => $data['sandbox'],
                 ]
             )->toArray())
             ->send()->json();

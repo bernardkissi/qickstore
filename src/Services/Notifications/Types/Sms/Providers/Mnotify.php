@@ -3,8 +3,8 @@
 namespace Domain\Services\Notifications\Types\Sms\Providers;
 
 use Domain\Messages\Dtos\MessageDto;
-use Domain\Services\Notifications\Types\Sms\SmsContract;
 use Integration\Mnotify\Sms\SendMnotifySms;
+use Service\Notifications\Types\Sms\SmsContract;
 
 class Mnotify implements SmsContract
 {
