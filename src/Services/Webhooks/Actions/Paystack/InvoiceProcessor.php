@@ -5,7 +5,11 @@ declare(strict_types=1);
 namespace Service\Webhooks\Actions\Paystack;
 
 use Domain\Subscription\Notifications\CreateInvoiceNotification;
+use Domain\Subscription\Notifications\PaymentFailedNotification;
+use Domain\Subscription\ProductSubscription;
+use Domain\Subscription\States\PaymentFailed;
 use Illuminate\Support\Facades\Notification;
+use Integration\Paystack\Subscriptions\GenerateSubscriptionLink;
 use Service\Notifications\Channels\SmsChannel;
 use Service\Webhooks\Actions\ActionHandler;
 
@@ -16,41 +20,56 @@ class InvoiceProcessor implements ActionHandler
         match ($payload['event']) {
             'invoice.create' => static::createInvoice($payload),
             'invoice.payment_failed' => static::paymentFailed($payload),
-            'invoice.update' => static::updateInvoice($payload),
+            'invoice.update' => dump('Invoice updated'),
         };
     }
 
-    protected static function createInvoice(array $payload)
+    /**
+     * Send customer invoice for subscription payment
+     *
+     * @param array $payload
+     * @return void
+     */
+    protected static function createInvoice(array $payload): void
     {
-        dump($payload); // Notification::route(SmsChannel::class, $payload['data']['customer']['phone'])
-        //         ->notify(new CreateInvoiceNotification($payload));
+        Notification::route('mail', static::customerDetails($payload)['email'])
+            ->route(SmsChannel::class, static::customerDetails($payload)['phone'])
+            ->notify(new CreateInvoiceNotification($payload));
     }
 
+    /**
+     * Notify customer about subcription payment failure
+     *
+     * @param array $payload
+     * @return void
+     */
     protected static function paymentFailed(array $payload)
     {
-        dump($payload);
-        //status
-        //descritpion
-        //open invoice
-        //card_type
+        $subscriptionCode = $payload['data']['subscription']['subscription_code'];
+
+        $data = GenerateSubscriptionLink::build()
+            ->setPath("/subscription/${subscriptionCode}/manage/link/")
+            ->send()
+            ->json();
+
+        Notification::route('mail', static::customerDetails($payload)['email'])
+                ->route(SmsChannel::class, static::customerDetails($payload)['phone'])
+                ->notify(new PaymentFailedNotification($payload, $data['data']['link']));
+
+        ProductSubscription::transitioning($subscriptionCode, PaymentFailed::class);
     }
 
-    protected static function updateInvoice(array $data)
+    /**
+     * Get customer details from payload
+     *
+     * @param array $payload
+     * @return array
+     */
+    protected static function customerDetails(array $payload): array
     {
-        //subscription_code
-        //card_type
-        //next_payment_due
-        //status
+        return [
+            'email' => $payload['data']['customer']['email'],
+            'phone' => $payload['data']['customer']['phone'],
+        ];
     }
 }
-
-//invoice.create
-// Remind the customer subscription is almost due for renewal
-
-//invoice.payment_failed
-//notify customer subscription payment failed
-//update the statement
-//option to retry
-
-//invoice.update
-//notify customer subscription has been successfully renewed

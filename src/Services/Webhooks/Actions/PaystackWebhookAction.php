@@ -19,9 +19,13 @@ class PaystackWebhookAction implements WebhookAction
      */
     public static function process(array $payload): void
     {
+        dump($payload);
         match ($payload['event']) {
             'charge.success' => PaymentProcessor::handle($payload),
-            'subscription.create','subscription.disable','subscription.enable' => SubscriptionProcessor::handle($payload),
+            'subscription.create',
+            'subscription.disable',
+            'subscription.enable',
+            'subscription.not_renew' => SubscriptionProcessor::handle($payload),
             'transfer.failed','transfer.success','transfer.reversed' => TransferProcessor::handle($payload),
             'invoice.create','invoice.payment_failed', 'invoice.update' => InvoiceProcessor::handle($payload),
         };
