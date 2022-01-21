@@ -4,6 +4,7 @@ namespace Domain\Subscription\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Service\Notifications\Channels\SmsChannel;
 use Service\Notifications\Types\Sms\SmsMessage;
@@ -30,7 +31,7 @@ class CreateInvoiceNotification extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return [SmsChannel::class];
+        return ['mail', SmsChannel::class];
     }
 
     /**
@@ -44,7 +45,26 @@ class CreateInvoiceNotification extends Notification implements ShouldQueue
     {
         return (new SmsMessage())
             ->from('Techshops')
-            ->line(`config('notifications.messages.invoice_created') monday`);
+            ->to('0552377591')
+            ->line(config('notifications.messages.invoice_created') . 'monday');
+    }
+
+    /**
+     * Get the mail representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return \Illuminate\Notifications\Messages\MailMessage
+     */
+    public function toMail($notifiable)
+    {
+        return (new MailMessage)
+                ->greeting('Hello!')
+                ->line('Your subscription for Basic Starter Pack has been renewed.')
+                ->line('Payment details are below:')
+                ->line('Invoice Number: ' . $this->payload['data']['invoice_code'])
+                ->line('Amount Paid: ' . $this->payload['data']['amount'])
+                ->action('Download Receipt', '')
+                ->line('Thank you for shopping with from qickspace');
     }
 
     /**

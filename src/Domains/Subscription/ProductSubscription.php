@@ -6,6 +6,7 @@ use Domain\Orders\Order;
 use Domain\Payments\Facade\Payment;
 use Domain\Products\Skus\Sku;
 use Domain\Subscription\States\SubscriptionState;
+use Domain\Subscription\Traits\CanTransistion;
 use Domain\Subscription\Traits\Searchable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -21,6 +22,7 @@ class ProductSubscription extends Model
     HasStates,
     HasUuidTrait,
     Searchable,
+    CanTransistion,
     HasFactory;
 
     /**

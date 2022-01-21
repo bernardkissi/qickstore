@@ -23,6 +23,7 @@ class CreateProductSubsctription
             'plan_code' => $product->skuable->plan_code,
             'auth_code' => $payload['data']['authorization']['authorization_code'],
             'channel' => $payload['data']['channel'],
+            'card_type' => $payload['data']['authorization']['card_type'],
             'customer_code' => $payload['data']['customer']['customer_code'],
             'customer_email' => $payload['data']['customer']['email'],
             'start_date' => now(),
