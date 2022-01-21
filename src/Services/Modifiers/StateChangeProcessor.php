@@ -6,6 +6,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Service\Modifiers\Handlers\DeliveryStateProcessor;
 use Service\Modifiers\Handlers\DisputeStateProcessor;
 use Service\Modifiers\Handlers\OrderStateProcessor;
+use Service\Modifiers\Handlers\SubscriptionStateProcessor;
 use Spatie\ModelStates\Events\StateChanged;
 
 class StateChangeProcessor implements ShouldQueue
@@ -34,6 +35,7 @@ class StateChangeProcessor implements ShouldQueue
             'Domain\Delivery\Delivery' => DeliveryStateProcessor::process($event->model, $state),
             'Domain\Orders\OrderStatus' => OrderStateProcessor::process($event->model, $state),
             'Domain\Disputes\Dispute' => DisputeStateProcessor::process($event->model, $state),
+            'Domain\Subscription\ProductSubscription' => SubscriptionStateProcessor::process($event->model, $state)
         };
     }
 }

@@ -11,7 +11,7 @@ class CardExpiry extends SubscriptionState
      *
      * @var string
      */
-    public static $name = 'disabled';
+    public static $name = 'card-expiry';
 
     /**
      * Returns the paid state of an order
@@ -20,6 +20,6 @@ class CardExpiry extends SubscriptionState
      */
     public function status(): string
     {
-        return 'Subscription is disabled';
+        return 'Subscription payment card is expirying';
     }
 }

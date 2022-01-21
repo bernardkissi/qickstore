@@ -14,10 +14,11 @@ use Spatie\ModelStates\State;
     AllowTransition(Active::class, CardExpiry::class),
     AllowTransition(Active::class, Disabled::class),
     AllowTransition(Active::class, NotRenewing::class),
+    AllowTransition(NotRenewing::class, Active::class),
     AllowTransition(Active::class, PaymentFailed::class),
     AllowTransition(PaymentFailed::class, Active::class),
     AllowTransition(Disabled::class, Active::class),
-    DefaultState(Pending::class),
+    DefaultState(Active::class),
 ]
 
 abstract class SubscriptionState extends State

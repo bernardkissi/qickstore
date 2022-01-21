@@ -11,7 +11,7 @@ class Disabled extends SubscriptionState
      *
      * @var string
      */
-    public static $name = 'diabled';
+    public static $name = 'disabled';
 
     /**
      * Returns the paid state of an order
