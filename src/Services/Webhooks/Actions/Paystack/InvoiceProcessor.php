@@ -48,7 +48,7 @@ class InvoiceProcessor implements ActionHandler
      * @param array $payload
      * @return void
      */
-    protected static function paymentFailed(array $payload)
+    protected static function paymentFailed(array $payload): void
     {
         $subscriptionCode = static::customerDetails($payload)['subscription_code'];
 
