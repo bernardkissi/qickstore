@@ -8,8 +8,8 @@ use App\Helpers\Processor\RunProcessor;
 use Domain\Subscription\Processors\ActiveProcessor;
 use Domain\Subscription\Processors\DisabledProcessor;
 use Domain\Subscription\Processors\NotRenewingProcessor;
+use Domain\Subscription\Processors\PaymentFailedProcessor;
 use Domain\Subscription\Processors\PendingProcessor;
-use Domain\Subscription\States\PaymentFailed;
 use Illuminate\Database\Eloquent\Model;
 use Service\Modifiers\Handlers\Contract\StateProcessContract;
 
@@ -22,7 +22,7 @@ class SubscriptionStateProcessor extends StateProcessContract
             'disabled' => new DisabledProcessor($model),
             'not-renewing' => new NotRenewingProcessor($model),
             'pending' => new PendingProcessor($model),
-            'payment-failed' => new PaymentFailed($model)
+            'payment-failed' => new PaymentFailedProcessor($model)
         };
 
         RunProcessor::run($processor);

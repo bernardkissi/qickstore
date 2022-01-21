@@ -7,6 +7,7 @@ namespace Service\Webhooks\Actions\Paystack;
 use Domain\Subscription\Notifications\CreateInvoiceNotification;
 use Domain\Subscription\Notifications\PaymentFailedNotification;
 use Domain\Subscription\ProductSubscription;
+use Domain\Subscription\States\Active;
 use Domain\Subscription\States\PaymentFailed;
 use Illuminate\Support\Facades\Notification;
 use Integration\Paystack\Subscriptions\GenerateSubscriptionLink;
@@ -32,9 +33,13 @@ class InvoiceProcessor implements ActionHandler
      */
     protected static function createInvoice(array $payload): void
     {
+        $subscriptionCode = static::customerDetails($payload)['subscription_code'];
+
         Notification::route('mail', static::customerDetails($payload)['email'])
             ->route(SmsChannel::class, static::customerDetails($payload)['phone'])
             ->notify(new CreateInvoiceNotification($payload));
+
+        ProductSubscription::transitioning($subscriptionCode, Active::class);
     }
 
     /**
@@ -45,7 +50,7 @@ class InvoiceProcessor implements ActionHandler
      */
     protected static function paymentFailed(array $payload)
     {
-        $subscriptionCode = $payload['data']['subscription']['subscription_code'];
+        $subscriptionCode = static::customerDetails($payload)['subscription_code'];
 
         $data = GenerateSubscriptionLink::build()
             ->setPath("/subscription/${subscriptionCode}/manage/link/")
@@ -70,6 +75,7 @@ class InvoiceProcessor implements ActionHandler
         return [
             'email' => $payload['data']['customer']['email'],
             'phone' => $payload['data']['customer']['phone'],
+            'subscription_code' => $payload['data']['subscription']['subscription_code'],
         ];
     }
 }
