@@ -21,6 +21,8 @@ use Domain\Products\Product\Actions\ProductActions;
 use Domain\Products\Product\Product;
 use Domain\Products\Product\ProductPlan;
 use Domain\Products\Product\ProductVariation;
+use Domain\Subscription\Actions\DisableProductSubscription;
+use Domain\Subscription\Actions\EnableProductSubscription;
 use Domain\Subscription\ProductSubscription;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
@@ -49,9 +51,8 @@ Route::post('/orders/{order}', function (Order $order) {
     },
     ]);
 
-    //return $order;
     Dispatcher::dispatch($order);
-});
+})->name('orders_dispatch');
 
 Route::post('/create', function (Request $request) {
     return (new CreateProduct())
@@ -107,45 +108,45 @@ Route::get('/verification', function (Request $request) {
 Route::get('/multiDelivery', function () {
     $order = Order::firstWhere('id', 1522);
     $order->transitionState('processing');
-});
+})->name('multiDelivery');
 
 Route::post('/coupons', function (Request $request) {
     return Coupon::create($request->all(), 3);
-});
+})->name('coupons');
 
 Route::get('/coupons', function (Request $request) {
     return $request->visitor->redeemCode($request->code);
-})->middleware('customer')->name('coupons');
+})->middleware('customer')->name('coupons.get');
 
 Route::get('/service-zones', function () {
     return SwooveServiceZones::getZones();
-});
+})->name('service-zones');
 
 Route::post('/delivery-zone', function (Request $request) {
     return CheckInDeliveryZone::check($request->longitude, $request->latitude);
-});
+})->name('delivery-zone');
 
 Route::get('/check-zone', function (Request $request) {
     $point = new Point($request->latitude, $request->longitude, 4326);
 
     return ShippingZone::query()->contains('area', $point)->get();
-});
+})->name('check-zone');
 
 Route::get('/geocoder', function (Request $request) {
     return GetLocationCoordinates::fetch($request->location);
-});
+})->name('geocoder');
 
 Route::post('/payouts', function (Request $request) {
     Payout::pay($request->all());
-})->middleware('customer');
+})->middleware('customer')->name('payouts');
 
 Route::get('/banks', function (Request $request) {
     return GetBanks::get($request->country);
-});
+})->name('banks');
 
 Route::get('/banks/{bank}/branches', function (Request $request, Bank $bank) {
     return GetBankBranches::get($bank->bank_id);
-});
+})->name('bank.branches');
 
 Route::get('/order/{order}/status', function (Request $request, Order $order) {
     //$order->status->updateTimeline($request->state);
@@ -175,17 +176,18 @@ Route::get('/order/{order}', function (Request $request, Order $order) {
     });
 
     //return $results->products;
-})->name('product_plans');
+})->name('orders.order');
 
 Route::get('/subscribes/{order}', function (Request $request, Order $order) {
-    // return $order->load(['products'
-    //         => fn ($query) => $query->select('skuable_type', 'skuable_id')->where('skuable_type', '=', 'Subscription'),
-    //         'products.skuable:id,plan_code']);
-    // $subscription = ProductSubscription::find(1);
-    // return $subscription->order->load(['products'
-    //         => fn ($query) => $query->select('skuable_type', 'skuable_id')->where('skuable_type', '=', 'Subscription'),
-    //         'products.skuable:id,plan_code']);
     $subscription = ProductSubscription::searchSubscription('PLN_1hxjlmxrx58e35n', 'CUS_6zrgz1q8hrz5man');
     $sku = $subscription->order->load(['products', 'orderable'])['products'];
     dump($sku->first()->skuable->type);
 })->name('product_subscribed');
+
+Route::post('subscription/disable', function (Request $request) {
+    DisableProductSubscription::execute($request->code, $request->token);
+})->name('subscription.disable');
+
+Route::post('subscription/enable', function (Request $request) {
+    EnableProductSubscription::execute($request->code, $request->token);
+})->name('subscription.enable');

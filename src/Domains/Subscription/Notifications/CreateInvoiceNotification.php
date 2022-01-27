@@ -53,18 +53,19 @@ class CreateInvoiceNotification extends Notification implements ShouldQueue
      * Get the mail representation of the notification.
      *
      * @param  mixed  $notifiable
+     *
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
-                ->greeting('Hello!')
-                ->line('Your subscription for Basic Starter Pack has been renewed.')
-                ->line('Payment details are below:')
-                ->line('Invoice Number: ' . $this->payload['data']['invoice_code'])
-                ->line('Amount Paid: ' . $this->payload['data']['amount'])
-                ->action('Download Receipt', '')
-                ->line('Thank you for shopping with from qickspace');
+        return (new MailMessage())
+            ->greeting('Hello!')
+            ->line('Your subscription for Basic Starter Pack has been renewed.')
+            ->line('Payment details are below:')
+            ->line('Invoice Number: ' . $this->payload['data']['invoice_code'])
+            ->line('Amount Paid: ' . $this->payload['data']['amount'])
+            ->action('Download Receipt', '')
+            ->line('Thank you for shopping with from qickspace');
     }
 
     /**

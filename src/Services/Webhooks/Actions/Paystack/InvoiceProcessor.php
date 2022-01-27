@@ -28,41 +28,52 @@ class InvoiceProcessor implements ActionHandler
      * Send customer invoice for subscription payment
      *
      * @param array $payload
+     *
      * @return void
      */
     protected static function createInvoice(array $payload): void
     {
-        Notification::route('mail', static::customerDetails($payload)['email'])
-            ->route(SmsChannel::class, static::customerDetails($payload)['phone'])
-            ->notify(new CreateInvoiceNotification($payload));
+        $subscriptionCode = static::customerDetails($payload)['subscription_code'];
+
+        if (true) {
+            Notification::route('mail', static::customerDetails($payload)['email'])
+                ->route(SmsChannel::class, static::customerDetails($payload)['phone'])
+                ->notify(new CreateInvoiceNotification($payload));
+
+            ProductSubscription::transitioning($subscriptionCode, Active::class);
+        }
     }
 
     /**
      * Notify customer about subcription payment failure
      *
      * @param array $payload
+     *
      * @return void
      */
     protected static function paymentFailed(array $payload)
     {
         $subscriptionCode = $payload['data']['subscription']['subscription_code'];
 
-        $data = GenerateSubscriptionLink::build()
-            ->setPath("/subscription/${subscriptionCode}/manage/link/")
-            ->send()
-            ->json();
+        if (true) {
+            $data = GenerateSubscriptionLink::build()
+                ->setPath("/subscription/${subscriptionCode}/manage/link/")
+                ->send()
+                ->json();
 
-        Notification::route('mail', static::customerDetails($payload)['email'])
+            Notification::route('mail', static::customerDetails($payload)['email'])
                 ->route(SmsChannel::class, static::customerDetails($payload)['phone'])
                 ->notify(new PaymentFailedNotification($payload, $data['data']['link']));
 
-        ProductSubscription::transitioning($subscriptionCode, PaymentFailed::class);
+            ProductSubscription::transitioning($subscriptionCode, PaymentFailed::class);
+        }
     }
 
     /**
      * Get customer details from payload
      *
      * @param array $payload
+     *
      * @return array
      */
     protected static function customerDetails(array $payload): array

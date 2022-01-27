@@ -58,7 +58,7 @@ class ProductSubscription extends Model
      * @var array
      */
     protected $casts = [
-        'state' => SubscriptionState::class
+        'state' => SubscriptionState::class,
     ];
 
     /**
@@ -82,10 +82,10 @@ class ProductSubscription extends Model
     }
 
     /**
-    * Returns the payments made for this subscription.
-    *
-    * @return HasMany
-    */
+     * Returns the payments made for this subscription.
+     *
+     * @return HasMany
+     */
     public function transcations(): HasMany
     {
         return $this->hasMany(Payment::class);

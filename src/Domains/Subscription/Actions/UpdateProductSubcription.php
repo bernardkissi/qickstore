@@ -21,7 +21,7 @@ class UpdateProductSubscription
             'end_date' => $data['period_date'] ?? null,
             'next_billing_date' => $data['data']['subscription']['next_payment_date'] ?? null,
             'cron_expression' => $data['cron_expression'] ?? null,
-            'state' => $data['data']['subscription']['status']
+            'state' => $data['data']['subscription']['status'],
         ]);
     }
 }

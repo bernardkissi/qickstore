@@ -756,4 +756,254 @@ App\Complex::class,
   ]
 ]
 
+#subscription not-renewing
+"event" => "subscription.not_renew"
+  "data" => array:20 [
+    "id" => 348853
+    "domain" => "test"
+    "status" => "non-renewing"
+    "subscription_code" => "SUB_suru12c42qq50a6"
+    "email_token" => "ozvlwc4gte5sp6c"
+    "amount" => 700
+    "cron_expression" => "0 * * * *"
+    "next_payment_date" => null
+    "open_invoice" => null
+    "cancelledAt" => "2022-01-21T17:05:05.000Z"
+    "integration" => 522040
+    "plan" => array:9 [
+      "id" => 217512
+      "name" => "Serria Enterprise Pack"
+      "plan_code" => "PLN_kst1e2gmg6wn98o"
+      "description" => null
+      "amount" => 700
+      "interval" => "hourly"
+      "send_invoices" => true
+      "send_sms" => false
+      "currency" => "GHS"
+    ]
+    "authorization" => array:13 [
+      "authorization_code" => "AUTH_euynz0btkg"
+      "bin" => "055XXX"
+      "last4" => "X987"
+      "exp_month" => "12"
+      "exp_year" => "9999"
+      "channel" => "mobile_money"
+      "card_type" => null
+      "bank" => "MTN"
+      "country_code" => "GH"
+      "brand" => "Mtn"
+      "reusable" => false
+      "signature" => null
+      "account_name" => null
+    ]
+    "customer" => array:9 [
+      "id" => 67489095
+      "first_name" => null
+      "last_name" => null
+      "email" => "bernardkissi18@live.com"
+      "customer_code" => "CUS_aslzwdvtzavwh6u"
+      "phone" => null
+      "metadata" => null
+      "risk_action" => "default"
+      "international_format_phone" => null
+    ]
+    "invoices" => []
+    "invoices_history" => []
+    "invoice_limit" => 12
+    "split_code" => null
+    "most_recent_invoice" => null
+    "created_at" => "2022-01-21T17:05:06.000Z"
+  ]
+]
+
 ```
+
+Domain\Subscription\Notifications\DisabledSusbcriptionNotification
+/Domains/Subscription/Notifications/DisabledSubscriptionNotification
+
+GuzzleHttp\Exception\ConnectException: cURL error 52: Empty reply from server (see https://curl.haxx.se/libcurl/c/libcurl-errors.html) for https://api.paystack.co/subscription in /Users/bernardkissi/projects/store/vendor/guzzlehttp/guzzle/src/Handler/CurlFactory.php:210
+Stack trace:
+#0 /Users/bernardkissi/projects/store/vendor/guzzlehttp/guzzle/src/Handler/CurlFactory.php(158): GuzzleHttp\Handler\CurlFactory::createRejection(Object(GuzzleHttp\Handler\EasyHandle), Array)
+#1 /Users/bernardkissi/projects/store/vendor/guzzlehttp/guzzle/src/Handler/CurlFactory.php(110): GuzzleHttp\Handler\CurlFactory::finishError(Object(GuzzleHttp\Handler\CurlHandler), Object(GuzzleHttp\Handler\EasyHandle), Object(GuzzleHttp\Handler\CurlFactory))
+#2 /Users/bernardkissi/projects/store/vendor/guzzlehttp/guzzle/src/Handler/CurlHandler.php(47): GuzzleHttp\Handler\CurlFactory::finish(Object(GuzzleHttp\Handler\CurlHandler), Object(GuzzleHttp\Handler\EasyHandle), Object(GuzzleHttp\Handler\CurlFactory))
+#3 /Users/bernardkissi/projects/store/vendor/guzzlehttp/guzzle/src/Handler/Proxy.php(28): GuzzleHttp\Handler\CurlHandler->**invoke(Object(GuzzleHttp\Psr7\Request), Array)
+#4 /Users/bernardkissi/projects/store/vendor/guzzlehttp/guzzle/src/Handler/Proxy.php(48): GuzzleHttp\Handler\Proxy::GuzzleHttp\Handler\{closure}(Object(GuzzleHttp\Psr7\Request), Array)
+#5 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Http/Client/PendingRequest.php(925): GuzzleHttp\Handler\Proxy::GuzzleHttp\Handler\{closure}(Object(GuzzleHttp\Psr7\Request), Array)
+#6 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Http/Client/PendingRequest.php(895): Illuminate\Http\Client\PendingRequest->Illuminate\Http\Client\{closure}(Object(GuzzleHttp\Psr7\Request), Array)
+#7 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Http/Client/PendingRequest.php(881): Illuminate\Http\Client\PendingRequest->Illuminate\Http\Client\{closure}(Object(GuzzleHttp\Psr7\Request), Array)
+#8 /Users/bernardkissi/projects/store/vendor/guzzlehttp/guzzle/src/PrepareBodyMiddleware.php(64): Illuminate\Http\Client\PendingRequest->Illuminate\Http\Client\{closure}(Object(GuzzleHttp\Psr7\Request), Array)
+#9 /Users/bernardkissi/projects/store/vendor/guzzlehttp/guzzle/src/Middleware.php(37): GuzzleHttp\PrepareBodyMiddleware->**invoke(Object(GuzzleHttp\Psr7\Request), Array)
+#10 /Users/bernardkissi/projects/store/vendor/guzzlehttp/guzzle/src/RedirectMiddleware.php(71): GuzzleHttp\Middleware::GuzzleHttp\{closure}(Object(GuzzleHttp\Psr7\Request), Array)
+#11 /Users/bernardkissi/projects/store/vendor/guzzlehttp/guzzle/src/Middleware.php(61): GuzzleHttp\RedirectMiddleware->**invoke(Object(GuzzleHttp\Psr7\Request), Array)
+#12 /Users/bernardkissi/projects/store/vendor/guzzlehttp/guzzle/src/HandlerStack.php(75): GuzzleHttp\Middleware::GuzzleHttp\{closure}(Object(GuzzleHttp\Psr7\Request), Array)
+#13 /Users/bernardkissi/projects/store/vendor/guzzlehttp/guzzle/src/Client.php(331): GuzzleHttp\HandlerStack->**invoke(Object(GuzzleHttp\Psr7\Request), Array)
+#14 /Users/bernardkissi/projects/store/vendor/guzzlehttp/guzzle/src/Client.php(168): GuzzleHttp\Client->transfer(Object(GuzzleHttp\Psr7\Request), Array)
+#15 /Users/bernardkissi/projects/store/vendor/guzzlehttp/guzzle/src/Client.php(187): GuzzleHttp\Client->requestAsync('POST', Object(GuzzleHttp\Psr7\Uri), Array)
+#16 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Http/Client/PendingRequest.php(748): GuzzleHttp\Client->request('POST', 'https://api.pay...', Array)
+#17 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Http/Client/PendingRequest.php(679): Illuminate\Http\Client\PendingRequest->sendRequest('POST', 'https://api.pay...', Array)
+#18 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Support/helpers.php(234): Illuminate\Http\Client\PendingRequest->Illuminate\Http\Client\{closure}(1)
+#19 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Http/Client/PendingRequest.php(693): retry(0, Object(Closure), 100, NULL)
+#20 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Http/Client/PendingRequest.php(576): Illuminate\Http\Client\PendingRequest->send('POST', 'https://api.pay...', Array)
+#21 /Users/bernardkissi/projects/store/vendor/juststeveking/laravel-transporter/src/Request.php(84): Illuminate\Http\Client\PendingRequest->post('/subscription', Array)
+#22 /Users/bernardkissi/projects/store/src/Domains/Subscription/Jobs/SubscribeToProductWithProvider.php(41): JustSteveKing\Transporter\Request->send()
+#23 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(36): Domain\Subscription\Jobs\SubscribeToProductWithProvider->handle()
+#24 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/Util.php(40): Illuminate\Container\BoundMethod::Illuminate\Container\{closure}()
+#25 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(93): Illuminate\Container\Util::unwrapIfClosure(Object(Closure))
+#26 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(37): Illuminate\Container\BoundMethod::callBoundMethod(Object(Illuminate\Foundation\Application), Array, Object(Closure))
+#27 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/Container.php(653): Illuminate\Container\BoundMethod::call(Object(Illuminate\Foundation\Application), Array, Array, NULL)
+#28 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Bus/Dispatcher.php(128): Illuminate\Container\Container->call(Array)
+#29 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(128): Illuminate\Bus\Dispatcher->Illuminate\Bus\{closure}(Object(Domain\Subscription\Jobs\SubscribeToProductWithProvider))
+#30 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(103): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Domain\Subscription\Jobs\SubscribeToProductWithProvider))
+#31 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Bus/Dispatcher.php(132): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#32 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/CallQueuedHandler.php(120): Illuminate\Bus\Dispatcher->dispatchNow(Object(Domain\Subscription\Jobs\SubscribeToProductWithProvider), false)
+#33 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(128): Illuminate\Queue\CallQueuedHandler->Illuminate\Queue\{closure}(Object(Domain\Subscription\Jobs\SubscribeToProductWithProvider))
+#34 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(103): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Domain\Subscription\Jobs\SubscribeToProductWithProvider))
+#35 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/CallQueuedHandler.php(122): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#36 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/CallQueuedHandler.php(70): Illuminate\Queue\CallQueuedHandler->dispatchThroughMiddleware(Object(Illuminate\Queue\Jobs\RedisJob), Object(Domain\Subscription\Jobs\SubscribeToProductWithProvider))
+#37 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/Jobs/Job.php(98): Illuminate\Queue\CallQueuedHandler->call(Object(Illuminate\Queue\Jobs\RedisJob), Array)
+#38 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(428): Illuminate\Queue\Jobs\Job->fire()
+#39 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(378): Illuminate\Queue\Worker->process('redis', Object(Illuminate\Queue\Jobs\RedisJob), Object(Illuminate\Queue\WorkerOptions))
+#40 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(172): Illuminate\Queue\Worker->runJob(Object(Illuminate\Queue\Jobs\RedisJob), 'redis', Object(Illuminate\Queue\WorkerOptions))
+#41 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/Console/WorkCommand.php(117): Illuminate\Queue\Worker->daemon('redis', 'default', Object(Illuminate\Queue\WorkerOptions))
+#42 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/Console/WorkCommand.php(101): Illuminate\Queue\Console\WorkCommand->runWorker('redis', 'default')
+#43 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(36): Illuminate\Queue\Console\WorkCommand->handle()
+#44 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/Util.php(40): Illuminate\Container\BoundMethod::Illuminate\Container\{closure}()
+#45 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(93): Illuminate\Container\Util::unwrapIfClosure(Object(Closure))
+#46 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(37): Illuminate\Container\BoundMethod::callBoundMethod(Object(Illuminate\Foundation\Application), Array, Object(Closure))
+#47 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/Container.php(653): Illuminate\Container\BoundMethod::call(Object(Illuminate\Foundation\Application), Array, Array, NULL)
+#48 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Console/Command.php(136): Illuminate\Container\Container->call(Array)
+#49 /Users/bernardkissi/projects/store/vendor/symfony/console/Command/Command.php(298): Illuminate\Console\Command->execute(Object(Symfony\Component\Console\Input\ArgvInput), Object(Illuminate\Console\OutputStyle))
+#50 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Console/Command.php(121): Symfony\Component\Console\Command\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Illuminate\Console\OutputStyle))
+#51 /Users/bernardkissi/projects/store/vendor/symfony/console/Application.php(1005): Illuminate\Console\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#52 /Users/bernardkissi/projects/store/vendor/symfony/console/Application.php(299): Symfony\Component\Console\Application->doRunCommand(Object(Illuminate\Queue\Console\WorkCommand), Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#53 /Users/bernardkissi/projects/store/vendor/symfony/console/Application.php(171): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#54 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Console/Application.php(94): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#55 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(129): Illuminate\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#56 /Users/bernardkissi/projects/store/artisan(37): Illuminate\Foundation\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#57 {main}
+
+Next Illuminate\Http\Client\ConnectionException: cURL error 52: Empty reply from server (see https://curl.haxx.se/libcurl/c/libcurl-errors.html) for https://api.paystack.co/subscription in /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Http/Client/PendingRequest.php:691
+Stack trace:
+#0 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Support/helpers.php(234): Illuminate\Http\Client\PendingRequest->Illuminate\Http\Client\{closure}(1)
+#1 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Http/Client/PendingRequest.php(693): retry(0, Object(Closure), 100, NULL)
+#2 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Http/Client/PendingRequest.php(576): Illuminate\Http\Client\PendingRequest->send('POST', 'https://api.pay...', Array)
+#3 /Users/bernardkissi/projects/store/vendor/juststeveking/laravel-transporter/src/Request.php(84): Illuminate\Http\Client\PendingRequest->post('/subscription', Array)
+#4 /Users/bernardkissi/projects/store/src/Domains/Subscription/Jobs/SubscribeToProductWithProvider.php(41): JustSteveKing\Transporter\Request->send()
+#5 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(36): Domain\Subscription\Jobs\SubscribeToProductWithProvider->handle()
+#6 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/Util.php(40): Illuminate\Container\BoundMethod::Illuminate\Container\{closure}()
+#7 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(93): Illuminate\Container\Util::unwrapIfClosure(Object(Closure))
+#8 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(37): Illuminate\Container\BoundMethod::callBoundMethod(Object(Illuminate\Foundation\Application), Array, Object(Closure))
+#9 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/Container.php(653): Illuminate\Container\BoundMethod::call(Object(Illuminate\Foundation\Application), Array, Array, NULL)
+#10 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Bus/Dispatcher.php(128): Illuminate\Container\Container->call(Array)
+#11 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(128): Illuminate\Bus\Dispatcher->Illuminate\Bus\{closure}(Object(Domain\Subscription\Jobs\SubscribeToProductWithProvider))
+#12 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(103): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Domain\Subscription\Jobs\SubscribeToProductWithProvider))
+#13 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Bus/Dispatcher.php(132): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#14 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/CallQueuedHandler.php(120): Illuminate\Bus\Dispatcher->dispatchNow(Object(Domain\Subscription\Jobs\SubscribeToProductWithProvider), false)
+#15 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(128): Illuminate\Queue\CallQueuedHandler->Illuminate\Queue\{closure}(Object(Domain\Subscription\Jobs\SubscribeToProductWithProvider))
+#16 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(103): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Domain\Subscription\Jobs\SubscribeToProductWithProvider))
+#17 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/CallQueuedHandler.php(122): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#18 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/CallQueuedHandler.php(70): Illuminate\Queue\CallQueuedHandler->dispatchThroughMiddleware(Object(Illuminate\Queue\Jobs\RedisJob), Object(Domain\Subscription\Jobs\SubscribeToProductWithProvider))
+#19 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/Jobs/Job.php(98): Illuminate\Queue\CallQueuedHandler->call(Object(Illuminate\Queue\Jobs\RedisJob), Array)
+#20 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(428): Illuminate\Queue\Jobs\Job->fire()
+#21 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(378): Illuminate\Queue\Worker->process('redis', Object(Illuminate\Queue\Jobs\RedisJob), Object(Illuminate\Queue\WorkerOptions))
+#22 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(172): Illuminate\Queue\Worker->runJob(Object(Illuminate\Queue\Jobs\RedisJob), 'redis', Object(Illuminate\Queue\WorkerOptions))
+#23 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/Console/WorkCommand.php(117): Illuminate\Queue\Worker->daemon('redis', 'default', Object(Illuminate\Queue\WorkerOptions))
+#24 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/Console/WorkCommand.php(101): Illuminate\Queue\Console\WorkCommand->runWorker('redis', 'default')
+#25 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(36): Illuminate\Queue\Console\WorkCommand->handle()
+#26 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/Util.php(40): Illuminate\Container\BoundMethod::Illuminate\Container\{closure}()
+#27 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(93): Illuminate\Container\Util::unwrapIfClosure(Object(Closure))
+#28 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(37): Illuminate\Container\BoundMethod::callBoundMethod(Object(Illuminate\Foundation\Application), Array, Object(Closure))
+#29 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/Container.php(653): Illuminate\Container\BoundMethod::call(Object(Illuminate\Foundation\Application), Array, Array, NULL)
+#30 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Console/Command.php(136): Illuminate\Container\Container->call(Array)
+#31 /Users/bernardkissi/projects/store/vendor/symfony/console/Command/Command.php(298): Illuminate\Console\Command->execute(Object(Symfony\Component\Console\Input\ArgvInput), Object(Illuminate\Console\OutputStyle))
+#32 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Console/Command.php(121): Symfony\Component\Console\Command\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Illuminate\Console\OutputStyle))
+#33 /Users/bernardkissi/projects/store/vendor/symfony/console/Application.php(1005): Illuminate\Console\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#34 /Users/bernardkissi/projects/store/vendor/symfony/console/Application.php(299): Symfony\Component\Console\Application->doRunCommand(Object(Illuminate\Queue\Console\WorkCommand), Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#35 /Users/bernardkissi/projects/store/vendor/symfony/console/Application.php(171): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#36 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Console/Application.php(94): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#37 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(129): Illuminate\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#38 /Users/bernardkissi/projects/store/artisan(37): Illuminate\Foundation\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#39 {main}
+
+ParseError: syntax error, unexpected token ")" in /Users/bernardkissi/projects/store/src/Services/Webhooks/Actions/Paystack/InvoiceProcessor.php:57
+Stack trace:
+#0 /Users/bernardkissi/projects/store/vendor/composer/ClassLoader.php(428): Composer\Autoload\includeFile('/Users/bernardk...')
+#1 /Users/bernardkissi/projects/store/src/Services/Webhooks/Actions/PaystackWebhookAction.php(30): Composer\Autoload\ClassLoader->loadClass('Service\\Webhook...')
+#2 /Users/bernardkissi/projects/store/src/Services/Webhooks/Jobs/PaymentWebhookJob.php(18): Service\Webhooks\Actions\PaystackWebhookAction::process(Array)
+#3 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(36): Service\Webhooks\Jobs\PaymentWebhookJob->handle()
+#4 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/Util.php(40): Illuminate\Container\BoundMethod::Illuminate\Container\{closure}()
+#5 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(93): Illuminate\Container\Util::unwrapIfClosure(Object(Closure))
+#6 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(37): Illuminate\Container\BoundMethod::callBoundMethod(Object(Illuminate\Foundation\Application), Array, Object(Closure))
+#7 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/Container.php(653): Illuminate\Container\BoundMethod::call(Object(Illuminate\Foundation\Application), Array, Array, NULL)
+#8 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Bus/Dispatcher.php(128): Illuminate\Container\Container->call(Array)
+#9 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(128): Illuminate\Bus\Dispatcher->Illuminate\Bus\{closure}(Object(Service\Webhooks\Jobs\PaymentWebhookJob))
+#10 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(103): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Service\Webhooks\Jobs\PaymentWebhookJob))
+#11 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Bus/Dispatcher.php(132): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#12 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/CallQueuedHandler.php(120): Illuminate\Bus\Dispatcher->dispatchNow(Object(Service\Webhooks\Jobs\PaymentWebhookJob), false)
+#13 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(128): Illuminate\Queue\CallQueuedHandler->Illuminate\Queue\{closure}(Object(Service\Webhooks\Jobs\PaymentWebhookJob))
+#14 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(103): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Service\Webhooks\Jobs\PaymentWebhookJob))
+#15 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/CallQueuedHandler.php(122): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#16 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/CallQueuedHandler.php(70): Illuminate\Queue\CallQueuedHandler->dispatchThroughMiddleware(Object(Illuminate\Queue\Jobs\RedisJob), Object(Service\Webhooks\Jobs\PaymentWebhookJob))
+#17 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/Jobs/Job.php(98): Illuminate\Queue\CallQueuedHandler->call(Object(Illuminate\Queue\Jobs\RedisJob), Array)
+#18 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(428): Illuminate\Queue\Jobs\Job->fire()
+#19 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(378): Illuminate\Queue\Worker->process('redis', Object(Illuminate\Queue\Jobs\RedisJob), Object(Illuminate\Queue\WorkerOptions))
+#20 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(172): Illuminate\Queue\Worker->runJob(Object(Illuminate\Queue\Jobs\RedisJob), 'redis', Object(Illuminate\Queue\WorkerOptions))
+#21 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/Console/WorkCommand.php(117): Illuminate\Queue\Worker->daemon('redis', 'default', Object(Illuminate\Queue\WorkerOptions))
+#22 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/Console/WorkCommand.php(101): Illuminate\Queue\Console\WorkCommand->runWorker('redis', 'default')
+#23 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(36): Illuminate\Queue\Console\WorkCommand->handle()
+#24 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/Util.php(40): Illuminate\Container\BoundMethod::Illuminate\Container\{closure}()
+#25 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(93): Illuminate\Container\Util::unwrapIfClosure(Object(Closure))
+#26 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(37): Illuminate\Container\BoundMethod::callBoundMethod(Object(Illuminate\Foundation\Application), Array, Object(Closure))
+#27 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/Container.php(653): Illuminate\Container\BoundMethod::call(Object(Illuminate\Foundation\Application), Array, Array, NULL)
+#28 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Console/Command.php(136): Illuminate\Container\Container->call(Array)
+#29 /Users/bernardkissi/projects/store/vendor/symfony/console/Command/Command.php(298): Illuminate\Console\Command->execute(Object(Symfony\Component\Console\Input\ArgvInput), Object(Illuminate\Console\OutputStyle))
+#30 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Console/Command.php(121): Symfony\Component\Console\Command\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Illuminate\Console\OutputStyle))
+#31 /Users/bernardkissi/projects/store/vendor/symfony/console/Application.php(1005): Illuminate\Console\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#32 /Users/bernardkissi/projects/store/vendor/symfony/console/Application.php(299): Symfony\Component\Console\Application->doRunCommand(Object(Illuminate\Queue\Console\WorkCommand), Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#33 /Users/bernardkissi/projects/store/vendor/symfony/console/Application.php(171): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#34 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Console/Application.php(94): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#35 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(129): Illuminate\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#36 /Users/bernardkissi/projects/store/artisan(37): Illuminate\Foundation\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#37 {main}
+
+ErrorException: Undefined array key "data" in /Users/bernardkissi/projects/store/src/Services/Webhooks/Actions/Paystack/InvoiceProcessor.php:65
+Stack trace:
+#0 /Users/bernardkissi/projects/store/src/Services/Webhooks/Actions/Paystack/InvoiceProcessor.php(65): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'Undefined array...', '/Users/bernardk...', 65)
+#1 /Users/bernardkissi/projects/store/src/Services/Webhooks/Actions/Paystack/InvoiceProcessor.php(23): Service\Webhooks\Actions\Paystack\InvoiceProcessor::paymentFailed(Array)
+#2 /Users/bernardkissi/projects/store/src/Services/Webhooks/Actions/PaystackWebhookAction.php(30): Service\Webhooks\Actions\Paystack\InvoiceProcessor::handle(Array)
+#3 /Users/bernardkissi/projects/store/src/Services/Webhooks/Jobs/PaymentWebhookJob.php(18): Service\Webhooks\Actions\PaystackWebhookAction::process(Array)
+#4 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(36): Service\Webhooks\Jobs\PaymentWebhookJob->handle()
+#5 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/Util.php(40): Illuminate\Container\BoundMethod::Illuminate\Container\{closure}()
+#6 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(93): Illuminate\Container\Util::unwrapIfClosure(Object(Closure))
+#7 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(37): Illuminate\Container\BoundMethod::callBoundMethod(Object(Illuminate\Foundation\Application), Array, Object(Closure))
+#8 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/Container.php(653): Illuminate\Container\BoundMethod::call(Object(Illuminate\Foundation\Application), Array, Array, NULL)
+#9 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Bus/Dispatcher.php(128): Illuminate\Container\Container->call(Array)
+#10 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(128): Illuminate\Bus\Dispatcher->Illuminate\Bus\{closure}(Object(Service\Webhooks\Jobs\PaymentWebhookJob))
+#11 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(103): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Service\Webhooks\Jobs\PaymentWebhookJob))
+#12 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Bus/Dispatcher.php(132): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#13 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/CallQueuedHandler.php(120): Illuminate\Bus\Dispatcher->dispatchNow(Object(Service\Webhooks\Jobs\PaymentWebhookJob), false)
+#14 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(128): Illuminate\Queue\CallQueuedHandler->Illuminate\Queue\{closure}(Object(Service\Webhooks\Jobs\PaymentWebhookJob))
+#15 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(103): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Service\Webhooks\Jobs\PaymentWebhookJob))
+#16 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/CallQueuedHandler.php(122): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#17 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/CallQueuedHandler.php(70): Illuminate\Queue\CallQueuedHandler->dispatchThroughMiddleware(Object(Illuminate\Queue\Jobs\RedisJob), Object(Service\Webhooks\Jobs\PaymentWebhookJob))
+#18 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/Jobs/Job.php(98): Illuminate\Queue\CallQueuedHandler->call(Object(Illuminate\Queue\Jobs\RedisJob), Array)
+#19 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(428): Illuminate\Queue\Jobs\Job->fire()
+#20 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(378): Illuminate\Queue\Worker->process('redis', Object(Illuminate\Queue\Jobs\RedisJob), Object(Illuminate\Queue\WorkerOptions))
+#21 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(172): Illuminate\Queue\Worker->runJob(Object(Illuminate\Queue\Jobs\RedisJob), 'redis', Object(Illuminate\Queue\WorkerOptions))
+#22 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/Console/WorkCommand.php(117): Illuminate\Queue\Worker->daemon('redis', 'default', Object(Illuminate\Queue\WorkerOptions))
+#23 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/Console/WorkCommand.php(101): Illuminate\Queue\Console\WorkCommand->runWorker('redis', 'default')
+#24 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(36): Illuminate\Queue\Console\WorkCommand->handle()
+#25 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/Util.php(40): Illuminate\Container\BoundMethod::Illuminate\Container\{closure}()
+#26 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(93): Illuminate\Container\Util::unwrapIfClosure(Object(Closure))
+#27 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(37): Illuminate\Container\BoundMethod::callBoundMethod(Object(Illuminate\Foundation\Application), Array, Object(Closure))
+#28 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/Container.php(653): Illuminate\Container\BoundMethod::call(Object(Illuminate\Foundation\Application), Array, Array, NULL)
+#29 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Console/Command.php(136): Illuminate\Container\Container->call(Array)
+#30 /Users/bernardkissi/projects/store/vendor/symfony/console/Command/Command.php(298): Illuminate\Console\Command->execute(Object(Symfony\Component\Console\Input\ArgvInput), Object(Illuminate\Console\OutputStyle))
+#31 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Console/Command.php(121): Symfony\Component\Console\Command\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Illuminate\Console\OutputStyle))
+#32 /Users/bernardkissi/projects/store/vendor/symfony/console/Application.php(1005): Illuminate\Console\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#33 /Users/bernardkissi/projects/store/vendor/symfony/console/Application.php(299): Symfony\Component\Console\Application->doRunCommand(Object(Illuminate\Queue\Console\WorkCommand), Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#34 /Users/bernardkissi/projects/store/vendor/symfony/console/Application.php(171): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#35 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Console/Application.php(94): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#36 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(129): Illuminate\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#37 /Users/bernardkissi/projects/store/artisan(37): Illuminate\Foundation\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#38 {main}
