@@ -19,7 +19,9 @@ class EnableProductSubscription
             ])
             ->send()
             ->json();
+
         dump($data);
+
         if ($data['status']) {
             ProductSubscription::transitioning($subscription_code, Active::class);
         }
