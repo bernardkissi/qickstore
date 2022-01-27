@@ -1007,3 +1007,32 @@ Stack trace:
 #36 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(129): Illuminate\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
 #37 /Users/bernardkissi/projects/store/artisan(37): Illuminate\Foundation\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
 #38 {main}
+
+<?php
+
+declare(strict_types=1);
+
+namespace Domain\Subscription\Actions;
+
+use Domain\Subscription\ProductSubscription;
+use Domain\Subscription\States\Disabled;
+use Integration\Paystack\Subscriptions\DisableSubscription;
+
+class DisableProductSubscription
+{
+    public static function execute(string $subscription_code, string $email_token): void
+    {
+        $data = DisableSubscription::build()
+            ->withData([
+                'code' => $subscription_code,
+                'token' => $email_token,
+            ])
+            ->send()
+            ->json();
+        dump($data);
+
+        if ($data['status']) {
+            ProductSubscription::transitioning($subscription_code, Disabled::class);
+        }
+    }
+}
