@@ -53,16 +53,17 @@ class PaymentFailedNotification extends Notification implements ShouldQueue
      * Get the mail representation of the notification.
      *
      * @param  mixed  $notifiable
+     *
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
-                ->greeting('Hello!')
-                ->line('Your subscription failed to renew due to payment failure')
-                ->line('Please review your payment details')
-                ->action('Manage subscription', $this->link)
-                ->line('Thank you for using our application!');
+        return (new MailMessage())
+            ->greeting('Hello!')
+            ->line('Your subscription failed to renew due to payment failure')
+            ->line('Please review your payment details')
+            ->action('Manage subscription', $this->link)
+            ->line('Thank you for using our application!');
     }
 
     /**

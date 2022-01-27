@@ -10,7 +10,6 @@ class TransferProcessor implements ActionHandler
 {
     public static function handle(array $payload): void
     {
-        //
     }
 }
 

@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notification;
 use Service\Notifications\Channels\SmsChannel;
 use Service\Notifications\Types\Sms\SmsMessage;
 
-class CreateInvoiceNotification extends Notification implements ShouldQueue
+class DisabledSubscriptionNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -60,11 +60,10 @@ class CreateInvoiceNotification extends Notification implements ShouldQueue
     {
         return (new MailMessage())
             ->greeting('Hello!')
-            ->line('Your subscription for Basic Starter Pack has been renewed.')
+            ->subject('Subscription Cancelled')
+            ->line('Your subscription for Basic Starter Pack has been cancelled.')
             ->line('Payment details are below:')
-            ->line('Invoice Number: ' . $this->payload['data']['invoice_code'])
-            ->line('Amount Paid: ' . $this->payload['data']['amount'])
-            ->action('Download Receipt', '')
+            ->action('Manage Subscription', '')
             ->line('Thank you for shopping with from qickspace');
     }
 

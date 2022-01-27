@@ -14,4 +14,28 @@ trait CanTransistion
             $subscription->state->transitionTo($state);
         }
     }
+
+    /**
+     * checks if subscription exist
+     *
+     * @param string $subscription_code
+     *
+     * @return bool
+     */
+    public static function subscriptionExist(string $subscriptionCode): bool
+    {
+        return self::where('subscription_code', $subscriptionCode)->exists();
+    }
+
+    /**
+     * checks if subscription exist
+     *
+     * @param string $subscription_code
+     *
+     * @return bool
+     */
+    public static function checkState(string $subscriptionCode): bool
+    {
+        return self::firstWhere('subscription_code', $subscriptionCode)->state;
+    }
 }

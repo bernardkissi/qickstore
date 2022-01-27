@@ -606,3 +606,105 @@ key improvements to product table
 3. pre-order
 4. pre-order release date
 5. preview files
+
+```
+Error: Typed property Service\Notifications\Types\Sms\SmsMessage::$to must not be accessed before initialization in /Users/bernardkissi/projects/store/src/Services/Notifications/Types/Sms/SmsMessage.php:88
+Stack trace:
+#0 /Users/bernardkissi/projects/store/src/Services/Notifications/Channels/SmsChannel.php(20): Service\Notifications\Types\Sms\SmsMessage->send()
+#1 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Notifications/NotificationSender.php(148): Service\Notifications\Channels\SmsChannel->send(Object(Illuminate\Notifications\AnonymousNotifiable), Object(Domain\Subscription\Notifications\PaymentFailedNotification))
+#2 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Notifications/NotificationSender.php(106): Illuminate\Notifications\NotificationSender->sendToNotifiable(Object(Illuminate\Notifications\AnonymousNotifiable), '8766621e-91de-4...', Object(Domain\Subscription\Notifications\PaymentFailedNotification), 'Service\\Notific...')
+#3 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Support/Traits/Localizable.php(19): Illuminate\Notifications\NotificationSender->Illuminate\Notifications\{closure}()
+#4 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Notifications/NotificationSender.php(109): Illuminate\Notifications\NotificationSender->withLocale(NULL, Object(Closure))
+#5 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Notifications/ChannelManager.php(54): Illuminate\Notifications\NotificationSender->sendNow(Object(Illuminate\Support\Collection), Object(Domain\Subscription\Notifications\PaymentFailedNotification), Array)
+#6 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Notifications/SendQueuedNotifications.php(104): Illuminate\Notifications\ChannelManager->sendNow(Object(Illuminate\Support\Collection), Object(Domain\Subscription\Notifications\PaymentFailedNotification), Array)
+#7 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(36): Illuminate\Notifications\SendQueuedNotifications->handle(Object(Illuminate\Notifications\ChannelManager))
+#8 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/Util.php(40): Illuminate\Container\BoundMethod::Illuminate\Container\{closure}()
+#9 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(93): Illuminate\Container\Util::unwrapIfClosure(Object(Closure))
+#10 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(37): Illuminate\Container\BoundMethod::callBoundMethod(Object(Illuminate\Foundation\Application), Array, Object(Closure))
+#11 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/Container.php(653): Illuminate\Container\BoundMethod::call(Object(Illuminate\Foundation\Application), Array, Array, NULL)
+#12 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Bus/Dispatcher.php(128): Illuminate\Container\Container->call(Array)
+#13 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(128): Illuminate\Bus\Dispatcher->Illuminate\Bus\{closure}(Object(Illuminate\Notifications\SendQueuedNotifications))
+#14 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(103): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Notifications\SendQueuedNotifications))
+#15 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Bus/Dispatcher.php(132): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#16 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/CallQueuedHandler.php(120): Illuminate\Bus\Dispatcher->dispatchNow(Object(Illuminate\Notifications\SendQueuedNotifications), false)
+#17 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(128): Illuminate\Queue\CallQueuedHandler->Illuminate\Queue\{closure}(Object(Illuminate\Notifications\SendQueuedNotifications))
+#18 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(103): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Notifications\SendQueuedNotifications))
+#19 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/CallQueuedHandler.php(122): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#20 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/CallQueuedHandler.php(70): Illuminate\Queue\CallQueuedHandler->dispatchThroughMiddleware(Object(Illuminate\Queue\Jobs\RedisJob), Object(Illuminate\Notifications\SendQueuedNotifications))
+#21 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/Jobs/Job.php(98): Illuminate\Queue\CallQueuedHandler->call(Object(Illuminate\Queue\Jobs\RedisJob), Array)
+#22 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(428): Illuminate\Queue\Jobs\Job->fire()
+#23 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(378): Illuminate\Queue\Worker->process('redis', Object(Illuminate\Queue\Jobs\RedisJob), Object(Illuminate\Queue\WorkerOptions))
+#24 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(172): Illuminate\Queue\Worker->runJob(Object(Illuminate\Queue\Jobs\RedisJob), 'redis', Object(Illuminate\Queue\WorkerOptions))
+#25 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/Console/WorkCommand.php(117): Illuminate\Queue\Worker->daemon('redis', 'default', Object(Illuminate\Queue\WorkerOptions))
+#26 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/Console/WorkCommand.php(101): Illuminate\Queue\Console\WorkCommand->runWorker('redis', 'default')
+#27 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(36): Illuminate\Queue\Console\WorkCommand->handle()
+#28 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/Util.php(40): Illuminate\Container\BoundMethod::Illuminate\Container\{closure}()
+#29 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(93): Illuminate\Container\Util::unwrapIfClosure(Object(Closure))
+#30 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(37): Illuminate\Container\BoundMethod::callBoundMethod(Object(Illuminate\Foundation\Application), Array, Object(Closure))
+#31 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/Container.php(653): Illuminate\Container\BoundMethod::call(Object(Illuminate\Foundation\Application), Array, Array, NULL)
+#32 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Console/Command.php(136): Illuminate\Container\Container->call(Array)
+#33 /Users/bernardkissi/projects/store/vendor/symfony/console/Command/Command.php(298): Illuminate\Console\Command->execute(Object(Symfony\Component\Console\Input\ArgvInput), Object(Illuminate\Console\OutputStyle))
+#34 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Console/Command.php(121): Symfony\Component\Console\Command\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Illuminate\Console\OutputStyle))
+#35 /Users/bernardkissi/projects/store/vendor/symfony/console/Application.php(1005): Illuminate\Console\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#36 /Users/bernardkissi/projects/store/vendor/symfony/console/Application.php(299): Symfony\Component\Console\Application->doRunCommand(Object(Illuminate\Queue\Console\WorkCommand), Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#37 /Users/bernardkissi/projects/store/vendor/symfony/console/Application.php(171): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#38 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Console/Application.php(94): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#39 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(129): Illuminate\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#40 /Users/bernardkissi/projects/store/artisan(37): Illuminate\Foundation\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#41 {main}
+```
+
+Exception: Sms message is missing some values in /Users/bernardkissi/projects/store/src/Services/Notifications/Types/Sms/SmsMessage.php:84
+Stack trace:
+#0 /Users/bernardkissi/projects/store/src/Services/Notifications/Channels/SmsChannel.php(20): Service\Notifications\Types\Sms\SmsMessage->send()
+#1 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Notifications/NotificationSender.php(148): Service\Notifications\Channels\SmsChannel->send(Object(Illuminate\Notifications\AnonymousNotifiable), Object(Domain\Subscription\Notifications\PaymentFailedNotification))
+#2 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Notifications/NotificationSender.php(106): Illuminate\Notifications\NotificationSender->sendToNotifiable(Object(Illuminate\Notifications\AnonymousNotifiable), 'ad530ce2-4258-4...', Object(Domain\Subscription\Notifications\PaymentFailedNotification), 'Service\\Notific...')
+#3 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Support/Traits/Localizable.php(19): Illuminate\Notifications\NotificationSender->Illuminate\Notifications\{closure}()
+#4 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Notifications/NotificationSender.php(109): Illuminate\Notifications\NotificationSender->withLocale(NULL, Object(Closure))
+#5 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Notifications/ChannelManager.php(54): Illuminate\Notifications\NotificationSender->sendNow(Object(Illuminate\Support\Collection), Object(Domain\Subscription\Notifications\PaymentFailedNotification), Array)
+#6 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Notifications/SendQueuedNotifications.php(104): Illuminate\Notifications\ChannelManager->sendNow(Object(Illuminate\Support\Collection), Object(Domain\Subscription\Notifications\PaymentFailedNotification), Array)
+#7 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(36): Illuminate\Notifications\SendQueuedNotifications->handle(Object(Illuminate\Notifications\ChannelManager))
+#8 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/Util.php(40): Illuminate\Container\BoundMethod::Illuminate\Container\{closure}()
+#9 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(93): Illuminate\Container\Util::unwrapIfClosure(Object(Closure))
+#10 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(37): Illuminate\Container\BoundMethod::callBoundMethod(Object(Illuminate\Foundation\Application), Array, Object(Closure))
+#11 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/Container.php(653): Illuminate\Container\BoundMethod::call(Object(Illuminate\Foundation\Application), Array, Array, NULL)
+#12 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Bus/Dispatcher.php(128): Illuminate\Container\Container->call(Array)
+#13 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(128): Illuminate\Bus\Dispatcher->Illuminate\Bus\{closure}(Object(Illuminate\Notifications\SendQueuedNotifications))
+#14 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(103): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Notifications\SendQueuedNotifications))
+#15 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Bus/Dispatcher.php(132): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#16 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/CallQueuedHandler.php(120): Illuminate\Bus\Dispatcher->dispatchNow(Object(Illuminate\Notifications\SendQueuedNotifications), false)
+#17 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(128): Illuminate\Queue\CallQueuedHandler->Illuminate\Queue\{closure}(Object(Illuminate\Notifications\SendQueuedNotifications))
+#18 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(103): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Notifications\SendQueuedNotifications))
+#19 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/CallQueuedHandler.php(122): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#20 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/CallQueuedHandler.php(70): Illuminate\Queue\CallQueuedHandler->dispatchThroughMiddleware(Object(Illuminate\Queue\Jobs\RedisJob), Object(Illuminate\Notifications\SendQueuedNotifications))
+#21 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/Jobs/Job.php(98): Illuminate\Queue\CallQueuedHandler->call(Object(Illuminate\Queue\Jobs\RedisJob), Array)
+#22 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(428): Illuminate\Queue\Jobs\Job->fire()
+#23 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(378): Illuminate\Queue\Worker->process('redis', Object(Illuminate\Queue\Jobs\RedisJob), Object(Illuminate\Queue\WorkerOptions))
+#24 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(172): Illuminate\Queue\Worker->runJob(Object(Illuminate\Queue\Jobs\RedisJob), 'redis', Object(Illuminate\Queue\WorkerOptions))
+#25 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/Console/WorkCommand.php(117): Illuminate\Queue\Worker->daemon('redis', 'default', Object(Illuminate\Queue\WorkerOptions))
+#26 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Queue/Console/WorkCommand.php(101): Illuminate\Queue\Console\WorkCommand->runWorker('redis', 'default')
+#27 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(36): Illuminate\Queue\Console\WorkCommand->handle()
+#28 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/Util.php(40): Illuminate\Container\BoundMethod::Illuminate\Container\{closure}()
+#29 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(93): Illuminate\Container\Util::unwrapIfClosure(Object(Closure))
+#30 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(37): Illuminate\Container\BoundMethod::callBoundMethod(Object(Illuminate\Foundation\Application), Array, Object(Closure))
+#31 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Container/Container.php(653): Illuminate\Container\BoundMethod::call(Object(Illuminate\Foundation\Application), Array, Array, NULL)
+#32 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Console/Command.php(136): Illuminate\Container\Container->call(Array)
+#33 /Users/bernardkissi/projects/store/vendor/symfony/console/Command/Command.php(298): Illuminate\Console\Command->execute(Object(Symfony\Component\Console\Input\ArgvInput), Object(Illuminate\Console\OutputStyle))
+#34 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Console/Command.php(121): Symfony\Component\Console\Command\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Illuminate\Console\OutputStyle))
+#35 /Users/bernardkissi/projects/store/vendor/symfony/console/Application.php(1005): Illuminate\Console\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#36 /Users/bernardkissi/projects/store/vendor/symfony/console/Application.php(299): Symfony\Component\Console\Application->doRunCommand(Object(Illuminate\Queue\Console\WorkCommand), Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#37 /Users/bernardkissi/projects/store/vendor/symfony/console/Application.php(171): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#38 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Console/Application.php(94): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#39 /Users/bernardkissi/projects/store/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(129): Illuminate\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#40 /Users/bernardkissi/projects/store/artisan(37): Illuminate\Foundation\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#41 {main}
+
+task pending
+
+1.  check the times a subscription has been running
+
+    algo:
+    increase the count for a successful subscription payment
+
+        check if the count equals the count of the plan the set the
+        status to completed
