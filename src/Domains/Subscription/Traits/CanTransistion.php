@@ -32,9 +32,9 @@ trait CanTransistion
      *
      * @param string $subscription_code
      *
-     * @return bool
+     * @return string
      */
-    public static function checkState(string $subscriptionCode): bool
+    public static function checkState(string $subscriptionCode): string
     {
         return self::firstWhere('subscription_code', $subscriptionCode)->state;
     }
