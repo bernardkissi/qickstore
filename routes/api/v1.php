@@ -24,6 +24,7 @@ use Domain\Products\Product\ProductVariation;
 use Domain\Subscription\Actions\DisableProductSubscription;
 use Domain\Subscription\Actions\EnableProductSubscription;
 use Domain\Subscription\ProductSubscription;
+use Domain\Subscription\States\PaymentFailed;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Http\Request;
