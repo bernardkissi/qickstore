@@ -8,6 +8,7 @@ use Domain\Orders\Checkouts\Contract\Checkoutable;
 use Domain\Orders\Order;
 use Domain\User\User;
 use Domain\User\Visitor;
+use Illuminate\Support\Facades\Log;
 
 class RecurringCheckout implements Checkoutable
 {
@@ -38,6 +39,9 @@ class RecurringCheckout implements Checkoutable
                 'subscription_id' => $data['subscription_id'],
             ]
         );
+
+        Log::info('Order created', ['order' => $order, 'subscription' => $data['subscription_id']]);
+
         $order->products()->sync([$data['product_id'] => ['quantity' => 1]]);
 
         return $order;

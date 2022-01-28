@@ -7,6 +7,7 @@ namespace Domain\Orders\Actions;
 use Domain\Orders\Checkouts\RecurringCheckout;
 use Domain\Orders\Order;
 use Domain\Subscription\ProductSubscription;
+use Illuminate\Support\Facades\Log;
 
 class GenerateOrder
 {
@@ -22,6 +23,8 @@ class GenerateOrder
         if ($subscription) {
             $parentOrder = $subscription->order->load(['products', 'orderable']);
             $orderDetails = static::orderData($parentOrder, $total, $providerId, $subscription->id);
+
+            Log::info("Order Details", $orderDetails);
 
             (new RecurringCheckout($parentOrder['orderable']))->createOrder($orderDetails);
         }
