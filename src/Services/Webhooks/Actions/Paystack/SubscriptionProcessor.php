@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Service\Webhooks\Actions\Paystack;
 
+use Domain\Subscription\ProductSubscription;
+use Domain\Subscription\States\Disabled;
 use Service\Webhooks\Actions\ActionHandler;
 
 class SubscriptionProcessor implements ActionHandler
@@ -29,11 +31,15 @@ class SubscriptionProcessor implements ActionHandler
 
     public static function disabled(array $payload)
     {
+        $subscriptionCode = $payload['data']['subscription_code'];
+        ProductSubscription::transitioning($subscriptionCode, Disabled::class);
+
         // 'subscription.disable',
         // 1. update subscription on product subscription table on state disabled
         // 2. send sms/email to customer about cancelling subscribing to a product
         // 3. notify vendor about subscription cancellation
     }
+
 
     public static function create(array $payload)
     {

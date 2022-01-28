@@ -35,6 +35,7 @@ class RecurringCheckout implements Checkoutable
                 'total' => $data['total'],
                 'address_id' => $addressId,
                 'provider_order_id' => $data['provider_order_id'],
+                'subscription_id' => $data['subscription_id'],
             ]
         );
         $order->products()->sync([$data['product_id'] => ['quantity' => 1]]);

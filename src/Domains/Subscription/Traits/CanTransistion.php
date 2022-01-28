@@ -4,14 +4,18 @@ declare(strict_types=1);
 
 namespace Domain\Subscription\Traits;
 
+use Carbon\Carbon;
+use Spatie\ModelStates\State;
+
 trait CanTransistion
 {
-    public static function transitioning(string $subscriptionCode, string $state)
+    public static function transitioning(string $subscriptionCode, string $state, Carbon $date = null)
     {
         $subscription = self::firstWhere('subscription_code', $subscriptionCode);
 
         if ($subscription->state->canTransitionTo($state)) {
             $subscription->state->transitionTo($state);
+            $date !== null ? $subscription->update(['cancelled_at' => $date]) : null;
         }
     }
 
@@ -32,9 +36,9 @@ trait CanTransistion
      *
      * @param string $subscription_code
      *
-     * @return string
+     * @return State
      */
-    public static function checkState(string $subscriptionCode): string
+    public static function checkState(string $subscriptionCode): State
     {
         return self::firstWhere('subscription_code', $subscriptionCode)->state;
     }

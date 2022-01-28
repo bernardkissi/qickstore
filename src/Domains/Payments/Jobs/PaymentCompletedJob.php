@@ -5,6 +5,7 @@ namespace Domain\Payments\Jobs;
 use Domain\Orders\Order;
 use Domain\Orders\States\Paid;
 use Domain\Payments\Payment;
+use Domain\Subscription\ProductSubscription;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -39,6 +40,11 @@ class PaymentCompletedJob implements ShouldQueue
         if ($orderState->state->canTransitionTo(Paid::class)) {
             $orderState->state->transitionTo(Paid::class);
             $orderState->updateTimeline('paid');
+
+            $subscriptionCode =  $this->payment->subscription_id;
+
+            $subscriptionCode !== null ? ProductSubscription::firstWhere('subscription_id', $subscriptionCode)
+                ->increment('payment_count') : null;
         }
     }
 }

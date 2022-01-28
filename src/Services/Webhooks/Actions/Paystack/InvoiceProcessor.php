@@ -36,11 +36,13 @@ class InvoiceProcessor implements ActionHandler
     {
         $subscriptionCode = static::customerDetails($payload)['subscription_code'];
 
-        Notification::route('mail', static::customerDetails($payload)['email'])
-            ->route(SmsChannel::class, static::customerDetails($payload)['phone'])
-            ->notify(new CreateInvoiceNotification($payload));
+        if (ProductSubscription::subscriptionExist($subscriptionCode)) {
+            Notification::route('mail', static::customerDetails($payload)['email'])
+                ->route(SmsChannel::class, static::customerDetails($payload)['phone'])
+                ->notify(new CreateInvoiceNotification($payload));
 
-        ProductSubscription::transitioning($subscriptionCode, Active::class);
+            ProductSubscription::transitioning($subscriptionCode, Active::class);
+        }
     }
 
     /**
@@ -55,7 +57,7 @@ class InvoiceProcessor implements ActionHandler
         $subscriptionCode = static::customerDetails($payload)['subscription_code'];
 
         if (ProductSubscription::subscriptionExist($subscriptionCode)
-            && ProductSubscription::checkState($subscriptionCode) !== PaymentFailed::class) {
+            && ProductSubscription::checkState($subscriptionCode) === PaymentFailed::class) {
             $data = GenerateSubscriptionLink::build()
                 ->setPath("/subscription/${subscriptionCode}/manage/link/")
                 ->send()
