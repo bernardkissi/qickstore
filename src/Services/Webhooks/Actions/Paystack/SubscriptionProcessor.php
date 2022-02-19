@@ -4,8 +4,15 @@ declare(strict_types=1);
 
 namespace Service\Webhooks\Actions\Paystack;
 
+use Carbon\Carbon;
+use Domain\Subscription\Jobs\ManageSubscriptionJob;
+use Domain\Subscription\Notifications\CreateSubscriptionNotification;
+use Domain\Subscription\Notifications\DisabledSubscriptionNotification;
 use Domain\Subscription\ProductSubscription;
+use Domain\Subscription\States\CardExpiry;
 use Domain\Subscription\States\Disabled;
+use Domain\Subscription\States\NotRenewing;
+use Illuminate\Support\Facades\Notification;
 use Service\Webhooks\Actions\ActionHandler;
 
 class SubscriptionProcessor implements ActionHandler
@@ -14,52 +21,85 @@ class SubscriptionProcessor implements ActionHandler
     {
         match ($payload['event']) {
             'subscription.create' => dump('subscription created'),
-            'subscription.disable' => dump('subscription disabled'),
+            'subscription.disable' => static::disabled($payload),
             'subscription.enable' => dump('Invoice updated'),
             'subscription.not_renew' => static::notRenewing($payload),
             'subscription.expiring_cards' => dump('Invoice updated'),
         };
     }
 
+    /**
+     * Subscription not-renewing hook
+     *
+     * @param array $payload
+     * @return void
+     */
     public static function notRenewing(array $payload)
     {
-        // 'subscription.not_renew'
-        // 1. not renew subscription on product subscription table on state not renewing
-        // 2. send sms/email to customer about about not renvew subscribing to a product
-        // 3. notify vendor about subscription not renewing
+        $subscriptionCode = static::customerDetails($payload)['subscription_code'];
+        $customerNumber = static::customerDetails($payload)['phone'];
+
+        $cancelled_at = Carbon::parse($payload['data']['cancelledAt']);
+        ProductSubscription::transitioning($subscriptionCode, NotRenewing::class, $cancelled_at);
+        Notification::route('mail', static::customerDetails($payload)['email'])
+                ->route(SmsChannel::class, static::customerDetails($payload)['phone'])
+                ->notify(new DisabledSubscriptionNotification($payload));
     }
 
+    /**
+     * Subscription disabled hook
+     *
+     * @param array $payload
+     * @return void
+     */
     public static function disabled(array $payload)
     {
-        $subscriptionCode = $payload['data']['subscription_code'];
-        ProductSubscription::transitioning($subscriptionCode, Disabled::class);
+        $subscriptionCode = static::customerDetails($payload)['subscription_code'];
+        $customerNumber = static::customerDetails($payload)['phone'];
 
-        // 'subscription.disable',
-        // 1. update subscription on product subscription table on state disabled
-        // 2. send sms/email to customer about cancelling subscribing to a product
-        // 3. notify vendor about subscription cancellation
+        ProductSubscription::transitioning($subscriptionCode, Disabled::class);
+        Notification::route('mail', static::customerDetails($payload)['email'])
+                ->route(SmsChannel::class, static::customerDetails($payload)['phone'])
+                ->notify(new DisabledSubscriptionNotification($payload));
     }
 
-
+    /**
+     * Subscription created hook
+     *
+     * @param array $payload
+     * @return array
+     */
     public static function create(array $payload)
     {
-        // 1. update subscription on product subscription table
-        // 2. send sms/email to customer about successfully subscribing to a product
-        // 3. notify vendor about subscription
+        Notification::route('mail', static::customerDetails($payload)['email'])
+                ->route(SmsChannel::class, static::customerDetails($payload)['phone'])
+                ->notify(new CreateSubscriptionNotification($payload));
     }
 
-    public function enabled(array $payload)
-    {
-        // 'subscription.enable'
-        // 1. enable subscription on product subscription table on state active
-        // 2. send sms/email to customer about cancelling subscribing to a product
-        // 3. notify vendor about subscription cancellation
-    }
 
     public function expiringCards(array $payload)
     {
-        // 'subscription.expiring_cards'
-       // update state not renewing expiring_cards
-       // send message to the customer with the link to update his expiring card
+        $subscriptionCode = static::customerDetails($payload)['subscription_code'];
+        $customerNumber = static::customerDetails($payload)['phone'];
+
+        ProductSubscription::transitioning($subscriptionCode, CardExpiry::class);
+        ManageSubscriptionJob::dispatch($customerNumber, $subscriptionCode);
+    }
+
+
+    /**
+    * Get customer details from payload
+    *
+    * @param array $payload
+    *
+    * @return array
+    */
+    protected static function customerDetails(array $payload): array
+    {
+        return [
+            'email' => $payload['data']['customer']['email'],
+            'phone' => $payload['data']['customer']['phone'] ?? '0552377591',
+            'subscription_code' => $payload['data']['subscription_code'],
+        ];
     }
 }
