@@ -41,10 +41,10 @@ class PaymentCompletedJob implements ShouldQueue
             $orderState->state->transitionTo(Paid::class);
             $orderState->updateTimeline('paid');
 
-            $subscriptionCode =  $this->payment->subscription_id;
+            $subscriptionId =  $this->payment->subscription_id;
 
-            $subscriptionCode !== null ? ProductSubscription::firstWhere('subscription_id', $subscriptionCode)
-                ->increment('payment_count') : null;
+            is_null($subscriptionId) ? null : ProductSubscription::firstWhere('id', $subscriptionId)
+                ->increment('payment_count') ;
         }
     }
 }
