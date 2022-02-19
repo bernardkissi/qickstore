@@ -14,11 +14,12 @@ class GenerateOrder
     public static function execute(array $payload): void
     {
         $planCode = $payload['data']['plan']['plan_code'];
-        $customerCode = $payload['data']['customer']['customer_code'];
+        $authCode = $payload['data']['authorization']['authorization_code'];
         $total = $payload['data']['amount'];
         $providerId = $payload['data']['id'];
 
-        $subscription = ProductSubscription::searchSubscription($planCode, $customerCode);
+        // use the auth code to get the subscription id
+        $subscription = ProductSubscription::searchSubscription($planCode, $authCode);
 
         if ($subscription) {
             $parentOrder = $subscription->order->load(['products', 'orderable']);
