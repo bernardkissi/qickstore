@@ -21,7 +21,7 @@ class InvoiceProcessor implements ActionHandler
         match ($payload['event']) {
             'invoice.create' => static::createInvoice($payload),
             'invoice.payment_failed' => static::paymentFailed($payload),
-            'invoice.update' => dump('Invoice updated'),
+            'invoice.update' => null,
         };
     }
 
