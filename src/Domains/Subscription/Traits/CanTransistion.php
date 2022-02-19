@@ -15,7 +15,7 @@ trait CanTransistion
 
         if ($subscription->state->canTransitionTo($state)) {
             $subscription->state->transitionTo($state);
-            $date !== null ? $subscription->update(['cancelled_at' => $date]) : null;
+            is_null($date) ? null : $subscription->update(['cancelled_at' => $date]);
         }
     }
 

@@ -11,7 +11,7 @@ class Disabled extends SubscriptionState
      *
      * @var string
      */
-    public static $name = 'disabled';
+    public static $name = ' cancelled';
 
     /**
      * Returns the paid state of an order
@@ -20,6 +20,6 @@ class Disabled extends SubscriptionState
      */
     public function status(): string
     {
-        return 'Subscription is disabled';
+        return 'Subscription is cancelled';
     }
 }

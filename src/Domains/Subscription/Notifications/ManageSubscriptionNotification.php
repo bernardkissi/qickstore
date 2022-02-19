@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notification;
 use Service\Notifications\Channels\SmsChannel;
 use Service\Notifications\Types\Sms\SmsMessage;
 
-class DisabledSubscriptionNotification extends Notification implements ShouldQueue
+class ManageSubscriptionNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -18,7 +18,7 @@ class DisabledSubscriptionNotification extends Notification implements ShouldQue
      *
      * @return void
      */
-    public function __construct(public array $payload)
+    public function __construct(public string $number, public string $link)
     {
     }
 
@@ -46,7 +46,10 @@ class DisabledSubscriptionNotification extends Notification implements ShouldQue
         return (new SmsMessage())
             ->from('Techshops')
             ->to('0552377591')
-            ->line(config('notifications.messages.invoice_created') . 'monday');
+            ->line(
+                'Your payment card is expiring soon,
+                please click the link below to manage your subscription'
+            )->line($this->link);
     }
 
     /**
@@ -60,10 +63,10 @@ class DisabledSubscriptionNotification extends Notification implements ShouldQue
     {
         return (new MailMessage())
             ->greeting('Hello!')
-            ->subject('Subscription Disabled')
-            ->line('Your subscription for Basic Starter Pack has been Disabled.')
-            ->action('Manage Subscription', '')
-            ->line('Thank you for shopping with from qickspace');
+            ->line('Your payment is expiring is soon')
+            ->line('Please change your payment details')
+            ->line('We will not be able to send you any more emails until you update your payment details.')
+            ->action('Manage subscription', $this->link);
     }
 
     /**
